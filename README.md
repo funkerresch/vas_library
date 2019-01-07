@@ -9,10 +9,15 @@ Usage
 
 In the Examples folder are implementations for dynamic binaural (room) synthesis for MaxMsp, Pure Data, JUCE and Unity. Max and Pd examples are XCode Projects for OSX, JUCE is of course multiplatform and for Unity you will find both, Visual Studio and XCode Projects
 
+In Max as in Pure Data, the HRTF/BRIR should be placed in the same folder as the Max/Pd Patch. Then you can simply pass the HRTF/BRIR name as the first argument then followed by partition size as second argument. Useful partition sizes are 512 or 1024 samples for BRIR Synthesis and up to 64 Samples for HRTF Synthesis.
+For the Unity Plugin on OSX, put the BRIR files inside the Plugin Bundle in MacOS (Show Package Contents -> Contents/MacOS). Since they are quite large I excluded them from the Repository; they can be downloaded from xxx.xxx.xx
+Because Unity Audio Plugins only accept floating point arguments, the BRIR's are choosen by numbers from 0 to 10 for the parameter "Select IR".
+Under Windows, place the BRIR/HRTF in the same folder as the Plugin. Unfortunatly this works not for Windows Builds yet because Unity seems to ignore the Textfile.
+
 
 Known Issues
 
-Unity seems to have some kind of upper memory limit for plugins (this has to be investigated further, for now it's just an assumption); while all other example implementations work perfect with large BRIR files, the Unity Editor produces weird noise sometimes, if several instances are loaded into one Audio Mixer. However, a standalone build (at least under OSX) works always fine.
+Unity seems to have some kind of upper memory limit for plugins (this has to be investigated further, for now it's just an assumption); while all other example implementations work perfect with large BRIR files, the Unity Editor produces weird noise sometimes if several instances are loaded into one Audio Mixer. However, a standalone build (at least under OSX) works always fine.
 
 
 
