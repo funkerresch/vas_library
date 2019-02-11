@@ -18,6 +18,8 @@ void vas_dynamicFirChannel_filter_init(vas_dynamicFirChannel_filter *x, int segm
     {
         for(int aziCount = 0; aziCount < x->firSetup->aziRange; aziCount++)
         {
+            x->averageSegmentPower[eleCount][aziCount]  = ( double * ) vas_mem_alloc(sizeof(double));
+            x->overallEnergy[eleCount][aziCount] = 0;
             x->real[eleCount][aziCount] = ( float ** ) vas_mem_alloc((sizeof(float *)));
             x->imag[eleCount][aziCount] = ( float ** ) vas_mem_alloc((sizeof(float *)));
             x->pointerToFFTSegments[eleCount][aziCount]  = (VAS_COMPLEX **) vas_mem_alloc(sizeof(VAS_COMPLEX *));
@@ -29,6 +31,12 @@ void vas_dynamicFirChannel_filter_init(vas_dynamicFirChannel_filter *x, int segm
 
 void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x)
 {
+#ifdef VAS_USE_VDSP
+    
+    vDSP_destroy_fftsetup(x->setupReal);
+    
+#endif
+    
     for(int eleCount = 0; eleCount < x->firSetup->eleRange; eleCount++)
     {
         for(int aziCount = 0; aziCount < x->firSetup->aziRange; aziCount++)
@@ -36,18 +44,19 @@ void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x)
 #ifdef VAS_USE_VDSP
             for(int i = 0; i < x->numberOfSegments; i++)
             {
+                
                 if(!x->segmentIsZero[eleCount][aziCount][i])
                 {
+                   // post("FREE: %d %d", aziCount, i);
                     vas_mem_free(x->real[eleCount][aziCount][i]);
                     vas_mem_free(x->imag[eleCount][aziCount][i]);
                 }
             }
 #endif
+            vas_mem_free(x->averageSegmentPower[eleCount][aziCount]);
             vas_mem_free(x->segmentIsZero[eleCount][aziCount]);
-#ifndef VAS_USE_VDSP
             vas_mem_free(x->real[eleCount][aziCount]);
             vas_mem_free(x->imag[eleCount][aziCount]);
-#endif
             vas_mem_free(x->pointerToFFTSegments[eleCount][aziCount]);
             vas_mem_free(x->data[eleCount][aziCount]);
         }
@@ -177,6 +186,8 @@ void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float t
 {
     if(thresh >= 0 && thresh < 1)
         x->segmentThreshold = thresh;
+    
+    post("%.20f", x->segmentThreshold);
 }
 
 void vas_dynamicFirChannel_setElevation(vas_dynamicFirChannel *x, int elevation)
@@ -189,6 +200,7 @@ void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentS
 {
     if(!vas_utilities_isValidSegmentSize(segmentSize))
     {
+        post("Set Segment Size");
         
 #if defined(MAXMSPSDK) || defined(PUREDATA)
         post("Invalid Segment Size: %d", segmentSize);
@@ -238,7 +250,7 @@ void vas_dynamicFirChannel_setAllInputSegments2Zero(vas_dynamicFirChannel *x)
 
 void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dynamicFirChannel_target *target)
 {
-        x->segmentIndex = 0;
+    x->segmentIndex = 0;
 #ifdef VAS_USE_VDSP
 
     vas_util_complexWriteZeros(&target->signalComplex, x->filter->segmentSize);
@@ -305,7 +317,6 @@ void vas_dynamicFirChannel_forwardFFTInput(vas_dynamicFirChannel *x)
     
 #ifdef VAS_USE_KISSFFT
     kiss_fftr(x->forwardFFT,x->input.copy,x->input.pointerToFFTSegments[x->movingIndex]);
-    //vas_util_complexScale(x->input.pointerToFFTSegments[x->movingIndex], x->scale, x->filter->segmentSize);
 #endif
 }
 
@@ -450,6 +461,8 @@ void vas_dynamicFirChannel_prepareOutputSignal(vas_dynamicFirChannel *x)
     x->output.current.signalComplex.imagp = (float *)vas_mem_resize(x->output.current.signalComplex.imagp, x->filter->segmentSize * sizeof ( float  ));
     x->output.next.signalComplex.realp = (float *)vas_mem_resize(x->output.next.signalComplex.realp, x->filter->segmentSize * sizeof ( float  ));
     x->output.next.signalComplex.imagp = (float *)vas_mem_resize(x->output.next.signalComplex.imagp, x->filter->segmentSize * sizeof ( float  ));
+    vas_util_complexWriteZeros(&x->output.current.signalComplex, x->filter->segmentSize);
+    vas_util_complexWriteZeros(&x->output.next.signalComplex, x->filter->segmentSize);
 #else
     x->output.current.signalComplex = (VAS_COMPLEX *)vas_mem_resize(x->output.current.signalComplex, x->filter->segmentSize * sizeof ( VAS_COMPLEX  ));
     x->output.next.signalComplex = (VAS_COMPLEX *)vas_mem_resize(x->output.next.signalComplex, x->filter->segmentSize * sizeof ( VAS_COMPLEX  ));
@@ -459,6 +472,7 @@ void vas_dynamicFirChannel_prepareOutputSignal(vas_dynamicFirChannel *x)
     vas_utilities_writeZeros(x->filter->segmentSize, x->output.outputSegment);
     vas_utilities_writeZeros(x->filter->segmentSize, x->output.current.overlap);
     vas_utilities_writeZeros(x->filter->segmentSize, x->output.next.overlap);
+    
 }
 
 void vas_dynamicFirChannel_prepareInputSignal(vas_dynamicFirChannel *x)
@@ -551,21 +565,131 @@ void vas_dynamicFirChannel_prepareArrays(vas_dynamicFirChannel *x)
     vas_dynamicFirChannel_prepareOutputSignal(x);
 }
 
-bool vas_dynamicFirChannel_isFilterSegmentZero(vas_dynamicFirChannel *x, float *filter, int segmentSize)
+void vas_dynmaicFirChannel_resetMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, int ele, int azi)
 {
-    float sum = 0;
-    float mid = 0;
-    for(int i = 0; i < segmentSize; i++)
-        sum += filter[i];
-    
-    mid = sum/segmentSize;
-    if(mid > x->segmentThreshold)
+    x->filter->minAverageSegmentPower[ele][azi] = 100000;
+    x->filter->maxAverageSegmentPower[ele][azi] = -100000;
+    x->filter->zeroCounter[ele][azi] = 0;
+    x->filter->nonZeroCounter[ele][azi] = 0;
+}
+
+void vas_dynamicFirChannel_leaveActivePartitions(vas_dynamicFirChannel *x, int numberOfActivePartions)
+{
+    for(int eleCount = 0; eleCount < x->filter->firSetup->eleRange; eleCount++)
     {
-       // post("segment energy: %f", sum/segmentSize);
+        for(int aziCount = 0; aziCount < x->filter->firSetup->aziRange; aziCount++)
+        {
+            int j = x->filter->nonZeroCounter[eleCount][aziCount];
+            
+            if(j > numberOfActivePartions)
+            {
+                while(j-- > numberOfActivePartions)
+                {
+                    int minIndex = -1;
+                    double minAverageSegmentPower = 10000;
+                    
+                    for(int i=0; i<x->filter->numberOfSegments;i++)
+                    {
+                        if(!x->filter->segmentIsZero[eleCount][aziCount][i])
+                        {
+                            if(x->filter->averageSegmentPower[eleCount][aziCount][i] < minAverageSegmentPower)
+                            {
+                                minIndex = i;
+                                minAverageSegmentPower = x->filter->averageSegmentPower[eleCount][aziCount][i] ;
+                            }
+                        }
+                    }
+                    
+                    x->filter->segmentIsZero[eleCount][aziCount][minIndex] = true;
+                    x->filter->segmentIsZero[eleCount][aziCount][minIndex+x->pointerArrayMiddle] = true;
+                    x->filter->zeroCounter[eleCount][aziCount]++;
+                    x->filter->nonZeroCounter[eleCount][aziCount]--;
+                    if(aziCount == 0)
+                    {
+                        post("Set Segment with Index %d to zero", minIndex);
+                        post("Energy of this Segment is %.14f, Max Energy: %.14f, Overall: %.14f", x->filter->averageSegmentPower[eleCount][aziCount][minIndex], x->filter->maxAverageSegmentPower[eleCount][aziCount], x->filter->overallEnergy[eleCount][aziCount]);
+                        post("Number of active partitions %d", x->filter->nonZeroCounter[eleCount][aziCount]);
+                    }
+                }
+            }
+            
+            else
+            {
+                while(j++ < numberOfActivePartions)
+                {
+                    int maxIndex = -1;
+                    double maxAverageSegmentPower = -10000;
+                    
+                    for(int i=0; i<x->filter->numberOfSegments;i++)
+                    {
+                        if(x->filter->segmentIsZero[eleCount][aziCount][i])
+                        {
+                            if(x->filter->averageSegmentPower[eleCount][aziCount][i] > maxAverageSegmentPower)
+                            {
+                                maxIndex = i;
+                                maxAverageSegmentPower = x->filter->averageSegmentPower[eleCount][aziCount][i] ;
+                            }
+                        }
+                    }
+                    
+                    x->filter->segmentIsZero[eleCount][aziCount][maxIndex] = false;
+                    x->filter->segmentIsZero[eleCount][aziCount][maxIndex+x->pointerArrayMiddle] = false;
+                    x->filter->zeroCounter[eleCount][aziCount]--;
+                    x->filter->nonZeroCounter[eleCount][aziCount]++;
+                    if(aziCount == 0)
+                    {
+                        post("Set Segment with Index %d to zero", maxIndex);
+                        post("Energy of this Segment is %.14f, Max Energy: %.14f, Overall: %.14f", x->filter->averageSegmentPower[eleCount][aziCount][maxIndex], x->filter->maxAverageSegmentPower[eleCount][aziCount], x->filter->overallEnergy[eleCount][aziCount]);
+                        post("Number of active partitions %d", x->filter->nonZeroCounter[eleCount][aziCount]);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void vas_dynamicFirChannel_calculateAverageSegmentPower(vas_dynamicFirChannel *x, float *filter, int segmentNumber, int ele, int azi)
+{
+    double energy = 0;
+    double averagePower = 0;
+    for(int i = 0; i < x->filter->segmentSize; i++)
+        energy += pow(filter[i], 2);
+    
+    averagePower = (double)energy / x->filter->segmentSize;
+    x->filter->averageSegmentPower[ele][azi][segmentNumber] = energy;
+    x->filter->overallEnergy[ele][azi] += energy;
+    
+    if(energy < x->filter->minAverageSegmentPower[ele][azi])
+    {
+        if(energy > 0)
+            x->filter->minAverageSegmentPower[ele][azi] = energy;
+    }
+    
+    if(energy > x->filter->maxAverageSegmentPower[ele][azi])
+        x->filter->maxAverageSegmentPower[ele][azi] = energy;
+}
+
+bool vas_dynamicFirChannel_isFilterSegmentBelowThreshhold(vas_dynamicFirChannel *x, float *filter, int ele, int azi)
+{
+    double energy = 0;
+    double averagePower = 0;
+    for(int i = 0; i < x->filter->segmentSize; i++)
+        energy += pow(filter[i], 2);
+    
+    averagePower = energy / x->filter->segmentSize;
+    
+    if(energy > x->segmentThreshold)
+    {
+        if(azi == 0)
+            ;//post("segment is greater: %.16f %.16f", energy, x->segmentThreshold);
         return false;
     }
     else
+    {
+        //if(azi == 0)
+           // post("segment is smaller: %.16f %.16f", energy, x->segmentThreshold);
         return true;
+    }
 }
 
 void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter, int ele, int azi)
@@ -576,6 +700,8 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
     {
         int i = 0;
 #ifdef VAS_USE_VDSP
+        
+        x->filter->averageSegmentPower[ele][azi] = (double *)vas_mem_resize(x->filter->averageSegmentPower[ele][azi], sizeof(double) * x->filter->numberOfSegments);
         x->filter->real[ele][azi] = (float **)vas_mem_resize(x->filter->real[ele][azi], sizeof(float *) * x->filter->numberOfSegments);
         x->filter->imag[ele][azi] = (float **)vas_mem_resize(x->filter->imag[ele][azi], sizeof(float *) * x->filter->numberOfSegments);
         x->filter->pointerToFFTSegments[ele][azi] = (VAS_COMPLEX **) vas_mem_resize(x->filter->pointerToFFTSegments[ele][azi], x->pointerArraySize * sizeof (VAS_COMPLEX *));
@@ -599,12 +725,12 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
             x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle] = &x->filter->data[ele][azi][i*x->filter->fftSize];
             x->filter->pointerToFFTSegments[ele][azi][i] = &x->filter->data[ele][azi][i*x->filter->fftSize];
 #endif
+            vas_dynamicFirChannel_calculateAverageSegmentPower(x, filter+(i*x->filter->segmentSize), i, ele, azi);
             
-            if(!vas_dynamicFirChannel_isFilterSegmentZero(x, filter+(i*x->filter->segmentSize), x->filter->segmentSize))
+            if(!vas_dynamicFirChannel_isFilterSegmentBelowThreshhold(x, filter+(i*x->filter->segmentSize), ele, azi))
             {
                 vas_util_fcopy(filter+(i*x->filter->segmentSize), x->tmp, x->filter->segmentSize);
-                //vas_util_fscale(x->tmp, x->scale, x->filter->segmentSize);
-               // vas_util_complexScale(x->filter->pointerToFFTSegments[ele][azi][i], x->scale, x->filter->segmentSize);
+            
 #ifdef VAS_USE_VDSP
                 vDSP_ctoz ( ( COMPLEX * ) x->tmp , 2, &(x->filter->data[ele][azi][i]), 1, x->filter->segmentSize  );
                 vDSP_fft_zrip ( x->filter->setupReal, &x->filter->data[ele][azi][i], 1, x->filter->fftSizeLog2, FFT_FORWARD  );
@@ -621,8 +747,7 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
 
                 x->filter->segmentIsZero[ele][azi][i] = false;
                 x->filter->segmentIsZero[ele][azi][i+x->pointerArrayMiddle] = false;
-                x->nonZeroCounter++;
-
+                x->filter->nonZeroCounter[ele][azi]++;
             }
             else
             {
@@ -632,7 +757,7 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
                 vas_mem_free(x->filter->real[ele][azi][i]);
                 vas_mem_free(x->filter->imag[ele][azi][i]);
 #endif
-                x->zeroCounter++;
+                x->filter->zeroCounter[ele][azi]++;
             }
             
             i++;
@@ -717,7 +842,6 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup, int segmentSize, vas
     
     vas_dynamicFirChannel *x = vas_mem_alloc(sizeof(vas_dynamicFirChannel));
     x->gain = 1.;
-    x->newFilter = 0;
     x->setup = setup;
     x->segmentIndex = 0;
     x->useSharedInput = false;
@@ -725,9 +849,6 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup, int segmentSize, vas
     x->sharedInput = NULL;
     x->sharedFilter = NULL;
     x->init = 0;
-    
-    x->nonZeroCounter = 0;
-    x->zeroCounter = 0;
     
     if(setup & VAS_GLOBALFILTER_LEFT)
     {

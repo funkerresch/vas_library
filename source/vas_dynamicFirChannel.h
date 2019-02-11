@@ -77,6 +77,12 @@ typedef struct vas_dynamicFirChannel_filter
 #endif
     
     bool *segmentIsZero[AK_VATOOLS_ELEVATION_RANGE][360];
+    float maxAverageSegmentPower[AK_VATOOLS_ELEVATION_RANGE][360];
+    float minAverageSegmentPower[AK_VATOOLS_ELEVATION_RANGE][360];
+    int zeroCounter[AK_VATOOLS_ELEVATION_RANGE][360];
+    int nonZeroCounter[AK_VATOOLS_ELEVATION_RANGE][360];
+    double *averageSegmentPower[AK_VATOOLS_ELEVATION_RANGE][360];
+    double overallEnergy[AK_VATOOLS_ELEVATION_RANGE][360];
     
     int init;
     int referenceCounter;
@@ -85,7 +91,7 @@ typedef struct vas_dynamicFirChannel_filter
     int fftSize;
     int fftSizeLog2;
     int filterLength;
-    
+   
     // fft configuration for vDSP lib
 } vas_dynamicFirChannel_filter;
 
@@ -173,7 +179,6 @@ typedef struct vas_dynamicFirChannel
     int movingIndex;                            // movingIndex for accessing filter partitions
     int filterSize;                             // size of the filter
     int segmentIndex;
-    int newFilter;
     int fadeCounter;
     int fadeLength;
     int activeCrossfade;
@@ -187,8 +192,8 @@ typedef struct vas_dynamicFirChannel
     float segmentThreshold;
     double scale;
     
-    int zeroCounter;
-    int nonZeroCounter;
+    
+ 
 } vas_dynamicFirChannel;
 
 /**
@@ -254,6 +259,12 @@ void vas_dynamicFirChannel_getSharedFilterValues(vas_dynamicFirChannel *x, vas_d
  */
 
 void vas_dynamicFirChannel_setFilterSize(vas_dynamicFirChannel *x, int filterSize);
+    
+void vas_dynmaicFirChannel_resetMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, int ele, int azi);
+
+void vas_dynamicFirChannel_calculateMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, float *filter, int ele, int azi);
+    
+void vas_dynamicFirChannel_leaveActivePartitions(vas_dynamicFirChannel *x, int numberOfActivePartions);
 
 /**
  * @brief Memory Allocation, partitioning and transformation to frequency domina for a filter <br>

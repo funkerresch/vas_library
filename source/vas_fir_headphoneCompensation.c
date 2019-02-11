@@ -7,15 +7,15 @@
 
 #include "vas_fir_headphoneCompensation.h"
 
-void vas_filter_headphoneCompensation_process(vas_filter_headphoneCompensation *x, AK_INPUTVECTOR *inLeft, AK_INPUTVECTOR *inRight, AK_OUTPUTVECTOR *outLeft, AK_OUTPUTVECTOR *outRight, int vectorSize)
+void vas_fir_headphoneCompensation_process(vas_fir_headphoneCompensation *x, AK_INPUTVECTOR *inLeft, AK_INPUTVECTOR *inRight, AK_OUTPUTVECTOR *outLeft, AK_OUTPUTVECTOR *outRight, int vectorSize)
 {
     vas_dynamicFirChannel_process(x->left, inLeft, outLeft, vectorSize, 0);
     vas_dynamicFirChannel_process(x->right, inRight, outRight, vectorSize, 0);
 }
 
-vas_filter_headphoneCompensation *vas_filter_headphoneCompensation_new(int setup, int segmentSize)
+vas_fir_headphoneCompensation *vas_fir_headphoneCompensation_new(int setup, int segmentSize)
 {
-    vas_filter_headphoneCompensation *x = vas_mem_alloc(sizeof(vas_filter_headphoneCompensation));
+    vas_fir_headphoneCompensation *x = vas_mem_alloc(sizeof(vas_fir_headphoneCompensation));
     vas_filter_metaData_init(&x->description);
     
     int leftSetup = setup;
@@ -35,7 +35,7 @@ vas_filter_headphoneCompensation *vas_filter_headphoneCompensation_new(int setup
     return x;
 }
 
-void vas_filter_headphoneCompensation_free(vas_filter_headphoneCompensation *x)
+void vas_fir_headphoneCompensation_free(vas_fir_headphoneCompensation *x)
 {
     vas_dynamicFirChannel_free(x->left);
     vas_dynamicFirChannel_free(x->right);

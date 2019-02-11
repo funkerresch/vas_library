@@ -22,14 +22,14 @@
 //#define VAS_USE_VDSP
 //#define VAS_USE_KISSFFT
 
-#ifdef _WIN32
-#define _USE_MATH_DEFINES
-#include <math.h>
-#define VAS_USE_KISSFFT
-#else
+//#ifdef _WIN32
+//#define _USE_MATH_DEFINES
+//#include <math.h>
+//#define VAS_USE_KISSFFT
+//#else
 #include <math.h>
 #define VAS_USE_VDSP
-#endif
+//#endif
 
 #include <string.h>
 #include <stdbool.h>

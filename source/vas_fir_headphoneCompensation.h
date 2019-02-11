@@ -21,12 +21,12 @@ typedef struct vas_fir_headphoneCompensation
     vas_dynamicFirChannel *left;
     vas_dynamicFirChannel *right;
     
-} vas_filter_headphoneCompensation;
+} vas_fir_headphoneCompensation;
 
-vas_filter_headphoneCompensation *vas_filter_headphoneCompensation_new(int setup, int segmentSize);
+vas_fir_headphoneCompensation *vas_fir_headphoneCompensation_new(int setup, int segmentSize);
 
-void vas_filter_headphoneCompensation_process(vas_filter_headphoneCompensation *x, AK_INPUTVECTOR *inLeft, AK_INPUTVECTOR *inRight, AK_OUTPUTVECTOR *outLeft, AK_OUTPUTVECTOR *outRight, int vectorSize);
+void vas_fir_headphoneCompensation_process(vas_fir_headphoneCompensation *x, AK_INPUTVECTOR *inLeft, AK_INPUTVECTOR *inRight, AK_OUTPUTVECTOR *outLeft, AK_OUTPUTVECTOR *outRight, int vectorSize);
 
-void vas_filter_headphoneCompensation_free(vas_filter_headphoneCompensation *x);
+void vas_fir_headphoneCompensation_free(vas_fir_headphoneCompensation *x);
 
 #endif /* vas_filter_headphoneCompensation_h */

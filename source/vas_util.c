@@ -858,34 +858,6 @@ void vas_util_complexCopy(VAS_COMPLEX *source, VAS_COMPLEX *dest, int length)
 #endif
 }
 
-void vas_util_postSomeValue(VAS_COMPLEX *dest, int length)
-{
-    int n = length;
-#ifdef VAS_USE_VDSP
-
-#endif
-    
-#ifdef VAS_USE_FFTW
-#ifdef VAS_USE_C99COMPLEX
-    
-    
-#else
-   
-#endif
-#endif
-    
-#ifdef VAS_USE_KISSFFT
-    while (n--)
-    {
-        if(n == 30)
-#ifdef PUREDATA
-            post("%d", dest->i);
-#endif
-        dest++;
-    }
-#endif
-}
-
 void vas_util_complexScale(VAS_COMPLEX *dest, float scale,  int length)
 {
     int n = length;
@@ -927,8 +899,6 @@ void vas_util_complexScale(VAS_COMPLEX *dest, float scale,  int length)
     }
 #endif
 }
-
-
 
 void vas_util_complexMultiplyAdd(VAS_COMPLEX *signalIn, VAS_COMPLEX *filter, VAS_COMPLEX *dest, int length)                //complex-multiplication
 {
