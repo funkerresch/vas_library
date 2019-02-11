@@ -1,0 +1,876 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		842E090120C67E760089C3D9 /* vas_fir.h in Headers */ = {isa = PBXBuildFile; fileRef = 842E08FF20C67E750089C3D9 /* vas_fir.h */; };
+		842E090220C67E760089C3D9 /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
+		842E090520C67E8B0089C3D9 /* vas_fir_binaural.h in Headers */ = {isa = PBXBuildFile; fileRef = 842E090320C67E8B0089C3D9 /* vas_fir_binaural.h */; };
+		842E090620C67E8B0089C3D9 /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */; };
+		843E664021F884FA00B89A9F /* rwa_firobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E663E21F884FA00B89A9F /* rwa_firobject.h */; };
+		843E664121F884FA00B89A9F /* rwa_firobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E663E21F884FA00B89A9F /* rwa_firobject.h */; };
+		843E664221F884FA00B89A9F /* rwa_firobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E663E21F884FA00B89A9F /* rwa_firobject.h */; };
+		844237661FB4A69E005ACA50 /* m_pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 844237651FB4A69D005ACA50 /* m_pd.h */; };
+		844237761FB4A887005ACA50 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+		8479364F21FB21D600A2082A /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 843E663F21F884FA00B89A9F /* rwa_firobject.c */; };
+		8479365021FB21D700A2082A /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 843E663F21F884FA00B89A9F /* rwa_firobject.c */; };
+		8479365121FB21D800A2082A /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 843E663F21F884FA00B89A9F /* rwa_firobject.c */; };
+		8493BE2721A546DE0067ED86 /* fftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493BE2621A546DE0067ED86 /* fftw3f.a */; };
+		8493BE2821A546DE0067ED86 /* fftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493BE2621A546DE0067ED86 /* fftw3f.a */; };
+		8493BE2921A546DE0067ED86 /* fftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493BE2621A546DE0067ED86 /* fftw3f.a */; };
+		84C9E384213ABFAA004C6B54 /* rwa_binauralrir~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C9E382213ABFAA004C6B54 /* rwa_binauralrir~.h */; };
+		84C9E385213ABFAA004C6B54 /* rwa_binauralrir~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C9E383213ABFAA004C6B54 /* rwa_binauralrir~.c */; };
+		84C9E386213AC043004C6B54 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
+		84C9E387213AC046004C6B54 /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */; };
+		84C9E388213AC049004C6B54 /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
+		84C9E389213AC04D004C6B54 /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF820401E1A00CDC513 /* vas_util.c */; };
+		84C9E38A213AC050004C6B54 /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF720401E1A00CDC513 /* vas_mem.c */; };
+		84C9E38F213ACA5D004C6B54 /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
+		84C9E390213ACA5D004C6B54 /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */; };
+		84C9E391213ACA5D004C6B54 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
+		84C9E392213ACA5D004C6B54 /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF820401E1A00CDC513 /* vas_util.c */; };
+		84C9E393213ACA5D004C6B54 /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF720401E1A00CDC513 /* vas_mem.c */; };
+		84C9E396213ACA5D004C6B54 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+		84C9E398213ACA5D004C6B54 /* rwa_binauralrir~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C9E382213ABFAA004C6B54 /* rwa_binauralrir~.h */; };
+		84C9E3A0213ACA80004C6B54 /* rwa_reverb~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C9E38C213ACA57004C6B54 /* rwa_reverb~.c */; };
+		84DA7EFF20401E1B00CDC513 /* vas_mem.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DA7EF520401E1A00CDC513 /* vas_mem.h */; };
+		84DA7F0120401E1B00CDC513 /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF720401E1A00CDC513 /* vas_mem.c */; };
+		84DA7F0220401E1B00CDC513 /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF820401E1A00CDC513 /* vas_util.c */; };
+		84DA7F0320401E1B00CDC513 /* vas_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DA7EF920401E1B00CDC513 /* vas_util.h */; };
+		84DA7F0E2040487A00CDC513 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
+		84DA7F0F2040487A00CDC513 /* vas_dynamicFirChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DA7F0D2040487A00CDC513 /* vas_dynamicFirChannel.h */; };
+		84E5E14821FB48E6002216EF /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
+		84E5E14921FB48E6002216EF /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */; };
+		84E5E14A21FB48E6002216EF /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
+		84E5E14B21FB48E6002216EF /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF820401E1A00CDC513 /* vas_util.c */; };
+		84E5E14E21FB48E6002216EF /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF720401E1A00CDC513 /* vas_mem.c */; };
+		84E5E15121FB48E6002216EF /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 843E663F21F884FA00B89A9F /* rwa_firobject.c */; };
+		84E5E15321FB48E6002216EF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+		84E5E15421FB48E6002216EF /* fftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493BE2621A546DE0067ED86 /* fftw3f.a */; };
+		84E5E15621FB48E6002216EF /* rwa_firobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E663E21F884FA00B89A9F /* rwa_firobject.h */; };
+		84E5E15721FB48E6002216EF /* rwa_binauralrir~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C9E382213ABFAA004C6B54 /* rwa_binauralrir~.h */; };
+		84E5E16121FB4973002216EF /* rwa_hpcomp~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E5E15F21FB4973002216EF /* rwa_hpcomp~.h */; };
+		84E5E16221FB4973002216EF /* rwa_hpcomp~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E5E16021FB4973002216EF /* rwa_hpcomp~.c */; };
+		84E5E16921FB4A28002216EF /* vas_fir_headphoneCompensation.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E5E16721FB4A28002216EF /* vas_fir_headphoneCompensation.c */; };
+		84E5E16A21FB4A28002216EF /* vas_fir_headphoneCompensation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E5E16821FB4A28002216EF /* vas_fir_headphoneCompensation.h */; };
+		84FFFFA42124405E00294898 /* rwa_binauralsimple~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84FFFFA22124405E00294898 /* rwa_binauralsimple~.c */; };
+		84FFFFA52124405E00294898 /* rwa_binauralsimple~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84FFFFA32124405E00294898 /* rwa_binauralsimple~.h */; };
+		84FFFFB42125808F00294898 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		84C9E399213ACA5D004C6B54 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84E5E15821FB48E6002216EF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FFFFA72124580800294898 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FFFFBD2125808F00294898 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		842E08FF20C67E750089C3D9 /* vas_fir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir.h; path = ../../../source/vas_fir.h; sourceTree = "<group>"; };
+		842E090020C67E760089C3D9 /* vas_fir.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir.c; path = ../../../source/vas_fir.c; sourceTree = "<group>"; };
+		842E090320C67E8B0089C3D9 /* vas_fir_binaural.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir_binaural.h; path = ../../../source/vas_fir_binaural.h; sourceTree = "<group>"; };
+		842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_binaural.c; path = ../../../source/vas_fir_binaural.c; sourceTree = "<group>"; };
+		843E663E21F884FA00B89A9F /* rwa_firobject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rwa_firobject.h; sourceTree = "<group>"; };
+		843E663F21F884FA00B89A9F /* rwa_firobject.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = rwa_firobject.c; sourceTree = "<group>"; };
+		844237651FB4A69D005ACA50 /* m_pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m_pd.h; sourceTree = "<group>"; };
+		844237741FB4A6E2005ACA50 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8493BE2621A546DE0067ED86 /* fftw3f.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = fftw3f.a; path = "../../../../fftw-3.3.8/build/fftw3f.a"; sourceTree = "<group>"; };
+		84C8BADF2211A47F0038459A /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fft.c; path = ../../../kissfft/kiss_fft.c; sourceTree = "<group>"; };
+		84C8BAE42211A48C0038459A /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fftr.c; path = ../../../kissfft/tools/kiss_fftr.c; sourceTree = "<group>"; };
+		84C9E382213ABFAA004C6B54 /* rwa_binauralrir~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "rwa_binauralrir~.h"; sourceTree = "<group>"; };
+		84C9E383213ABFAA004C6B54 /* rwa_binauralrir~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "rwa_binauralrir~.c"; sourceTree = "<group>"; };
+		84C9E38B213ACA57004C6B54 /* rwa_reverb~.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rwa_reverb~.h"; sourceTree = "<group>"; };
+		84C9E38C213ACA57004C6B54 /* rwa_reverb~.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rwa_reverb~.c"; sourceTree = "<group>"; };
+		84C9E39F213ACA5D004C6B54 /* rwa_reverb~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "rwa_reverb~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84DA7EF520401E1A00CDC513 /* vas_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_mem.h; path = ../../../source/vas_mem.h; sourceTree = "<group>"; };
+		84DA7EF720401E1A00CDC513 /* vas_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_mem.c; path = ../../../source/vas_mem.c; sourceTree = "<group>"; };
+		84DA7EF820401E1A00CDC513 /* vas_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_util.c; path = ../../../source/vas_util.c; sourceTree = "<group>"; };
+		84DA7EF920401E1B00CDC513 /* vas_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_util.h; path = ../../../source/vas_util.h; sourceTree = "<group>"; };
+		84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_dynamicFirChannel.c; path = ../../../source/vas_dynamicFirChannel.c; sourceTree = "<group>"; };
+		84DA7F0D2040487A00CDC513 /* vas_dynamicFirChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_dynamicFirChannel.h; path = ../../../source/vas_dynamicFirChannel.h; sourceTree = "<group>"; };
+		84E5E15E21FB48E6002216EF /* rwa_hpcomp~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "rwa_hpcomp~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84E5E15F21FB4973002216EF /* rwa_hpcomp~.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rwa_hpcomp~.h"; sourceTree = "<group>"; };
+		84E5E16021FB4973002216EF /* rwa_hpcomp~.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "rwa_hpcomp~.c"; sourceTree = "<group>"; };
+		84E5E16321FB49EA002216EF /* vas_fir_staticFir_s2s.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir_staticFir_s2s.h; path = ../../../source/vas_fir_staticFir_s2s.h; sourceTree = "<group>"; };
+		84E5E16421FB49EA002216EF /* vas_fir_staticFir_s2s.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_staticFir_s2s.c; path = ../../../source/vas_fir_staticFir_s2s.c; sourceTree = "<group>"; };
+		84E5E16721FB4A28002216EF /* vas_fir_headphoneCompensation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_headphoneCompensation.c; path = ../../../source/vas_fir_headphoneCompensation.c; sourceTree = "<group>"; };
+		84E5E16821FB4A28002216EF /* vas_fir_headphoneCompensation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir_headphoneCompensation.h; path = ../../../source/vas_fir_headphoneCompensation.h; sourceTree = "<group>"; };
+		84FFFFA22124405E00294898 /* rwa_binauralsimple~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "rwa_binauralsimple~.c"; sourceTree = "<group>"; };
+		84FFFFA32124405E00294898 /* rwa_binauralsimple~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "rwa_binauralsimple~.h"; sourceTree = "<group>"; };
+		84FFFFC32125808F00294898 /* rwa_binauralrir~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "rwa_binauralrir~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA2927EC1A899B4C005A2BA9 /* rwa_binauralsimple~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "rwa_binauralsimple~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		84C9E395213ACA5D004C6B54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C9E396213ACA5D004C6B54 /* Accelerate.framework in Frameworks */,
+				8493BE2921A546DE0067ED86 /* fftw3f.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84E5E15221FB48E6002216EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84E5E15321FB48E6002216EF /* Accelerate.framework in Frameworks */,
+				84E5E15421FB48E6002216EF /* fftw3f.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FFFFB32125808F00294898 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84FFFFB42125808F00294898 /* Accelerate.framework in Frameworks */,
+				8493BE2821A546DE0067ED86 /* fftw3f.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA2927E91A899B4C005A2BA9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				844237761FB4A887005ACA50 /* Accelerate.framework in Frameworks */,
+				8493BE2721A546DE0067ED86 /* fftw3f.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		844237731FB4A6E1005ACA50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8493BE2621A546DE0067ED86 /* fftw3f.a */,
+				844237741FB4A6E2005ACA50 /* Accelerate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA2927E31A899B4C005A2BA9 = {
+			isa = PBXGroup;
+			children = (
+				844237651FB4A69D005ACA50 /* m_pd.h */,
+				84DA7EF720401E1A00CDC513 /* vas_mem.c */,
+				84DA7EF520401E1A00CDC513 /* vas_mem.h */,
+				84DA7EF820401E1A00CDC513 /* vas_util.c */,
+				84DA7EF920401E1B00CDC513 /* vas_util.h */,
+				842E090020C67E760089C3D9 /* vas_fir.c */,
+				842E08FF20C67E750089C3D9 /* vas_fir.h */,
+				842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */,
+				842E090320C67E8B0089C3D9 /* vas_fir_binaural.h */,
+				84E5E16421FB49EA002216EF /* vas_fir_staticFir_s2s.c */,
+				84E5E16321FB49EA002216EF /* vas_fir_staticFir_s2s.h */,
+				84E5E16721FB4A28002216EF /* vas_fir_headphoneCompensation.c */,
+				84E5E16821FB4A28002216EF /* vas_fir_headphoneCompensation.h */,
+				84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */,
+				84DA7F0D2040487A00CDC513 /* vas_dynamicFirChannel.h */,
+				843E663E21F884FA00B89A9F /* rwa_firobject.h */,
+				843E663F21F884FA00B89A9F /* rwa_firobject.c */,
+				84FFFFA22124405E00294898 /* rwa_binauralsimple~.c */,
+				84FFFFA32124405E00294898 /* rwa_binauralsimple~.h */,
+				84C9E383213ABFAA004C6B54 /* rwa_binauralrir~.c */,
+				84C9E382213ABFAA004C6B54 /* rwa_binauralrir~.h */,
+				84C9E38C213ACA57004C6B54 /* rwa_reverb~.c */,
+				84C9E38B213ACA57004C6B54 /* rwa_reverb~.h */,
+				84E5E15F21FB4973002216EF /* rwa_hpcomp~.h */,
+				84E5E16021FB4973002216EF /* rwa_hpcomp~.c */,
+				84C8BADF2211A47F0038459A /* kiss_fft.c */,
+				84C8BAE42211A48C0038459A /* kiss_fftr.c */,
+				FA2927ED1A899B4C005A2BA9 /* Products */,
+				844237731FB4A6E1005ACA50 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FA2927ED1A899B4C005A2BA9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA2927EC1A899B4C005A2BA9 /* rwa_binauralsimple~.pd_darwin */,
+				84FFFFC32125808F00294898 /* rwa_binauralrir~.pd_darwin */,
+				84C9E39F213ACA5D004C6B54 /* rwa_reverb~.pd_darwin */,
+				84E5E15E21FB48E6002216EF /* rwa_hpcomp~.pd_darwin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		84C9E397213ACA5D004C6B54 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				843E664221F884FA00B89A9F /* rwa_firobject.h in Headers */,
+				84C9E398213ACA5D004C6B54 /* rwa_binauralrir~.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84E5E15521FB48E6002216EF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84E5E16121FB4973002216EF /* rwa_hpcomp~.h in Headers */,
+				84E5E15621FB48E6002216EF /* rwa_firobject.h in Headers */,
+				84E5E16A21FB4A28002216EF /* vas_fir_headphoneCompensation.h in Headers */,
+				84E5E15721FB48E6002216EF /* rwa_binauralrir~.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FFFFB52125808F00294898 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				843E664121F884FA00B89A9F /* rwa_firobject.h in Headers */,
+				84C9E384213ABFAA004C6B54 /* rwa_binauralrir~.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA2927EA1A899B4C005A2BA9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				842E090120C67E760089C3D9 /* vas_fir.h in Headers */,
+				84FFFFA52124405E00294898 /* rwa_binauralsimple~.h in Headers */,
+				843E664021F884FA00B89A9F /* rwa_firobject.h in Headers */,
+				84DA7F0F2040487A00CDC513 /* vas_dynamicFirChannel.h in Headers */,
+				844237661FB4A69E005ACA50 /* m_pd.h in Headers */,
+				842E090520C67E8B0089C3D9 /* vas_fir_binaural.h in Headers */,
+				84DA7F0320401E1B00CDC513 /* vas_util.h in Headers */,
+				84DA7EFF20401E1B00CDC513 /* vas_mem.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		84C9E38D213ACA5D004C6B54 /* rwa_reverb~ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84C9E39C213ACA5D004C6B54 /* Build configuration list for PBXNativeTarget "rwa_reverb~" */;
+			buildPhases = (
+				84C9E38E213ACA5D004C6B54 /* Sources */,
+				84C9E395213ACA5D004C6B54 /* Frameworks */,
+				84C9E397213ACA5D004C6B54 /* Headers */,
+				84C9E399213ACA5D004C6B54 /* CopyFiles */,
+				84C9E39A213ACA5D004C6B54 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "rwa_reverb~";
+			productName = "HelloWorld-pd-external";
+			productReference = 84C9E39F213ACA5D004C6B54 /* rwa_reverb~.pd_darwin */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		84E5E14621FB48E6002216EF /* rwa_hpcomp~ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84E5E15B21FB48E6002216EF /* Build configuration list for PBXNativeTarget "rwa_hpcomp~" */;
+			buildPhases = (
+				84E5E14721FB48E6002216EF /* Sources */,
+				84E5E15221FB48E6002216EF /* Frameworks */,
+				84E5E15521FB48E6002216EF /* Headers */,
+				84E5E15821FB48E6002216EF /* CopyFiles */,
+				84E5E15921FB48E6002216EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "rwa_hpcomp~";
+			productName = "HelloWorld-pd-external";
+			productReference = 84E5E15E21FB48E6002216EF /* rwa_hpcomp~.pd_darwin */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		84FFFFAB2125808F00294898 /* rwa_binauralrir~ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84FFFFC02125808F00294898 /* Build configuration list for PBXNativeTarget "rwa_binauralrir~" */;
+			buildPhases = (
+				84FFFFAC2125808F00294898 /* Sources */,
+				84FFFFB32125808F00294898 /* Frameworks */,
+				84FFFFB52125808F00294898 /* Headers */,
+				84FFFFBD2125808F00294898 /* CopyFiles */,
+				84FFFFBE2125808F00294898 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "rwa_binauralrir~";
+			productName = "HelloWorld-pd-external";
+			productReference = 84FFFFC32125808F00294898 /* rwa_binauralrir~.pd_darwin */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		FA2927EB1A899B4C005A2BA9 /* rwa_binauralsimple~ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA2927F01A899B4C005A2BA9 /* Build configuration list for PBXNativeTarget "rwa_binauralsimple~" */;
+			buildPhases = (
+				FA2927E81A899B4C005A2BA9 /* Sources */,
+				FA2927E91A899B4C005A2BA9 /* Frameworks */,
+				FA2927EA1A899B4C005A2BA9 /* Headers */,
+				84FFFFA72124580800294898 /* CopyFiles */,
+				84FFFFA92124589200294898 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "rwa_binauralsimple~";
+			productName = "HelloWorld-pd-external";
+			productReference = FA2927EC1A899B4C005A2BA9 /* rwa_binauralsimple~.pd_darwin */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA2927E41A899B4C005A2BA9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Intrinsic Audio";
+				TargetAttributes = {
+					FA2927EB1A899B4C005A2BA9 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = FA2927E71A899B4C005A2BA9 /* Build configuration list for PBXProject "rwa_binauralsimple~" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FA2927E31A899B4C005A2BA9;
+			productRefGroup = FA2927ED1A899B4C005A2BA9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA2927EB1A899B4C005A2BA9 /* rwa_binauralsimple~ */,
+				84FFFFAB2125808F00294898 /* rwa_binauralrir~ */,
+				84C9E38D213ACA5D004C6B54 /* rwa_reverb~ */,
+				84E5E14621FB48E6002216EF /* rwa_hpcomp~ */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84C9E39A213ACA5D004C6B54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84E5E15921FB48E6002216EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FFFFA92124589200294898 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FFFFBE2125808F00294898 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		84C9E38E213ACA5D004C6B54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C9E38F213ACA5D004C6B54 /* vas_fir.c in Sources */,
+				84C9E390213ACA5D004C6B54 /* vas_fir_binaural.c in Sources */,
+				84C9E391213ACA5D004C6B54 /* vas_dynamicFirChannel.c in Sources */,
+				84C9E392213ACA5D004C6B54 /* vas_util.c in Sources */,
+				84C9E393213ACA5D004C6B54 /* vas_mem.c in Sources */,
+				84C9E3A0213ACA80004C6B54 /* rwa_reverb~.c in Sources */,
+				8479365121FB21D800A2082A /* rwa_firobject.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84E5E14721FB48E6002216EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84E5E14821FB48E6002216EF /* vas_fir.c in Sources */,
+				84E5E14921FB48E6002216EF /* vas_fir_binaural.c in Sources */,
+				84E5E14A21FB48E6002216EF /* vas_dynamicFirChannel.c in Sources */,
+				84E5E16921FB4A28002216EF /* vas_fir_headphoneCompensation.c in Sources */,
+				84E5E14B21FB48E6002216EF /* vas_util.c in Sources */,
+				84E5E16221FB4973002216EF /* rwa_hpcomp~.c in Sources */,
+				84E5E14E21FB48E6002216EF /* vas_mem.c in Sources */,
+				84E5E15121FB48E6002216EF /* rwa_firobject.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FFFFAC2125808F00294898 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84C9E388213AC049004C6B54 /* vas_fir.c in Sources */,
+				84C9E387213AC046004C6B54 /* vas_fir_binaural.c in Sources */,
+				84C9E386213AC043004C6B54 /* vas_dynamicFirChannel.c in Sources */,
+				84C9E389213AC04D004C6B54 /* vas_util.c in Sources */,
+				84C9E38A213AC050004C6B54 /* vas_mem.c in Sources */,
+				84C9E385213ABFAA004C6B54 /* rwa_binauralrir~.c in Sources */,
+				8479365021FB21D700A2082A /* rwa_firobject.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA2927E81A899B4C005A2BA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84DA7F0E2040487A00CDC513 /* vas_dynamicFirChannel.c in Sources */,
+				84FFFFA42124405E00294898 /* rwa_binauralsimple~.c in Sources */,
+				842E090220C67E760089C3D9 /* vas_fir.c in Sources */,
+				84DA7F0220401E1B00CDC513 /* vas_util.c in Sources */,
+				842E090620C67E8B0089C3D9 /* vas_fir_binaural.c in Sources */,
+				84DA7F0120401E1B00CDC513 /* vas_mem.c in Sources */,
+				8479364F21FB21D600A2082A /* rwa_firobject.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		84C9E39D213ACA5D004C6B54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VERBOSE,
+					VAS_INPUTVECTOR_USE_FLOAT,
+				);
+				INSTALL_PATH = "../../../../../../../Applications/Pd-0.48-0.app/Contents/Resources/extra/rwa_reverb~";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		84C9E39E213ACA5D004C6B54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VERBOSE,
+					VAS_INPUTVECTOR_USE_FLOAT,
+				);
+				INSTALL_PATH = "../../../../../../../Applications/Pd-0.48-0.app/Contents/Resources/extra/rwa_reverb~";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
+		84E5E15C21FB48E6002216EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VERBOSE,
+					VAS_INPUTVECTOR_USE_FLOAT,
+				);
+				INSTALL_PATH = "../../../../../../../Applications/Pd-0.48-0.app/Contents/Resources/extra/rwa_hpcomp~";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		84E5E15D21FB48E6002216EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VERBOSE,
+					VAS_INPUTVECTOR_USE_FLOAT,
+				);
+				INSTALL_PATH = "../../../../../../../Applications/Pd-0.48-0.app/Contents/Resources/extra/rwa_hpcomp~";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
+		84FFFFC12125808F00294898 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_INPUTVECTOR_USE_FLOAT,
+					VAS_USEFABIAN256HEADER,
+				);
+				INSTALL_PATH = "../../../../../../../Applications/Pd-0.48-0.app/Contents/Resources/extra/rwa_binauralrir~";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/** \"$(SRCROOT)/../../../source/kissfft\"/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		84FFFFC22125808F00294898 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_INPUTVECTOR_USE_FLOAT,
+					VAS_USEFABIAN256HEADER,
+				);
+				INSTALL_PATH = "../../../../../../../Applications/Pd-0.48-0.app/Contents/Resources/extra/rwa_binauralrir~";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/** \"$(SRCROOT)/../../../source/kissfft\"/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
+		FA2927EE1A899B4C005A2BA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "akbinaural~";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FA2927EF1A899B4C005A2BA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "akbinaural~";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FA2927F11A899B4C005A2BA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "";
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_INPUTVECTOR_USE_FLOAT,
+					VAS_USEFABIAN256HEADER,
+				);
+				INSTALL_PATH = "../../../../../../../Applications/Pd-0.48-0.app/Contents/Resources/extra/rwa_binauralsimple~";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "rwa_binauralsimple~";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		FA2927F21A899B4C005A2BA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "";
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_INPUTVECTOR_USE_FLOAT,
+					VAS_USEFABIAN256HEADER,
+				);
+				INSTALL_PATH = "../../../../../../../Applications/Pd-0.48-0.app/Contents/Resources/extra/rwa_binauralsimple~";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "rwa_binauralsimple~";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84C9E39C213ACA5D004C6B54 /* Build configuration list for PBXNativeTarget "rwa_reverb~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84C9E39D213ACA5D004C6B54 /* Debug */,
+				84C9E39E213ACA5D004C6B54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84E5E15B21FB48E6002216EF /* Build configuration list for PBXNativeTarget "rwa_hpcomp~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84E5E15C21FB48E6002216EF /* Debug */,
+				84E5E15D21FB48E6002216EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84FFFFC02125808F00294898 /* Build configuration list for PBXNativeTarget "rwa_binauralrir~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84FFFFC12125808F00294898 /* Debug */,
+				84FFFFC22125808F00294898 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA2927E71A899B4C005A2BA9 /* Build configuration list for PBXProject "rwa_binauralsimple~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA2927EE1A899B4C005A2BA9 /* Debug */,
+				FA2927EF1A899B4C005A2BA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA2927F01A899B4C005A2BA9 /* Build configuration list for PBXNativeTarget "rwa_binauralsimple~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA2927F11A899B4C005A2BA9 /* Debug */,
+				FA2927F21A899B4C005A2BA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA2927E41A899B4C005A2BA9 /* Project object */;
+}
