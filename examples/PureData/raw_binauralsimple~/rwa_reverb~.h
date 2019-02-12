@@ -14,4 +14,8 @@ typedef struct rwa_reverb
     
 } rwa_reverb;
 
+#ifdef PUREDATA
+void rwa_reverb_tilde_setup(void);
+#endif
+
 #endif

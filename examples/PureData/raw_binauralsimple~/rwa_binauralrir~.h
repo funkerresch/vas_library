@@ -16,4 +16,8 @@ typedef struct rwa_binauralrir
   
 } rwa_binauralrir;
 
+#ifdef PUREDATA
+void rwa_binauralrir_tilde_setup(void);
+#endif
+
 #endif

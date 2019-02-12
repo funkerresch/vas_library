@@ -16,5 +16,8 @@ typedef struct rwa_binauralsimple
     
 } rwa_binauralsimple;
 
+#ifdef PUREDATA
+void rwa_binauralsimple_tilde_setup(void);
+#endif
 
 #endif /* ak_binaural_h */

@@ -16,4 +16,8 @@ typedef struct rwa_hpcomp
     
 } rwa_hpcomp;
 
+#ifdef PUREDATA
+void rwa_hpcomp_tilde_setup(void);
+#endif
+
 #endif
