@@ -1,6 +1,4 @@
 #include "rwa_binauralrir~.h"
-#include <dlfcn.h>
-
 
 static t_class *rwa_binauralrir_class;
 
@@ -42,10 +40,16 @@ static t_int *rwa_binauralrir_perform(t_int *w)
     t_float *outL = (t_float *)(w[3]);
     t_float *outR = (t_float *)(w[4]);
     t_float *inputBufferPtr = x->inputBuffer;
+    t_float *outputBufferPtrL = outL;
+    t_float *outputBufferPtrR = outR;
+    
     int n = (int)(w[5]);
     
     while(n--)
+    {
         *inputBufferPtr++ = *in++;
+        *outputBufferPtrL++ = 0; *outputBufferPtrR++ = 0;
+    }
     
     n = (int)(w[5]);
     
