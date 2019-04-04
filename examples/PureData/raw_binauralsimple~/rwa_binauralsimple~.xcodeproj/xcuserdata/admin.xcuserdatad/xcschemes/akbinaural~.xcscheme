@@ -62,6 +62,34 @@
                ReferencedContainer = "container:rwa_binauralsimple~.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84C08264223F99F400918A05"
+               BuildableName = "tr_pitchtrack~.pd_darwin"
+               BlueprintName = "tr_pitchtrack~"
+               ReferencedContainer = "container:rwa_binauralsimple~.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "843A832722560C4D00CC7F80"
+               BuildableName = "tr_biquad~.pd_darwin"
+               BlueprintName = "tr_biquad~"
+               ReferencedContainer = "container:rwa_binauralsimple~.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

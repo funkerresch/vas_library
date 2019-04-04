@@ -19,6 +19,16 @@ static void rwa_binauralrir_setSegmentThreshold(rwa_binauralrir *x, float thresh
     vas_dynamicFirChannel_setSegmentThreshold(binauralEngine->right, thresh);
 }
 
+static void rwa_binauralrir_postInactivePartionIndexes(rwa_binauralrir *x)
+{
+    vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
+    for(int i=0; i < binauralEngine->right->filter->numberOfSegments; i++ )
+    {
+        if( binauralEngine->right->filter->segmentIsZero[0][0][i])
+            post("%d", i);
+    }
+}
+
 static void rwa_binauralrir_setAzimuth(rwa_binauralrir *x, float azimuth)
 {
     vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
@@ -144,5 +154,6 @@ void rwa_binauralrir_tilde_setup(void)
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_setElevation, gensym("elevation"), A_DEFFLOAT,0);
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_setSegmentThreshold, gensym("thresh"), A_DEFFLOAT,0);
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_firobject_read, gensym("read"), A_DEFSYM,0);
+    class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_postInactivePartionIndexes, gensym("zeroindexes"),0);
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_leaveNumberOfPartionsActive,  gensym("activepartitions"),A_DEFFLOAT, 0);
 }
