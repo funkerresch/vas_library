@@ -1,0 +1,77 @@
+\hypertarget{stp__gain__pd_8c}{}\section{/\+Users/admin/\+Desktop/\+Strukturiertes Programmieren Public\+\_\+04/\+X\+Code/stp\+\_\+gain$\sim$/stp\+\_\+gain\+\_\+pd.c File Reference}
+\label{stp__gain__pd_8c}\index{/\+Users/admin/\+Desktop/\+Strukturiertes Programmieren Public\+\_\+04/\+X\+Code/stp\+\_\+gain$\sim$/stp\+\_\+gain\+\_\+pd.\+c@{/\+Users/admin/\+Desktop/\+Strukturiertes Programmieren Public\+\_\+04/\+X\+Code/stp\+\_\+gain$\sim$/stp\+\_\+gain\+\_\+pd.\+c}}
+{\ttfamily \#include \char`\"{}m\+\_\+pd.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stp\+\_\+gain.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde} \hyperlink{stp__gain__pd_8c_a5e9a84287be093d538428ceb7150b921}{stp\+\_\+gain\+\_\+tilde}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{m__pd_8h_a25c3bfb56994a1e98ffc5ecb5abee24b}{t\+\_\+int} $\ast$ \hyperlink{stp__gain__pd_8c_a89cca74a9217e945de96e767cbaadc55}{stp\+\_\+gain\+\_\+tilde\+\_\+perform} (\hyperlink{m__pd_8h_a25c3bfb56994a1e98ffc5ecb5abee24b}{t\+\_\+int} $\ast$w)
+\item 
+void \hyperlink{stp__gain__pd_8c_a44e6490aca114bc89548d4ec316638eb}{stp\+\_\+gain\+\_\+tilde\+\_\+dsp} (\hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde} $\ast$x, \hyperlink{m__pd_8h_a5b6cc9d0a96ab1c6267ddca1b89d7199}{t\+\_\+signal} $\ast$$\ast$sp)
+\item 
+void \hyperlink{stp__gain__pd_8c_ac6dcde965f8cb9e6576179047f7951fe}{stp\+\_\+gain\+\_\+tilde\+\_\+free} (\hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde} $\ast$x)
+\item 
+void $\ast$ \hyperlink{stp__gain__pd_8c_af1f671eb22e1181b59590ca697a15154}{stp\+\_\+gain\+\_\+tilde\+\_\+new} (\hyperlink{m__pd_8h_ab66b7dff3a7346586dc6f918e9a594af}{t\+\_\+floatarg} f)
+\item 
+void \hyperlink{stp__gain__pd_8c_a724fa7ba5f9d719d188b109f207c7f9b}{stp\+\_\+gain\+\_\+tilde\+\_\+set\+Level} (\hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde} $\ast$x, float level)
+\item 
+void \hyperlink{stp__gain__pd_8c_adbd573ae6f50fce3a78fc4dafb58c469}{stp\+\_\+gain\+\_\+tilde\+\_\+setup} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{stp__gain__pd_8c_a5e9a84287be093d538428ceb7150b921}\label{stp__gain__pd_8c_a5e9a84287be093d538428ceb7150b921}} 
+\index{stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}!stp\+\_\+gain\+\_\+tilde@{stp\+\_\+gain\+\_\+tilde}}
+\index{stp\+\_\+gain\+\_\+tilde@{stp\+\_\+gain\+\_\+tilde}!stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}}
+\subsubsection{\texorpdfstring{stp\+\_\+gain\+\_\+tilde}{stp\_gain\_tilde}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde}  \hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{stp__gain__pd_8c_a44e6490aca114bc89548d4ec316638eb}\label{stp__gain__pd_8c_a44e6490aca114bc89548d4ec316638eb}} 
+\index{stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}!stp\+\_\+gain\+\_\+tilde\+\_\+dsp@{stp\+\_\+gain\+\_\+tilde\+\_\+dsp}}
+\index{stp\+\_\+gain\+\_\+tilde\+\_\+dsp@{stp\+\_\+gain\+\_\+tilde\+\_\+dsp}!stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}}
+\subsubsection{\texorpdfstring{stp\+\_\+gain\+\_\+tilde\+\_\+dsp()}{stp\_gain\_tilde\_dsp()}}
+{\footnotesize\ttfamily void stp\+\_\+gain\+\_\+tilde\+\_\+dsp (\begin{DoxyParamCaption}\item[{\hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde} $\ast$}]{x,  }\item[{\hyperlink{m__pd_8h_a5b6cc9d0a96ab1c6267ddca1b89d7199}{t\+\_\+signal} $\ast$$\ast$}]{sp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stp__gain__pd_8c_ac6dcde965f8cb9e6576179047f7951fe}\label{stp__gain__pd_8c_ac6dcde965f8cb9e6576179047f7951fe}} 
+\index{stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}!stp\+\_\+gain\+\_\+tilde\+\_\+free@{stp\+\_\+gain\+\_\+tilde\+\_\+free}}
+\index{stp\+\_\+gain\+\_\+tilde\+\_\+free@{stp\+\_\+gain\+\_\+tilde\+\_\+free}!stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}}
+\subsubsection{\texorpdfstring{stp\+\_\+gain\+\_\+tilde\+\_\+free()}{stp\_gain\_tilde\_free()}}
+{\footnotesize\ttfamily void stp\+\_\+gain\+\_\+tilde\+\_\+free (\begin{DoxyParamCaption}\item[{\hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde} $\ast$}]{x }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stp__gain__pd_8c_af1f671eb22e1181b59590ca697a15154}\label{stp__gain__pd_8c_af1f671eb22e1181b59590ca697a15154}} 
+\index{stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}!stp\+\_\+gain\+\_\+tilde\+\_\+new@{stp\+\_\+gain\+\_\+tilde\+\_\+new}}
+\index{stp\+\_\+gain\+\_\+tilde\+\_\+new@{stp\+\_\+gain\+\_\+tilde\+\_\+new}!stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}}
+\subsubsection{\texorpdfstring{stp\+\_\+gain\+\_\+tilde\+\_\+new()}{stp\_gain\_tilde\_new()}}
+{\footnotesize\ttfamily void$\ast$ stp\+\_\+gain\+\_\+tilde\+\_\+new (\begin{DoxyParamCaption}\item[{\hyperlink{m__pd_8h_ab66b7dff3a7346586dc6f918e9a594af}{t\+\_\+floatarg}}]{f }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stp__gain__pd_8c_a89cca74a9217e945de96e767cbaadc55}\label{stp__gain__pd_8c_a89cca74a9217e945de96e767cbaadc55}} 
+\index{stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}!stp\+\_\+gain\+\_\+tilde\+\_\+perform@{stp\+\_\+gain\+\_\+tilde\+\_\+perform}}
+\index{stp\+\_\+gain\+\_\+tilde\+\_\+perform@{stp\+\_\+gain\+\_\+tilde\+\_\+perform}!stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}}
+\subsubsection{\texorpdfstring{stp\+\_\+gain\+\_\+tilde\+\_\+perform()}{stp\_gain\_tilde\_perform()}}
+{\footnotesize\ttfamily \hyperlink{m__pd_8h_a25c3bfb56994a1e98ffc5ecb5abee24b}{t\+\_\+int}$\ast$ stp\+\_\+gain\+\_\+tilde\+\_\+perform (\begin{DoxyParamCaption}\item[{\hyperlink{m__pd_8h_a25c3bfb56994a1e98ffc5ecb5abee24b}{t\+\_\+int} $\ast$}]{w }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stp__gain__pd_8c_a724fa7ba5f9d719d188b109f207c7f9b}\label{stp__gain__pd_8c_a724fa7ba5f9d719d188b109f207c7f9b}} 
+\index{stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}!stp\+\_\+gain\+\_\+tilde\+\_\+set\+Level@{stp\+\_\+gain\+\_\+tilde\+\_\+set\+Level}}
+\index{stp\+\_\+gain\+\_\+tilde\+\_\+set\+Level@{stp\+\_\+gain\+\_\+tilde\+\_\+set\+Level}!stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}}
+\subsubsection{\texorpdfstring{stp\+\_\+gain\+\_\+tilde\+\_\+set\+Level()}{stp\_gain\_tilde\_setLevel()}}
+{\footnotesize\ttfamily void stp\+\_\+gain\+\_\+tilde\+\_\+set\+Level (\begin{DoxyParamCaption}\item[{\hyperlink{structstp__gain__tilde}{stp\+\_\+gain\+\_\+tilde} $\ast$}]{x,  }\item[{float}]{level }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stp__gain__pd_8c_adbd573ae6f50fce3a78fc4dafb58c469}\label{stp__gain__pd_8c_adbd573ae6f50fce3a78fc4dafb58c469}} 
+\index{stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}!stp\+\_\+gain\+\_\+tilde\+\_\+setup@{stp\+\_\+gain\+\_\+tilde\+\_\+setup}}
+\index{stp\+\_\+gain\+\_\+tilde\+\_\+setup@{stp\+\_\+gain\+\_\+tilde\+\_\+setup}!stp\+\_\+gain\+\_\+pd.\+c@{stp\+\_\+gain\+\_\+pd.\+c}}
+\subsubsection{\texorpdfstring{stp\+\_\+gain\+\_\+tilde\+\_\+setup()}{stp\_gain\_tilde\_setup()}}
+{\footnotesize\ttfamily void stp\+\_\+gain\+\_\+tilde\+\_\+setup (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+

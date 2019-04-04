@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['stp_5fdefines_2eh',['stp_defines.h',['../stp__defines_8h.html',1,'']]],
+  ['stp_5fgain',['stp_gain',['../structstp__gain.html',1,'']]],
+  ['stp_5fgain_2eh',['stp_gain.h',['../stp__gain_8h.html',1,'']]],
+  ['stp_5fgain_5ffree',['stp_gain_free',['../structstp__gain.html#ab36b939e4336809ad301f890303d98f9',1,'stp_gain']]],
+  ['stp_5fgain_5fnew',['stp_gain_new',['../structstp__gain.html#a0979540c2a80ff589d209066faa0a5e9',1,'stp_gain']]],
+  ['stp_5fgain_5fpd_2ec',['stp_gain_pd.c',['../stp__gain__pd_8c.html',1,'']]],
+  ['stp_5fgain_5fperform',['stp_gain_perform',['../structstp__gain.html#a2405b0c38009081fd715433b07971946',1,'stp_gain']]],
+  ['stp_5fgain_5fsetlevel',['stp_gain_setLevel',['../structstp__gain.html#a40ce3451f3a3bf7bc7fe73e84d0cdfbe',1,'stp_gain']]],
+  ['stp_5fgain_5ftilde',['stp_gain_tilde',['../structstp__gain__tilde.html',1,'']]],
+  ['stp_5fgain_5ftilde_5fdsp',['stp_gain_tilde_dsp',['../structstp__gain__tilde.html#a44e6490aca114bc89548d4ec316638eb',1,'stp_gain_tilde']]],
+  ['stp_5fgain_5ftilde_5ffree',['stp_gain_tilde_free',['../structstp__gain__tilde.html#ac6dcde965f8cb9e6576179047f7951fe',1,'stp_gain_tilde']]],
+  ['stp_5fgain_5ftilde_5fnew',['stp_gain_tilde_new',['../structstp__gain__tilde.html#abd7b5011b953f4fe73564886bc67c984',1,'stp_gain_tilde']]],
+  ['stp_5fgain_5ftilde_5fperform',['stp_gain_tilde_perform',['../structstp__gain__tilde.html#a1c7d55f58651664bf47911a741858a89',1,'stp_gain_tilde']]],
+  ['stp_5fgain_5ftilde_5fsetlevel',['stp_gain_tilde_setLevel',['../structstp__gain__tilde.html#a724fa7ba5f9d719d188b109f207c7f9b',1,'stp_gain_tilde']]],
+  ['stp_5fgain_5ftilde_5fsetup',['stp_gain_tilde_setup',['../structstp__gain__tilde.html#adbd573ae6f50fce3a78fc4dafb58c469',1,'stp_gain_tilde']]],
+  ['stp_5finputvector',['STP_INPUTVECTOR',['../stp__defines_8h.html#a142134bffa517ce86ebf0bdcdbe975d2',1,'stp_defines.h']]],
+  ['stp_5finputvector_5fusefloat',['STP_INPUTVECTOR_USEFLOAT',['../stp__gain_8h.html#a427228d7c81c8bf42195af554a9107a8',1,'stp_gain.h']]],
+  ['stp_5foutputvector',['STP_OUTPUTVECTOR',['../stp__defines_8h.html#a0a4fde8c3943f5267ab6f09538b3ac26',1,'stp_defines.h']]],
+  ['stp_5foutputvector_5fusefloat',['STP_OUTPUTVECTOR_USEFLOAT',['../stp__gain_8h.html#a13f5cd92d1630c719e2d203a78c9d87d',1,'stp_gain.h']]]
+];
