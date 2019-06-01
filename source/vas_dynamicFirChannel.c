@@ -7,6 +7,8 @@ vas_dynamicFirChannel_config vas_binauralSetup_std = { .aziRange = 120, .aziStri
 vas_dynamicFirChannel_config vas_binauralSetup_noEle = { .aziRange = 120, .aziStride = 3, .eleMin = 0, .eleMax = 1, .eleRange = 1, .eleStride = 1, .eleZero = 0};
 vas_dynamicFirChannel_config vas_staticSetup = { .aziRange = 1, .aziStride = 1, .eleMin = 0, .eleMax = 1, .eleRange = 1, .eleStride = 1, .eleZero = 0};
 
+
+
 void vas_dynamicFirChannel_filter_init(vas_dynamicFirChannel_filter *x, int segmentSize)
 {
     x->segmentSize = segmentSize;
@@ -186,8 +188,9 @@ void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float t
 {
     if(thresh >= 0 && thresh < 1)
         x->segmentThreshold = thresh;
-    
+#if defined(MAXMSPSDK) || defined(PUREDATA)
     post("%.20f", x->segmentThreshold);
+#endif
 }
 
 void vas_dynamicFirChannel_setElevation(vas_dynamicFirChannel *x, int elevation)
@@ -200,7 +203,9 @@ void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentS
 {
     if(!vas_utilities_isValidSegmentSize(segmentSize))
     {
+#if defined(MAXMSPSDK) || defined(PUREDATA)
         post("Set Segment Size");
+#endif
         
 #if defined(MAXMSPSDK) || defined(PUREDATA)
         post("Invalid Segment Size: %d", segmentSize);
@@ -339,6 +344,12 @@ void vas_dynamicFirChannel_inverseFFT(vas_dynamicFirChannel *x, vas_dynamicFirCh
 
 void vas_dynamicFirChannel_calculateConvolution(vas_dynamicFirChannel *x)
 {
+    float *pointerToFFTInput;
+    float *pointerToOutputSegment;
+    
+    pointerToFFTInput = x->input.copy;
+    pointerToOutputSegment = x->output.outputSegment;
+   
     if(!x->fadeCounter)
         vas_dynamicFirChannel_updateAzimuthAndElevation(x);
     
@@ -370,6 +381,8 @@ void vas_dynamicFirChannel_calculateConvolution(vas_dynamicFirChannel *x)
     x->movingIndex +=1;
     if (x->movingIndex == x->pointerArraySize)
         x->movingIndex = x->pointerArrayMiddle;
+    
+    return;
 }
 
 void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, AK_INPUTVECTOR *in, AK_OUTPUTVECTOR *out, int vectorSize, int flags)
@@ -606,9 +619,11 @@ void vas_dynamicFirChannel_leaveActivePartitions(vas_dynamicFirChannel *x, int n
                     x->filter->nonZeroCounter[eleCount][aziCount]--;
                     if(aziCount == 0)
                     {
+#if defined(MAXMSPSDK) || defined(PUREDATA)
                         post("Set Segment with Index %d to zero", minIndex);
                         post("Energy of this Segment is %.14f, Max Energy: %.14f, Overall: %.14f", x->filter->averageSegmentPower[eleCount][aziCount][minIndex], x->filter->maxAverageSegmentPower[eleCount][aziCount], x->filter->overallEnergy[eleCount][aziCount]);
                         post("Number of active partitions %d", x->filter->nonZeroCounter[eleCount][aziCount]);
+#endif
                     }
                 }
             }
@@ -638,9 +653,11 @@ void vas_dynamicFirChannel_leaveActivePartitions(vas_dynamicFirChannel *x, int n
                     x->filter->nonZeroCounter[eleCount][aziCount]++;
                     if(aziCount == 0)
                     {
+#if defined(MAXMSPSDK) || defined(PUREDATA)
                         post("Set Segment with Index %d to zero", maxIndex);
                         post("Energy of this Segment is %.14f, Max Energy: %.14f, Overall: %.14f", x->filter->averageSegmentPower[eleCount][aziCount][maxIndex], x->filter->maxAverageSegmentPower[eleCount][aziCount], x->filter->overallEnergy[eleCount][aziCount]);
                         post("Number of active partitions %d", x->filter->nonZeroCounter[eleCount][aziCount]);
+#endif
                     }
                 }
             }
@@ -715,6 +732,7 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
         while(i < x->filter->numberOfSegments)         //create pointer array to filtersegments
         {
 #ifdef VAS_USE_VDSP
+
             x->filter->real[ele][azi][i] = vas_mem_alloc(sizeof(float) * x->filter->segmentSize);
             x->filter->imag[ele][azi][i] = vas_mem_alloc(sizeof(float) * x->filter->segmentSize);
             x->filter->data[ele][azi][i].realp = x->filter->real[ele][azi][i];

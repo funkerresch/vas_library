@@ -191,9 +191,6 @@ typedef struct vas_dynamicFirChannel
     float gain;
     float segmentThreshold;
     double scale;
-    
-    
- 
 } vas_dynamicFirChannel;
 
 /**
@@ -344,6 +341,8 @@ void vas_dynamicFirChannel_setInitFlag(vas_dynamicFirChannel *x);
 void vas_dynamicFirChannel_removeInitFlag(vas_dynamicFirChannel *x);
 
 void vas_dynamicFirChannel_config_set(vas_dynamicFirChannel_config *x, int eleMin, int eleMax, int eleStride, int aziStride);
+    
+void vas_dynamicFirChannel_assignExternMemory(vas_dynamicFirChannel *x, float *real, float *imag);
     
 void vas_dynamicFirChannel_setAllInputSegments2Zero(vas_dynamicFirChannel *x);
 

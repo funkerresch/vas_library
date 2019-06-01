@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		842BEF3421BE643E0044FDEA /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3321BE643E0044FDEA /* kiss_fft.c */; };
-		842BEF3621BE64580044FDEA /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3521BE64580044FDEA /* kiss_fftr.c */; };
 		842BEF4121BE64A80044FDEA /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3721BE64A70044FDEA /* vas_dynamicFirChannel.c */; };
 		842BEF4221BE64A80044FDEA /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3B21BE64A70044FDEA /* vas_fir_binaural.c */; };
 		842BEF4321BE64A80044FDEA /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3C21BE64A70044FDEA /* vas_fir.c */; };
@@ -20,12 +18,13 @@
 		84AD4833213EAB5600F64F0C /* VasBinauralRIR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84A2C7F1213BCA390053BE5E /* VasBinauralRIR.cpp */; };
 		84E257B1213EA30E00A29086 /* AudioPluginUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E257AE213EA30E00A29086 /* AudioPluginUtil.cpp */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
+		E43DE8DB229D0EB100F2E32A /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = E43DE8DA229D0EB100F2E32A /* kiss_fftr.c */; };
+		E43DE8DD229D0EBE00F2E32A /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = E43DE8DC229D0EBE00F2E32A /* kiss_fft.c */; };
+		E43DE8DF229D3FF600F2E32A /* VasUnitySpatializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43DE8DE229D3FF600F2E32A /* VasUnitySpatializer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
-		842BEF3321BE643E0044FDEA /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fft.c; path = ../../../source/kissfft/kiss_fft.c; sourceTree = "<group>"; };
-		842BEF3521BE64580044FDEA /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fftr.c; path = ../../../source/kissfft/tools/kiss_fftr.c; sourceTree = "<group>"; };
 		842BEF3721BE64A70044FDEA /* vas_dynamicFirChannel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_dynamicFirChannel.c; path = ../../../source/vas_dynamicFirChannel.c; sourceTree = "<group>"; };
 		842BEF3821BE64A70044FDEA /* vas_fir_binaural.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir_binaural.h; path = ../../../source/vas_fir_binaural.h; sourceTree = "<group>"; };
 		842BEF3921BE64A70044FDEA /* vas_dynamicFirChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_dynamicFirChannel.h; path = ../../../source/vas_dynamicFirChannel.h; sourceTree = "<group>"; };
@@ -46,6 +45,9 @@
 		84E257B0213EA30E00A29086 /* AudioPluginUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPluginUtil.h; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* AudioPluginDemo.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioPluginDemo.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E43DE8DA229D0EB100F2E32A /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fftr.c; path = ../../../kissfft/tools/kiss_fftr.c; sourceTree = "<group>"; };
+		E43DE8DC229D0EBE00F2E32A /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fft.c; path = ../../../kissfft/kiss_fft.c; sourceTree = "<group>"; };
+		E43DE8DE229D3FF600F2E32A /* VasUnitySpatializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VasUnitySpatializer.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,13 +106,14 @@
 				842BEF3F21BE64A80044FDEA /* vas_mem.h */,
 				842BEF4021BE64A80044FDEA /* vas_util.c */,
 				842BEF3E21BE64A80044FDEA /* vas_util.h */,
-				842BEF3521BE64580044FDEA /* kiss_fftr.c */,
-				842BEF3321BE643E0044FDEA /* kiss_fft.c */,
+				E43DE8DA229D0EB100F2E32A /* kiss_fftr.c */,
+				E43DE8DC229D0EBE00F2E32A /* kiss_fft.c */,
 				84E257AD213EA2DF00A29086 /* PluginList.h */,
 				84E257AF213EA30E00A29086 /* AudioPluginInterface.h */,
 				84E257AE213EA30E00A29086 /* AudioPluginUtil.cpp */,
 				84E257B0213EA30E00A29086 /* AudioPluginUtil.h */,
 				84A2C7F1213BCA390053BE5E /* VasBinauralRIR.cpp */,
+				E43DE8DE229D3FF600F2E32A /* VasUnitySpatializer.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -197,14 +200,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				842BEF4221BE64A80044FDEA /* vas_fir_binaural.c in Sources */,
+				E43DE8DD229D0EBE00F2E32A /* kiss_fft.c in Sources */,
+				E43DE8DB229D0EB100F2E32A /* kiss_fftr.c in Sources */,
+				E43DE8DF229D3FF600F2E32A /* VasUnitySpatializer.cpp in Sources */,
 				84AD4833213EAB5600F64F0C /* VasBinauralRIR.cpp in Sources */,
 				842BEF4421BE64A80044FDEA /* vas_mem.c in Sources */,
 				842BEF4121BE64A80044FDEA /* vas_dynamicFirChannel.c in Sources */,
 				84E257B1213EA30E00A29086 /* AudioPluginUtil.cpp in Sources */,
-				842BEF3421BE643E0044FDEA /* kiss_fft.c in Sources */,
 				842BEF4321BE64A80044FDEA /* vas_fir.c in Sources */,
 				842BEF4521BE64A80044FDEA /* vas_util.c in Sources */,
-				842BEF3621BE64580044FDEA /* kiss_fftr.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +224,7 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /Users/admin/MarbleMadness/Assets/Plugins/;
+				DSTROOT = /Users/harveykeitel/Repositories/SpatializerTest/Assets/Plugins;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -238,7 +242,7 @@
 				PRODUCT_NAME = AudioPluginDemo;
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility \"$(SRCROOT)/../../../source/kissfft\"/** \"$(SRCROOT)/../../../source/kissfft/tools\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility $(PROJECT_DIR)/../../../kissfft \"$(SRCROOT)/../../../source/kissfft\"/** \"$(SRCROOT)/../../../source/kissfft/tools\"/**";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -252,7 +256,7 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /Users/admin/MarbleMadness/Assets/Plugins/;
+				DSTROOT = /Users/harveykeitel/Repositories/SpatializerTest/Assets/Plugins;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -269,7 +273,7 @@
 				PRODUCT_NAME = AudioPluginDemo;
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility \"$(SRCROOT)/../../../source/kissfft\"/** \"$(SRCROOT)/../../../source/kissfft/tools\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility $(PROJECT_DIR)/../../../kissfft \"$(SRCROOT)/../../../source/kissfft\"/** \"$(SRCROOT)/../../../source/kissfft/tools\"/**";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;

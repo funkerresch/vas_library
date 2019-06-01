@@ -433,7 +433,7 @@ static void vas_filter_read_lineFormat_ir(vas_fir *x, FILE *filePtr, char **line
    
     if(currentIr)
         vas_mem_free(currentIr);
-    
+#if defined(MAXMSPSDK) || defined(PUREDATA)
     post("Min Average Segment Power Left: %.14f", x->left->filter->minAverageSegmentPower[0][0]);
     post("Max Average Segment Power Left: %.14f", x->left->filter->maxAverageSegmentPower[0][0]);
     post("Number of Segments Left: %d", x->left->filter->numberOfSegments);
@@ -443,6 +443,7 @@ static void vas_filter_read_lineFormat_ir(vas_fir *x, FILE *filePtr, char **line
     post("Max Average Segment Power Right: %.14f", x->right->filter->maxAverageSegmentPower[0][0]);
     post("Number of Segments Right: %d", x->right->filter->numberOfSegments);
     post("Segments below Threshhold Right: %d", x->right->filter->zeroCounter[0][0]);
+#endif
 }
 
 void vas_fir_readText_1IrPerLine(vas_fir *x, char *fullpath)
