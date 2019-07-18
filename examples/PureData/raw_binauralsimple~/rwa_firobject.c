@@ -25,10 +25,10 @@ void rwa_firobject_read(rwa_firobject *x, t_symbol *s)
     
     if(!strcmp(fileExtension, "sofa"))
     {
-#ifdef USE_LIBMYSOFA
-        vas_fir_readSofa(x->filter, fullpath, x->filter->left->firSetup);
+#ifdef VAS_USE_LIBMYSOFA
+        vas_fir_readSofa((vas_fir *)x->convolutionEngine, x->fullpath, ((vas_fir *)x->convolutionEngine)->left->filter->firSetup);
 #else
-        post("Sofa not supported for this binary, compile again with USE_LIBMYSOFA");
+        post("Sofa not supported for this binary, compile again with VAS_USE_LIBMYSOFA");
 #endif
     }
     if(!strcmp(fileExtension, "txt"))
@@ -36,6 +36,6 @@ void rwa_firobject_read(rwa_firobject *x, t_symbol *s)
         post("Read Text");
         vas_fir_readText_1IrPerLine((vas_fir *)x->convolutionEngine, x->fullpath);
     }
-    
+
     vas_fir_setInitFlag((vas_fir *)x->convolutionEngine);
 }

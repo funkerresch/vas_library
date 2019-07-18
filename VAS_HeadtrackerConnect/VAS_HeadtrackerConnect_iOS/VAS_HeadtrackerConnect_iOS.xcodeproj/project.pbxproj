@@ -1,0 +1,477 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E42C2AEE22BA89890056C6D7 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AEC22BA89890056C6D7 /* Device.swift */; };
+		E42C2AEF22BA89890056C6D7 /* VasHeadtrackerConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AED22BA89890056C6D7 /* VasHeadtrackerConnect.swift */; };
+		E42C2AF322BA89B00056C6D7 /* OSCAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AF122BA89B00056C6D7 /* OSCAddress.swift */; };
+		E42C2AF422BA89B00056C6D7 /* OSCAddressPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AF222BA89B00056C6D7 /* OSCAddressPattern.swift */; };
+		E42C2AF722BA89B80056C6D7 /* OSCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AF522BA89B80056C6D7 /* OSCServer.swift */; };
+		E42C2AF822BA89B80056C6D7 /* OSCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AF622BA89B80056C6D7 /* OSCClient.swift */; };
+		E42C2AFC22BA89BF0056C6D7 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AF922BA89BF0056C6D7 /* yudpsocket.c */; };
+		E42C2AFD22BA89BF0056C6D7 /* yudpsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AFA22BA89BF0056C6D7 /* yudpsocket.swift */; };
+		E42C2AFE22BA89BF0056C6D7 /* ysocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AFB22BA89BF0056C6D7 /* ysocket.swift */; };
+		E42C2B0222BA89C80056C6D7 /* OSCBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AFF22BA89C80056C6D7 /* OSCBundle.swift */; };
+		E42C2B0322BA89C80056C6D7 /* OSCElementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0022BA89C80056C6D7 /* OSCElementProtocol.swift */; };
+		E42C2B0422BA89C80056C6D7 /* OSCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0122BA89C80056C6D7 /* OSCMessage.swift */; };
+		E42C2B0722BA89D00056C6D7 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0522BA89D00056C6D7 /* Timer.swift */; };
+		E42C2B0822BA89D00056C6D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0622BA89D00056C6D7 /* Extensions.swift */; };
+		E42C2B1122BA89D80056C6D7 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0922BA89D80056C6D7 /* Blob.swift */; };
+		E42C2B1222BA89D80056C6D7 /* Impulse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0A22BA89D80056C6D7 /* Impulse.swift */; };
+		E42C2B1322BA89D80056C6D7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0B22BA89D80056C6D7 /* String.swift */; };
+		E42C2B1422BA89D80056C6D7 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0C22BA89D80056C6D7 /* Bool.swift */; };
+		E42C2B1522BA89D80056C6D7 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0D22BA89D80056C6D7 /* Int.swift */; };
+		E42C2B1622BA89D80056C6D7 /* Timetag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0E22BA89D80056C6D7 /* Timetag.swift */; };
+		E42C2B1722BA89D80056C6D7 /* OSCTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B0F22BA89D80056C6D7 /* OSCTypeProtocol.swift */; };
+		E42C2B1822BA89D80056C6D7 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2B1022BA89D80056C6D7 /* Float.swift */; };
+		E42C2B1922BA8B340056C6D7 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E437134622A7D80B00916B69 /* NetworkExtension.framework */; };
+		E437130E22A7D7BE00916B69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E437130D22A7D7BE00916B69 /* AppDelegate.swift */; };
+		E437131022A7D7BE00916B69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E437130F22A7D7BE00916B69 /* ViewController.swift */; };
+		E437131322A7D7BE00916B69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E437131122A7D7BE00916B69 /* Main.storyboard */; };
+		E437131522A7D7BE00916B69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E437131422A7D7BE00916B69 /* Assets.xcassets */; };
+		E437131822A7D7BE00916B69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E437131622A7D7BE00916B69 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E42C2AEC22BA89890056C6D7 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = ../../Device.swift; sourceTree = "<group>"; };
+		E42C2AED22BA89890056C6D7 /* VasHeadtrackerConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VasHeadtrackerConnect.swift; path = ../../VasHeadtrackerConnect.swift; sourceTree = "<group>"; };
+		E42C2AF122BA89B00056C6D7 /* OSCAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCAddress.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Addresses/OSCAddress.swift; sourceTree = "<group>"; };
+		E42C2AF222BA89B00056C6D7 /* OSCAddressPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCAddressPattern.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Addresses/OSCAddressPattern.swift; sourceTree = "<group>"; };
+		E42C2AF522BA89B80056C6D7 /* OSCServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCServer.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Communication/OSCServer.swift; sourceTree = "<group>"; };
+		E42C2AF622BA89B80056C6D7 /* OSCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCClient.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Communication/OSCClient.swift; sourceTree = "<group>"; };
+		E42C2AF922BA89BF0056C6D7 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yudpsocket.c; path = ../../SwiftOSC/Framework/SwiftOSC/Communication/ysocket/yudpsocket.c; sourceTree = "<group>"; };
+		E42C2AFA22BA89BF0056C6D7 /* yudpsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = yudpsocket.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Communication/ysocket/yudpsocket.swift; sourceTree = "<group>"; };
+		E42C2AFB22BA89BF0056C6D7 /* ysocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ysocket.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Communication/ysocket/ysocket.swift; sourceTree = "<group>"; };
+		E42C2AFF22BA89C80056C6D7 /* OSCBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCBundle.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Elements/OSCBundle.swift; sourceTree = "<group>"; };
+		E42C2B0022BA89C80056C6D7 /* OSCElementProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCElementProtocol.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Elements/OSCElementProtocol.swift; sourceTree = "<group>"; };
+		E42C2B0122BA89C80056C6D7 /* OSCMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCMessage.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Elements/OSCMessage.swift; sourceTree = "<group>"; };
+		E42C2B0522BA89D00056C6D7 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Helpers/Timer.swift; sourceTree = "<group>"; };
+		E42C2B0622BA89D00056C6D7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Helpers/Extensions.swift; sourceTree = "<group>"; };
+		E42C2B0922BA89D80056C6D7 /* Blob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Blob.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Types/Blob.swift; sourceTree = "<group>"; };
+		E42C2B0A22BA89D80056C6D7 /* Impulse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Impulse.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Types/Impulse.swift; sourceTree = "<group>"; };
+		E42C2B0B22BA89D80056C6D7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Types/String.swift; sourceTree = "<group>"; };
+		E42C2B0C22BA89D80056C6D7 /* Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bool.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Types/Bool.swift; sourceTree = "<group>"; };
+		E42C2B0D22BA89D80056C6D7 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Int.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Types/Int.swift; sourceTree = "<group>"; };
+		E42C2B0E22BA89D80056C6D7 /* Timetag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timetag.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Types/Timetag.swift; sourceTree = "<group>"; };
+		E42C2B0F22BA89D80056C6D7 /* OSCTypeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCTypeProtocol.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Types/OSCTypeProtocol.swift; sourceTree = "<group>"; };
+		E42C2B1022BA89D80056C6D7 /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Float.swift; path = ../../SwiftOSC/Framework/SwiftOSC/Types/Float.swift; sourceTree = "<group>"; };
+		E437130A22A7D7BE00916B69 /* VAS_HeadtrackerConnect_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VAS_HeadtrackerConnect_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E437130D22A7D7BE00916B69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E437130F22A7D7BE00916B69 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E437131222A7D7BE00916B69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E437131422A7D7BE00916B69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E437131722A7D7BE00916B69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E437131922A7D7BE00916B69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E437134622A7D80B00916B69 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		E437134822A7D80B00916B69 /* RWAHeadtrackerConnect_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RWAHeadtrackerConnect_iOS.entitlements; sourceTree = "<group>"; };
+		E4802E4322A7E0A600E040AE /* VAS_HeadtrackerConnect_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VAS_HeadtrackerConnect_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E437130722A7D7BE00916B69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E42C2B1922BA8B340056C6D7 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E42C2AF022BA899C0056C6D7 /* SwiftOSC */ = {
+			isa = PBXGroup;
+			children = (
+				E42C2B0922BA89D80056C6D7 /* Blob.swift */,
+				E42C2B0C22BA89D80056C6D7 /* Bool.swift */,
+				E42C2B1022BA89D80056C6D7 /* Float.swift */,
+				E42C2B0A22BA89D80056C6D7 /* Impulse.swift */,
+				E42C2B0D22BA89D80056C6D7 /* Int.swift */,
+				E42C2B0F22BA89D80056C6D7 /* OSCTypeProtocol.swift */,
+				E42C2B0B22BA89D80056C6D7 /* String.swift */,
+				E42C2B0E22BA89D80056C6D7 /* Timetag.swift */,
+				E42C2AFF22BA89C80056C6D7 /* OSCBundle.swift */,
+				E42C2B0022BA89C80056C6D7 /* OSCElementProtocol.swift */,
+				E42C2B0122BA89C80056C6D7 /* OSCMessage.swift */,
+				E42C2AFB22BA89BF0056C6D7 /* ysocket.swift */,
+				E42C2AF922BA89BF0056C6D7 /* yudpsocket.c */,
+				E42C2AFA22BA89BF0056C6D7 /* yudpsocket.swift */,
+				E42C2AF622BA89B80056C6D7 /* OSCClient.swift */,
+				E42C2AF522BA89B80056C6D7 /* OSCServer.swift */,
+				E42C2AF122BA89B00056C6D7 /* OSCAddress.swift */,
+				E42C2AF222BA89B00056C6D7 /* OSCAddressPattern.swift */,
+				E42C2B0622BA89D00056C6D7 /* Extensions.swift */,
+				E42C2B0522BA89D00056C6D7 /* Timer.swift */,
+			);
+			name = SwiftOSC;
+			sourceTree = "<group>";
+		};
+		E437130122A7D7BE00916B69 = {
+			isa = PBXGroup;
+			children = (
+				E42C2AF022BA899C0056C6D7 /* SwiftOSC */,
+				E437130C22A7D7BE00916B69 /* RWAHeadtrackerConnect_iOS */,
+				E437130B22A7D7BE00916B69 /* Products */,
+				E437134522A7D80B00916B69 /* Frameworks */,
+				E4802E4322A7E0A600E040AE /* VAS_HeadtrackerConnect_iOS-Bridging-Header.h */,
+			);
+			sourceTree = "<group>";
+		};
+		E437130B22A7D7BE00916B69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E437130A22A7D7BE00916B69 /* VAS_HeadtrackerConnect_iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E437130C22A7D7BE00916B69 /* RWAHeadtrackerConnect_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				E42C2AEC22BA89890056C6D7 /* Device.swift */,
+				E42C2AED22BA89890056C6D7 /* VasHeadtrackerConnect.swift */,
+				E437134822A7D80B00916B69 /* RWAHeadtrackerConnect_iOS.entitlements */,
+				E437130D22A7D7BE00916B69 /* AppDelegate.swift */,
+				E437130F22A7D7BE00916B69 /* ViewController.swift */,
+				E437131122A7D7BE00916B69 /* Main.storyboard */,
+				E437131422A7D7BE00916B69 /* Assets.xcassets */,
+				E437131622A7D7BE00916B69 /* LaunchScreen.storyboard */,
+				E437131922A7D7BE00916B69 /* Info.plist */,
+			);
+			path = RWAHeadtrackerConnect_iOS;
+			sourceTree = "<group>";
+		};
+		E437134522A7D80B00916B69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E437134622A7D80B00916B69 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E437130922A7D7BE00916B69 /* VAS_HeadtrackerConnect_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E437133222A7D7BF00916B69 /* Build configuration list for PBXNativeTarget "VAS_HeadtrackerConnect_iOS" */;
+			buildPhases = (
+				E437130622A7D7BE00916B69 /* Sources */,
+				E437130722A7D7BE00916B69 /* Frameworks */,
+				E437130822A7D7BE00916B69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VAS_HeadtrackerConnect_iOS;
+			productName = RWAHeadtrackerConnect_iOS;
+			productReference = E437130A22A7D7BE00916B69 /* VAS_HeadtrackerConnect_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E437130222A7D7BE00916B69 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Beryllium Design";
+				TargetAttributes = {
+					E437130922A7D7BE00916B69 = {
+						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = E437130522A7D7BE00916B69 /* Build configuration list for PBXProject "VAS_HeadtrackerConnect_iOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E437130122A7D7BE00916B69;
+			productRefGroup = E437130B22A7D7BE00916B69 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E437130922A7D7BE00916B69 /* VAS_HeadtrackerConnect_iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E437130822A7D7BE00916B69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E437131822A7D7BE00916B69 /* LaunchScreen.storyboard in Resources */,
+				E437131522A7D7BE00916B69 /* Assets.xcassets in Resources */,
+				E437131322A7D7BE00916B69 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E437130622A7D7BE00916B69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E42C2B1322BA89D80056C6D7 /* String.swift in Sources */,
+				E42C2AF322BA89B00056C6D7 /* OSCAddress.swift in Sources */,
+				E42C2B0422BA89C80056C6D7 /* OSCMessage.swift in Sources */,
+				E42C2B1522BA89D80056C6D7 /* Int.swift in Sources */,
+				E42C2B0222BA89C80056C6D7 /* OSCBundle.swift in Sources */,
+				E42C2B0722BA89D00056C6D7 /* Timer.swift in Sources */,
+				E42C2B1122BA89D80056C6D7 /* Blob.swift in Sources */,
+				E42C2B1222BA89D80056C6D7 /* Impulse.swift in Sources */,
+				E42C2AEF22BA89890056C6D7 /* VasHeadtrackerConnect.swift in Sources */,
+				E437131022A7D7BE00916B69 /* ViewController.swift in Sources */,
+				E42C2B0322BA89C80056C6D7 /* OSCElementProtocol.swift in Sources */,
+				E437130E22A7D7BE00916B69 /* AppDelegate.swift in Sources */,
+				E42C2B1722BA89D80056C6D7 /* OSCTypeProtocol.swift in Sources */,
+				E42C2AEE22BA89890056C6D7 /* Device.swift in Sources */,
+				E42C2AFC22BA89BF0056C6D7 /* yudpsocket.c in Sources */,
+				E42C2B1422BA89D80056C6D7 /* Bool.swift in Sources */,
+				E42C2AFD22BA89BF0056C6D7 /* yudpsocket.swift in Sources */,
+				E42C2B0822BA89D00056C6D7 /* Extensions.swift in Sources */,
+				E42C2B1622BA89D80056C6D7 /* Timetag.swift in Sources */,
+				E42C2AFE22BA89BF0056C6D7 /* ysocket.swift in Sources */,
+				E42C2B1822BA89D80056C6D7 /* Float.swift in Sources */,
+				E42C2AF722BA89B80056C6D7 /* OSCServer.swift in Sources */,
+				E42C2AF822BA89B80056C6D7 /* OSCClient.swift in Sources */,
+				E42C2AF422BA89B00056C6D7 /* OSCAddressPattern.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E437131122A7D7BE00916B69 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E437131222A7D7BE00916B69 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E437131622A7D7BE00916B69 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E437131722A7D7BE00916B69 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E437133022A7D7BF00916B69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E437133122A7D7BF00916B69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E437133322A7D7BF00916B69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RWAHeadtrackerConnect_iOS/RWAHeadtrackerConnect_iOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../RwaHeadtrackerUnityIntegration/RwaHeadtrackerUnityIntegration/**";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../RwaHeadtrackerUnityIntegration/RwaHeadtrackerUnityIntegration/**";
+				INFOPLIST_FILE = RWAHeadtrackerConnect_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../RwaHeadtrackerUnityIntegration/RwaHeadtrackerUnityIntegration/**";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.berylliumdesign.RWAHeadtrackerConnect-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VAS_HeadtrackerConnect_iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E437133422A7D7BF00916B69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RWAHeadtrackerConnect_iOS/RWAHeadtrackerConnect_iOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../RwaHeadtrackerUnityIntegration/RwaHeadtrackerUnityIntegration/**";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../RwaHeadtrackerUnityIntegration/RwaHeadtrackerUnityIntegration/**";
+				INFOPLIST_FILE = RWAHeadtrackerConnect_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../RwaHeadtrackerUnityIntegration/RwaHeadtrackerUnityIntegration/**";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.berylliumdesign.RWAHeadtrackerConnect-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VAS_HeadtrackerConnect_iOS-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E437130522A7D7BE00916B69 /* Build configuration list for PBXProject "VAS_HeadtrackerConnect_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E437133022A7D7BF00916B69 /* Debug */,
+				E437133122A7D7BF00916B69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E437133222A7D7BF00916B69 /* Build configuration list for PBXNativeTarget "VAS_HeadtrackerConnect_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E437133322A7D7BF00916B69 /* Debug */,
+				E437133422A7D7BF00916B69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E437130222A7D7BE00916B69 /* Project object */;
+}

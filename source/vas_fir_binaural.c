@@ -6,6 +6,12 @@ void vas_fir_binaural_process(vas_fir_binaural *x, AK_INPUTVECTOR *in, AK_OUTPUT
     vas_dynamicFirChannel_process(x->right, in, outRight, vectorSize, 0);
 }
 
+void vas_fir_binaural_processOutputInPlace(vas_fir_binaural *x, AK_INPUTVECTOR *in, AK_OUTPUTVECTOR *outLeft, AK_OUTPUTVECTOR *outRight, int vectorSize)
+{
+    vas_dynamicFirChannel_process(x->left, in, outLeft, vectorSize, VAS_OUTPUTVECTOR_ADDINPLACE);
+    vas_dynamicFirChannel_process(x->right, in, outRight, vectorSize, VAS_OUTPUTVECTOR_ADDINPLACE);
+}
+
 void vas_fir_binaural_resetInput(vas_fir_binaural *x)
 {
     vas_dynamicFirChannel_setAllInputSegments2Zero(x->left);
@@ -47,6 +53,18 @@ void vas_fir_binaural_free(vas_fir_binaural *x)
 {
     vas_dynamicFirChannel_free(x->left);
     vas_dynamicFirChannel_free(x->right);
+}
+
+void vas_fir_binaural_shareInput(vas_fir_binaural *x, vas_fir_binaural *sharedInput)
+{
+    vas_dynamicFirChannel_shareInputWith(x->left, sharedInput->left);
+    vas_dynamicFirChannel_shareInputWith(x->right, sharedInput->right);
+}
+
+void vas_fir_binaural_shareFilter(vas_fir_binaural *x, vas_fir_binaural *sharedFilter)
+{
+    vas_dynamicFirChannel_shareFilterWith(x->left, sharedFilter->left);
+    vas_dynamicFirChannel_shareInputWith(x->right, sharedFilter->right);
 }
 
 

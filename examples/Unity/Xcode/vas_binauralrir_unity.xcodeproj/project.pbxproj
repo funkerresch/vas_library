@@ -18,10 +18,44 @@
 		84AD4833213EAB5600F64F0C /* VasBinauralRIR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84A2C7F1213BCA390053BE5E /* VasBinauralRIR.cpp */; };
 		84E257B1213EA30E00A29086 /* AudioPluginUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E257AE213EA30E00A29086 /* AudioPluginUtil.cpp */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
+		E42C2A6E22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */; };
+		E42C2A6F22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */; };
+		E42C2A7222AE4B5A0056C6D7 /* vas_delay.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A7122AE4B5A0056C6D7 /* vas_delay.c */; };
+		E42C2A7322AE4B5A0056C6D7 /* vas_delay.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A7122AE4B5A0056C6D7 /* vas_delay.c */; };
+		E42C2A7622AE64480056C6D7 /* vas_delay_crossfade.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A7522AE64480056C6D7 /* vas_delay_crossfade.c */; };
+		E42C2A7722AE64480056C6D7 /* vas_delay_crossfade.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A7522AE64480056C6D7 /* vas_delay_crossfade.c */; };
 		E43DE8DB229D0EB100F2E32A /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = E43DE8DA229D0EB100F2E32A /* kiss_fftr.c */; };
 		E43DE8DD229D0EBE00F2E32A /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = E43DE8DC229D0EBE00F2E32A /* kiss_fft.c */; };
 		E43DE8DF229D3FF600F2E32A /* VasUnitySpatializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43DE8DE229D3FF600F2E32A /* VasUnitySpatializer.cpp */; };
+		E49062B322ABA6720065D10F /* vas_iir_biquad.c in Sources */ = {isa = PBXBuildFile; fileRef = E49062B222ABA6720065D10F /* vas_iir_biquad.c */; };
+		E49062B422ABA6720065D10F /* vas_iir_biquad.c in Sources */ = {isa = PBXBuildFile; fileRef = E49062B222ABA6720065D10F /* vas_iir_biquad.c */; };
+		E49062B722ABA67D0065D10F /* vas_interpolDelay.c in Sources */ = {isa = PBXBuildFile; fileRef = E49062B522ABA67D0065D10F /* vas_interpolDelay.c */; };
+		E49062B822ABA67D0065D10F /* vas_interpolDelay.c in Sources */ = {isa = PBXBuildFile; fileRef = E49062B522ABA67D0065D10F /* vas_interpolDelay.c */; };
+		E4C4888922A3BF8D009EDA44 /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C4888822A3BF8D009EDA44 /* libmysofa.a */; };
+		E4E0C47B22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E0C47A22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m */; };
+		E4E0C47C22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E4E0C47922A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h */; };
+		E4E0C48022A7C245002B9564 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3721BE64A70044FDEA /* vas_dynamicFirChannel.c */; };
+		E4E0C48122A7C249002B9564 /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3B21BE64A70044FDEA /* vas_fir_binaural.c */; };
+		E4E0C48222A7C24C002B9564 /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3C21BE64A70044FDEA /* vas_fir.c */; };
+		E4E0C48322A7C24F002B9564 /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3D21BE64A70044FDEA /* vas_mem.c */; };
+		E4E0C48422A7C252002B9564 /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF4021BE64A80044FDEA /* vas_util.c */; };
+		E4E0C48522A7C261002B9564 /* AudioPluginUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E257AE213EA30E00A29086 /* AudioPluginUtil.cpp */; };
+		E4E0C48622A7C265002B9564 /* VasBinauralRIR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84A2C7F1213BCA390053BE5E /* VasBinauralRIR.cpp */; };
+		E4E0C48722A7C268002B9564 /* VasUnitySpatializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43DE8DE229D3FF600F2E32A /* VasUnitySpatializer.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E4E0C47522A7BB90002B9564 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				E4E0C47C22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
@@ -43,11 +77,25 @@
 		84E257AE213EA30E00A29086 /* AudioPluginUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPluginUtil.cpp; sourceTree = "<group>"; };
 		84E257AF213EA30E00A29086 /* AudioPluginInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPluginInterface.h; sourceTree = "<group>"; };
 		84E257B0213EA30E00A29086 /* AudioPluginUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPluginUtil.h; sourceTree = "<group>"; };
-		8D576316048677EA00EA77CD /* AudioPluginDemo.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioPluginDemo.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D576316048677EA00EA77CD /* AudioPlugin_VAS_Binaural.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioPlugin_VAS_Binaural.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E42C2A6C22AE49890056C6D7 /* vas_fir_binauralReflection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_fir_binauralReflection.h; path = ../../../source/vas_fir_binauralReflection.h; sourceTree = "<group>"; };
+		E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_fir_binauralReflection.c; path = ../../../source/vas_fir_binauralReflection.c; sourceTree = "<group>"; };
+		E42C2A7022AE4B5A0056C6D7 /* vas_delay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_delay.h; path = ../../../source/vas_delay.h; sourceTree = "<group>"; };
+		E42C2A7122AE4B5A0056C6D7 /* vas_delay.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_delay.c; path = ../../../source/vas_delay.c; sourceTree = "<group>"; };
+		E42C2A7422AE64480056C6D7 /* vas_delay_crossfade.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_delay_crossfade.h; path = ../../../source/vas_delay_crossfade.h; sourceTree = "<group>"; };
+		E42C2A7522AE64480056C6D7 /* vas_delay_crossfade.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_delay_crossfade.c; path = ../../../source/vas_delay_crossfade.c; sourceTree = "<group>"; };
 		E43DE8DA229D0EB100F2E32A /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fftr.c; path = ../../../kissfft/tools/kiss_fftr.c; sourceTree = "<group>"; };
 		E43DE8DC229D0EBE00F2E32A /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fft.c; path = ../../../kissfft/kiss_fft.c; sourceTree = "<group>"; };
 		E43DE8DE229D3FF600F2E32A /* VasUnitySpatializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VasUnitySpatializer.cpp; sourceTree = "<group>"; };
+		E49062B122ABA6720065D10F /* vas_iir_biquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_iir_biquad.h; path = ../../../source/vas_iir_biquad.h; sourceTree = "<group>"; };
+		E49062B222ABA6720065D10F /* vas_iir_biquad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_iir_biquad.c; path = ../../../source/vas_iir_biquad.c; sourceTree = "<group>"; };
+		E49062B522ABA67D0065D10F /* vas_interpolDelay.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_interpolDelay.c; path = ../../../source/vas_interpolDelay.c; sourceTree = "<group>"; };
+		E49062B622ABA67D0065D10F /* vas_interpolDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_interpolDelay.h; path = ../../../source/vas_interpolDelay.h; sourceTree = "<group>"; };
+		E4C4888822A3BF8D009EDA44 /* libmysofa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmysofa.a; path = ../../../libmysofa/build/src/libmysofa.a; sourceTree = "<group>"; };
+		E4E0C47722A7BB90002B9564 /* libAudioPlugin_VAS_Binaural_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAudioPlugin_VAS_Binaural_iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4E0C47922A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlugin_VAS_Binaural_iOS.h; sourceTree = "<group>"; };
+		E4E0C47A22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlugin_VAS_Binaural_iOS.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +103,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C4888922A3BF8D009EDA44 /* libmysofa.a in Frameworks */,
 				842BEF4921BE64DD0044FDEA /* OpenGL.framework in Frameworks */,
 				842BEF4721BE64C30044FDEA /* CoreMIDI.framework in Frameworks */,
 				84A20751218712CC004C96CB /* Accelerate.framework in Frameworks */,
 				8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4E0C47422A7BB90002B9564 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +127,7 @@
 				08FB77AFFE84173DC02AAC07 /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
+				E4E0C47822A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
 				84A2C802213BCA7D0053BE5E /* Frameworks */,
 			);
@@ -96,6 +153,16 @@
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				E42C2A7122AE4B5A0056C6D7 /* vas_delay.c */,
+				E42C2A7022AE4B5A0056C6D7 /* vas_delay.h */,
+				E42C2A7422AE64480056C6D7 /* vas_delay_crossfade.h */,
+				E42C2A7522AE64480056C6D7 /* vas_delay_crossfade.c */,
+				E49062B522ABA67D0065D10F /* vas_interpolDelay.c */,
+				E49062B622ABA67D0065D10F /* vas_interpolDelay.h */,
+				E49062B222ABA6720065D10F /* vas_iir_biquad.c */,
+				E49062B122ABA6720065D10F /* vas_iir_biquad.h */,
+				E42C2A6C22AE49890056C6D7 /* vas_fir_binauralReflection.h */,
+				E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */,
 				842BEF3721BE64A70044FDEA /* vas_dynamicFirChannel.c */,
 				842BEF3921BE64A70044FDEA /* vas_dynamicFirChannel.h */,
 				842BEF3B21BE64A70044FDEA /* vas_fir_binaural.c */,
@@ -121,7 +188,8 @@
 		19C28FB6FE9D52B211CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D576316048677EA00EA77CD /* AudioPluginDemo.bundle */,
+				8D576316048677EA00EA77CD /* AudioPlugin_VAS_Binaural.bundle */,
+				E4E0C47722A7BB90002B9564 /* libAudioPlugin_VAS_Binaural_iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,6 +197,7 @@
 		84A2C802213BCA7D0053BE5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4C4888822A3BF8D009EDA44 /* libmysofa.a */,
 				842BEF4821BE64DD0044FDEA /* OpenGL.framework */,
 				842BEF4621BE64C30044FDEA /* CoreMIDI.framework */,
 				84A20750218712CC004C96CB /* Accelerate.framework */,
@@ -136,12 +205,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E4E0C47822A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				E4E0C47922A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h */,
+				E4E0C47A22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m */,
+			);
+			path = AudioPlugin_VAS_Binaural_iOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D57630D048677EA00EA77CD /* AudioPluginDemo */ = {
+		8D57630D048677EA00EA77CD /* AudioPlugin_VAS_Binaural */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB911A08733D790010E9CD /* Build configuration list for PBXNativeTarget "AudioPluginDemo" */;
+			buildConfigurationList = 1DEB911A08733D790010E9CD /* Build configuration list for PBXNativeTarget "AudioPlugin_VAS_Binaural" */;
 			buildPhases = (
 				8D57630F048677EA00EA77CD /* Resources */,
 				8D576311048677EA00EA77CD /* Sources */,
@@ -151,11 +229,28 @@
 			);
 			dependencies = (
 			);
-			name = AudioPluginDemo;
+			name = AudioPlugin_VAS_Binaural;
 			productInstallPath = "$(HOME)/Library/Bundles";
 			productName = AudioPluginDemo;
-			productReference = 8D576316048677EA00EA77CD /* AudioPluginDemo.bundle */;
+			productReference = 8D576316048677EA00EA77CD /* AudioPlugin_VAS_Binaural.bundle */;
 			productType = "com.apple.product-type.bundle";
+		};
+		E4E0C47622A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4E0C47D22A7BB90002B9564 /* Build configuration list for PBXNativeTarget "AudioPlugin_VAS_Binaural_iOS" */;
+			buildPhases = (
+				E4E0C47322A7BB90002B9564 /* Sources */,
+				E4E0C47422A7BB90002B9564 /* Frameworks */,
+				E4E0C47522A7BB90002B9564 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AudioPlugin_VAS_Binaural_iOS;
+			productName = AudioPlugin_VAS_Binaural_iOS;
+			productReference = E4E0C47722A7BB90002B9564 /* libAudioPlugin_VAS_Binaural_iOS.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -164,6 +259,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1000;
+				TargetAttributes = {
+					E4E0C47622A7BB90002B9564 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
 			};
 			buildConfigurationList = 1DEB911E08733D790010E9CD /* Build configuration list for PBXProject "vas_binauralrir_unity" */;
 			compatibilityVersion = "Xcode 3.1";
@@ -179,7 +279,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D57630D048677EA00EA77CD /* AudioPluginDemo */,
+				8D57630D048677EA00EA77CD /* AudioPlugin_VAS_Binaural */,
+				E4E0C47622A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -199,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E49062B322ABA6720065D10F /* vas_iir_biquad.c in Sources */,
 				842BEF4221BE64A80044FDEA /* vas_fir_binaural.c in Sources */,
 				E43DE8DD229D0EBE00F2E32A /* kiss_fft.c in Sources */,
 				E43DE8DB229D0EB100F2E32A /* kiss_fftr.c in Sources */,
@@ -207,8 +309,33 @@
 				842BEF4421BE64A80044FDEA /* vas_mem.c in Sources */,
 				842BEF4121BE64A80044FDEA /* vas_dynamicFirChannel.c in Sources */,
 				84E257B1213EA30E00A29086 /* AudioPluginUtil.cpp in Sources */,
+				E42C2A7622AE64480056C6D7 /* vas_delay_crossfade.c in Sources */,
+				E49062B722ABA67D0065D10F /* vas_interpolDelay.c in Sources */,
+				E42C2A7222AE4B5A0056C6D7 /* vas_delay.c in Sources */,
+				E42C2A6E22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */,
 				842BEF4321BE64A80044FDEA /* vas_fir.c in Sources */,
 				842BEF4521BE64A80044FDEA /* vas_util.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4E0C47322A7BB90002B9564 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E42C2A7322AE4B5A0056C6D7 /* vas_delay.c in Sources */,
+				E49062B822ABA67D0065D10F /* vas_interpolDelay.c in Sources */,
+				E4E0C48622A7C265002B9564 /* VasBinauralRIR.cpp in Sources */,
+				E4E0C48722A7C268002B9564 /* VasUnitySpatializer.cpp in Sources */,
+				E42C2A6F22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */,
+				E4E0C48322A7C24F002B9564 /* vas_mem.c in Sources */,
+				E49062B422ABA6720065D10F /* vas_iir_biquad.c in Sources */,
+				E4E0C48222A7C24C002B9564 /* vas_fir.c in Sources */,
+				E4E0C48522A7C261002B9564 /* AudioPluginUtil.cpp in Sources */,
+				E4E0C48122A7C249002B9564 /* vas_fir_binaural.c in Sources */,
+				E4E0C48022A7C245002B9564 /* vas_dynamicFirChannel.c in Sources */,
+				E4E0C48422A7C252002B9564 /* vas_util.c in Sources */,
+				E4E0C47B22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m in Sources */,
+				E42C2A7722AE64480056C6D7 /* vas_delay_crossfade.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,22 +351,25 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /Users/harveykeitel/Repositories/SpatializerTest/Assets/Plugins;
+				DSTROOT = /Users/harveykeitel/Repositories/SpatializerTest/Assets/Plugins/x86_64;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_USE_LIBMYSOFA,
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034Identifier}";
-				PRODUCT_NAME = AudioPluginDemo;
+				PRODUCT_NAME = AudioPlugin_VAS_Binaural;
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility $(PROJECT_DIR)/../../../kissfft \"$(SRCROOT)/../../../source/kissfft\"/** \"$(SRCROOT)/../../../source/kissfft/tools\"/**";
@@ -256,21 +386,24 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /Users/harveykeitel/Repositories/SpatializerTest/Assets/Plugins;
+				DSTROOT = /Users/harveykeitel/Repositories/SpatializerTest/Assets/Plugins/x86_64;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_USE_LIBMYSOFA,
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034Identifier}";
-				PRODUCT_NAME = AudioPluginDemo;
+				PRODUCT_NAME = AudioPlugin_VAS_Binaural;
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility $(PROJECT_DIR)/../../../kissfft \"$(SRCROOT)/../../../source/kissfft\"/** \"$(SRCROOT)/../../../source/kissfft/tools\"/**";
@@ -351,10 +484,97 @@
 			};
 			name = Release;
 		};
+		E4E0C47E22A7BB90002B9564 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEPLOYMENT_LOCATION = YES;
+				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				DSTROOT = /Users/harveykeitel/Repositories/raytracingpic/Assets/Plugins/iOS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				INSTALL_PATH = /;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E4E0C47F22A7BB90002B9564 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_LOCATION = YES;
+				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				DSTROOT = /Users/harveykeitel/Repositories/raytracingpic/Assets/Plugins/iOS;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				INSTALL_PATH = /;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB911A08733D790010E9CD /* Build configuration list for PBXNativeTarget "AudioPluginDemo" */ = {
+		1DEB911A08733D790010E9CD /* Build configuration list for PBXNativeTarget "AudioPlugin_VAS_Binaural" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB911B08733D790010E9CD /* Debug */,
@@ -368,6 +588,15 @@
 			buildConfigurations = (
 				1DEB911F08733D790010E9CD /* Debug */,
 				1DEB912008733D790010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E4E0C47D22A7BB90002B9564 /* Build configuration list for PBXNativeTarget "AudioPlugin_VAS_Binaural_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4E0C47E22A7BB90002B9564 /* Debug */,
+				E4E0C47F22A7BB90002B9564 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

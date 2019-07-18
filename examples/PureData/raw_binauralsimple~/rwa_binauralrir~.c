@@ -145,7 +145,7 @@ void rwa_binauralrir_tilde_setup(void)
     rwa_binauralrir_class = class_new(gensym("rwa_binauralrir~"), (t_newmethod)rwa_binauralrir_new, (t_method)rwa_binauralrir_free,
     	sizeof(rwa_binauralrir), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("rwa_binauralrir~ v0.56");
+    post("rwa_binauralrir~ v0.6");
    
     CLASS_MAINSIGNALIN(rwa_binauralrir_class, rwa_binauralrir, f);
    

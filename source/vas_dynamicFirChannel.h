@@ -84,7 +84,6 @@ typedef struct vas_dynamicFirChannel_filter
     double *averageSegmentPower[AK_VATOOLS_ELEVATION_RANGE][360];
     double overallEnergy[AK_VATOOLS_ELEVATION_RANGE][360];
     
-    int init;
     int referenceCounter;
     int numberOfSegments;
     int segmentSize;
@@ -219,7 +218,6 @@ void vas_dynamicFirChannel_free(vas_dynamicFirChannel *x);
  * @brief Tells a channel to use the input from another channel. <br>
  * @param x The channel, which is supposed to use the input from another channel. <br>
  * @param sharedInputChannel The channel, which shares its input with x <br>
- * @return Returns void
  * A mono to stereo reverb uses for left and right channel the same input. <br>
  * So it is not necessary to calculate the fft's of the input segments twice. <br>
  */
@@ -230,7 +228,6 @@ void vas_dynamicFirChannel_shareInputWith(vas_dynamicFirChannel *x, vas_dynamicF
  * @brief Tells a channel to use the filter from another channel. <br>
  * @param x The channel, which is supposed to use the filter from another channel. <br>
  * @param sharedInputChannel The channel, which shares its filter with x <br>
- * @return Returns void
  */
 
 void vas_dynamicFirChannel_shareFilterWith(vas_dynamicFirChannel *x, vas_dynamicFirChannel *sharedInputChannel);
@@ -239,7 +236,6 @@ void vas_dynamicFirChannel_shareFilterWith(vas_dynamicFirChannel *x, vas_dynamic
  * @brief Get shared filter values <br>
  * @param x The channel, which is supposed to use the filter from another channel. <br>
  * @param sharedInputChannel The channel, which shares its filter with x <br>
- * @return Returns void
  * To be called only, after the sharedInputChannel is initialized with a filter. <br>
  */
 
@@ -249,14 +245,17 @@ void vas_dynamicFirChannel_getSharedFilterValues(vas_dynamicFirChannel *x, vas_d
  * @brief Sets the filter size <br>
  * @param x The channel, which is supposed to use the filter from another channel. <br>
  * @param filterSize The size of the filter <br>
- * @return Returns void
  * Usually called after opening a file containing the filter and its size <br>
  * All parameters necessary for the realtime convlution function are calculated here. <br>
  * (number of segements, pointers the filter segmentes etc.)<br>
  */
-
+ 
 void vas_dynamicFirChannel_setFilterSize(vas_dynamicFirChannel *x, int filterSize);
     
+void vas_dynamicFirChannel_setGlobalFilterLeft(vas_dynamicFirChannel *x, bool usesGlobalFilter);
+    
+void vas_dynamicFirChannel_setGlobalFilterRight(vas_dynamicFirChannel *x, bool usesGlobalFilter);
+   
 void vas_dynmaicFirChannel_resetMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, int ele, int azi);
 
 void vas_dynamicFirChannel_calculateMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, float *filter, int ele, int azi);

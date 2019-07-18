@@ -15,6 +15,10 @@
 #include "vas_mem.h"
 #include "vas_util.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define VAS_IIR_BIQUAD_LOWPASS 1
 #define VAS_IIR_BIQUAD_HIGHPASS 2
 
@@ -46,10 +50,16 @@ typedef struct vas_iir_biquad
 } vas_iir_biquad;
 
 vas_iir_biquad *vas_iir_biquad_new(int type, float f0, float Q);
+    
+void vas_iir_biquad_free(vas_iir_biquad *x);
 
 void vas_iir_biquad_setFrequency(vas_iir_biquad *x, float f0);
 
 void vas_iir_biquad_process(vas_iir_biquad *x, AK_INPUTVECTOR *in, AK_OUTPUTVECTOR *out, int vectorSize);
+    
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -23,6 +23,11 @@ vas_iir_biquad *vas_iir_biquad_new(int type, float f0, float Q)
     return x;
 }
 
+void vas_iir_biquad_free(vas_iir_biquad *x)
+{
+    vas_mem_free(x);
+}
+
 void vas_iir_biquad_setSampleRate(vas_iir_biquad *x, float sampleRate)
 {
     x->sampleRate = sampleRate;

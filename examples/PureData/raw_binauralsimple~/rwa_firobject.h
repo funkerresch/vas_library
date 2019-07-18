@@ -1,7 +1,9 @@
 #include "vas_fir_binaural.h"
 #include "vas_fir_headphoneCompensation.h"
 
-#ifdef USE_LIBMYSOFA
+#define VAS_USE_LIBMYSOFA
+
+#ifdef VAS_USE_LIBMYSOFA
 #include "mysofa.h"
 #endif
 #ifdef MAXMSPSDK

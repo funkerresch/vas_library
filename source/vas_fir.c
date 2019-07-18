@@ -10,8 +10,10 @@
  *
  */
 
+#define VAS_USE_LIBMYSOFA
+
 #include "vas_fir.h"
-#ifdef USE_LIBMYSOFA
+#ifdef VAS_USE_LIBMYSOFA
 #include "mysofa.h"
 #endif
 #include "string.h"
@@ -34,7 +36,7 @@ void vas_fir_setInitFlag(vas_fir *x)
 
 int vas_fir_getInitFlag(vas_fir *x)
 {
-    if(x->left->filter->init)
+    if(x->left->init)
         return 1;
     else
         return 0;
@@ -54,7 +56,7 @@ void vas_fir_prepareChannelsWithSharedFilter(vas_fir *x,  vas_dynamicFirChannel 
     vas_dynamicFirChannel_prepareArrays(right);
 }
 
-#ifdef USE_LIBMYSOFA
+#ifdef VAS_USE_LIBMYSOFA
 int vas_fir_readSofa(vas_fir *x, char *fullpath, vas_dynamicFirChannel_config *firSetup)
 {
     int err = 0;
@@ -101,6 +103,14 @@ int vas_fir_readSofa(vas_fir *x, char *fullpath, vas_dynamicFirChannel_config *f
     int aziStride = firSetup->aziStride;
     int eleZero = firSetup->eleZero;
     
+#if defined(MAXMSPSDK) || defined(PUREDATA)
+    post("EleRange: %d", eleRange);
+    post("AziRange: %d", aziRange);
+#else
+    printf("EleRange: %d", eleRange);
+    printf("AziRange: %d", aziRange);
+#endif
+    
     for(int eleCount = 0; eleCount < eleRange; eleCount++)
     {
         for(int aziCount = 0; aziCount < aziRange; aziCount++)
@@ -115,6 +125,7 @@ int vas_fir_readSofa(vas_fir *x, char *fullpath, vas_dynamicFirChannel_config *f
             float z = sinf(elev);
             
             mysofa_getfilter_float(hrtf , xx, y, z, leftIR, rightIR, &leftDelay, &rightDelay);
+            
             vas_dynamicFirChannel_prepareFilter(x->left, leftIR,  eleCount, aziCount);
             vas_dynamicFirChannel_prepareFilter(x->right, rightIR,  eleCount, aziCount);
         }

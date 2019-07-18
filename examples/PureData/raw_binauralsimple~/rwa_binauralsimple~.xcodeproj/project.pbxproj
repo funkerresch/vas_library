@@ -19,8 +19,6 @@
 		8479364F21FB21D600A2082A /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 843E663F21F884FA00B89A9F /* rwa_firobject.c */; };
 		8479365021FB21D700A2082A /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 843E663F21F884FA00B89A9F /* rwa_firobject.c */; };
 		8479365121FB21D800A2082A /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 843E663F21F884FA00B89A9F /* rwa_firobject.c */; };
-		8493BE2821A546DE0067ED86 /* fftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493BE2621A546DE0067ED86 /* fftw3f.a */; };
-		8493BE2921A546DE0067ED86 /* fftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493BE2621A546DE0067ED86 /* fftw3f.a */; };
 		84C9E384213ABFAA004C6B54 /* rwa_binauralrir~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C9E382213ABFAA004C6B54 /* rwa_binauralrir~.h */; };
 		84C9E385213ABFAA004C6B54 /* rwa_binauralrir~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C9E383213ABFAA004C6B54 /* rwa_binauralrir~.c */; };
 		84C9E386213AC043004C6B54 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
@@ -49,7 +47,6 @@
 		84E5E14E21FB48E6002216EF /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF720401E1A00CDC513 /* vas_mem.c */; };
 		84E5E15121FB48E6002216EF /* rwa_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = 843E663F21F884FA00B89A9F /* rwa_firobject.c */; };
 		84E5E15321FB48E6002216EF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
-		84E5E15421FB48E6002216EF /* fftw3f.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493BE2621A546DE0067ED86 /* fftw3f.a */; };
 		84E5E15621FB48E6002216EF /* rwa_firobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 843E663E21F884FA00B89A9F /* rwa_firobject.h */; };
 		84E5E15721FB48E6002216EF /* rwa_binauralrir~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C9E382213ABFAA004C6B54 /* rwa_binauralrir~.h */; };
 		84E5E16121FB4973002216EF /* rwa_hpcomp~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E5E15F21FB4973002216EF /* rwa_hpcomp~.h */; };
@@ -59,6 +56,10 @@
 		84FFFFA42124405E00294898 /* rwa_binauralsimple~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84FFFFA22124405E00294898 /* rwa_binauralsimple~.c */; };
 		84FFFFA52124405E00294898 /* rwa_binauralsimple~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84FFFFA32124405E00294898 /* rwa_binauralsimple~.h */; };
 		84FFFFB42125808F00294898 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+		E481CB3222A2CF80001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
+		E481CB3322A2CF9F001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
+		E481CB3422A2CFBB001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
+		E481CB3522A2CFD3001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -111,7 +112,6 @@
 		843E663F21F884FA00B89A9F /* rwa_firobject.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = rwa_firobject.c; sourceTree = "<group>"; };
 		844237651FB4A69D005ACA50 /* m_pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m_pd.h; sourceTree = "<group>"; };
 		844237741FB4A6E2005ACA50 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		8493BE2621A546DE0067ED86 /* fftw3f.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = fftw3f.a; path = "../../../../fftw-3.3.8/build/fftw3f.a"; sourceTree = "<group>"; };
 		84C0825F223F886600918A05 /* vas_pitchtrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_pitchtrack.h; path = ../../../source/vas_pitchtrack.h; sourceTree = "<group>"; };
 		84C08260223F886600918A05 /* vas_pitchtrack.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_pitchtrack.c; path = ../../../source/vas_pitchtrack.c; sourceTree = "<group>"; };
 		84C08262223F8DB100918A05 /* d_fft_mayer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = d_fft_mayer.c; path = ../../../source/d_fft_mayer.c; sourceTree = "<group>"; };
@@ -138,6 +138,7 @@
 		84FFFFA22124405E00294898 /* rwa_binauralsimple~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "rwa_binauralsimple~.c"; sourceTree = "<group>"; };
 		84FFFFA32124405E00294898 /* rwa_binauralsimple~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "rwa_binauralsimple~.h"; sourceTree = "<group>"; };
 		84FFFFC32125808F00294898 /* rwa_binauralrir~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "rwa_binauralrir~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E481CB3122A2CF80001927DC /* libmysofa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmysofa.a; path = ../../../libmysofa/build/src/libmysofa.a; sourceTree = "<group>"; };
 		FA2927EC1A899B4C005A2BA9 /* rwa_binauralsimple~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "rwa_binauralsimple~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,8 +147,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E481CB3422A2CFBB001927DC /* libmysofa.a in Frameworks */,
 				84C9E396213ACA5D004C6B54 /* Accelerate.framework in Frameworks */,
-				8493BE2921A546DE0067ED86 /* fftw3f.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,8 +156,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E481CB3522A2CFD3001927DC /* libmysofa.a in Frameworks */,
 				84E5E15321FB48E6002216EF /* Accelerate.framework in Frameworks */,
-				84E5E15421FB48E6002216EF /* fftw3f.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,8 +165,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E481CB3322A2CF9F001927DC /* libmysofa.a in Frameworks */,
 				84FFFFB42125808F00294898 /* Accelerate.framework in Frameworks */,
-				8493BE2821A546DE0067ED86 /* fftw3f.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E481CB3222A2CF80001927DC /* libmysofa.a in Frameworks */,
 				844237761FB4A887005ACA50 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,7 +185,7 @@
 		844237731FB4A6E1005ACA50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8493BE2621A546DE0067ED86 /* fftw3f.a */,
+				E481CB3122A2CF80001927DC /* libmysofa.a */,
 				844237741FB4A6E2005ACA50 /* Accelerate.framework */,
 			);
 			name = Frameworks;
@@ -508,10 +510,12 @@
 					VERBOSE,
 					VAS_INPUTVECTOR_USE_FLOAT,
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../..\"/**",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
@@ -521,7 +525,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/libmysofa/src/hrtf";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -542,10 +546,12 @@
 					VERBOSE,
 					VAS_INPUTVECTOR_USE_FLOAT,
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../..\"/**",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
@@ -555,7 +561,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/libmysofa/src/hrtf";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
@@ -575,10 +581,12 @@
 					VERBOSE,
 					VAS_INPUTVECTOR_USE_FLOAT,
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../..\"/**",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
@@ -588,7 +596,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/libmysofa/src/hrtf";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -609,10 +617,12 @@
 					VERBOSE,
 					VAS_INPUTVECTOR_USE_FLOAT,
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../..\"/**",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
@@ -622,7 +632,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/libmysofa/src/hrtf";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
@@ -640,12 +650,13 @@
 					PUREDATA,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
 					VAS_INPUTVECTOR_USE_FLOAT,
-					VAS_USEFABIAN256HEADER,
+					VAS_USE_LIBMYSOFA,
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../..\"/**",
-					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -654,7 +665,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/** \"$(SRCROOT)/../../../source/kissfft\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -673,12 +684,13 @@
 					PUREDATA,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
 					VAS_INPUTVECTOR_USE_FLOAT,
-					VAS_USEFABIAN256HEADER,
+					VAS_USE_LIBMYSOFA,
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../..\"/**",
-					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -687,7 +699,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/** \"$(SRCROOT)/../../../source/kissfft\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
@@ -786,13 +798,11 @@
 					PUREDATA,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
 					VAS_INPUTVECTOR_USE_FLOAT,
-					VAS_USEFABIAN256HEADER,
+					VAS_USE_LIBMYSOFA,
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /build;
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../..\"/**",
-					"$(PROJECT_DIR)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-undefined",
@@ -800,7 +810,7 @@
 				);
 				PRODUCT_NAME = "rwa_binauralsimple~";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/src/hrtf/**";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -820,13 +830,11 @@
 					PUREDATA,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
 					VAS_INPUTVECTOR_USE_FLOAT,
-					VAS_USEFABIAN256HEADER,
+					VAS_USE_LIBMYSOFA,
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /build;
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../..\"/**",
-					"$(PROJECT_DIR)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-undefined",
@@ -834,7 +842,7 @@
 				);
 				PRODUCT_NAME = "rwa_binauralsimple~";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../..\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/src/hrtf/**";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;

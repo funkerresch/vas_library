@@ -7,7 +7,30 @@
 		<key>AudioPluginDemo.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>AudioPlugin_VAS_Binaural copy.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>AudioPlugin_VAS_Binaural_iOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>8D57630D048677EA00EA77CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4E0C44622A7B6A5002B9564</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

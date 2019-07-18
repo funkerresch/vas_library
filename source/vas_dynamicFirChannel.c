@@ -1,8 +1,8 @@
 #include "vas_dynamicFirChannel.h"
 //#include <pthread.h>
 
-vas_dynamicFirChannel_filter globalFilterLeft = { .init = 0, .referenceCounter = 0};
-vas_dynamicFirChannel_filter globalFilterRight = { .init = 0, .referenceCounter = 0};
+vas_dynamicFirChannel_filter globalFilterLeft = {  .referenceCounter = 0};
+vas_dynamicFirChannel_filter globalFilterRight = {  .referenceCounter = 0};
 vas_dynamicFirChannel_config vas_binauralSetup_std = { .aziRange = 120, .aziStride = 3, .eleMin = -90, .eleMax = 90, .eleRange = 60, .eleStride = 3, .eleZero = 30};
 vas_dynamicFirChannel_config vas_binauralSetup_noEle = { .aziRange = 120, .aziStride = 3, .eleMin = 0, .eleMax = 1, .eleRange = 1, .eleStride = 1, .eleZero = 0};
 vas_dynamicFirChannel_config vas_staticSetup = { .aziRange = 1, .aziStride = 1, .eleMin = 0, .eleMax = 1, .eleRange = 1, .eleStride = 1, .eleZero = 0};
@@ -361,9 +361,7 @@ void vas_dynamicFirChannel_calculateConvolution(vas_dynamicFirChannel *x)
     }
    
     vas_dynamicFirChannel_multiplyAddSegments(x, &x->output.current);
-    
     vas_dynamicFirChannel_inverseFFT(x, &x->output.current);
-    
     vas_util_fadd(x->output.current.overlap, x->output.current.signalFloat, x->output.outputSegment, x->filter->segmentSize);
     
     if(x->output.current.azimuth != x->output.next.azimuth || x->output.current.elevation != x->output.next.elevation)
@@ -372,9 +370,7 @@ void vas_dynamicFirChannel_calculateConvolution(vas_dynamicFirChannel *x)
             vas_util_fcopy(x->output.next.signalFloat+x->filter->segmentSize, x->output.next.overlap, x->filter->segmentSize);
         
         vas_dynamicFirChannel_multiplyAddSegments(x, &x->output.next);
-        
         vas_dynamicFirChannel_inverseFFT(x, &x->output.next);
-        
         vas_dynamicFirChannel_crossfadeBetweenOldAndNewFilter(x);
     }
     
@@ -393,7 +389,7 @@ void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, AK_INPUTVECTOR *in,
     int vsOverSegmentSize = vectorSize/x->filter->segmentSize;
     int frameCounter = 0;
     
-    if(!x->filter->init)
+    if(!x->init)
     {
         n = vectorSize;
         while (n--)
@@ -408,9 +404,12 @@ void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, AK_INPUTVECTOR *in,
         pointerToOutputSegment = x->output.outputSegment;
         n = vectorSize;
         
-        pointerToFFTInput+= x->frameCounter * vectorSize;
-        while (n--)
-            *pointerToFFTInput++ = *in++; // copy current signal input vector to fftInputSignalFloat
+        if(!x->useSharedInput)
+        {
+            pointerToFFTInput+= x->frameCounter * vectorSize;
+            while (n--)
+                *pointerToFFTInput++ = *in++; // copy current signal input vector to fftInputSignalFloat
+        }
     
         n = vectorSize;
     
@@ -500,6 +499,8 @@ void vas_dynamicFirChannel_prepareInputSignal(vas_dynamicFirChannel *x)
         x->input.data = ( VAS_COMPLEX * )vas_mem_resize(x->input.data, x->filter->numberOfSegments * sizeof (VAS_COMPLEX));
         x->input.real = (float *)vas_mem_resize(x->input.real, sizeof(float) * x->filter->numberOfSegments * x->filter->segmentSize);
         x->input.imag = (float *)vas_mem_resize(x->input.imag, sizeof(float) * x->filter->numberOfSegments * x->filter->segmentSize);
+        vas_utilities_writeZeros(x->filter->numberOfSegments * x->filter->segmentSize, x->input.real);
+        vas_utilities_writeZeros(x->filter->numberOfSegments * x->filter->segmentSize, x->input.imag);
 #else
         x->input.pointerToFFTSegments = (VAS_COMPLEX **) vas_mem_resize(x->input.pointerToFFTSegments, x->pointerArraySize * sizeof (VAS_COMPLEX *));
         x->input.data = ( VAS_COMPLEX * )vas_mem_resize(x->input.data, x->filter->numberOfSegments * x->filter->fftSize *sizeof (VAS_COMPLEX));
@@ -809,7 +810,7 @@ void vas_dynamicFirChannel_free(vas_dynamicFirChannel *x)
     if( ((x->setup & (VAS_GLOBALFILTER) ) && !x->filter->referenceCounter)
        || x->setup & VAS_LOCALFILTER)
     {
-        x->filter->init = 0;
+        x->init = 0;
         if(!x->useSharedFilter)
         {
             vas_dynamicFirChannel_filter_free(x->filter);
@@ -826,31 +827,45 @@ void vas_dynamicFirChannel_free(vas_dynamicFirChannel *x)
 
 void vas_dynamicFirChannel_setInitFlag(vas_dynamicFirChannel *x)
 {
-    x->filter->init = 1;
+    x->init = 1;
 }
 
 void vas_dynamicFirChannel_removeInitFlag(vas_dynamicFirChannel *x)
 {
-    x->filter->init = 0;
+    x->init = 0;
 }
 
 void vas_dynamicFirChannel_shareInputWith(vas_dynamicFirChannel *x, vas_dynamicFirChannel *sharedInputChannel)
 {
     x->sharedInput = &sharedInputChannel->input;
     x->useSharedInput = true;
-    vas_dynamicFirChannel_input_free(&x->input);
+   // vas_dynamicFirChannel_input_free(&x->input);
 }
 
 void vas_dynamicFirChannel_getSharedFilterValues(vas_dynamicFirChannel *x, vas_dynamicFirChannel *sharedInputChannel)
 {
     vas_dynamicFirChannel_setFilterSize(x, sharedInputChannel->filterSize);
+    
 }
 
 void vas_dynamicFirChannel_shareFilterWith(vas_dynamicFirChannel *x, vas_dynamicFirChannel *sharedInputChannel)
 {
-    vas_dynamicFirChannel_filter_free(x->filter);
+    //if(x->filter != NULL)
+        //vas_dynamicFirChannel_filter_free(x->filter);
     x->filter = sharedInputChannel->filter;
     x->useSharedFilter = true;
+}
+
+void vas_dynamicFirChannel_setGlobalFilterLeft(vas_dynamicFirChannel *x, bool usesGlobalFilter)
+{
+    x->filter = &globalFilterLeft;
+    x->filter->referenceCounter++;
+}
+
+void vas_dynamicFirChannel_setGlobalFilterRight(vas_dynamicFirChannel *x, bool usesGlobalFilter)
+{
+    x->filter = &globalFilterRight;
+    x->filter->referenceCounter++;
 }
 
 vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup, int segmentSize, vas_dynamicFirChannel_config *firConfig)
@@ -882,7 +897,7 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup, int segmentSize, vas
     else
     {
         x->filter = &x->localFilter;
-        x->filter->init = 0;
+        x->init = 0;
     }
     
     if(firConfig == NULL)
@@ -897,7 +912,7 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup, int segmentSize, vas
     else
         x->filter->firSetup = firConfig;
     
-    if(!x->filter->init)
+    if(!x->init)
         vas_dynamicFirChannel_filter_init(x->filter, segmentSize);
     
     x->scale = 1.0 / (x->filter->fftSize * x->filter->fftSize);

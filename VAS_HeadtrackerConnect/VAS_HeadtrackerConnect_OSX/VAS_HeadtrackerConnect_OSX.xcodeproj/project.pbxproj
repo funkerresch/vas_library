@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E42C2AAD22B262400056C6D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AAC22B262400056C6D7 /* AppDelegate.swift */; };
+		E42C2AAF22B262400056C6D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AAE22B262400056C6D7 /* ViewController.swift */; };
+		E42C2AB122B262410056C6D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42C2AB022B262410056C6D7 /* Assets.xcassets */; };
+		E42C2AB422B262410056C6D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42C2AB222B262410056C6D7 /* Main.storyboard */; };
+		E42C2ABD22B262DF0056C6D7 /* VasHeadtrackerConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ABC22B262DF0056C6D7 /* VasHeadtrackerConnect.swift */; };
+		E42C2AC322B263600056C6D7 /* OSCAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AC122B263600056C6D7 /* OSCAddress.swift */; };
+		E42C2AC422B263600056C6D7 /* OSCAddressPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AC222B263600056C6D7 /* OSCAddressPattern.swift */; };
+		E42C2AC722B2636A0056C6D7 /* OSCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AC522B2636A0056C6D7 /* OSCClient.swift */; };
+		E42C2AC822B2636A0056C6D7 /* OSCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AC622B2636A0056C6D7 /* OSCServer.swift */; };
+		E42C2ACD22B263750056C6D7 /* ysocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ACA22B263750056C6D7 /* ysocket.swift */; };
+		E42C2ACE22B263750056C6D7 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ACB22B263750056C6D7 /* yudpsocket.c */; };
+		E42C2ACF22B263750056C6D7 /* yudpsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ACC22B263750056C6D7 /* yudpsocket.swift */; };
+		E42C2AD322B263810056C6D7 /* OSCElementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AD022B263810056C6D7 /* OSCElementProtocol.swift */; };
+		E42C2AD422B263810056C6D7 /* OSCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AD122B263810056C6D7 /* OSCMessage.swift */; };
+		E42C2AD522B263810056C6D7 /* OSCBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AD222B263810056C6D7 /* OSCBundle.swift */; };
+		E42C2AD822B263880056C6D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AD622B263880056C6D7 /* Extensions.swift */; };
+		E42C2AD922B263880056C6D7 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AD722B263880056C6D7 /* Timer.swift */; };
+		E42C2AE222B263950056C6D7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ADA22B263940056C6D7 /* String.swift */; };
+		E42C2AE322B263950056C6D7 /* OSCTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ADB22B263940056C6D7 /* OSCTypeProtocol.swift */; };
+		E42C2AE422B263950056C6D7 /* Impulse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ADC22B263940056C6D7 /* Impulse.swift */; };
+		E42C2AE522B263950056C6D7 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ADD22B263940056C6D7 /* Bool.swift */; };
+		E42C2AE622B263950056C6D7 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ADE22B263940056C6D7 /* Int.swift */; };
+		E42C2AE722B263950056C6D7 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2ADF22B263940056C6D7 /* Float.swift */; };
+		E42C2AE822B263950056C6D7 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AE022B263940056C6D7 /* Blob.swift */; };
+		E42C2AE922B263950056C6D7 /* Timetag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AE122B263940056C6D7 /* Timetag.swift */; };
+		E42C2AEB22B263C80056C6D7 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C2AEA22B263C80056C6D7 /* Device.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E42C2AA922B262400056C6D7 /* VAS_HeadtrackerConnect_OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VAS_HeadtrackerConnect_OSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E42C2AAC22B262400056C6D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E42C2AAE22B262400056C6D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E42C2AB022B262410056C6D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E42C2AB322B262410056C6D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E42C2AB522B262410056C6D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E42C2AB622B262410056C6D7 /* VAS_HeadtrackerConnect_OSX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VAS_HeadtrackerConnect_OSX.entitlements; sourceTree = "<group>"; };
+		E42C2ABC22B262DF0056C6D7 /* VasHeadtrackerConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VasHeadtrackerConnect.swift; path = ../../VasHeadtrackerConnect.swift; sourceTree = "<group>"; };
+		E42C2AC122B263600056C6D7 /* OSCAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCAddress.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Addresses/OSCAddress.swift; sourceTree = "<group>"; };
+		E42C2AC222B263600056C6D7 /* OSCAddressPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCAddressPattern.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Addresses/OSCAddressPattern.swift; sourceTree = "<group>"; };
+		E42C2AC522B2636A0056C6D7 /* OSCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCClient.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Communication/OSCClient.swift; sourceTree = "<group>"; };
+		E42C2AC622B2636A0056C6D7 /* OSCServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCServer.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Communication/OSCServer.swift; sourceTree = "<group>"; };
+		E42C2AC922B263740056C6D7 /* VAS_HeadtrackerConnect_OSX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VAS_HeadtrackerConnect_OSX-Bridging-Header.h"; sourceTree = "<group>"; };
+		E42C2ACA22B263750056C6D7 /* ysocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ysocket.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Communication/ysocket/ysocket.swift; sourceTree = "<group>"; };
+		E42C2ACB22B263750056C6D7 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yudpsocket.c; path = ../../../SwiftOSC/Framework/SwiftOSC/Communication/ysocket/yudpsocket.c; sourceTree = "<group>"; };
+		E42C2ACC22B263750056C6D7 /* yudpsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = yudpsocket.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Communication/ysocket/yudpsocket.swift; sourceTree = "<group>"; };
+		E42C2AD022B263810056C6D7 /* OSCElementProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCElementProtocol.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Elements/OSCElementProtocol.swift; sourceTree = "<group>"; };
+		E42C2AD122B263810056C6D7 /* OSCMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCMessage.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Elements/OSCMessage.swift; sourceTree = "<group>"; };
+		E42C2AD222B263810056C6D7 /* OSCBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCBundle.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Elements/OSCBundle.swift; sourceTree = "<group>"; };
+		E42C2AD622B263880056C6D7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Helpers/Extensions.swift; sourceTree = "<group>"; };
+		E42C2AD722B263880056C6D7 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Helpers/Timer.swift; sourceTree = "<group>"; };
+		E42C2ADA22B263940056C6D7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Types/String.swift; sourceTree = "<group>"; };
+		E42C2ADB22B263940056C6D7 /* OSCTypeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OSCTypeProtocol.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Types/OSCTypeProtocol.swift; sourceTree = "<group>"; };
+		E42C2ADC22B263940056C6D7 /* Impulse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Impulse.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Types/Impulse.swift; sourceTree = "<group>"; };
+		E42C2ADD22B263940056C6D7 /* Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bool.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Types/Bool.swift; sourceTree = "<group>"; };
+		E42C2ADE22B263940056C6D7 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Int.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Types/Int.swift; sourceTree = "<group>"; };
+		E42C2ADF22B263940056C6D7 /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Float.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Types/Float.swift; sourceTree = "<group>"; };
+		E42C2AE022B263940056C6D7 /* Blob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Blob.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Types/Blob.swift; sourceTree = "<group>"; };
+		E42C2AE122B263940056C6D7 /* Timetag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timetag.swift; path = ../../../SwiftOSC/Framework/SwiftOSC/Types/Timetag.swift; sourceTree = "<group>"; };
+		E42C2AEA22B263C80056C6D7 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = ../../Device.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E42C2AA622B262400056C6D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E42C2AA022B262400056C6D7 = {
+			isa = PBXGroup;
+			children = (
+				E42C2AC022B2634B0056C6D7 /* SwiftOSC */,
+				E42C2AAB22B262400056C6D7 /* VAS_HeadtrackerConnect_OSX */,
+				E42C2AAA22B262400056C6D7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E42C2AAA22B262400056C6D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E42C2AA922B262400056C6D7 /* VAS_HeadtrackerConnect_OSX.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E42C2AAB22B262400056C6D7 /* VAS_HeadtrackerConnect_OSX */ = {
+			isa = PBXGroup;
+			children = (
+				E42C2AEA22B263C80056C6D7 /* Device.swift */,
+				E42C2ABC22B262DF0056C6D7 /* VasHeadtrackerConnect.swift */,
+				E42C2AAC22B262400056C6D7 /* AppDelegate.swift */,
+				E42C2AAE22B262400056C6D7 /* ViewController.swift */,
+				E42C2AB022B262410056C6D7 /* Assets.xcassets */,
+				E42C2AB222B262410056C6D7 /* Main.storyboard */,
+				E42C2AB522B262410056C6D7 /* Info.plist */,
+				E42C2AB622B262410056C6D7 /* VAS_HeadtrackerConnect_OSX.entitlements */,
+			);
+			path = VAS_HeadtrackerConnect_OSX;
+			sourceTree = "<group>";
+		};
+		E42C2AC022B2634B0056C6D7 /* SwiftOSC */ = {
+			isa = PBXGroup;
+			children = (
+				E42C2AE022B263940056C6D7 /* Blob.swift */,
+				E42C2ADD22B263940056C6D7 /* Bool.swift */,
+				E42C2ADF22B263940056C6D7 /* Float.swift */,
+				E42C2ADC22B263940056C6D7 /* Impulse.swift */,
+				E42C2ADE22B263940056C6D7 /* Int.swift */,
+				E42C2ADB22B263940056C6D7 /* OSCTypeProtocol.swift */,
+				E42C2ADA22B263940056C6D7 /* String.swift */,
+				E42C2AE122B263940056C6D7 /* Timetag.swift */,
+				E42C2AD622B263880056C6D7 /* Extensions.swift */,
+				E42C2AD722B263880056C6D7 /* Timer.swift */,
+				E42C2AD222B263810056C6D7 /* OSCBundle.swift */,
+				E42C2AD022B263810056C6D7 /* OSCElementProtocol.swift */,
+				E42C2AD122B263810056C6D7 /* OSCMessage.swift */,
+				E42C2ACA22B263750056C6D7 /* ysocket.swift */,
+				E42C2ACB22B263750056C6D7 /* yudpsocket.c */,
+				E42C2ACC22B263750056C6D7 /* yudpsocket.swift */,
+				E42C2AC522B2636A0056C6D7 /* OSCClient.swift */,
+				E42C2AC622B2636A0056C6D7 /* OSCServer.swift */,
+				E42C2AC122B263600056C6D7 /* OSCAddress.swift */,
+				E42C2AC222B263600056C6D7 /* OSCAddressPattern.swift */,
+				E42C2AC922B263740056C6D7 /* VAS_HeadtrackerConnect_OSX-Bridging-Header.h */,
+			);
+			path = SwiftOSC;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E42C2AA822B262400056C6D7 /* VAS_HeadtrackerConnect_OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E42C2AB922B262410056C6D7 /* Build configuration list for PBXNativeTarget "VAS_HeadtrackerConnect_OSX" */;
+			buildPhases = (
+				E42C2AA522B262400056C6D7 /* Sources */,
+				E42C2AA622B262400056C6D7 /* Frameworks */,
+				E42C2AA722B262400056C6D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VAS_HeadtrackerConnect_OSX;
+			productName = VAS_HeadtrackerConnect_OSX;
+			productReference = E42C2AA922B262400056C6D7 /* VAS_HeadtrackerConnect_OSX.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E42C2AA122B262400056C6D7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Beryllium Design";
+				TargetAttributes = {
+					E42C2AA822B262400056C6D7 = {
+						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
+					};
+				};
+			};
+			buildConfigurationList = E42C2AA422B262400056C6D7 /* Build configuration list for PBXProject "VAS_HeadtrackerConnect_OSX" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E42C2AA022B262400056C6D7;
+			productRefGroup = E42C2AAA22B262400056C6D7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E42C2AA822B262400056C6D7 /* VAS_HeadtrackerConnect_OSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E42C2AA722B262400056C6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E42C2AB122B262410056C6D7 /* Assets.xcassets in Resources */,
+				E42C2AB422B262410056C6D7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E42C2AA522B262400056C6D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E42C2AC722B2636A0056C6D7 /* OSCClient.swift in Sources */,
+				E42C2AD422B263810056C6D7 /* OSCMessage.swift in Sources */,
+				E42C2AAF22B262400056C6D7 /* ViewController.swift in Sources */,
+				E42C2AD922B263880056C6D7 /* Timer.swift in Sources */,
+				E42C2AE822B263950056C6D7 /* Blob.swift in Sources */,
+				E42C2AE322B263950056C6D7 /* OSCTypeProtocol.swift in Sources */,
+				E42C2AE422B263950056C6D7 /* Impulse.swift in Sources */,
+				E42C2AD522B263810056C6D7 /* OSCBundle.swift in Sources */,
+				E42C2AE622B263950056C6D7 /* Int.swift in Sources */,
+				E42C2ACD22B263750056C6D7 /* ysocket.swift in Sources */,
+				E42C2AAD22B262400056C6D7 /* AppDelegate.swift in Sources */,
+				E42C2AC322B263600056C6D7 /* OSCAddress.swift in Sources */,
+				E42C2ACE22B263750056C6D7 /* yudpsocket.c in Sources */,
+				E42C2AE522B263950056C6D7 /* Bool.swift in Sources */,
+				E42C2ACF22B263750056C6D7 /* yudpsocket.swift in Sources */,
+				E42C2AEB22B263C80056C6D7 /* Device.swift in Sources */,
+				E42C2AD322B263810056C6D7 /* OSCElementProtocol.swift in Sources */,
+				E42C2ABD22B262DF0056C6D7 /* VasHeadtrackerConnect.swift in Sources */,
+				E42C2AC822B2636A0056C6D7 /* OSCServer.swift in Sources */,
+				E42C2AE922B263950056C6D7 /* Timetag.swift in Sources */,
+				E42C2AE722B263950056C6D7 /* Float.swift in Sources */,
+				E42C2AC422B263600056C6D7 /* OSCAddressPattern.swift in Sources */,
+				E42C2AE222B263950056C6D7 /* String.swift in Sources */,
+				E42C2AD822B263880056C6D7 /* Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E42C2AB222B262410056C6D7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E42C2AB322B262410056C6D7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E42C2AB722B262410056C6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E42C2AB822B262410056C6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		E42C2ABA22B262410056C6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				INFOPLIST_FILE = VAS_HeadtrackerConnect_OSX/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.berylliumdesign.VAS-HeadtrackerConnect-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftOSC/VAS_HeadtrackerConnect_OSX-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E42C2ABB22B262410056C6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = X68HKQ3ZCY;
+				INFOPLIST_FILE = VAS_HeadtrackerConnect_OSX/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.berylliumdesign.VAS-HeadtrackerConnect-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftOSC/VAS_HeadtrackerConnect_OSX-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E42C2AA422B262400056C6D7 /* Build configuration list for PBXProject "VAS_HeadtrackerConnect_OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E42C2AB722B262410056C6D7 /* Debug */,
+				E42C2AB822B262410056C6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E42C2AB922B262410056C6D7 /* Build configuration list for PBXNativeTarget "VAS_HeadtrackerConnect_OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E42C2ABA22B262410056C6D7 /* Debug */,
+				E42C2ABB22B262410056C6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E42C2AA122B262400056C6D7 /* Project object */;
+}

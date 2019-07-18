@@ -49,6 +49,8 @@ static void *rwa_hpcomp_new(t_symbol *s, int argc, t_atom *argv)
     x->filterSize = 0;
     x->useGlobalFilter = 1;
     x->f = 0;
+    x->fullpath[0] = '\0';
+    sprintf(x->canvasDirectory, "%s", canvas_getcurrentdir()->s_name);
     
     if(argc >= 1)
     {
@@ -98,7 +100,7 @@ void rwa_hpcomp_tilde_setup(void)
     rwa_hpcomp_class = class_new(gensym("rwa_hpcomp~"), (t_newmethod)rwa_hpcomp_new, (t_method)rwa_hpcomp_free,
                                  sizeof(rwa_hpcomp), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("rwa_hpcomp~ v0.5");
+    post("rwa_hpcomp~ v0.6");
     
     CLASS_MAINSIGNALIN(rwa_hpcomp_class, rwa_hpcomp, f);
     

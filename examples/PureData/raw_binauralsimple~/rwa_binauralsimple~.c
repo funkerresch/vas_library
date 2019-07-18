@@ -117,7 +117,7 @@ void rwa_binauralsimple_tilde_setup(void)
     rwa_binauralsimple_class = class_new(gensym("rwa_binauralsimple~"), (t_newmethod)rwa_binauralsimple_new, (t_method)rwa_binauralsimple_free,
     	sizeof(rwa_binauralsimple), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("rwa_binauralsimple~ v0.62");
+    post("rwa_binauralsimple~ v0.7");
    
     CLASS_MAINSIGNALIN(rwa_binauralsimple_class, rwa_binauralsimple, f);
    
