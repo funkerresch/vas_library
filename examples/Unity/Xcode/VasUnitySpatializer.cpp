@@ -412,7 +412,7 @@ namespace Spatializer
         vas_fir_binaural_setAzimuth(data->binauralEngine, azimuth);
         vas_fir_binaural_setElevation(data->binauralEngine, elevation);
        
-        float scale = 1;
+       /* float scale = 1;
         if(s2l_azimuth <= rightFull)
             ;
         else if(s2l_azimuth >= leftFull)
@@ -437,8 +437,8 @@ namespace Spatializer
         data->p[P_TEST] = length;
         
         vas_iir_biquad_process(data->directivityDamping, data->input, data->tmp, length);
-        vas_util_fscale(data->tmp, scale, length);
-        vas_fir_binaural_process(data->binauralEngine, data->tmp, data->outputL, data->outputR, length);
+        vas_util_fscale(data->tmp, scale, length);*/
+        vas_fir_binaural_process(data->binauralEngine, data->input, data->outputL, data->outputR, length);
         
       /*  for(int i = 0; i< 6; i++)
         {            

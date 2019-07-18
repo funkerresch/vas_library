@@ -654,7 +654,7 @@ AudioSource:
   Spatialize: 1
   SpatializePostEffects: 1
   Priority: 128
-  DopplerLevel: 1.14
+  DopplerLevel: 0.72
   MinDistance: 1
   MaxDistance: 10
   Pan2D: 0
@@ -1069,7 +1069,7 @@ AudioSource:
   Spatialize: 1
   SpatializePostEffects: 1
   Priority: 128
-  DopplerLevel: 1.14
+  DopplerLevel: 0.88
   MinDistance: 1
   MaxDistance: 10
   Pan2D: 0
@@ -1393,7 +1393,7 @@ AudioSource:
   Spatialize: 1
   SpatializePostEffects: 1
   Priority: 128
-  DopplerLevel: 1.14
+  DopplerLevel: 0.75
   MinDistance: 1
   MaxDistance: 10
   Pan2D: 0
@@ -1619,16 +1619,16 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 612d7e1b2313d46c695f6fd544e09e41, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.559
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 1
   SpatializePostEffects: 1
   Priority: 128
-  DopplerLevel: 1.14
+  DopplerLevel: 0.65
   MinDistance: 1
-  MaxDistance: 10
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
