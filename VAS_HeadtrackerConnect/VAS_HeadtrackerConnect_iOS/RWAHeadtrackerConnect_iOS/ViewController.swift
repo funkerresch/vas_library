@@ -8,14 +8,15 @@
 
 import UIKit
 
-var TRACKERID = "rwaht00"
-var btconnect = VasHeadtrackerConnect(headtrackerId: TRACKERID)
+var TRACKERID = "rwaht81"
+
 
 class ViewController: UIViewController {
-
+    
+    var btconnect:VasHeadtrackerConnect!
     override func viewDidLoad() {
         super.viewDidLoad()
-        btconnect.connect()
+        self.btconnect = VasHeadtrackerConnect(headtrackerId: TRACKERID, portNumber: Int(51051))
         // Do any additional setup after loading the view.
     }
 }

@@ -17,6 +17,8 @@
 #define vas_memory_h
 
 #include <stdlib.h>
+#include <string.h> /* memset */
+//#include <unistd.h> /* close */
 #ifdef PUREDATA
 #include "m_pd.h"
 #endif

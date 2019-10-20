@@ -37,26 +37,29 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#define AK_VATOOLS_ELEVATION_RANGE 180
-#define AK_VATOOLS_ELEVATION_ZERO 90
-#define VAS_OUTPUTVECTOR_ADDINPLACE 1
-
+   
 /**
- * @brief Struct vas_dynamicFirChannel_config. <br>
- * Configuration datatype for setting range and resolution for the binaural synthesis <br>
+ * @brief Struct vas_fir_metaData. <br>
+ * Format Meta data of a vas fir filter <br>
  */
 
-typedef struct vas_dynamicFirChannel_config
+typedef struct vas_fir_metaData
 {
-    int eleMin;
-    int eleMax;
+    char *fullPath;
+    int filterLength;
+    int directionFormat;
+    int audioFormat;
+    int lineFormat;
+    int azimuthStride;
+    int elevationStride;
     int eleZero;
     int eleRange;
-    int eleStride;
+    int eleMin;
+    int eleMax;
     int aziRange;
-    int aziStride;
-} vas_dynamicFirChannel_config;
+} vas_fir_metaData;
+
+void vas_filter_metaData_init(vas_fir_metaData *x);
 
 /**
  * @brief Struct vas_dynamicFirChannel_filter. <br>
@@ -65,24 +68,26 @@ typedef struct vas_dynamicFirChannel_config
 
 typedef struct vas_dynamicFirChannel_filter
 {
-    vas_dynamicFirChannel_config *firSetup;     // configuration for binaural range and resolution; can be set with globals defined in vas_dynamicFirChannel.c
-    float **real[AK_VATOOLS_ELEVATION_RANGE][360];
-    float **imag[AK_VATOOLS_ELEVATION_RANGE][360];
-    
-    VAS_COMPLEX *data[AK_VATOOLS_ELEVATION_RANGE][360];
-    VAS_COMPLEX **pointerToFFTSegments[AK_VATOOLS_ELEVATION_RANGE][360];
+    VAS_COMPLEX *data[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    VAS_COMPLEX **pointerToFFTSegments[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     
 #ifdef VAS_USE_VDSP
     FFTSetup setupReal;   
 #endif
+#ifdef VAS_USE_KISSFFT
+    kiss_fftr_cfg  forwardFFT;
+    kiss_fftr_cfg  inverseFFT;
+#endif
     
-    bool *segmentIsZero[AK_VATOOLS_ELEVATION_RANGE][360];
-    float maxAverageSegmentPower[AK_VATOOLS_ELEVATION_RANGE][360];
-    float minAverageSegmentPower[AK_VATOOLS_ELEVATION_RANGE][360];
-    int zeroCounter[AK_VATOOLS_ELEVATION_RANGE][360];
-    int nonZeroCounter[AK_VATOOLS_ELEVATION_RANGE][360];
-    double *averageSegmentPower[AK_VATOOLS_ELEVATION_RANGE][360];
-    double overallEnergy[AK_VATOOLS_ELEVATION_RANGE][360];
+    bool *segmentIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    int zeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    int nonZeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
+    float maxAverageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    float minAverageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    double *averageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    double overallEnergy[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+#endif
     
     int referenceCounter;
     int numberOfSegments;
@@ -90,8 +95,15 @@ typedef struct vas_dynamicFirChannel_filter
     int fftSize;
     int fftSizeLog2;
     int filterLength;
-   
-    // fft configuration for vDSP lib
+    int directionFormat;
+    int eleMin;
+    int eleMax;
+    int eleZero;
+    int eleRange;
+    int eleStride;
+    int aziRange;
+    int aziStride;
+
 } vas_dynamicFirChannel_filter;
 
 /**
@@ -151,24 +163,15 @@ typedef struct vas_dynamicFirChannel
     float *fadeOut;                             // holds the fadeout array necessary for the crossfade
     float *fadeIn;                              // holds the fadein array necessary for the crossfade
     
-    vas_dynamicFirChannel_config std;
-    
-    vas_dynamicFirChannel_filter localFilter;   // local filter means that this channel has its own filter instead of using a global one valid for all instances
-    vas_dynamicFirChannel_input input;          // my signal input
+    vas_dynamicFirChannel_input *input;          // my signal input
     vas_dynamicFirChannel_output output;        // calculated output
-    
     vas_dynamicFirChannel_input *sharedInput;   // can be set if the channel uses the same input as another channel (->stereo reverb for example)
     vas_dynamicFirChannel_filter *sharedFilter; // can be set if the channel uses the same filter as another channel (->stereo reverb for example)
-    vas_dynamicFirChannel_filter *filter;       // pointer to either localFilter or globalFilter
+    vas_dynamicFirChannel_filter *filter;       // pointer to filter
 
 #ifdef VAS_USE_FFTW
     fftwf_plan forwardFFT;
     fftwf_plan inverseFFT;
-#endif
-
-#ifdef VAS_USE_KISSFFT
-    kiss_fftr_cfg  forwardFFT;
-    kiss_fftr_cfg  inverseFFT;
 #endif
     
     int init;
@@ -204,7 +207,7 @@ typedef struct vas_dynamicFirChannel
  * which are capable of sharing the input, the filter or both. <br>
  */
 
-vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup, int segmentSize, vas_dynamicFirChannel_config *firConfig);
+vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup);
 
 /**
  * @brief Frees a dynamicFirChannel. <br>
@@ -221,16 +224,7 @@ void vas_dynamicFirChannel_free(vas_dynamicFirChannel *x);
  * A mono to stereo reverb uses for left and right channel the same input. <br>
  * So it is not necessary to calculate the fft's of the input segments twice. <br>
  */
-
 void vas_dynamicFirChannel_shareInputWith(vas_dynamicFirChannel *x, vas_dynamicFirChannel *sharedInputChannel);
-
-/**
- * @brief Tells a channel to use the filter from another channel. <br>
- * @param x The channel, which is supposed to use the filter from another channel. <br>
- * @param sharedInputChannel The channel, which shares its filter with x <br>
- */
-
-void vas_dynamicFirChannel_shareFilterWith(vas_dynamicFirChannel *x, vas_dynamicFirChannel *sharedInputChannel);
 
 /**
  * @brief Get shared filter values <br>
@@ -251,16 +245,16 @@ void vas_dynamicFirChannel_getSharedFilterValues(vas_dynamicFirChannel *x, vas_d
  */
  
 void vas_dynamicFirChannel_setFilterSize(vas_dynamicFirChannel *x, int filterSize);
-    
-void vas_dynamicFirChannel_setGlobalFilterLeft(vas_dynamicFirChannel *x, bool usesGlobalFilter);
-    
-void vas_dynamicFirChannel_setGlobalFilterRight(vas_dynamicFirChannel *x, bool usesGlobalFilter);
-   
-void vas_dynmaicFirChannel_resetMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, int ele, int azi);
+
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
+
 
 void vas_dynamicFirChannel_calculateMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, float *filter, int ele, int azi);
+
+void vas_dynmaicFirChannel_resetMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, int ele, int azi);
     
 void vas_dynamicFirChannel_leaveActivePartitions(vas_dynamicFirChannel *x, int numberOfActivePartions);
+#endif
 
 /**
  * @brief Memory Allocation, partitioning and transformation to frequency domina for a filter <br>
@@ -310,15 +304,6 @@ void vas_dynamicFirChannel_prepareInputSignal(vas_dynamicFirChannel *x);
 void vas_dynamicFirChannel_prepareArrays(vas_dynamicFirChannel *x);
 
 /**
- * @brief Convenience function for init arrays if the channel is using a global filter <br>
- * @param x The target channel <br>
- * Allocates and prepares all necessary arrays including tmp, fadein, fadeout and <br>
- * input and output arrays if the filter is using an already initialized global filter <br>
- */
-
-void vas_dynamicFirChannel_initArraysWithGlobalFilter(vas_dynamicFirChannel *x);
-
-/**
  * @brief DSP Processing method. Analyzed and prepares everything for realtime convolution <br>
  * @param x The target channel <br>
  * @param in The input vector <br>
@@ -333,17 +318,13 @@ void vas_dynamicFirChannel_initArraysWithGlobalFilter(vas_dynamicFirChannel *x);
  * flags can be set to VAS_OUTPUT_ADDINPLACE
  */
 
-void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, AK_INPUTVECTOR *in, AK_OUTPUTVECTOR *out, int vectorSize, int flags);
+void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize, int flags);
 
 void vas_dynamicFirChannel_setInitFlag(vas_dynamicFirChannel *x);
 
 void vas_dynamicFirChannel_removeInitFlag(vas_dynamicFirChannel *x);
-
-void vas_dynamicFirChannel_config_set(vas_dynamicFirChannel_config *x, int eleMin, int eleMax, int eleStride, int aziStride);
     
 void vas_dynamicFirChannel_assignExternMemory(vas_dynamicFirChannel *x, float *real, float *imag);
-    
-void vas_dynamicFirChannel_setAllInputSegments2Zero(vas_dynamicFirChannel *x);
 
 void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dynamicFirChannel_target *target);
 
@@ -360,25 +341,16 @@ void vas_dynamicFirChannel_setElevation(vas_dynamicFirChannel *x, int elevation)
 void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float thresh);
 
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize);
-
-/**
- * @brief Creates a new dynamicFirChannel-Configuration datastructure. <br>
- * @return Returns a new, initialized configuration. <br>
- * The config will be initialized with "standard"-binaural resolution, meaning <br>
- * one filter for every three degrees, elevation ranging from -90 to +90 <br>
- * Usually it won't be necessary to deal with the config. Instead use a higher class <br>
- * filter, for example vas_filter_staticFir_s2s or vas_filter_binaural. It will create the corresponding config itself <br>
- */
-
-vas_dynamicFirChannel_config *vas_dynamicFirChannel_config_new(void);
-
-void vas_dynamicFirChannel_filter_init(vas_dynamicFirChannel_filter *x, int segmentSize);
-
+    
+void vas_dynamicFirChannel_init(vas_dynamicFirChannel *x, int segmentSize, vas_fir_metaData *metaData); // filter init must be called, if either segmentSize, eleRange or aziRange change
+    
 void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x);
 
-void vas_dynamicFirChannel_input_init(vas_dynamicFirChannel_input *x);
+vas_dynamicFirChannel_input *vas_dynamicFirChannel_input_new(void);
 
-void vas_dynamicFirChannel_input_free(vas_dynamicFirChannel_input *x);
+void vas_dynamicFirChannel_input_reset(vas_dynamicFirChannel_input *x, int currentNumberOfSegments);
+
+void vas_dynamicFirChannel_input_free(vas_dynamicFirChannel_input *x, int currentNumberOfSegments);
 
 void vas_dynamicFirChannel_output_init(vas_dynamicFirChannel_output *x, int elevationZero);
 

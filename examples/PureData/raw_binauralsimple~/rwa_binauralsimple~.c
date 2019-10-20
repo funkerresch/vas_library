@@ -67,8 +67,8 @@ static void *rwa_binauralsimple_new(t_symbol *s, int argc, t_atom *argv)
     x->f = 0;
     sprintf(x->canvasDirectory, "%s", canvas_getcurrentdir()->s_name);
     
-    inlet_new(&x->x_obj, &x->x_obj.ob_pd, &s_float, gensym("azimuth"));
-    inlet_new(&x->x_obj, &x->x_obj.ob_pd, &s_float, gensym("elevation"));
+    x->azi = inlet_new(&x->x_obj, &x->x_obj.ob_pd, &s_float, gensym("azimuth"));
+    x->ele = inlet_new(&x->x_obj, &x->x_obj.ob_pd, &s_float, gensym("elevation"));
     
     if(argc >= 1)
     {
@@ -98,7 +98,7 @@ static void *rwa_binauralsimple_new(t_symbol *s, int argc, t_atom *argv)
     
     if(path)
     {
-        if(!vas_fir_getInitFlag((vas_fir *)x->convolutionEngine))
+        if(!binauralEngine->left->init)
         {
             rwa_firobject_read((rwa_firobject *)x, path);
         }

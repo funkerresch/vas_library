@@ -89,6 +89,7 @@ enum HeadtrackerType {
     }
     
     public func startScanning() {
+        print("Start scanning")
         if centralManager.isScanning {
             return;
         }
@@ -117,6 +118,7 @@ enum HeadtrackerType {
     }
     
     @objc public func connect() {
+        print("connect")
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
@@ -154,6 +156,7 @@ enum HeadtrackerType {
         print("Central Manager State Updated: \(central.state)")
         
         if central.state != .poweredOn {
+            print("error")
             self.peripheral = nil
             return
         }

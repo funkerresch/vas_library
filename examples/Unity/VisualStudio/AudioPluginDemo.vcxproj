@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -18,34 +18,67 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\kissfft\kiss_fft.h" />
+    <ClInclude Include="..\..\..\kissfft\tools\kiss_fftr.h" />
+    <ClInclude Include="..\..\..\source\vas_delay.h" />
+    <ClInclude Include="..\..\..\source\vas_delay_crossfade.h" />
+    <ClInclude Include="..\..\..\source\vas_dynamicFirChannel.h" />
+    <ClInclude Include="..\..\..\source\vas_fir.h" />
+    <ClInclude Include="..\..\..\source\vas_fir_binaural.h" />
+    <ClInclude Include="..\..\..\source\vas_fir_binauralReflection.h" />
+    <ClInclude Include="..\..\..\source\vas_fir_list.h" />
+    <ClInclude Include="..\..\..\source\vas_iir_biquad.h" />
+    <ClInclude Include="..\..\..\source\vas_mem.h" />
+    <ClInclude Include="..\..\..\source\vas_util.h" />
+    <ClInclude Include="..\AudioPluginInterface.h" />
+    <ClInclude Include="..\AudioPluginUtil.h" />
+    <ClInclude Include="..\PluginList.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\kissfft\kiss_fft.c" />
+    <ClCompile Include="..\..\..\kissfft\tools\kiss_fftr.c" />
+    <ClCompile Include="..\..\..\source\vas_delay.c" />
+    <ClCompile Include="..\..\..\source\vas_delay_crossfade.c" />
+    <ClCompile Include="..\..\..\source\vas_dynamicFirChannel.c" />
+    <ClCompile Include="..\..\..\source\vas_fir.c" />
+    <ClCompile Include="..\..\..\source\vas_fir_binaural.c" />
+    <ClCompile Include="..\..\..\source\vas_fir_binauralReflection.c" />
+    <ClCompile Include="..\..\..\source\vas_fir_list.c" />
+    <ClCompile Include="..\..\..\source\vas_iir_biquad.c" />
+    <ClCompile Include="..\..\..\source\vas_mem.c" />
+    <ClCompile Include="..\..\..\source\vas_util.c" />
+    <ClCompile Include="..\AudioPluginUtil.cpp" />
+    <ClCompile Include="..\VasUnitySpatializer.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F7CFEF5A-54BD-42E8-A59E-54ABAEB4EA9C}</ProjectGuid>
     <RootNamespace>AudioPluginDemo</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -66,27 +99,27 @@
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)build\$(Configuration)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)build\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\thomas.resch\Desktop\SpatializerTest\Assets\Plugins\x86_64</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">build\$(Configuration)\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">build\$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)build\$(Configuration)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)build\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\SpatializerTest\Assets\Plugins\x86_64</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">build\$(Configuration)\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">build\$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\vas_library\source;E:\vas_library\source\kissfft;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\harvey\Desktop\UnityNativeAudioPluginSDK\NativeCode\VisualStudio\fftw-3.3.5-dll32;C:\Users\harvey\Desktop\UnityNativeAudioPluginSDK\NativeCode\VisualStudio;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>E:\vas_library\source;E:\vas_library\source\kissfft;$(IncludePath)</IncludePath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>Z:\vas_library\kissfft;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>E:\vas_library\source;E:\vas_library\source\kissfft;$(IncludePath)</IncludePath>
+    <IncludePath>Z:\vas_library\kissfft;$(IncludePath)</IncludePath>
+    <TargetName>AudioPlugin_VAS_Binaural</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>AudioPlugin_VAS_Binaural</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -104,21 +137,17 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>kernel32.lib;user32.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;winmm.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mkdir ..\..\Assets\Plugins\x86
 copy $(TargetPath) ..\..\Assets\Plugins\x86\$(TargetName).dll
 </Command>
     </PostBuildEvent>
-    <ProjectReference>
-      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
-    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;AudioPluginDemo_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -126,17 +155,18 @@ copy $(TargetPath) ..\..\Assets\Plugins\x86\$(TargetName).dll
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalIncludeDirectories>Y:\vas_library\source;Y:\vas_library\kissfft\tools;Y:\vas_library\kissfft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>kernel32.lib;user32.lib</AdditionalDependencies>
-      <DelayLoadDLLs>
-      </DelayLoadDLLs>
+      <AdditionalDependencies>kernel32.lib;user32.lib;winmm.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mkdir ..\..\Assets\Plugins\x86_64
-copy $(TargetPath) ..\..\Assets\Plugins\x86_64\$(TargetName).dll
+copy /y $(TargetPath) ..\..\Assets\Plugins\x86_64\$(TargetName).dll
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -151,6 +181,11 @@ copy $(TargetPath) ..\..\Assets\Plugins\x86_64\$(TargetName).dll
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <AdditionalIncludeDirectories>Z:\vas_library\source;Z:\vas_library\kissfft\tools;Z:\vas_library\kissfft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -158,7 +193,7 @@ copy $(TargetPath) ..\..\Assets\Plugins\x86_64\$(TargetName).dll
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>kernel32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;winmm.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mkdir ..\..\Assets\Plugins\x86
@@ -177,37 +212,29 @@ copy $(TargetPath) ..\..\Assets\Plugins\x86\$(TargetName).dll
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <AdditionalIncludeDirectories>Y:\vas_library\source;Y:\vas_library\kissfft\tools;Y:\vas_library\kissfft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>kernel32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;winmm.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mkdir ..\..\Assets\Plugins\x86_64
-copy $(TargetPath) ..\..\Assets\Plugins\x86_64\$(TargetName).dll
+copy /y $(TargetPath) ..\..\Assets\Plugins\x86_64\$(TargetName).dll
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\source\kissfft\kiss_fft.c" />
-    <ClCompile Include="..\..\..\source\kissfft\tools\kiss_fftr.c" />
-    <ClCompile Include="..\Xcode\AudioPluginUtil.cpp" />
-    <ClCompile Include="..\Xcode\VasBinauralRIR.cpp" />
-    <ClCompile Include="E:\vas_library\source\vas_dynamicFirChannel.c" />
-    <ClCompile Include="E:\vas_library\source\vas_fir.c" />
-    <ClCompile Include="E:\vas_library\source\vas_fir_binaural.c" />
-    <ClCompile Include="E:\vas_library\source\vas_mem.c" />
-    <ClCompile Include="E:\vas_library\source\vas_util.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\source\kissfft\kiss_fft.h" />
-    <ClInclude Include="..\Xcode\AudioPluginInterface.h" />
-    <ClInclude Include="..\Xcode\AudioPluginUtil.h" />
-    <ClInclude Include="..\Xcode\PluginList.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

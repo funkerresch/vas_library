@@ -25,7 +25,7 @@ typedef struct vas_fir_headphoneCompensation
 
 vas_fir_headphoneCompensation *vas_fir_headphoneCompensation_new(int setup, int segmentSize);
 
-void vas_fir_headphoneCompensation_process(vas_fir_headphoneCompensation *x, AK_INPUTVECTOR *inLeft, AK_INPUTVECTOR *inRight, AK_OUTPUTVECTOR *outLeft, AK_OUTPUTVECTOR *outRight, int vectorSize);
+void vas_fir_headphoneCompensation_process(vas_fir_headphoneCompensation *x, VAS_INPUTBUFFER *inLeft, VAS_INPUTBUFFER *inRight, VAS_OUTPUTBUFFER *outLeft, VAS_OUTPUTBUFFER *outRight, int vectorSize);
 
 void vas_fir_headphoneCompensation_free(vas_fir_headphoneCompensation *x);
 

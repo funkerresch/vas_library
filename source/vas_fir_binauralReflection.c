@@ -10,12 +10,13 @@
 vas_fir_binauralReflection *vas_fir_binauralReflection_new(vas_fir_binaural *mainSource, long maxDelayTime)
 {
     vas_fir_binauralReflection *x = (vas_fir_binauralReflection *) vas_mem_alloc(sizeof(vas_fir_binauralReflection));
-    x->binauralEngine = vas_fir_binaural_new(VAS_VDSP | VAS_BINAURALSETUP_STD | VAS_LOCALFILTER, 1024, NULL);
-    vas_dynamicFirChannel_shareFilterWith(x->binauralEngine->left, mainSource->left);
-    vas_dynamicFirChannel_shareFilterWith(x->binauralEngine->right, mainSource->right);
-    
+    x->binauralEngine = vas_fir_binaural_new(0);
+     
     x->delay = vas_delay_crossfade_new(maxDelayTime);
     x->filter = vas_iir_biquad_new(VAS_IIR_BIQUAD_HIGHPASS, 1000, 10);
+    x->filterLP = vas_iir_biquad_new(VAS_IIR_BIQUAD_LOWPASS, 17000, 10);
+    vas_utilities_writeZeros(VAS_MAXVECTORSIZE, x->tmp);
+
     return x;
 }
 
@@ -42,7 +43,9 @@ void vas_fir_binauralReflection_setElevation(vas_fir_binauralReflection *x, floa
 void vas_fir_binauralReflection_process(vas_fir_binauralReflection *x, float *in, float *outL, float *outR, int vectorSize)
 {
     vas_iir_biquad_process(x->filter, in, x->tmp, vectorSize);
+    vas_iir_biquad_process(x->filterLP, x->tmp, x->tmp, vectorSize);
     vas_delay_crossfade_process(x->delay, x->tmp, x->tmp, vectorSize);
+    vas_util_fcopy(x->tmp, in, vectorSize);
     vas_fir_binaural_processOutputInPlace(x->binauralEngine, x->tmp, outL, outR, vectorSize);
 }
 
@@ -50,6 +53,7 @@ void vas_fir_binauralReflection_free(vas_fir_binauralReflection *x)
 {
     vas_mem_free(x->binauralEngine);
     vas_mem_free(x->filter);
+    vas_mem_free(x->filterLP);
     vas_mem_free(x->delay);
     vas_mem_free(x);
 }

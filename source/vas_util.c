@@ -761,12 +761,33 @@ void vas_util_fadd(float *input1, float *input2, float *dest, int length)
 {
 #ifdef VAS_USE_VDSP
     vDSP_vadd(input1, 1, input2, 1, dest, 1, length);
+#endif
+    
+#ifdef VAS_USE_KISSFFT
+#ifdef VAS_USE_AVX
+    
+    int n = length;
+    while(n)
+    {
+        __m256 buffer1 = _mm256_load_ps(input1);
+        __m256 buffer2 = _mm256_load_ps(input2);
+        __m256 result;
+        
+        result = _mm256_add_ps(buffer1, buffer2);
+        _mm256_store_ps(dest, result);
+        n-=8;
+        input1+=8;
+        input2+=8;
+        dest+=8;
+    }
+     
 #else
     int n = length;
     while (n--)
     {
         *dest++ = *input1++ + *input2++;
     }
+#endif
 #endif
 }
 
@@ -787,12 +808,45 @@ void vas_util_fcopy(float *source, float *dest, int length)
 {
 #ifdef VAS_USE_VDSP
     cblas_scopy(length, source, 1, dest, 1);
+#endif
+    
+#ifdef VAS_USE_KISSFFT
+#ifdef VAS_USE_AVX
+    
+    int n = length;
+    while(n)
+    {
+        __m256 buffer = _mm256_load_ps(source);
+        _mm256_store_ps(dest, buffer);
+        n-=8;
+        source+=8;
+        dest+=8;
+    }
+
 #else
     int n = length;
     while (n--)
     {
         *dest++ = *source++;
     }
+
+#endif
+#endif
+}
+
+void vas_util_fcopy_noavx(float *source, float *dest, int length)
+{
+#ifdef VAS_USE_VDSP
+    cblas_scopy(length, source, 1, dest, 1);
+#endif
+    
+#ifdef VAS_USE_KISSFFT
+    int n = length;
+    while (n--)
+    {
+        *dest++ = *source++;
+    }
+
 #endif
 }
 
@@ -832,22 +886,6 @@ void vas_util_complexCopy(VAS_COMPLEX *source, VAS_COMPLEX *dest, int length)
     }
 #endif
     
-#ifdef VAS_USE_FFTW
-#ifdef VAS_USE_C99COMPLEX
-    while (n--)
-    {
-        *dest++ = *source++;
-    }
-#else
-    while (n--)
-    {
-        (*dest)[0] = (*source)[0];
-        (*dest)[1] = (*source)[1];
-        dest++;source++;
-    }
-#endif
-#endif
-    
 #ifdef VAS_USE_KISSFFT
     while (n--)
     {
@@ -871,24 +909,6 @@ void vas_util_complexScale(VAS_COMPLEX *dest, float scale,  int length)
         destReal++;destImag++;
     }
 #endif
-  
-#ifdef VAS_USE_FFTW
-#ifdef VAS_USE_C99COMPLEX
-    
-    while (n--)
-    {
-        *dest = *dest * scale;
-        dest++;
-    }
-#else
-    while (n--)
-    {
-        (*dest)[0] *= scale;
-        (*dest)[1] *= scale;
-        dest++;
-    }
-#endif
-#endif
     
 #ifdef VAS_USE_KISSFFT
     while (n--)
@@ -896,6 +916,19 @@ void vas_util_complexScale(VAS_COMPLEX *dest, float scale,  int length)
         dest->r *= scale;
         dest->i *= scale;
         dest++;
+    }
+#endif
+}
+
+void vas_util_deinterleaveComplexArray(VAS_COMPLEX *input, float *real, float *imag, int length)
+{
+#ifdef VAS_USE_KISSFFT
+    int n = length;
+    while (n--)
+    {
+        *real++  = input->r;
+        *imag++ = input->i;
+        input++;
     }
 #endif
 }
@@ -911,38 +944,80 @@ void vas_util_complexMultiplyAdd(VAS_COMPLEX *signalIn, VAS_COMPLEX *filter, VAS
     dest->imagp[0] = 0;
     
     vDSP_zvma(signalIn, 1, filter, 1, dest, 1, dest, 1, length);
-    dest->imagp[0] = 0;//preserveIRNyq * preserveSigNyq + preservePrevResult;
+    dest->imagp[0] = preserveIRNyq * preserveSigNyq + preservePrevResult;
     filter->imagp[0] = preserveIRNyq;
     signalIn->imagp[0] = preserveSigNyq;
 #endif
     
-#ifdef VAS_USE_FFTW
-#ifdef VAS_USE_C99COMPLEX
-    int n = length;
-    while(n--)
-    {
-        *dest++ += *signalIn++ * *filter++;
-    }
-#else
-    int n = length;
-    while(n--)
-    {
-        //(a+bi)(c+di) = (ac−bd) + (ad+bc)i
-        (*dest)[0] += (*filter)[0] * (*signalIn)[0] - (*filter)[1] * (*signalIn)[1];
-        (*dest)[1] += (*filter)[0] * (*signalIn)[1] + (*filter)[1] * (*signalIn)[0];
-        dest++;filter++;signalIn++;
-    }
-#endif
-#endif
-    
 #ifdef VAS_USE_KISSFFT
-    int n = length;
-    while (n--)
-    {
+    
+#ifdef VAS_USE_AVX
+    
+        double * p;
+   
+        int n = length;
+        while (n)
+        {
+            p = (double*)dest;
+            
+            __m256 ab0145 = _mm256_castpd_ps(_mm256_setr_pd(p[0], p[1], p[4], p[5]));
+            __m256 ab2367 = _mm256_castpd_ps(_mm256_setr_pd(p[2], p[3], p[6], p[7]));
+            __m256 destReal = _mm256_shuffle_ps(ab0145, ab2367, 0x88);
+            __m256 destImag = _mm256_shuffle_ps(ab0145, ab2367, 0xDD);
+           
+            p = (double*)signalIn;
+
+            ab0145 = _mm256_castpd_ps(_mm256_setr_pd(p[0], p[1], p[4], p[5]));
+            ab2367 = _mm256_castpd_ps(_mm256_setr_pd(p[2], p[3], p[6], p[7]));
+            __m256 signalInReal = _mm256_shuffle_ps(ab0145, ab2367, 0x88);
+            __m256 signalInImag = _mm256_shuffle_ps(ab0145, ab2367, 0xDD);
+            
+            p = (double*)filter;
+            
+            ab0145 = _mm256_castpd_ps(_mm256_setr_pd(p[0], p[1], p[4], p[5]));
+            ab2367 = _mm256_castpd_ps(_mm256_setr_pd(p[2], p[3], p[6], p[7]));
+            __m256 filterReal = _mm256_shuffle_ps(ab0145, ab2367, 0x88);
+            __m256 filterImag = _mm256_shuffle_ps(ab0145, ab2367, 0xDD);
+              
+            //pDstR[i] = fmsub(fSrc1R, fSrc2R, fmadd(fSrc1I, fSrc2I, -pDstR[i]));
+            //pDstI[i] = fmadd(fSrc1R, fSrc2I, fmadd(fSrc2R, fSrc1I, pDstI[i]));
+            destReal = _mm256_add_ps(destReal, _mm256_sub_ps(_mm256_mul_ps(signalInReal, filterReal), _mm256_mul_ps(signalInImag, filterImag)));
+            destImag = _mm256_add_ps(destImag, _mm256_add_ps(_mm256_mul_ps(signalInReal, filterImag), _mm256_mul_ps(signalInImag, filterReal)));
+            
+            //destImag = _mm256_fmadd_ps(signalInReal, filterImag, _mm256_fmadd_ps(filterReal, signalInImag, destImag));
+
+            float* resReal = (float*)&destReal;
+            float* resImag = (float*)&destImag;
+        
+            (dest)->r = resReal[0]; (dest+1)->r = resReal[1]; (dest+2)->r = resReal[2]; (dest+3)->r = resReal[3];
+            (dest+4)->r = resReal[4]; (dest+5)->r = resReal[5]; (dest+6)->r = resReal[6]; (dest+7)->r = resReal[7];
+            
+            (dest)->i = resImag[0]; (dest+1)->i = resImag[1]; (dest+2)->i = resImag[2]; (dest+3)->i = resImag[3];
+            (dest+4)->i = resImag[4]; (dest+5)->i = resImag[5]; (dest+6)->i = resImag[6]; (dest+7)->i = resImag[7];
+    
+            n-=8;
+            signalIn+=8;
+            filter+=8;
+            dest+=8;
+        }
+    
+        signalIn-=7;
+        filter-=7;
+        dest-=7;
+    
         dest->r += filter->r * signalIn->r - filter->i * signalIn->i;
         dest->i += filter->r * signalIn->i + filter->i * signalIn->r;
-        dest++;filter++;signalIn++;
-    }
+    
+#else
+        int n = length+1;
+        while (n--)
+        {
+            dest->r += filter->r * signalIn->r - filter->i * signalIn->i;
+            dest->i += filter->r * signalIn->i + filter->i * signalIn->r;
+            dest++;filter++;signalIn++;
+        }
+#endif
+    
 #endif
     
 }
@@ -960,25 +1035,6 @@ void vas_util_complexMultiply(int length, VAS_COMPLEX *signalIn, VAS_COMPLEX *fi
     filter->imagp[0] = preserveIRNyq;
     signalIn->imagp[0] = preserveSigNyq;
 #endif
-  
-#ifdef VAS_USE_FFTW
-#ifdef VAS_USE_C99COMPLEX
-    int n = length;
-    while(n--)
-    {
-        *dest++ = *signalIn++ * *filter++;
-    }
-#else
-    int n = length;
-    while(n--)
-    {
-        //(a+bi)(c+di) = (ac−bd) + (ad+bc)i
-        (*dest)[0] = (*filter)[0] * (*signalIn)[0] - (*filter)[1] * (*signalIn)[1];
-        (*dest)[1] = (*filter)[0] * (*signalIn)[1] + (*filter)[1] * (*signalIn)[0];
-        dest++;filter++;signalIn++;
-    }
-#endif
-#endif
     
 #ifdef VAS_USE_KISSFFT
     int n = length;
@@ -989,7 +1045,6 @@ void vas_util_complexMultiply(int length, VAS_COMPLEX *signalIn, VAS_COMPLEX *fi
         dest++;filter++;signalIn++;
     }
 #endif
-    
 }
 
 void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int length)
@@ -1006,22 +1061,6 @@ void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int length)
     }
 #endif
     
-#ifdef VAS_USE_FFTW
-#ifdef VAS_USE_C99COMPLEX
-    while(n--)
-    {
-        *dest++ = 0;
-    }
-#else
-    while(n--)
-    {
-        (*dest)[0] = 0;
-        (*dest)[1] = 0;
-        dest++;
-    }
-#endif
-#endif
-    
 #ifdef VAS_USE_KISSFFT
     while (n--)
     {
@@ -1030,7 +1069,6 @@ void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int length)
         dest++;
     }
 #endif
-    
 }
 
 float vas_utilities_degrees2radians(float degrees)
@@ -1049,6 +1087,18 @@ const char *vas_util_getFileExtension(const char *filename)
 bool vas_utilities_isValidSegmentSize(int segmentSize)
 {
     return  (segmentSize >= 16) && (segmentSize <= 65536)  && ((segmentSize & (segmentSize - 1)) == 0);
+}
+
+int vas_utilities_roundUp2NextPowerOf2(int value)
+{
+    value--;
+    value |= value >> 1;
+    value |= value >> 2;
+    value |= value >> 4;
+    value |= value >> 8;
+    value |= value >> 16;
+    value++;
+    return value;
 }
 
 
@@ -1087,6 +1137,7 @@ void ak_vaTools_zmultiplyAdd_SSE(int length, COMPLEX_SPLIT signalIn, COMPLEX_SPL
         signalInReal++; signalInImag++;filterReal++; filterImag++; destReal++; destImag++;
     }
 }
+ 
 void ak_vaTools_fadd_SSE(int n, float *signalIn, float *filter, float *dest)
 {
     
@@ -1106,7 +1157,7 @@ void vas_utilities_fcopy_SSE(int n, float *source,  float *dest)
         *out++ = *in++;
 }*/
 
-void vas_utilities_writeZeros1(int length, AK_INPUTVECTOR *dest)
+void vas_utilities_writeZeros1(int length, VAS_INPUTBUFFER *dest)
 {
     int n = length;
     while(n--)
@@ -1154,6 +1205,30 @@ void vas_utilities_writeFadeInArray(float length, float *dest)
     {
         float k = 1-n/length;
         float volume = (0.5  - 0.5 * cos(M_PI * k));
+        *destPtr++ = volume;
+    }
+}
+
+void vas_utilities_writeFadeOutArray1(float length, float *dest)
+{
+    float n = length;
+    float *destPtr = dest;
+    while(n--)
+    {
+        float k = 1-n/length;
+        float volume = cos(M_PI*0.5 * k);
+        *destPtr++ = volume;
+    }
+}
+
+void vas_utilities_writeFadeInArray1(float length, float *dest)
+{
+    float n = length;
+    float *destPtr = dest;
+    while(n--)
+    {
+        float k = 1-n/length;
+        float volume = sin(M_PI*0.5 * k);
         *destPtr++ = volume;
     }
 }
@@ -1266,7 +1341,7 @@ void vas_utilities_zmultiplyAdd_vDSP(int length, COMPLEX_SPLIT signalIn, COMPLEX
     dest.imagp[0] = 0;
     
     vDSP_zvma(&signalIn, 1, &filter, 1, &dest, 1, &dest, 1, length);
-    dest.imagp[0] = 0;//preserveIRNyq * preserveSigNyq + preservePrevResult;
+    dest.imagp[0] = preserveIRNyq * preserveSigNyq + preservePrevResult;
     filter.imagp[0] = preserveIRNyq;
     signalIn.imagp[0] = preserveSigNyq;
 }

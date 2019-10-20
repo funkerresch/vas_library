@@ -16,12 +16,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+     
 typedef struct vas_fir_binauralReflection {
     vas_fir_binaural *binauralEngine;
     vas_delay_crossfade *delay;
     vas_iir_biquad *filter;
-    float tmp[4096];
+    vas_iir_biquad *filterLP;
+    float tmp[VAS_MAXVECTORSIZE];
 } vas_fir_binauralReflection;
     
 vas_fir_binauralReflection *vas_fir_binauralReflection_new(vas_fir_binaural *mainSource, long maxDelayTime);

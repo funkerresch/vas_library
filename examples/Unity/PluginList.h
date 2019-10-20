@@ -1,0 +1,1 @@
+DECLARE_EFFECT("VAS_Spatializer", Spatializer)

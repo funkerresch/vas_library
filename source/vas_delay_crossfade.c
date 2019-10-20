@@ -58,8 +58,6 @@ void vas_delay_crossfade_process(vas_delay_crossfade *x, float *in, float *out, 
         }
     }
     vas_util_fcopy(x->outputCurrent, out, vectorSize);
-    
-    
 }
 
 void vas_delay_crossfade_free(vas_delay_crossfade *x)

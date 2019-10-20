@@ -78,13 +78,13 @@ public class VasSpatializerConfiguration : MonoBehaviour
    // public static extern void SetDebugFunction(IntPtr fp);
 
 #else
-    [DllImport("AudioPlugin_VAS_Binaural", CallingConvention = CallingConvention.Cdecl)]
+    [DllImport("AudioPlugin_VAS_Binaural", EntryPoint = "GetInstance", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
     private static extern IntPtr GetInstance(int id);
 
-    [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
+    [DllImport("AudioPlugin_VAS_Binaural", EntryPoint = "LoadHRTF", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
     private static extern void LoadHRTF(IntPtr x, string str);
 
-    [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
+    [DllImport("AudioPlugin_VAS_Binaural", EntryPoint = "SetDebugFunction", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
     public static extern void SetDebugFunction(IntPtr fp);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -101,9 +101,9 @@ public class VasSpatializerConfiguration : MonoBehaviour
 #if UNITY_IPHONE
         ;
 #else
-        DebugDelegate callback_delegate = new DebugDelegate(DebugCallback);
-        IntPtr intptr_delegate = Marshal.GetFunctionPointerForDelegate(callback_delegate);
-        SetDebugFunction(intptr_delegate);
+        //DebugDelegate callback_delegate = new DebugDelegate(DebugCallback);
+        //IntPtr intptr_delegate = Marshal.GetFunctionPointerForDelegate(callback_delegate);
+        //SetDebugFunction(intptr_delegate);
 #endif
         mySource = GetComponent<AudioSource>();
     }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 13608c1e9543b49faafe8a460c093077
+guid: 9d47b848a12e64121a2256619f795706
 folderAsset: yes
 PluginImporter:
   externalObjects: {}
@@ -37,23 +37,11 @@ PluginImporter:
       settings:
         CPU: AnyCPU
   - first:
-      Standalone: Linux
-    second:
-      enabled: 0
-      settings:
-        CPU: None
-  - first:
       Standalone: Linux64
     second:
       enabled: 1
       settings:
-        CPU: x86_64
-  - first:
-      Standalone: LinuxUniversal
-    second:
-      enabled: 1
-      settings:
-        CPU: x86_64
+        CPU: AnyCPU
   - first:
       Standalone: OSXUniversal
     second:

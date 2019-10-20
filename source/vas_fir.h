@@ -19,22 +19,7 @@
 extern "C" {
 #endif
 
-/**
- * @brief Struct vas_fir_metaData. <br>
- * Format Meta data of a vas fir filter <br>
- */
-
-typedef struct vas_fir_metaData
-{
-    int filterLength;
-    int directionFormat;
-    int audioFormat;
-    int lineFormat;
-    int azimuthStride;
-    int elevationStride;
-} vas_fir_metaData;
-
-void vas_filter_metaData_init(vas_fir_metaData *x);
+    
 
 /**
  * @brief Struct vas_fir <br>
@@ -60,8 +45,11 @@ void vas_fir_removeInitFlag(vas_fir *x);
 void vas_fir_prepareChannelsWithSharedFilter(vas_fir *x,  vas_dynamicFirChannel *left, vas_dynamicFirChannel *right);
 
 void vas_fir_readText_1ValuePerLine(vas_fir *x, char *fullpath);
-void vas_fir_readText_1IrPerLine(vas_fir *x, char *fullpath);
-int vas_fir_readSofa(vas_fir *x, char *fullpath, vas_dynamicFirChannel_config *firSetup);
+FILE *vas_fir_readText_metaData1(vas_fir *x, char *fullpath);
+void vas_fir_readText_Ir(vas_fir *x, FILE *filePtr);
+void vas_fir_initFilter1(vas_fir *x, int segmentSize);
+void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath);
+int vas_fir_readSofa_getFilter(vas_fir *x, void *filter);
     
 #ifdef __cplusplus
 }

@@ -52,7 +52,7 @@ namespace BinauralRIR {
         if(ir >= 0)
         {
             sprintf(fullIrPath, "%s/%s", path, irName);
-            vas_fir_readText_1IrPerLine(x, fullIrPath);
+           // vas_fir_readText_1IrPerLine(x, fullIrPath);
         }
     }
    
@@ -75,7 +75,7 @@ namespace BinauralRIR {
             {
                 data->currentIrIndex = (int) value;
                 readImpulseResponse((vas_fir *)data->binauralEngine, data->path, (int) value);
-                vas_fir_setInitFlag((vas_fir *)data->binauralEngine);
+                //vas_fir_setInitFlag((vas_fir *)data->binauralEngine);
             }
         }
        

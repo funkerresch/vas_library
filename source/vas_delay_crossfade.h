@@ -47,9 +47,6 @@ void vas_delay_crossfade_process(vas_delay_crossfade *x, float *in, float *out, 
     
 void vas_delay_crossfade_free(vas_delay_crossfade *x);
     
-
-    
-    
 #ifdef __cplusplus
     }
 #endif

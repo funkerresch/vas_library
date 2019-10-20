@@ -1,5 +1,15 @@
 #include "rwa_binauralrir~.h"
 
+#include "rwa_firobject.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern vas_fir_list IRs;
+#ifdef __cplusplus
+}
+#endif
+
 static t_class *rwa_binauralrir_class;
 
 static void rwa_binauralrir_leaveNumberOfPartionsActive(rwa_binauralrir *x, float i)
@@ -50,17 +60,12 @@ static t_int *rwa_binauralrir_perform(t_int *w)
     t_float *outL = (t_float *)(w[3]);
     t_float *outR = (t_float *)(w[4]);
     t_float *inputBufferPtr = x->inputBuffer;
-    t_float *outputBufferPtrL = outL;
-    t_float *outputBufferPtrR = outR;
     
     int n = (int)(w[5]);
     
     while(n--)
-    {
         *inputBufferPtr++ = *in++;
-        *outputBufferPtrL++ = 0; *outputBufferPtrR++ = 0;
-    }
-    
+ 
     n = (int)(w[5]);
     
     vas_fir_binaural_process(x->convolutionEngine, x->inputBuffer, outL, outR, n);
@@ -75,7 +80,15 @@ static void rwa_binauralrir_dsp(rwa_binauralrir *x, t_signal **sp)
 
 static void rwa_binauralrir_free(rwa_binauralrir *x)
 {
+    vas_fir *convolutionEngine = (vas_fir *)x->convolutionEngine;
+    if(convolutionEngine->left->filter->referenceCounter == 1 || convolutionEngine->left->useSharedFilter == false  )
+        vas_fir_list_removeNode1(&IRs, (vas_fir *)x->convolutionEngine);
+    
     vas_fir_binaural_free(x->convolutionEngine);
+    inlet_free(x->azi);
+    inlet_free(x->ele);
+    outlet_free(x->outL);
+    outlet_free(x->outR);
 }
 
 static void *rwa_binauralrir_new(t_symbol *s, int argc, t_atom *argv)
@@ -83,19 +96,17 @@ static void *rwa_binauralrir_new(t_symbol *s, int argc, t_atom *argv)
     rwa_binauralrir *x = (rwa_binauralrir *)pd_new(rwa_binauralrir_class);
     
     t_symbol *path = NULL;
-
     x->outL = outlet_new(&x->x_obj, gensym("signal"));
     x->outR = outlet_new(&x->x_obj, gensym("signal"));
+    x->azi = inlet_new(&x->x_obj, &x->x_obj.ob_pd, &s_float, gensym("azimuth"));
+    x->ele = inlet_new(&x->x_obj, &x->x_obj.ob_pd, &s_float, gensym("elevation"));
+    
     x->segmentSize = 256;
     x->filterSize = 0;
-    x->useGlobalFilter = 1;
     x->f = 0;
     x->fullpath[0] = '\0';
     sprintf(x->canvasDirectory, "%s", canvas_getcurrentdir()->s_name);
 
-    inlet_new(&x->x_obj, &x->x_obj.ob_pd, &s_float, gensym("azimuth"));
-    inlet_new(&x->x_obj, &x->x_obj.ob_pd, &s_float, gensym("elevation"));
-    
     if(argc >= 1)
     {
         if(argv[0].a_type == A_FLOAT)
@@ -107,8 +118,8 @@ static void *rwa_binauralrir_new(t_symbol *s, int argc, t_atom *argv)
             path = atom_getsymbolarg(0, argc, argv);
     }
     
-    x->convolutionEngine = vas_fir_binaural_new(VAS_VDSP | VAS_BINAURALSETUP_NOELEVATION | VAS_LOCALFILTER, x->segmentSize, NULL);
-    vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
+    x->convolutionEngine = vas_fir_binaural_new(0);
+
     if(!x->convolutionEngine)
     {
         post("Could not create rwa_binauralrir.");
@@ -123,20 +134,8 @@ static void *rwa_binauralrir_new(t_symbol *s, int argc, t_atom *argv)
     }
     
     if(path)
-    {
-        if(!vas_fir_getInitFlag((vas_fir *)x->convolutionEngine))
-        {
-            rwa_firobject_read((rwa_firobject *)x, path);
-            //post("BRIR OVERALL ENERGY: %.14f", binauralEngine->right->filter->overallEnergy[0][0] );
-           // post("BRIR Average Segment ENERGY: %.14f", binauralEngine->right->filter->overallEnergy[0][0] / binauralEngine->right->filter->nonZeroCounter[0][0] );
-        }
-        else
-        {
-            vas_dynamicFirChannel_initArraysWithGlobalFilter(binauralEngine->left);
-            vas_dynamicFirChannel_initArraysWithGlobalFilter(binauralEngine->right);
-        }
-    }
-    
+        rwa_firobject_read1((rwa_firobject *)x, path, x->segmentSize);
+
     return (x);
 }
 
@@ -145,7 +144,7 @@ void rwa_binauralrir_tilde_setup(void)
     rwa_binauralrir_class = class_new(gensym("rwa_binauralrir~"), (t_newmethod)rwa_binauralrir_new, (t_method)rwa_binauralrir_free,
     	sizeof(rwa_binauralrir), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("rwa_binauralrir~ v0.6");
+    post("rwa_binauralrir~ v0.7");
    
     CLASS_MAINSIGNALIN(rwa_binauralrir_class, rwa_binauralrir, f);
    
@@ -153,7 +152,7 @@ void rwa_binauralrir_tilde_setup(void)
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_setAzimuth, gensym("azimuth"), A_DEFFLOAT,0);
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_setElevation, gensym("elevation"), A_DEFFLOAT,0);
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_setSegmentThreshold, gensym("thresh"), A_DEFFLOAT,0);
-    class_addmethod(rwa_binauralrir_class, (t_method)rwa_firobject_read, gensym("read"), A_DEFSYM,0);
+    class_addmethod(rwa_binauralrir_class, (t_method)rwa_firobject_read1, gensym("read"), A_DEFSYM, A_FLOAT, 0);
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_postInactivePartionIndexes, gensym("zeroindexes"),0);
     class_addmethod(rwa_binauralrir_class, (t_method)rwa_binauralrir_leaveNumberOfPartionsActive,  gensym("activepartitions"),A_DEFFLOAT, 0);
 }

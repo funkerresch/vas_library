@@ -29,7 +29,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.headTrackerId.delegate = self
-        self.headTrackerId.stringValue = "rwaht00"
+        self.headTrackerId.stringValue = "rwaht85"
         self.portNumber.stringValue = "51080"
         self.azimuthInverted.state = NSControl.StateValue.off
         self.tare.state = NSControl.StateValue.off

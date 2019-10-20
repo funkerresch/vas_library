@@ -34,11 +34,19 @@ void *vas_mem_resize(void *ptr, long size)
     
 #elif defined(PUREDATA)
     
-    return realloc(ptr, size);
+    void *tmp = realloc(ptr, size);
+    memset(tmp, 0, size);
+    
+    return tmp;
     
 #else
+
+    void *tmp = realloc(ptr, size);
+    memset(tmp, 0, size);
     
-    return realloc(ptr, size);
+    return tmp;
+    
+    //return realloc(ptr, size);
     
 #endif
     
@@ -53,12 +61,12 @@ void vas_mem_free(void *ptr)
     free(ptr);
     
 #elif defined(PUREDATA)
-    
-    free(ptr);
+    if(ptr)
+        free(ptr);
     
 #else
-    
-    free(ptr);
+    if(ptr)
+        free(ptr);
     
 #endif
     

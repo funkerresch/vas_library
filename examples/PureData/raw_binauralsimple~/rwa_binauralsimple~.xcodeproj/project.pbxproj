@@ -56,10 +56,26 @@
 		84FFFFA42124405E00294898 /* rwa_binauralsimple~.c in Sources */ = {isa = PBXBuildFile; fileRef = 84FFFFA22124405E00294898 /* rwa_binauralsimple~.c */; };
 		84FFFFA52124405E00294898 /* rwa_binauralsimple~.h in Headers */ = {isa = PBXBuildFile; fileRef = 84FFFFA32124405E00294898 /* rwa_binauralsimple~.h */; };
 		84FFFFB42125808F00294898 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+		E448C06E230FE4B300D3C142 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
+		E448C06F230FE4B400D3C142 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
+		E448C070230FE4B400D3C142 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
+		E448C071230FE4B500D3C142 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
+		E448C072230FE4B800D3C142 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
+		E448C073230FE4B800D3C142 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
+		E448C074230FE4B900D3C142 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
+		E448C075230FE4B900D3C142 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
 		E481CB3222A2CF80001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
 		E481CB3322A2CF9F001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
 		E481CB3422A2CFBB001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
 		E481CB3522A2CFD3001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
+		E4A69BD4234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
+		E4A69BD5234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
+		E4A69BD6234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
+		E4A69BD7234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
+		E4A69BD8234C947C00E4E570 /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A69BD3234C947C00E4E570 /* vas_fir_list.c */; };
+		E4A69BD9234C947C00E4E570 /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A69BD3234C947C00E4E570 /* vas_fir_list.c */; };
+		E4A69BDA234C947C00E4E570 /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A69BD3234C947C00E4E570 /* vas_fir_list.c */; };
+		E4A69BDB234C947C00E4E570 /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A69BD3234C947C00E4E570 /* vas_fir_list.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -139,6 +155,8 @@
 		84FFFFA32124405E00294898 /* rwa_binauralsimple~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "rwa_binauralsimple~.h"; sourceTree = "<group>"; };
 		84FFFFC32125808F00294898 /* rwa_binauralrir~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "rwa_binauralrir~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E481CB3122A2CF80001927DC /* libmysofa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmysofa.a; path = ../../../libmysofa/build/src/libmysofa.a; sourceTree = "<group>"; };
+		E4A69BD2234C947C00E4E570 /* vas_fir_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_fir_list.h; path = ../../../source/vas_fir_list.h; sourceTree = "<group>"; };
+		E4A69BD3234C947C00E4E570 /* vas_fir_list.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_fir_list.c; path = ../../../source/vas_fir_list.c; sourceTree = "<group>"; };
 		FA2927EC1A899B4C005A2BA9 /* rwa_binauralsimple~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "rwa_binauralsimple~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -206,6 +224,8 @@
 				84C08260223F886600918A05 /* vas_pitchtrack.c */,
 				842E090020C67E760089C3D9 /* vas_fir.c */,
 				842E08FF20C67E750089C3D9 /* vas_fir.h */,
+				E4A69BD2234C947C00E4E570 /* vas_fir_list.h */,
+				E4A69BD3234C947C00E4E570 /* vas_fir_list.c */,
 				842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */,
 				842E090320C67E8B0089C3D9 /* vas_fir_binaural.h */,
 				84E5E16421FB49EA002216EF /* vas_fir_staticFir_s2s.c */,
@@ -250,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843E664221F884FA00B89A9F /* rwa_firobject.h in Headers */,
+				E4A69BD6234C947C00E4E570 /* vas_fir_list.h in Headers */,
 				84C9E398213ACA5D004C6B54 /* rwa_binauralrir~.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +283,7 @@
 				84E5E15621FB48E6002216EF /* rwa_firobject.h in Headers */,
 				84E5E16A21FB4A28002216EF /* vas_fir_headphoneCompensation.h in Headers */,
 				84E5E15721FB48E6002216EF /* rwa_binauralrir~.h in Headers */,
+				E4A69BD7234C947C00E4E570 /* vas_fir_list.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843E664121F884FA00B89A9F /* rwa_firobject.h in Headers */,
+				E4A69BD5234C947C00E4E570 /* vas_fir_list.h in Headers */,
 				84C9E384213ABFAA004C6B54 /* rwa_binauralrir~.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +308,7 @@
 				844237661FB4A69E005ACA50 /* m_pd.h in Headers */,
 				842E090520C67E8B0089C3D9 /* vas_fir_binaural.h in Headers */,
 				84DA7F0320401E1B00CDC513 /* vas_util.h in Headers */,
+				E4A69BD4234C947C00E4E570 /* vas_fir_list.h in Headers */,
 				84DA7EFF20401E1B00CDC513 /* vas_mem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +470,9 @@
 				84C9E393213ACA5D004C6B54 /* vas_mem.c in Sources */,
 				84C9E3A0213ACA80004C6B54 /* rwa_reverb~.c in Sources */,
 				8479365121FB21D800A2082A /* rwa_firobject.c in Sources */,
+				E448C070230FE4B400D3C142 /* kiss_fftr.c in Sources */,
+				E448C074230FE4B900D3C142 /* kiss_fft.c in Sources */,
+				E4A69BDA234C947C00E4E570 /* vas_fir_list.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +480,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4A69BDB234C947C00E4E570 /* vas_fir_list.c in Sources */,
+				E448C075230FE4B900D3C142 /* kiss_fft.c in Sources */,
 				84E5E14821FB48E6002216EF /* vas_fir.c in Sources */,
 				84E5E14921FB48E6002216EF /* vas_fir_binaural.c in Sources */,
 				84E5E14A21FB48E6002216EF /* vas_dynamicFirChannel.c in Sources */,
@@ -461,6 +490,7 @@
 				84E5E16221FB4973002216EF /* rwa_hpcomp~.c in Sources */,
 				84E5E14E21FB48E6002216EF /* vas_mem.c in Sources */,
 				84E5E15121FB48E6002216EF /* rwa_firobject.c in Sources */,
+				E448C071230FE4B500D3C142 /* kiss_fftr.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +505,9 @@
 				84C9E38A213AC050004C6B54 /* vas_mem.c in Sources */,
 				84C9E385213ABFAA004C6B54 /* rwa_binauralrir~.c in Sources */,
 				8479365021FB21D700A2082A /* rwa_firobject.c in Sources */,
+				E448C06F230FE4B400D3C142 /* kiss_fftr.c in Sources */,
+				E448C073230FE4B800D3C142 /* kiss_fft.c in Sources */,
+				E4A69BD9234C947C00E4E570 /* vas_fir_list.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +522,9 @@
 				842E090620C67E8B0089C3D9 /* vas_fir_binaural.c in Sources */,
 				84DA7F0120401E1B00CDC513 /* vas_mem.c in Sources */,
 				8479364F21FB21D600A2082A /* rwa_firobject.c in Sources */,
+				E448C06E230FE4B300D3C142 /* kiss_fftr.c in Sources */,
+				E448C072230FE4B800D3C142 /* kiss_fft.c in Sources */,
+				E4A69BD8234C947C00E4E570 /* vas_fir_list.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,7 +546,10 @@
 					VERBOSE,
 					VAS_INPUTVECTOR_USE_FLOAT,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../..\"/**",
@@ -546,7 +585,10 @@
 					VERBOSE,
 					VAS_INPUTVECTOR_USE_FLOAT,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../..\"/**",
@@ -581,7 +623,10 @@
 					VERBOSE,
 					VAS_INPUTVECTOR_USE_FLOAT,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../..\"/**",
@@ -617,7 +662,10 @@
 					VERBOSE,
 					VAS_INPUTVECTOR_USE_FLOAT,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../..\"/**",
@@ -641,6 +689,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DSTROOT = "$(PROJECT_DIR)/..";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -651,8 +701,13 @@
 					VAS_OUTPUTVECTOR_USE_FLOAT,
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_USE_LIBMYSOFA,
+					VAS_DEBUG_MEM,
+					VAS_WITH_AVERAGE_SEGMENTPOWER,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/**",
@@ -665,6 +720,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
 				VALID_ARCHS = "i386 x86_64";
 			};
@@ -674,6 +730,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				COPY_PHASE_STRIP = NO;
 				DSTROOT = "$(PROJECT_DIR)/..";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -685,8 +743,13 @@
 					VAS_OUTPUTVECTOR_USE_FLOAT,
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_USE_LIBMYSOFA,
+					VAS_DEBUG_MEM,
+					VAS_WITH_AVERAGE_SEGMENTPOWER,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/**",
@@ -699,6 +762,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = YES;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
 				VALID_ARCHS = "i386 x86_64";
 			};
@@ -800,7 +864,10 @@
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_USE_LIBMYSOFA,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
 				ONLY_ACTIVE_ARCH = NO;
@@ -832,7 +899,10 @@
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_USE_LIBMYSOFA,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
 				ONLY_ACTIVE_ARCH = NO;

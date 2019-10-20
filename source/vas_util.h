@@ -1,7 +1,7 @@
 /**
  * @file vas_util.h
  * @author Thomas Resch <br>
- * Audiocommunication Group, Technical University Berlin <br>
+ * Audiocommunication Group, Technische Universität Berlin <br>
  * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
  * Tools for calculating convolution based virtual acoustics (mainly dynamic binaural synthesis) <br>
  * Many thanks to gpakosz for whereami <br>
@@ -17,19 +17,42 @@
 #ifndef ak_utilities_h
 #define ak_utilities_h
 
-//#define VAS_USE_FFTW
-//#define VAS_USE_C99COMPLEX
-//#define VAS_USE_VDSP
-//#define VAS_USE_KISSFFT
+#include <immintrin.h>
 
-//#ifdef _WIN32
-//#define _USE_MATH_DEFINES
-//#include <math.h>
 //#define VAS_USE_KISSFFT
-//#else
+#define VAS_USE_AVX
+
+#if !defined(VAS_USE_VDSP) && !defined(VAS_USE_KISSFFT) && !defined(VAS_USE_FFTW)
+
+#ifdef _WIN32
+#define VAS_EXPORT __declspec(dllexport)
+#define _USE_MATH_DEFINES
 #include <math.h>
+#define VAS_USE_KISSFFT
+#else
+#include <math.h>
+#define VAS_EXPORT
 #define VAS_USE_VDSP
-//#endif
+#endif
+
+#endif
+
+#if !defined(VAS_EXPORT)
+
+#ifdef _WIN32
+#define VAS_EXPORT __declspec(dllexport)
+#define _USE_MATH_DEFINES
+#include <math.h>
+#else
+#define VAS_EXPORT
+#include <math.h>
+#endif
+
+#endif
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 #include <string.h>
 #include <stdbool.h>
@@ -40,16 +63,8 @@
 typedef COMPLEX_SPLIT VAS_COMPLEX;
 #endif
 
-#ifdef VAS_USE_FFTW
-#ifdef VAS_USE_C99COMPLEX
-#include <complex.h>
-#endif
-#include "fftw3.h"
-typedef fftwf_complex VAS_COMPLEX;
-#endif
-
 #ifdef VAS_USE_KISSFFT
-#include "kissfft/tools/kiss_fftr.h"
+#include "kiss_fftr.h"
 typedef kiss_fft_cpx VAS_COMPLEX;
 #endif
 
@@ -57,20 +72,27 @@ typedef kiss_fft_cpx VAS_COMPLEX;
 extern "C" {
 #endif
 
-
 //#ifdef VAS_INPUTVECTOR_USE_FLOAT
-typedef float AK_INPUTVECTOR;
+typedef float VAS_INPUTBUFFER;
 ///#else
-//typedef double AK_INPUTVECTOR;
+//typedef double VAS_OUTPUTBUFFER;
 //#endif
 
 //#ifdef VAS_OUTPUTVECTOR_USE_FLOAT
-typedef float AK_OUTPUTVECTOR;
+typedef float VAS_OUTPUTBUFFER;
 //#else
-//typedef double AK_OUTPUTVECTOR;
+//typedef double VAS_OUTPUTBUFFER;
 //#endif
 
-#define VAS_MAXVECTORSIZE 4096
+#define VAS_MAXVECTORSIZE 1024
+
+#define VAS_ELEVATION_ANGLES_MAX 90
+#define VAS_AZIMUTH_ANGLES_MAX 180
+#define VAS_ELEVATIONZERO 45
+#define VAS_AZIMUTH_STRIDE_MIN 2
+#define VAS_ELEVATION_STRIDE_MIN 2
+
+#define VAS_OUTPUTVECTOR_ADDINPLACE 1
 
 #define VAS_UNDEFINED 0
 #define VAS_GLOBALFILTER_LEFT 1
@@ -111,8 +133,6 @@ typedef float AK_OUTPUTVECTOR;
 #define VAS_NOERROR 0
 #define VAS_ERROR_MEM 1
 #define VAS_ERROR_READFILE 2
-
-//#define AK_VATOOLS_MAXBINAURALFILTERLENGTH 2048
 
 #ifndef WHEREAMI_H
 #define WHEREAMI_H
@@ -170,7 +190,7 @@ typedef float AK_OUTPUTVECTOR;
     
 #endif // #ifndef WHEREAMI_H
     
-    void vas_util_complexMultiplyAddWithOne(VAS_COMPLEX *signalIn, VAS_COMPLEX *dest, int length) ;
+void vas_util_complexMultiplyAddWithOne(VAS_COMPLEX *signalIn, VAS_COMPLEX *dest, int length) ;
     
 int vas_getline(char **lineptr, size_t *n, FILE *stream);
     
@@ -183,6 +203,8 @@ void vas_util_fadd(float *input1, float *input2, float *dest, int length);
 void vas_util_fmultiply(float *input1, float *input2, float *dest, int length);
     
 void vas_util_fcopy(float *source, float *dest, int length);
+
+void vas_util_fcopy_noavx(float *source, float *dest, int length);
     
 void vas_util_fscale(float *dest, float scale,  int length);
     
@@ -202,6 +224,8 @@ float vas_utilities_degrees2radians(float degrees);
 
 bool vas_utilities_isValidSegmentSize(int segmentSize);
 
+int vas_utilities_roundUp2NextPowerOf2(int value);
+
 void ak_vaTools_zmultiply_SSE(int length, VAS_COMPLEX signalIn, VAS_COMPLEX filter, VAS_COMPLEX dest);                //complex-multiplication
 
 void ak_vaTools_zmultiplyAdd_SSE(int length, VAS_COMPLEX signalIn, VAS_COMPLEX filter, VAS_COMPLEX dest);               //complex-multiplication
@@ -212,7 +236,7 @@ void vas_utilities_fcopy_SSE(int n, float *source,  float *dest);
 
 void vas_utilities_writeZeros(int length, float *dest);
 
-void vas_utilities_writeZeros1(int length, AK_INPUTVECTOR *dest);
+void vas_utilities_writeZeros1(int length, VAS_INPUTBUFFER *dest);
 
 float vas_utilities_fadeOut(float n, float length);
 
@@ -221,6 +245,10 @@ float vas_utilities_fadeIn(float n, float length);
 void vas_utilities_writeFadeOutArray(float length, float *dest);
 
 void vas_utilities_writeFadeInArray(float length, float *dest);
+
+void vas_utilities_writeFadeOutArray1(float length, float *dest);
+
+void vas_utilities_writeFadeInArray1(float length, float *dest);
 
 void vas_utilities_copyFloatArray(int length, float *arr1, float *arr2);
     

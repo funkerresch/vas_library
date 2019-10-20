@@ -1,7 +1,8 @@
 #include "vas_fir_binaural.h"
 #include "vas_fir_headphoneCompensation.h"
 
-#define VAS_USE_LIBMYSOFA
+#define RWA_BINAURALENGINE 0
+#define RWA_REVERBENGINE 1
 
 #ifdef VAS_USE_LIBMYSOFA
 #include "mysofa.h"
@@ -35,7 +36,7 @@
     t_object x_obj; \
     t_outlet *outL; \
     t_outlet *outR; \
-    float inputBuffer[2048]; \
+    float inputBuffer[4096]; \
     float f; \
 \
     RWA_FIROBJECT
@@ -61,5 +62,7 @@ typedef struct rwa_firobject
 } rwa_firobject;
 
 void rwa_firobject_read(rwa_firobject *x, t_symbol *s);
+
+void rwa_firobject_read1(rwa_firobject *x, t_symbol *s, float segmentSize);
 
 #endif

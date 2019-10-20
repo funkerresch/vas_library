@@ -82,7 +82,7 @@ void vas_iir_biquad_setFrequency(vas_iir_biquad *x, float f0)
     x->b2_over_a0 = x->b2/x->a0;
 }
 
-void vas_iir_biquad_process(vas_iir_biquad *x, AK_INPUTVECTOR *in, AK_OUTPUTVECTOR *out, int vectorSize)
+void vas_iir_biquad_process(vas_iir_biquad *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize)
 {
     int n = 0;
     float lastOut = x->lastOut;
