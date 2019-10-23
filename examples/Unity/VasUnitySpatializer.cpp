@@ -35,6 +35,8 @@ namespace Spatializer
         P_DIRECTIVITYDAMPING,
         P_NUMBEROFRAYS,
         P_REFLECTIONORDER,
+        P_INVERSEAZI,
+        P_INVERSEELE,
         
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
@@ -295,6 +297,7 @@ namespace Spatializer
         int config = 1;
         int init = 0;
         int initReverbTail = 0;
+        
         vas_fir_binaural *binauralEngine;
         vas_fir_reverb *reverbEngine;
         vas_iir_biquad *directivityDamping;
@@ -416,6 +419,7 @@ namespace Spatializer
                     {
                         for (int j = 0; j < effectData->reflectionOrder; j ++)
                         {
+                            effectData->reflections[i][j] = vas_fir_binauralReflection_new(effectData->binauralEngine, 100000);
                             vas_fir_prepareChannelsWithSharedFilter((vas_fir *)x, effectData->reflections[i][j]->binauralEngine->left, effectData->reflections[i][j]->binauralEngine->right);
                             vas_fir_setInitFlag((vas_fir *)effectData->reflections[i][j]->binauralEngine);
                         }
@@ -429,7 +433,6 @@ namespace Spatializer
                 if(Debug != NULL)
                     Debug("Could not find Instance");
 #endif
-                
             }
         }
     
@@ -450,6 +453,23 @@ namespace Spatializer
 #ifdef VAS_DEBUG_TO_UNITY
                 if(Debug != NULL)
                     Debug("Could not find Instance");
+#endif
+            }
+        }
+    
+        VAS_EXPORT void BypassSpatializer(EffectData *effectData, int onOff)
+        {
+            if(effectData != NULL)
+            {
+                effectData->init = onOff;
+#ifdef VAS_DEBUG_TO_UNITY
+                if(Debug != NULL)
+                {
+                    if(onOff)
+                        Debug("Enabled Spatializer");
+                    else
+                        Debug("Disabled Spatializer");
+                }
 #endif
             }
         }
@@ -483,6 +503,8 @@ namespace Spatializer
         RegisterParameter(definition, "Dir Damping", "", 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, P_DIRECTIVITYDAMPING, "Directivity Damping");
         RegisterParameter(definition, "No of rays", "", 0.0f, 6.0f, 0.0f, 1.0f, 1.0f, P_NUMBEROFRAYS, "Number of rays");
         RegisterParameter(definition, "Ref order", "", 0.0f, 10.0f, 0.0f, 1.0f, 1.0f, P_REFLECTIONORDER, "Reflection order");
+        RegisterParameter(definition, "Inverse Azi", "", 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, P_INVERSEAZI, "Inverse Azimuth");
+        RegisterParameter(definition, "Inverse Ele", "", 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, P_INVERSEELE, "Inverse Elevation");
         
         for(int i = 0; i < VAS_MAXNUMBEROFRAYS; i++)
         {
@@ -539,14 +561,6 @@ namespace Spatializer
             effectdata->tmp[i] = 0.0;
         }
         
-        for(int i = 0; i < VAS_MAXNUMBEROFRAYS; i++)
-        {
-            for (int j = 0; j < VAS_MAXREFLECTIONORDER; j ++)
-            {
-                effectdata->reflections[i][j] = vas_fir_binauralReflection_new(effectdata->binauralEngine, 100000);
-            }
-        }
-        
         InitParametersFromDefinitions(InternalRegisterEffectDefinition, effectdata->p);
         
         return UNITY_AUDIODSP_OK;
@@ -571,11 +585,12 @@ namespace Spatializer
         vas_fir_binaural_free(data->reverbEngine);
         vas_iir_biquad_free(data->directivityDamping);
  
-        for(int i = 0; i < VAS_MAXNUMBEROFRAYS; i++)
+        if(data->config == VAS_SPAT_CONFIG_AUTO)
         {
-            for (int j = 0; j < VAS_MAXREFLECTIONORDER; j ++)
+            for(int i = 0; i < data->numberOfRays; i++)
             {
-                vas_fir_binauralReflection_free(data->reflections[i][j]);
+                for (int j = 0; j < data->reflectionOrder; j ++)
+                    vas_fir_binauralReflection_free(data->reflections[i][j]);
             }
         }
         
@@ -627,17 +642,16 @@ namespace Spatializer
 
     UNITY_AUDIODSP_RESULT UNITY_AUDIODSP_CALLBACK ProcessCallback(UnityAudioEffectState* state, float* inbuffer, float* outbuffer, unsigned int length, int inchannels, int outchannels)
     {
-        if (inchannels != 2 || outchannels != 2 ||
-            !IsHostCompatible(state) || state->spatializerdata == NULL)
+        if (inchannels != 2 || outchannels != 2 || state->spatializerdata == NULL)
         {
-            memcpy(outbuffer, inbuffer, length * outchannels * sizeof(float));
+            memset(outbuffer, 0, length * outchannels * sizeof(float));
             return UNITY_AUDIODSP_OK;
         }
         
         EffectData* data = state->GetEffectData<EffectData>();
         if(!data->init)
         {
-            memcpy(outbuffer, inbuffer, length * outchannels * sizeof(float));
+            memset(outbuffer, 0, length * outchannels * sizeof(float));
             return UNITY_AUDIODSP_OK;
         }
 
@@ -661,7 +675,6 @@ namespace Spatializer
         azimuth = FastClip(azimuth * kRad2Deg, 0.0f, 360.0f);
 
         float elevation = atan2f(dir_y, sqrtf(dir_x * dir_x + dir_z * dir_z) + 0.001f) * kRad2Deg;
-      
         float spatialblend = state->spatializerdata->spatialblend;
         float reverbmix = state->spatializerdata->reverbzonemix;
         //float occlusionLowPassFreq = data->p[P_OCCLUSION_FREQ];
@@ -682,7 +695,8 @@ namespace Spatializer
             data->lastReflectionInput[n] = inbuffer[n * inchannels];
         }
      
-        azimuth = 360 - azimuth;
+        if(data->p[P_INVERSEAZI])
+            azimuth = 360 - azimuth;
         
         vas_fir_binaural_setAzimuth(data->binauralEngine, azimuth);
         vas_fir_binaural_setElevation(data->binauralEngine, elevation);
@@ -732,6 +746,8 @@ namespace Spatializer
                     if (azimuth < 0.0f)
                         azimuth += 2.0f * kPI;
                     azimuth = FastClip(azimuth * kRad2Deg, 0.0f, 360.0f);
+                    if(data->p[P_INVERSEAZI])
+                        azimuth = 360 - azimuth;
                      
                     elevation = atan2f(dir_y, sqrtf(dir_x * dir_x + dir_z * dir_z) + 0.001f) * kRad2Deg;
                      

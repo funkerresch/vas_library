@@ -22,6 +22,8 @@ public class VasSpatConfigSimple : MonoBehaviour
         P_DIRECTIVITYDAMPING,
         P_NUMBEROFRAYS,
         P_REFLECTIONORDER,
+        P_INVERSEAZI,
+        P_INVERSEELE,
 
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
@@ -269,6 +271,10 @@ public class VasSpatConfigSimple : MonoBehaviour
     static int spatIdCounter;
     public string IrSet = "";
     public string ReverbTail = "";
+    public bool inverseAzimuth;
+    public bool inverseElevation;
+    public bool bypass = false;
+    private bool lastBypassState = false;
     private int spatId;
     private AudioSource mySource;
     private IntPtr VAS_Unity_Spatializer;
@@ -305,6 +311,9 @@ public class VasSpatConfigSimple : MonoBehaviour
     private static extern void SetConfig(IntPtr x, int config);
 
     [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
+    private static extern void BypassSpatializer(IntPtr effectData, int onOff);
+
+    [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
     public static extern void SetDebugFunction(IntPtr fp);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -315,6 +324,21 @@ public class VasSpatConfigSimple : MonoBehaviour
         Debug.Log(str);
     }
 #endif
+
+    void OnValidate()
+    {
+        if(bypass == true && lastBypassState == false)
+        {
+            BypassSpatializer(VAS_Unity_Spatializer, 0);
+            lastBypassState = true;
+        }
+
+        if (bypass == false && lastBypassState == true)
+        {
+            BypassSpatializer(VAS_Unity_Spatializer, 1);
+            lastBypassState = false;
+        }
+    }
 
     void Awake()
     {
@@ -330,8 +354,11 @@ public class VasSpatConfigSimple : MonoBehaviour
         Debug.Log("SpatId: " + spatId);
         mySource.SetSpatializerFloat((int)SpatParams.P_SPATID, (float)spatId);
         mySource.SetSpatializerFloat((int)SpatParams.P_DIRECTIVITYDAMPING, 1f);
-
-    }
+        if(inverseAzimuth == true)
+            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEAZI, (float)1f);
+        if (inverseElevation == true)
+            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEELE, (float)1f);
+       }
 
     void Start()
     {

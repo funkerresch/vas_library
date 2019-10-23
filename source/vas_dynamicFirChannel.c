@@ -681,8 +681,6 @@ void vas_dynmaicFirChannel_resetMinMaxAverageSegmentPower(vas_dynamicFirChannel 
     x->filter->nonZeroCounter[ele][azi] = 0;
 }
 
-
-
 void vas_dynamicFirChannel_leaveActivePartitions(vas_dynamicFirChannel *x, int numberOfActivePartions)
 {
     for(int eleCount = 0; eleCount < x->filter->eleRange; eleCount++)

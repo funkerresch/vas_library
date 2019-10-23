@@ -19,6 +19,10 @@ public class VasSpatConfigManual : MonoBehaviour
         P_V_SOURCEDIRECTIVITY,
         P_V_FULLPOWERRANGE,
         P_DIRECTIVITYDAMPING,
+        P_NUMBEROFRAYS,
+        P_REFLECTIONORDER,
+        P_INVERSEAZI,
+        P_INVERSEELE,
 
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
@@ -44,6 +48,22 @@ public class VasSpatConfigManual : MonoBehaviour
         P_REF_1_6_Y,
         P_REF_1_6_Z,
 
+        P_REF_1_7_X,
+        P_REF_1_7_Y,
+        P_REF_1_7_Z,
+
+        P_REF_1_8_X,
+        P_REF_1_8_Y,
+        P_REF_1_8_Z,
+
+        P_REF_1_9_X,
+        P_REF_1_9_Y,
+        P_REF_1_9_Z,
+
+        P_REF_1_10_X,
+        P_REF_1_10_Y,
+        P_REF_1_10_Z,
+
         P_REF_2_1_X, //9
         P_REF_2_1_Y,
         P_REF_2_1_Z,
@@ -67,6 +87,22 @@ public class VasSpatConfigManual : MonoBehaviour
         P_REF_2_6_X,
         P_REF_2_6_Y,
         P_REF_2_6_Z,
+
+        P_REF_2_7_X,
+        P_REF_2_7_Y,
+        P_REF_2_7_Z,
+
+        P_REF_2_8_X,
+        P_REF_2_8_Y,
+        P_REF_2_8_Z,
+
+        P_REF_2_9_X,
+        P_REF_2_9_Y,
+        P_REF_2_9_Z,
+
+        P_REF_2_10_X,
+        P_REF_2_10_Y,
+        P_REF_2_10_Z,
 
         P_REF_3_1_X, //9
         P_REF_3_1_Y,
@@ -92,6 +128,22 @@ public class VasSpatConfigManual : MonoBehaviour
         P_REF_3_6_Y,
         P_REF_3_6_Z,
 
+        P_REF_3_7_X,
+        P_REF_3_7_Y,
+        P_REF_3_7_Z,
+
+        P_REF_3_8_X,
+        P_REF_3_8_Y,
+        P_REF_3_8_Z,
+
+        P_REF_3_9_X,
+        P_REF_3_9_Y,
+        P_REF_3_9_Z,
+
+        P_REF_3_10_X,
+        P_REF_3_10_Y,
+        P_REF_3_10_Z,
+
         P_REF_4_1_X, //9
         P_REF_4_1_Y,
         P_REF_4_1_Z,
@@ -115,6 +167,22 @@ public class VasSpatConfigManual : MonoBehaviour
         P_REF_4_6_X,
         P_REF_4_6_Y,
         P_REF_4_6_Z,
+
+        P_REF_4_7_X,
+        P_REF_4_7_Y,
+        P_REF_4_7_Z,
+
+        P_REF_4_8_X,
+        P_REF_4_8_Y,
+        P_REF_4_8_Z,
+
+        P_REF_4_9_X,
+        P_REF_4_9_Y,
+        P_REF_4_9_Z,
+
+        P_REF_4_10_X,
+        P_REF_4_10_Y,
+        P_REF_4_10_Z,
 
         P_REF_5_1_X, //9
         P_REF_5_1_Y,
@@ -140,6 +208,22 @@ public class VasSpatConfigManual : MonoBehaviour
         P_REF_5_6_Y,
         P_REF_5_6_Z,
 
+        P_REF_5_7_X,
+        P_REF_5_7_Y,
+        P_REF_5_7_Z,
+
+        P_REF_5_8_X,
+        P_REF_5_8_Y,
+        P_REF_5_8_Z,
+
+        P_REF_5_9_X,
+        P_REF_5_9_Y,
+        P_REF_5_9_Z,
+
+        P_REF_5_10_X,
+        P_REF_5_10_Y,
+        P_REF_5_10_Z,
+
         P_REF_6_1_X, //9
         P_REF_6_1_Y,
         P_REF_6_1_Z,
@@ -163,6 +247,22 @@ public class VasSpatConfigManual : MonoBehaviour
         P_REF_6_6_X,
         P_REF_6_6_Y,
         P_REF_6_6_Z,
+
+        P_REF_6_7_X,
+        P_REF_6_7_Y,
+        P_REF_6_7_Z,
+
+        P_REF_6_8_X,
+        P_REF_6_8_Y,
+        P_REF_6_8_Z,
+
+        P_REF_6_9_X,
+        P_REF_6_9_Y,
+        P_REF_6_9_Z,
+
+        P_REF_6_10_X,
+        P_REF_6_10_Y,
+        P_REF_6_10_Z,
 
         P_NUM
     }

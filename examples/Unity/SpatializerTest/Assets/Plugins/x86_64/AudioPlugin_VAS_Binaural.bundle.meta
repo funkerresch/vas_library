@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9d47b848a12e64121a2256619f795706
+guid: 5e6ee528c88c14e7cab379621ce89281
 folderAsset: yes
 PluginImporter:
   externalObjects: {}
@@ -47,7 +47,7 @@ PluginImporter:
     second:
       enabled: 0
       settings:
-        CPU: x86_64
+        CPU: AnyCPU
   - first:
       Standalone: Win
     second:

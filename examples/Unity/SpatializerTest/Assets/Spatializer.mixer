@@ -1,38 +1,43 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!243 &-4560313362261267792
+--- !u!243 &-6320832556633875801
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: KEMAR HRTF
+  m_Name: Raytracing Example 1
   m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 485907868aa384c4cb0ec88409f6cbee
+  m_GroupID: b8f0aaec051d44b2e9450b0609893abe
   m_Children: []
-  m_Volume: 6ab614713f051447aa0b4dd79dee2f0b
-  m_Pitch: 82261fc57b8884030b82bd2d06e7baa1
+  m_Volume: 54361a40ec79c49eeb8fff0c46c0ffb1
+  m_Pitch: 01b1613fde77e4720b922e4fa7fcf67b
   m_Send: 00000000000000000000000000000000
   m_Effects:
-  - {fileID: -2904389773140053861}
+  - {fileID: 832543686743212917}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!244 &-2904389773140053861
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
+--- !u!243 &-1879239213314618110
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: ffa2ad3cfbe1f40cd8265dc89c9332aa
-  m_EffectName: Attenuation
-  m_MixLevel: 405a2919f4a734a2fa9354292e790700
-  m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
+  m_Name: BRIR Example 1
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 0d32e8b90a0d24fe8bb5f71d5d064077
+  m_Children: []
+  m_Volume: fd6773ca2f270467d8b7268665506c21
+  m_Pitch: 1b7ef8dcc609248fab51acd4432c0831
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 8183235145790342753}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -52,9 +57,8 @@ AudioMixerController:
   m_AudioMixerGroupViews:
   - guids:
     - e89f191b20f9e4380a91054c66f74913
-    - dc7f91afcbeba49cca7d8d87e3fcf670
-    - 485907868aa384c4cb0ec88409f6cbee
-    - 8f4e2b544507842b0b0d44edf2cc7645
+    - 0d32e8b90a0d24fe8bb5f71d5d064077
+    - b8f0aaec051d44b2e9450b0609893abe
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -68,9 +72,8 @@ AudioMixerGroupController:
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: e89f191b20f9e4380a91054c66f74913
   m_Children:
-  - {fileID: 5887659203484575809}
-  - {fileID: -4560313362261267792}
-  - {fileID: 2465844825604620609}
+  - {fileID: -1879239213314618110}
+  - {fileID: -6320832556633875801}
   m_Volume: 65f634806f35b4394b807b94a1785633
   m_Pitch: 38bb0f6c58ce04e57b26017b16a85aa0
   m_Send: 00000000000000000000000000000000
@@ -108,71 +111,34 @@ AudioMixerSnapshotController:
     f11f54230eff6498c8e128999ece8df6: 0
     94547ac51d3b94981a328cf9e698f9c5: 1
     e92c7636242d942d6a600c4d385f6516: 20
-    fd753c7d3609c4343bb13abdbeebd8bb: 0.025578514
+    fd6773ca2f270467d8b7268665506c21: 20
+    fd753c7d3609c4343bb13abdbeebd8bb: 0.025578512
   m_TransitionOverrides: {}
---- !u!243 &2465844825604620609
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: FORUM BRIR
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 8f4e2b544507842b0b0d44edf2cc7645
-  m_Children: []
-  m_Volume: 107cc83dd89024f88a2e561ab73e3c9e
-  m_Pitch: efed1ace8e31b48e79e29df8bd485b4e
-  m_Send: 00000000000000000000000000000000
-  m_Effects:
-  - {fileID: 5012725031952044167}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0
---- !u!244 &3629105149956958309
+--- !u!244 &832543686743212917
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: f1c0012a2c4e947068d0740897da3394
+  m_EffectID: 880c5360600d9486e96ed0b1e5df7ee0
   m_EffectName: Attenuation
-  m_MixLevel: 2d4d7088f9440440abda7243341df9c2
+  m_MixLevel: 211230ca144b14b7ca0136ee81235007
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!244 &5012725031952044167
+--- !u!244 &8183235145790342753
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: 1eaa66000e06142d5a1095d3ed06af8c
+  m_EffectID: df4154c2c2edf431dac11b755f25adaa
   m_EffectName: Attenuation
-  m_MixLevel: 0cca794d4ac454468947f7fbfdc52d3a
+  m_MixLevel: a6c332d9d7f1149c9b2ebd0239ff76dc
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!243 &5887659203484575809
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: FABIAN HRTF
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: dc7f91afcbeba49cca7d8d87e3fcf670
-  m_Children: []
-  m_Volume: fd753c7d3609c4343bb13abdbeebd8bb
-  m_Pitch: 41a6e9e612d1e4004ad4ccaca7fe565e
-  m_Send: 00000000000000000000000000000000
-  m_Effects:
-  - {fileID: 3629105149956958309}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0

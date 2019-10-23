@@ -62,11 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ConeCastExample.cs" />
-    <Compile Include="Assets\ConeCastExtension.cs" />
-    <Compile Include="Assets\DebugAudioPlugin.cs" />
-    <Compile Include="Assets\LogManager.cs" />
-    <Compile Include="Assets\RaycastReflection.cs" />
     <Compile Include="Assets\ReceiveHeadtrackerData.cs" />
     <Compile Include="Assets\uOSC\Examples\Scripts\ClientBlobTest.cs" />
     <Compile Include="Assets\uOSC\Examples\Scripts\ClientBundleTest.cs" />
@@ -90,9 +85,7 @@
     <Compile Include="Assets\uOSC\Scripts\uOscServer.cs" />
     <Compile Include="Assets\VasSpatConfigAuto.cs" />
     <Compile Include="Assets\VasSpatConfigManual.cs" />
-    <Compile Include="Assets\VasSpatConfigRaytracing.cs" />
     <Compile Include="Assets\VasSpatConfigSimple.cs" />
-    <Compile Include="Assets\VasSpatializerConfiguration.cs" />
     <None Include="Assets\StreamingAssets\fr_pos0.txt" />
     <None Include="Assets\StreamingAssets\fabian_dir256.txt" />
     <None Include="Assets\StreamingAssets\fr_pos0_tail.txt" />
