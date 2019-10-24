@@ -296,12 +296,15 @@ namespace Spatializer
         int numberOfRays = 6;
         int config = 1;
         int init = 0;
+        int bypass = 0;
         int initReverbTail = 0;
         
         vas_fir_binaural *binauralEngine;
         vas_fir_reverb *reverbEngine;
         vas_iir_biquad *directivityDamping;
         vas_fir_binauralReflection *reflections[VAS_MAXNUMBEROFRAYS][VAS_MAXREFLECTIONORDER];
+        
+        char debugString[512];
     };
     
     extern "C"
@@ -461,7 +464,7 @@ namespace Spatializer
         {
             if(effectData != NULL)
             {
-                effectData->init = onOff;
+                effectData->bypass = onOff;
 #ifdef VAS_DEBUG_TO_UNITY
                 if(Debug != NULL)
                 {
@@ -620,6 +623,9 @@ namespace Spatializer
         if(index == P_REFLECTIONORDER)
             data->reflectionOrder = data->p[index];
         
+        if(Debug)
+            Debug(data->debugString);
+        
         return UNITY_AUDIODSP_OK;
     }
 
@@ -632,6 +638,7 @@ namespace Spatializer
             *value = data->p[index];
         if (valuestr != NULL)
             valuestr[0] = 0;
+         
         return UNITY_AUDIODSP_OK;
     }
 
@@ -649,7 +656,7 @@ namespace Spatializer
         }
         
         EffectData* data = state->GetEffectData<EffectData>();
-        if(!data->init)
+        if(!data->init || data->bypass)
         {
             memset(outbuffer, 0, length * outchannels * sizeof(float));
             return UNITY_AUDIODSP_OK;
@@ -657,18 +664,20 @@ namespace Spatializer
 
         static const float kRad2Deg = 180.0f / kPI;
 
-        float* m = state->spatializerdata->listenermatrix;
-        float* s = state->spatializerdata->sourcematrix;
+        float* listener = state->spatializerdata->listenermatrix;
+        float* source = state->spatializerdata->sourcematrix;
      
         // Currently we ignore source orientation and only use the position
-        float px = s[12];
-        float py = s[13];
-        float pz = s[14];
+        float px = source[12];
+        float py = source[13];
+        float pz = source[14];
       
-        float dir_x = m[0] * px + m[4] * py + m[8] * pz + m[12];
-        float dir_y = m[1] * px + m[5] * py + m[9] * pz + m[13];
-        float dir_z = m[2] * px + m[6] * py + m[10] * pz + m[14];
-
+        float dir_x = listener[0] * px + listener[4] * py + listener[8] * pz + listener[12];
+        float dir_y = listener[1] * px + listener[5] * py + listener[9] * pz + listener[13];
+        float dir_z = listener[2] * px + listener[6] * py + listener[10] * pz + listener[14];
+        
+        //sprintf(data->debugString, "%.2f %.2f %.2f %.2f", listener[4], listener[5], listener[6], listener[7]);
+   
         float azimuth = (fabsf(dir_z) < 0.001f) ? 0.0f : atan2f(dir_x, dir_z);
         if (azimuth < 0.0f)
             azimuth += 2.0f * kPI;
@@ -738,9 +747,9 @@ namespace Spatializer
                     distance = sqrt(pow(r_px-px, 2) + pow(r_py-py, 2) + pow(r_pz-pz, 2));
                     float delayTime = distance/343.0 * 44100.0;
                     
-                    dir_x = m[0] * r_px + m[4] * r_py + m[8] * r_pz + m[12];
-                    dir_y = m[1] * r_px + m[5] * r_py + m[9] * r_pz + m[13];
-                    dir_z = m[2] * r_px + m[6] * r_py + m[10] * r_pz + m[14];
+                    dir_x = listener[0] * r_px + listener[4] * r_py + listener[8] * r_pz + listener[12];
+                    dir_y = listener[1] * r_px + listener[5] * r_py + listener[9] * r_pz + listener[13];
+                    dir_z = listener[2] * r_px + listener[6] * r_py + listener[10] * r_pz + listener[14];
                      
                     azimuth = (fabsf(dir_z) < 0.001f) ? 0.0f : atan2f(dir_x, dir_z);
                     if (azimuth < 0.0f)

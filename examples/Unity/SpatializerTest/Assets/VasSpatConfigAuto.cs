@@ -368,19 +368,22 @@ public class VasSpatConfigAuto : MonoBehaviour
     }
 #endif
 
-    void OnValidate()
+    void BypassSpat(bool onOff)
     {
-        if (bypass == true && lastBypassState == false)
-        {
-            BypassSpatializer(VAS_Unity_Spatializer, 0);
-            lastBypassState = true;
-        }
-
-        if (bypass == false && lastBypassState == true)
+        if (onOff == true)
         {
             BypassSpatializer(VAS_Unity_Spatializer, 1);
-            lastBypassState = false;
         }
+
+        if (onOff == false)
+        {
+            BypassSpatializer(VAS_Unity_Spatializer, 0);
+        }
+    }
+
+    void OnValidate()
+    {
+        BypassSpat(bypass);
     }
 
     void Awake()
@@ -528,6 +531,7 @@ public class VasSpatConfigAuto : MonoBehaviour
             String fullpath = Path.Combine(Application.streamingAssetsPath, IrSet);
             Debug.Log(fullpath);
             LoadHRTF(VAS_Unity_Spatializer, fullpath);
+            BypassSpat(bypass);
         }
         else
             print("No Renderer Reference");

@@ -325,19 +325,22 @@ public class VasSpatConfigSimple : MonoBehaviour
     }
 #endif
 
-    void OnValidate()
+    void BypassSpat(bool onOff)
     {
-        if(bypass == true && lastBypassState == false)
-        {
-            BypassSpatializer(VAS_Unity_Spatializer, 0);
-            lastBypassState = true;
-        }
-
-        if (bypass == false && lastBypassState == true)
+        if (onOff == true)
         {
             BypassSpatializer(VAS_Unity_Spatializer, 1);
-            lastBypassState = false;
         }
+
+        if (onOff == false)
+        {
+            BypassSpatializer(VAS_Unity_Spatializer, 0);
+        }
+    }
+
+    void OnValidate()
+    {
+        BypassSpat(bypass);
     }
 
     void Awake()
@@ -363,6 +366,7 @@ public class VasSpatConfigSimple : MonoBehaviour
     void Start()
     {
         VAS_Unity_Spatializer = GetInstance(spatId);
+
         SetConfig(VAS_Unity_Spatializer, (int)VAS_CONFIG.SIMPLE);
         if (VAS_Unity_Spatializer != IntPtr.Zero)
         {
@@ -372,6 +376,7 @@ public class VasSpatConfigSimple : MonoBehaviour
             fullpath = Path.Combine(Application.streamingAssetsPath, ReverbTail);
             //Debug.Log(fullpath);
             LoadReverbTail(VAS_Unity_Spatializer, fullpath);
+            BypassSpat(bypass);
         }
         else
             print("No Renderer Reference");

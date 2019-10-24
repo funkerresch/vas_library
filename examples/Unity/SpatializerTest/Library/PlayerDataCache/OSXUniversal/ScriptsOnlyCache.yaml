@@ -2,7 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - ReceiveHeadtrackerData
-    - VasSpatConfigAuto
+    - VasSpatConfigSimple
     - uOSC.uOscServer
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
@@ -12,8 +12,9 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TileDragAndDropManager
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
   sceneClasses:
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/BRIR Example 1.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -49,7 +50,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10510}
     - Class: 114
-      Script: {instanceID: 11096}
+      Script: {instanceID: 11156}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -567,5 +568,5 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 2
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/BRIR Example 1.unity
   playerPath: /Users/harveykeitel/Desktop/testBuild.app

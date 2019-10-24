@@ -173,7 +173,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 106.67833
+  field of view: 118.65873
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -638,7 +638,7 @@ MonoBehaviour:
   ReverbTail: fr_pos0_tail.txt
   inverseAzimuth: 0
   inverseElevation: 0
-  bypass: 0
+  bypass: 1
 --- !u!82 &745503713
 AudioSource:
   m_ObjectHideFlags: 0
