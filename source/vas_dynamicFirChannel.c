@@ -49,7 +49,6 @@ vas_dynamicFirChannel_filter *vas_dynamicFirChannel_filter_new()
 #endif
             x->pointerToFFTSegments[eleCount][aziCount] = malloc( sizeof(VAS_COMPLEX *));
             x->segmentIsZero[eleCount][aziCount] = malloc( sizeof(bool));
-            
         }
     }
     return x;
@@ -104,44 +103,48 @@ void vas_dynamicFirChannel_init(vas_dynamicFirChannel *x, int segmentSize, vas_f
         x->init = 0;
     }
     
+    x->frameCounter = 0;
     x->filter->referenceCounter = 1;
     x->filter->segmentSize = segmentSize;
     x->filter->fftSize = segmentSize * 2;
     x->filter->fftSizeLog2 = log2(x->filter->fftSize);
+    x->filter->directionFormat = metaData->directionFormat;
     x->filter->eleStride = metaData->elevationStride;
     x->filter->aziStride = metaData->azimuthStride;
-    
-    if(metaData->directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE)
-    {
-        x->filter->directionFormat = VAS_IR_DIRECTIONFORMAT_SINGLE;
-        x->filter->aziRange = 1;
-        x->filter->eleRange = 1;
-        x->filter->eleMin = 0;
-        x->filter->eleMax = 1;
-        x->filter->eleZero = 0;
-    }
-    
-    if(metaData->directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH)
-    {
-        x->filter->directionFormat = VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH;
-        x->filter->aziRange = 360 / x->filter->aziStride;
-        x->filter->eleRange = 1;
-        x->filter->eleMin = 0;
-        x->filter->eleMax = 1;
-        x->filter->eleZero = 0;
-    }
-    
-    if(metaData->directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI)
-    {
-        x->filter->directionFormat = VAS_IR_DIRECTIONFORMAT_MULTI;
-        x->filter->aziRange = 360 / x->filter->aziStride;
-        x->filter->eleRange = 180 / x->filter->eleStride;
-        x->filter->eleMin = -90;
-        x->filter->eleMax = 90;
-        x->filter->eleZero = x->filter->eleRange / 2;
-    }
+    x->filter->aziRange = metaData->aziRange;
+    x->filter->eleRange = metaData->eleRange;
+    x->filter->eleMin = metaData->eleMin;
+    x->filter->eleMax = metaData->eleMax;
+    x->filter->eleZero = metaData->eleZero;
     
     vas_dynamicFirChannel_setFilterSize(x, metaData->filterLength);
+    vas_dynamicFirChannel_prepareArrays(x);
+}
+
+void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *metaData, int segmentSize, int offset) // filter init must be called, if either segmentSize, eleRange or aziRange change
+{
+    if(x->init)
+    {
+        vas_dynamicFirChannel_input_reset(x->input, x->filter->numberOfSegments);
+        vas_dynamicFirChannel_filter_reset(x->filter);
+        x->init = 0;
+    }
+    
+    x->frameCounter = 0;
+    x->filter->referenceCounter = 1;
+    x->filter->segmentSize = segmentSize;
+    x->filter->fftSize = segmentSize * 2;
+    x->filter->fftSizeLog2 = log2(x->filter->fftSize);
+    x->filter->directionFormat = metaData->directionFormat;
+    x->filter->eleStride = metaData->elevationStride;
+    x->filter->aziStride = metaData->azimuthStride;
+    x->filter->aziRange = metaData->aziRange;
+    x->filter->eleRange = metaData->eleRange;
+    x->filter->eleMin = metaData->eleMin;
+    x->filter->eleMax = metaData->eleMax;
+    x->filter->eleZero = metaData->eleZero;
+    
+    vas_dynamicFirChannel_setFilterSize(x, metaData->filterLength-offset);
     vas_dynamicFirChannel_prepareArrays(x);
 }
 
@@ -378,7 +381,7 @@ void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dyn
     }
     
 #else
-    vas_util_complexWriteZeros(target->signalComplex, x->filter->segmentSize);
+    vas_util_complexWriteZeros(target->signalComplex, x->filter->segmentSize+1);
     
     while(x->segmentIndex < x->filter->numberOfSegments)
     {
@@ -481,11 +484,13 @@ void vas_dynamicFirChannel_calculateConvolution(vas_dynamicFirChannel *x)
     return;
 }
 
+
 void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize, int flags)
 {
     float *pointerToFFTInput;
     float *pointerToOutputSegment;
     int n;
+    int offset;
     int vsOverSegmentSize = vectorSize/x->filter->segmentSize;
     int frameCounter = 0;
 
@@ -502,26 +507,19 @@ void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, VAS_INPUTBUFFER *in
         int segmentSizeOverVs = x->filter->segmentSize/vectorSize;
         pointerToFFTInput = x->input->copy;
         pointerToOutputSegment = x->output.outputSegment;
-        n = vectorSize;
         
         if(!x->useSharedInput)
         {
             pointerToFFTInput+= x->frameCounter * vectorSize;
-            while (n--)
-                *pointerToFFTInput++ = *in++; // copy current signal input vector to fftInputSignalFloat
+            vas_util_fcopy(in, pointerToFFTInput, vectorSize);
         }
-    
-        n = vectorSize;
     
         pointerToOutputSegment+= x->frameCounter * vectorSize;
-    
-        while (n--)
-        {
-            if(flags & VAS_OUTPUTVECTOR_ADDINPLACE)
-                *out++ += *pointerToOutputSegment++;
-            else
-                *out++ = *pointerToOutputSegment++;
-        }
+        
+        if(flags & VAS_OUTPUTVECTOR_ADDINPLACE)
+            vas_util_fadd(out, pointerToOutputSegment, out, vectorSize);
+        else
+            vas_util_fcopy(pointerToOutputSegment, out, vectorSize);
         
         x->frameCounter++;
         if(x->frameCounter == segmentSizeOverVs)
@@ -536,25 +534,19 @@ void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, VAS_INPUTBUFFER *in
         while(frameCounter < vsOverSegmentSize) //  segment size <= vector size
         {
             n = x->filter->segmentSize;
+            offset = frameCounter * n;
             pointerToFFTInput = x->input->copy;
             pointerToOutputSegment = x->output.outputSegment;
             
             if(!x->useSharedInput)
-            {
-                while (n--)
-                    *pointerToFFTInput++ = *in++; // copy current signal input vector to fftInputSignalFloat
-            }
+                vas_util_fcopy(in + offset, pointerToFFTInput, n);
             
             vas_dynamicFirChannel_calculateConvolution(x);
             
-            n = x->filter->segmentSize;
-            while (n--)
-            {
-                if(flags & VAS_OUTPUTVECTOR_ADDINPLACE)
-                    *out++ += *pointerToOutputSegment++;
-                else
-                    *out++ = *pointerToOutputSegment++;
-            }
+            if(flags & VAS_OUTPUTVECTOR_ADDINPLACE)
+                vas_util_fadd(out + offset, pointerToOutputSegment, out + offset, n);
+            else
+                vas_util_fcopy(pointerToOutputSegment, out + offset, n);
             
             frameCounter++;
         }
@@ -641,6 +633,8 @@ void vas_dynamicFirChannel_setFilterSize(vas_dynamicFirChannel *x, int filterSiz
     
     vas_dynamicFirChannel_setSegmentSize(x, x->filter->segmentSize);
     x->fadeLength = 1024;
+    if(x->fadeLength < x->filter->segmentSize)
+        x->fadeLength = x->filter->segmentSize;
      
     x->filter->numberOfSegments = x->filterSize/x->filter->segmentSize;
     if(x->filterSize%x->filter->segmentSize != 0)
@@ -956,7 +950,8 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup)
     x->sharedInput = NULL;
     x->sharedFilter = NULL;
     x->init = 0;
-    
+    x->frameCounter = 0;
+
     x->filter = vas_dynamicFirChannel_filter_new();
     x->input = vas_dynamicFirChannel_input_new();
     

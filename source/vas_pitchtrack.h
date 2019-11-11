@@ -1,5 +1,15 @@
 
-
+/*katja'*/
+/**
+* @file vas_fir.h
+* @author Thomas Resch
+* @date 4 Jan 2018
+* @brief C - pitch traking class<br>
+*
+* Copied/adapted for vas from Katja's pure data helmholtz~ object:
+* http://www.katjaas.nl/helmholtz/helmholtz.html
+*
+*/
 #ifndef vas_pitchtrack_h
 #define vas_pitchtrack_h
 

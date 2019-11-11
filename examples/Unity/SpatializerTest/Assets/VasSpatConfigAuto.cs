@@ -23,6 +23,10 @@ public class VasSpatConfigAuto : MonoBehaviour
         P_REFLECTIONORDER,
         P_INVERSEAZI,
         P_INVERSEELE,
+        P_BYPASS,
+        P_LISTENERORIENTATIONONLY,
+        P_SEGMENTSIZE_EARLYPART,
+        P_SEGMENTSIZE_LATEPART,
 
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
@@ -294,6 +298,9 @@ public class VasSpatConfigAuto : MonoBehaviour
     public int reflectionOrder = 1;
     public Material raycastMaterial;
     public bool bypass = false;
+    public bool listenerOrientationOnly = false;
+    public int segmentSizeEarlyReverb = 1024;
+    public int segmentSizeLateReverb = 4096;
 
     private bool lastBypassState = false;
     private Transform goTransform;
@@ -354,9 +361,6 @@ public class VasSpatConfigAuto : MonoBehaviour
     private static extern void SetConfig(IntPtr x, int config);
 
     [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
-    private static extern void BypassSpatializer(IntPtr effectData, int onOff);
-
-    [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
     public static extern void SetDebugFunction(IntPtr fp);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -371,19 +375,23 @@ public class VasSpatConfigAuto : MonoBehaviour
     void BypassSpat(bool onOff)
     {
         if (onOff == true)
-        {
-            BypassSpatializer(VAS_Unity_Spatializer, 1);
-        }
+            mySource.SetSpatializerFloat((int)SpatParams.P_BYPASS, 1f);
+        else
+            mySource.SetSpatializerFloat((int)SpatParams.P_BYPASS, 0);
+    }
 
-        if (onOff == false)
-        {
-            BypassSpatializer(VAS_Unity_Spatializer, 0);
-        }
+    void ListenerOrientationOnly(bool onOff)
+    {
+        if (onOff == true)
+            mySource.SetSpatializerFloat((int)SpatParams.P_LISTENERORIENTATIONONLY, 1f);
+        else
+            mySource.SetSpatializerFloat((int)SpatParams.P_LISTENERORIENTATIONONLY, 0);
     }
 
     void OnValidate()
     {
         BypassSpat(bypass);
+        ListenerOrientationOnly(listenerOrientationOnly);
     }
 
     void Awake()
@@ -518,6 +526,9 @@ public class VasSpatConfigAuto : MonoBehaviour
         mySource.SetSpatializerFloat((int)SpatParams.P_H_FULLPOWERRANGE, horizontalFullPowerRange);
         mySource.SetSpatializerFloat((int)SpatParams.P_NUMBEROFRAYS, numberOfRays);
         mySource.SetSpatializerFloat((int)SpatParams.P_REFLECTIONORDER, reflectionOrder);
+        mySource.SetSpatializerFloat((int)SpatParams.P_SEGMENTSIZE_EARLYPART, segmentSizeEarlyReverb);
+        mySource.SetSpatializerFloat((int)SpatParams.P_SEGMENTSIZE_LATEPART, segmentSizeLateReverb);
+
         if (inverseAzimuth == true)
             mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEAZI, (float)1f);
         if (inverseElevation == true)

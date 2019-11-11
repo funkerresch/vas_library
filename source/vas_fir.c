@@ -46,6 +46,35 @@ void vas_fir_prepareChannelsWithSharedFilter(vas_fir *x,  vas_dynamicFirChannel 
     x->right->filter->referenceCounter++;
 }
 
+void vas_fir_setDirectionFormat(vas_fir *x, int directionFormat)
+{
+    if(directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE)
+    {
+        x->description.directionFormat = VAS_IR_DIRECTIONFORMAT_SINGLE;
+        x->description.eleMin = 0;
+        x->description.eleMax = 1;
+    }
+
+    if(directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH)
+    {
+        x->description.directionFormat = VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH;
+        x->description.eleMin = 0;
+        x->description.eleMax = 1;
+    }
+    
+    if(directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI)
+    {
+        x->description.directionFormat = VAS_IR_DIRECTIONFORMAT_MULTI;
+        x->description.eleMin = -90;
+        x->description.eleMax = 90;
+    }
+}
+
+void vas_fir_setMetaData(vas_fir *x, int directionFormat, int eleStride, int aziStride)
+{
+
+}
+
 #ifdef VAS_USE_LIBMYSOFA
 
 void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
@@ -181,7 +210,17 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
             value = vas_strsep(&lineAdr, " ");
             value = vas_strsep(&lineAdr, " ");
             x->description.elevationStride = atoi(value);
-
+            if(x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE || x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH)
+            {
+                x->description.eleRange = 1;
+                x->description.eleZero = 0;
+            }
+            else
+            {
+                x->description.eleRange = 180 /x->description.elevationStride;
+                x->description.eleZero = x->description.eleRange/2;
+            }
+ 
 #ifdef VERBOSE
 #if(defined(MAXMSPSDK) || defined(PUREDATA))
             post("elestride: %d", x->description.elevationStride);
@@ -194,6 +233,10 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
             value = vas_strsep(&lineAdr, " ");
             value = vas_strsep(&lineAdr, " ");
             x->description.azimuthStride = atoi(value);
+            if(x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE || x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH)
+                x->description.aziRange = 1;
+            else
+                x->description.aziRange = 360/x->description.azimuthStride;
 
 #ifdef VERBOSE
 #if(defined(MAXMSPSDK) || defined(PUREDATA))
@@ -205,36 +248,13 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
         else if(strstr(*line, "directionformat"))
         {
             if(strstr(*line, "single"))
-            {
-                x->description.directionFormat = VAS_IR_DIRECTIONFORMAT_SINGLE;
-                x->description.eleMin = 0;
-                x->description.eleMax = 1;
-                x->description.eleZero = 0;
-                x->description.eleRange = 1;
-                x->description.aziRange = 1;
+                vas_fir_setDirectionFormat(x, VAS_IR_DIRECTIONFORMAT_SINGLE);
 
-            }
-            // { .aziRange = 120, .aziStride = 3, .eleMin = 0, .eleMax = 1, .eleRange = 1, .eleStride = 1, .eleZero = 0};
             if(strstr(*line, "multiazimuth") || strstr(*line, "azimuth"))
-            {
-                x->description.directionFormat = VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH;
-                x->description.eleMin = 0;
-                x->description.eleMax = 1;
-                x->description.eleZero = 0;
-                x->description.eleRange = 1;
-                x->description.aziRange = 120;
+                vas_fir_setDirectionFormat(x, VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH);
 
-            }
-            // vas_dynamicFirChannel_config vas_binauralSetup_std = { .aziRange = 120, .aziStride = 3, .eleMin = -90, .eleMax = 90, .eleRange = 60, .eleStride = 3, .eleZero = 30};
             if(strstr(*line, "multi") || strstr(*line, "multiall"))
-            {
-                x->description.directionFormat = VAS_IR_DIRECTIONFORMAT_MULTI;
-                x->description.eleMin = -90;
-                x->description.eleMax = 90;
-                x->description.eleZero = 30;
-                x->description.eleRange = 60;
-                x->description.aziRange = 120;
-            }
+                vas_fir_setDirectionFormat(x, VAS_IR_DIRECTIONFORMAT_MULTI);
             
 #ifdef VERBOSE
 #if(defined(MAXMSPSDK) || defined(PUREDATA))
@@ -344,11 +364,13 @@ static void vas_filter_read_lineFormat_value(vas_fir *x, FILE *filePtr, char **l
         vas_mem_free(currentIr);
 }
 
-static void vas_filter_read_lineFormat_ir(vas_fir *x, FILE *filePtr, char **line)
+static void vas_filter_read_lineFormat_ir1(vas_fir *x, FILE *filePtr, char **line, int offset)
 {
     int currentAzimuth2Read = 0;
+    int currentIndex2Write = 0;
     int currentElevation2Read = 0;
     int currentIrIndex2Read = 0;
+    int filterLenghtMinusOffset = 0;
     char *filterCoefficients = NULL;
     char angle[50];
     float fvalue = 0;
@@ -361,9 +383,21 @@ static void vas_filter_read_lineFormat_ir(vas_fir *x, FILE *filePtr, char **line
     size_t len = 0;
     size_t read = 0;
     
-    currentIr = (float *)vas_mem_alloc(x->description.filterLength * sizeof(float));
-    x->left->filter->filterLength = x->description.filterLength;
-    x->right->filter->filterLength = x->description.filterLength;
+    if(offset >= x->description.filterLength)
+    {
+#if(defined(MAXMSPSDK) || defined(PUREDATA))
+        post("Offset greater than filter length.");
+#else
+        printf("Offset greater than filter length.");
+#endif
+        offset = 0;
+    }
+    
+    filterLenghtMinusOffset = x->description.filterLength-offset;
+    
+    currentIr = (float *)vas_mem_alloc( filterLenghtMinusOffset * sizeof(float));
+    x->left->filter->filterLength = filterLenghtMinusOffset;
+    x->right->filter->filterLength = filterLenghtMinusOffset;
 
     while ((read = vas_getline(line, &len, filePtr)) != -1)
     {
@@ -402,6 +436,7 @@ static void vas_filter_read_lineFormat_ir(vas_fir *x, FILE *filePtr, char **line
             }
             
             currentIrIndex2Read = 0;
+            currentIndex2Write = 0;
             
             while( (filterCoefficients = vas_strsep(&lineAdr,", ")) != NULL )
             {
@@ -412,11 +447,14 @@ static void vas_filter_read_lineFormat_ir(vas_fir *x, FILE *filePtr, char **line
                     else
                     {
                         fvalue = atof(filterCoefficients);
-                        if(currentIrIndex2Read < x->description.filterLength)
+                        if(currentIrIndex2Read < x->description.filterLength && currentIrIndex2Read >= offset)
                         {
-                            currentIr[currentIrIndex2Read] = fvalue;
+                            currentIr[currentIndex2Write] = fvalue;
+                            currentIndex2Write++;
                             currentIrIndex2Read++;
                         }
+                        else
+                            currentIrIndex2Read++;
                     }
                 }
             }
@@ -429,6 +467,7 @@ static void vas_filter_read_lineFormat_ir(vas_fir *x, FILE *filePtr, char **line
    
     if(currentIr)
         vas_mem_free(currentIr);
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
 #if defined(MAXMSPSDK) || defined(PUREDATA)
     post("Min Average Segment Power Left: %.14f", x->left->filter->minAverageSegmentPower[0][0]);
     post("Max Average Segment Power Left: %.14f", x->left->filter->maxAverageSegmentPower[0][0]);
@@ -440,12 +479,13 @@ static void vas_filter_read_lineFormat_ir(vas_fir *x, FILE *filePtr, char **line
    // post("Number of Segments Right: %d", x->right->filter->numberOfSegments);
     post("Segments below Threshhold Right: %d", x->right->filter->zeroCounter[0][0]);
 #endif
+#endif
 }
 
-void vas_fir_initFilter1(vas_fir *x, int segmentSize)
+void vas_fir_initFilter2(vas_fir *x, int segmentSize, int offset)
 {
-    vas_dynamicFirChannel_init(x->left, segmentSize, &x->description);
-    vas_dynamicFirChannel_init(x->right, segmentSize, &x->description);
+    vas_dynamicFirChannel_init1(x->left, &x->description, segmentSize, offset);
+    vas_dynamicFirChannel_init1(x->right,&x->description, segmentSize, offset);
 }
 
 FILE *vas_fir_readText_metaData1(vas_fir *x, char *fullpath)
@@ -477,7 +517,33 @@ FILE *vas_fir_readText_metaData1(vas_fir *x, char *fullpath)
     }
 }
 
-void vas_fir_readText_Ir(vas_fir *x, FILE *filePtr)
+void vas_fir_readText_Ir1(vas_fir *x, FILE *filePtr, int offset)
+{
+    char * line = NULL;
+    
+    if (!filePtr)
+    {
+#ifdef VERBOSE
+#if(defined(MAXMSPSDK) || defined(PUREDATA))
+        post("Could not open");
+#endif
+#endif
+        return;
+    }
+    else
+    {
+        if(x->description.lineFormat == VAS_IR_LINEFORMAT_IR)
+            vas_filter_read_lineFormat_ir1(x, filePtr, &line, offset);
+        if(x->description.lineFormat == VAS_IR_LINEFORMAT_VALUE)
+            vas_filter_read_lineFormat_value(x, filePtr, &line);
+        
+        fclose(filePtr);
+        if(line)
+            free(line);
+    }
+}
+
+/*void vas_fir_readText_Ir(vas_fir *x, FILE *filePtr)
 {
     char * line = NULL;
     
@@ -501,5 +567,5 @@ void vas_fir_readText_Ir(vas_fir *x, FILE *filePtr)
         if(line)
             free(line);
     }
-}
+}*/
 

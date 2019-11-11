@@ -1,10 +1,13 @@
-//
-//  vas_linkedlist.h
-//  rwa_binauralsimple~
-//
-//  Created by Harvey Keitel on 08.10.19.
-//  Copyright © 2019 Intrinsic Audio. All rights reserved.
-//
+/**
+* @file vas_fir_list.h
+* @author Thomas Resch
+* @date 4 Jan 2018
+* @brief C - Minimal linked list for fir objects. <br>
+*
+* Allows for sharing an IR set with another fir object if <br>
+* the corresponding IR set is already calculated and loaded<br>
+*
+*/
 
 #ifndef vas_linkedlist_h
 #define vas_linkedlist_h
@@ -25,8 +28,6 @@ typedef struct vas_fir_list {
     vas_fir_listNode *firstElement;
     vas_fir_listNode *lastElement;
 } vas_fir_list;
-
-
 
 vas_fir_listNode *vas_fir_listNode_new(vas_fir *data);
 

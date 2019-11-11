@@ -72,48 +72,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "918C60C5-77F6-4E36-85D5-697C0E61016F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../source/vas_dynamicFirChannel.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "648"
-            endingLineNumber = "648"
-            landmarkName = "vas_dynamicFirChannel_setFilterSize(x, filterSize)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0E58C259-3A9B-4311-9849-DA27091D4E5E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../source/vas_dynamicFirChannel.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "649"
-            endingLineNumber = "649"
-            landmarkName = "vas_dynamicFirChannel_setFilterSize(x, filterSize)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5E2C1D26-14D7-44E0-B8B3-D459C4ECE604"
+            uuid = "F25021DE-483A-4D27-8C65-BCFF8E776986"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "670"
-            endingLineNumber = "670"
-            landmarkName = "vas_dynamicFirChannel_prepareArrays(x)"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
+            landmarkName = "vas_dynamicFirChannel_setSegmentSize(x, segmentSize)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

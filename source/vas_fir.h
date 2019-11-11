@@ -46,8 +46,8 @@ void vas_fir_prepareChannelsWithSharedFilter(vas_fir *x,  vas_dynamicFirChannel 
 
 void vas_fir_readText_1ValuePerLine(vas_fir *x, char *fullpath);
 FILE *vas_fir_readText_metaData1(vas_fir *x, char *fullpath);
-void vas_fir_readText_Ir(vas_fir *x, FILE *filePtr);
-void vas_fir_initFilter1(vas_fir *x, int segmentSize);
+void vas_fir_readText_Ir1(vas_fir *x, FILE *filePtr, int offset);
+void vas_fir_initFilter2(vas_fir *x, int segmentSize, int offset);
 void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath);
 int vas_fir_readSofa_getFilter(vas_fir *x, void *filter);
     

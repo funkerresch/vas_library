@@ -23,6 +23,10 @@ public class VasSpatConfigManual : MonoBehaviour
         P_REFLECTIONORDER,
         P_INVERSEAZI,
         P_INVERSEELE,
+        P_BYPASS,
+        P_LISTENERORIENTATIONONLY,
+        P_SEGMENTSIZE_EARLYPART,
+        P_SEGMENTSIZE_LATEPART,
 
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
@@ -283,6 +287,8 @@ public class VasSpatConfigManual : MonoBehaviour
     public bool autoPositionReflections;
     public float horizontalSourceDirectivity = 180;
     public float horizontalFullPowerRange = 120;
+    public int segmentSizeEarlyReverb = 1024;
+    public int segmentSizeLateReverb = 4096;
     public GameObject reflection1;
     public GameObject reflection2;
     public GameObject reflection3;
@@ -290,7 +296,7 @@ public class VasSpatConfigManual : MonoBehaviour
     public GameObject reflection5;
     public GameObject reflection6;
     public ReflectionMaterial refMaterial;
-   
+  
 
 #if UNITY_IPHONE
    
@@ -334,13 +340,21 @@ public class VasSpatConfigManual : MonoBehaviour
         mySource = GetComponent<AudioSource>();
     }
 
-  /*  void updateReflections()
-    {
-        int offsetReflections = (int)SpatParams.P_REF1_X;
+    /*  void updateReflections()
+      {
+          int offsetReflections = (int)SpatParams.P_REF1_X;
 
-        for (int i = 0; i < numberOfReflections; i++)
-            mySource.SetSpatializerFloat(offsetReflections + i, (float)reflection[i].transform.position.x);
-    }*/
+          for (int i = 0; i < numberOfReflections; i++)
+              mySource.SetSpatializerFloat(offsetReflections + i, (float)reflection[i].transform.position.x);
+      }*/
+
+    void ListenerOrientationOnly(bool onOff)
+    {
+        if (onOff == true)
+            mySource.SetSpatializerFloat((int)SpatParams.P_LISTENERORIENTATIONONLY, 1f);
+        else
+            mySource.SetSpatializerFloat((int)SpatParams.P_LISTENERORIENTATIONONLY, 0);
+    }
 
     void Start()
     {

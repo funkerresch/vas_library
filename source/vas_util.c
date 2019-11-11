@@ -757,6 +757,8 @@ char* vas_strsep(char** stringp, const char* delim)
     return start;
 }
 
+
+
 void vas_util_fadd(float *input1, float *input2, float *dest, int length)
 {
 #ifdef VAS_USE_VDSP
@@ -986,14 +988,22 @@ void vas_util_complexMultiplyAdd(VAS_COMPLEX *signalIn, VAS_COMPLEX *filter, VAS
             
             //destImag = _mm256_fmadd_ps(signalInReal, filterImag, _mm256_fmadd_ps(filterReal, signalInImag, destImag));
 
-            float* resReal = (float*)&destReal;
+          /*  float* resReal = (float*)&destReal;
             float* resImag = (float*)&destImag;
         
             (dest)->r = resReal[0]; (dest+1)->r = resReal[1]; (dest+2)->r = resReal[2]; (dest+3)->r = resReal[3];
             (dest+4)->r = resReal[4]; (dest+5)->r = resReal[5]; (dest+6)->r = resReal[6]; (dest+7)->r = resReal[7];
             
             (dest)->i = resImag[0]; (dest+1)->i = resImag[1]; (dest+2)->i = resImag[2]; (dest+3)->i = resImag[3];
-            (dest+4)->i = resImag[4]; (dest+5)->i = resImag[5]; (dest+6)->i = resImag[6]; (dest+7)->i = resImag[7];
+            (dest+4)->i = resImag[4]; (dest+5)->i = resImag[5]; (dest+6)->i = resImag[6]; (dest+7)->i = resImag[7];*/
+            
+
+            ab0145 = _mm256_unpacklo_ps(destReal, destImag);
+            ab2367 = _mm256_unpackhi_ps(destReal, destImag);
+            __m256 destVec = _mm256_permute2f128_ps(ab0145,ab2367,0x20);
+            _mm256_store_ps((float *)dest, destVec);
+            destVec = _mm256_permute2f128_ps(ab0145,ab2367,0x31) ;
+            _mm256_store_ps((float *)(dest+4), destVec);
     
             n-=8;
             signalIn+=8;
@@ -1074,6 +1084,11 @@ void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int length)
 float vas_utilities_degrees2radians(float degrees)
 {
     return degrees * (M_PI/180);
+}
+
+float vas_utilities_radians2degrees(float radians)
+{
+    return radians * (180/M_PI);
 }
 
 const char *vas_util_getFileExtension(const char *filename)

@@ -37,6 +37,10 @@ namespace Spatializer
         P_REFLECTIONORDER,
         P_INVERSEAZI,
         P_INVERSEELE,
+        P_BYPASS,
+        P_LISTENERORIENTATIONONLY,
+        P_SEGMENTSIZE_EARLYPART,
+        P_SEGMENTSIZE_LATEPART,
         
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
@@ -296,7 +300,6 @@ namespace Spatializer
         int numberOfRays = 6;
         int config = 1;
         int init = 0;
-        int bypass = 0;
         int initReverbTail = 0;
         
         vas_fir_binaural *binauralEngine;
@@ -312,6 +315,64 @@ namespace Spatializer
         void *currentInstance[100];
         int instanceCounter = 0;
         extern vas_fir_list IRs;
+    
+        /*union {
+            struct
+            {
+                float        _11, _12, _13, _14;
+                float        _21, _22, _23, _24;
+                float        _31, _32, _33, _34;
+                float        _41, _42, _43, _44;
+            };
+            float m[4][4];
+            float m2[16];
+        };
+
+        void GetRotation(float& Yaw, float& Pitch, float& Roll) const
+        {
+            if (_11 == 1.0f)
+            {
+                Yaw = atan2f(_13, _34);
+                Pitch = 0;
+                Roll = 0;
+
+            }else if (_11 == -1.0f)
+            {
+                Yaw = atan2f(_13, _34);
+                Pitch = 0;
+                Roll = 0;
+            }else
+            {
+
+                Yaw = atan2(-_31,_11);
+                Pitch = asin(_21);
+                Roll = atan2(-_23,_22);
+            }
+        }
+         If matrix has size, n by m [i.e. i goes from 0 to (n-1) and j from 0 to (m-1) ], then:
+
+         matrix[ i ][ j ] = array[ i*m + j ].
+         
+         */
+    
+        void HeadingAndElevationFromTranformationMatrix(float *matrix, float *heading, float *elevation)
+        {
+            if (matrix[0] == 1.0f)
+            {
+                *heading = vas_utilities_radians2degrees(atan2f(matrix[2], matrix[11]));
+                *elevation = vas_utilities_radians2degrees(atan2f(-matrix[6],matrix[5]+0.001f));
+            }
+            else if (matrix[0]  == -1.0f)
+            {
+                *heading = vas_utilities_radians2degrees(atan2f(matrix[2], matrix[11]));
+                *elevation = vas_utilities_radians2degrees(atan2f(-matrix[6],matrix[5]+0.001f));
+            }
+            else
+            {
+                *heading = vas_utilities_radians2degrees(atan2(-matrix[8], matrix[0]));
+                *elevation = vas_utilities_radians2degrees(atan2f(-matrix[6],matrix[5]+0.001f));
+            }
+        }
         
 		VAS_EXPORT void SetDebugFunction( FuncPtr fp )
         {
@@ -347,7 +408,7 @@ namespace Spatializer
             effectData->config = config;
         }
     
-        void readIR(vas_fir *x, char *fullpath, int segmentSize)
+        void readIR(vas_fir *x, char *fullpath, int segmentSize, int offset)
         {
             const char *fileExtension;
             fileExtension = vas_util_getFileExtension(fullpath);
@@ -396,8 +457,8 @@ namespace Spatializer
                         Debug("Read text file");
 #endif
                     FILE *file = vas_fir_readText_metaData1((vas_fir *)x, fullpath);
-                    vas_fir_initFilter1((vas_fir *)x, segmentSize);
-                    vas_fir_readText_Ir((vas_fir *)x, file);
+                    vas_fir_initFilter2((vas_fir *)x, segmentSize, offset);
+                    vas_fir_readText_Ir1((vas_fir *)x, file, offset);
                     vas_fir_list_addNode(&IRs, vas_fir_listNode_new(x));
                     vas_fir_setInitFlag((vas_fir *)x);
                 }
@@ -409,12 +470,13 @@ namespace Spatializer
             vas_fir *x;
             if(effectData != NULL)
             {
+                int segmentSize = effectData->p[P_SEGMENTSIZE_EARLYPART];
                 x = (vas_fir *)effectData->binauralEngine;
 #ifdef VAS_DEBUG_TO_UNITY
                 if(Debug != NULL)
                     Debug(fullpath);
 #endif
-                readIR(x, fullpath, 1024);
+                readIR(x, fullpath, segmentSize, 0);
                     
                 if(effectData->config == VAS_SPAT_CONFIG_AUTO)
                 {
@@ -444,11 +506,13 @@ namespace Spatializer
             vas_fir *x;
             if(effectData != NULL)
             {
+                int segmentSize = effectData->p[P_SEGMENTSIZE_LATEPART];
+                int offset = segmentSize - effectData->p[P_SEGMENTSIZE_EARLYPART];
                 x = (vas_fir *)effectData->reverbEngine;
                 if(Debug != NULL)
                     Debug(fullpath);
                 
-                readIR(x, fullpath, 1024);
+                readIR(x, fullpath, segmentSize, offset);
                 effectData->initReverbTail = 1;
             }
             else
@@ -456,23 +520,6 @@ namespace Spatializer
 #ifdef VAS_DEBUG_TO_UNITY
                 if(Debug != NULL)
                     Debug("Could not find Instance");
-#endif
-            }
-        }
-    
-        VAS_EXPORT void BypassSpatializer(EffectData *effectData, int onOff)
-        {
-            if(effectData != NULL)
-            {
-                effectData->bypass = onOff;
-#ifdef VAS_DEBUG_TO_UNITY
-                if(Debug != NULL)
-                {
-                    if(onOff)
-                        Debug("Enabled Spatializer");
-                    else
-                        Debug("Disabled Spatializer");
-                }
 #endif
             }
         }
@@ -508,7 +555,11 @@ namespace Spatializer
         RegisterParameter(definition, "Ref order", "", 0.0f, 10.0f, 0.0f, 1.0f, 1.0f, P_REFLECTIONORDER, "Reflection order");
         RegisterParameter(definition, "Inverse Azi", "", 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, P_INVERSEAZI, "Inverse Azimuth");
         RegisterParameter(definition, "Inverse Ele", "", 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, P_INVERSEELE, "Inverse Elevation");
-        
+        RegisterParameter(definition, "Bypass", "", 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, P_BYPASS, "Bypass");
+        RegisterParameter(definition, "Lister Only", "", 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, P_LISTENERORIENTATIONONLY, "Listener orientation only");
+        RegisterParameter(definition, "SegSizeEarly", "", 0.0f, 4096.0f, 1024.0f, 1.0f, 1.0f, P_SEGMENTSIZE_EARLYPART, "Segment size early reverb");
+        RegisterParameter(definition, "SegSizeLate", "", 0.0f, 4096.0f, 1024.0f, 1.0f, 1.0f, P_SEGMENTSIZE_LATEPART, "Segment size late reverb");
+
         for(int i = 0; i < VAS_MAXNUMBEROFRAYS; i++)
         {
             for (int j = 0; j < VAS_MAXREFLECTIONORDER; j ++)
@@ -656,36 +707,44 @@ namespace Spatializer
         }
         
         EffectData* data = state->GetEffectData<EffectData>();
-        if(!data->init || data->bypass)
+        if(!data->init || data->p[P_BYPASS])
         {
             memset(outbuffer, 0, length * outchannels * sizeof(float));
             return UNITY_AUDIODSP_OK;
         }
 
         static const float kRad2Deg = 180.0f / kPI;
+        float azimuth, elevation;
 
         float* listener = state->spatializerdata->listenermatrix;
         float* source = state->spatializerdata->sourcematrix;
+        float px, py, pz;
+        float dir_x, dir_y, dir_z;
      
-        // Currently we ignore source orientation and only use the position
-        float px = source[12];
-        float py = source[13];
-        float pz = source[14];
-      
-        float dir_x = listener[0] * px + listener[4] * py + listener[8] * pz + listener[12];
-        float dir_y = listener[1] * px + listener[5] * py + listener[9] * pz + listener[13];
-        float dir_z = listener[2] * px + listener[6] * py + listener[10] * pz + listener[14];
+        if(data->p[P_LISTENERORIENTATIONONLY])
+           HeadingAndElevationFromTranformationMatrix(listener, &azimuth, &elevation);
         
-        //sprintf(data->debugString, "%.2f %.2f %.2f %.2f", listener[4], listener[5], listener[6], listener[7]);
-   
-        float azimuth = (fabsf(dir_z) < 0.001f) ? 0.0f : atan2f(dir_x, dir_z);
-        if (azimuth < 0.0f)
-            azimuth += 2.0f * kPI;
-        azimuth = FastClip(azimuth * kRad2Deg, 0.0f, 360.0f);
-
-        float elevation = atan2f(dir_y, sqrtf(dir_x * dir_x + dir_z * dir_z) + 0.001f) * kRad2Deg;
-        float spatialblend = state->spatializerdata->spatialblend;
-        float reverbmix = state->spatializerdata->reverbzonemix;
+        else
+        {
+            px = source[12];
+            py = source[13];
+            pz = source[14];
+            
+            dir_x = listener[0] * px + listener[4] * py + listener[8] * pz + listener[12];
+            dir_y = listener[1] * px + listener[5] * py + listener[9] * pz + listener[13];
+            dir_z = listener[2] * px + listener[6] * py + listener[10] * pz + listener[14];
+            
+            azimuth = (fabsf(dir_z) < 0.001f) ? 0.0f : atan2f(dir_x, dir_z);
+            if (azimuth < 0.0f)
+                azimuth += 2.0f * kPI;
+            azimuth = FastClip(azimuth * kRad2Deg, 0.0f, 360.0f);
+            elevation = atan2f(dir_y, sqrtf(dir_x * dir_x + dir_z * dir_z) + 0.001f) * kRad2Deg;
+        }
+  
+        
+        //float spatialblend = state->spatializerdata->spatialblend;
+        //float reverbmix = state->spatializerdata->reverbzonemix;
+    
         //float occlusionLowPassFreq = data->p[P_OCCLUSION_FREQ];
 
         // From the FMOD documentation:
@@ -695,8 +754,8 @@ namespace Spatializer
         //   A spread angle of 360 makes the stereo sound mono at the opposite speaker location to where the 3D emitter should be located (by moving the left part 180 degrees left and the right part 180 degrees right). So in this case, behind you when the sound should be in front of you!
         // Note that FMOD performs the spreading and panning in one go. We can't do this here due to the way that impulse-based spatialization works, so we perform the spread calculations on the left/right source signals before they enter the convolution processing.
         // That way we can still use it to control how the source signal downmixing takes place.
-        float spread = cosf(state->spatializerdata->spread * kPI / 360.0f);
-        float spreadmatrix[2] = { 2.0f - spread, spread };
+       // float spread = cosf(state->spatializerdata->spread * kPI / 360.0f);
+       // float spreadmatrix[2] = { 2.0f - spread, spread };
         
         for(unsigned int n = 0; n < length; n++)
         {

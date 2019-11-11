@@ -248,7 +248,6 @@ void vas_dynamicFirChannel_setFilterSize(vas_dynamicFirChannel *x, int filterSiz
 
 #ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
 
-
 void vas_dynamicFirChannel_calculateMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, float *filter, int ele, int azi);
 
 void vas_dynmaicFirChannel_resetMinMaxAverageSegmentPower(vas_dynamicFirChannel *x, int ele, int azi);
@@ -341,6 +340,8 @@ void vas_dynamicFirChannel_setElevation(vas_dynamicFirChannel *x, int elevation)
 void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float thresh);
 
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize);
+
+void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *metaData, int segmentSize, int offset);
     
 void vas_dynamicFirChannel_init(vas_dynamicFirChannel *x, int segmentSize, vas_fir_metaData *metaData); // filter init must be called, if either segmentSize, eleRange or aziRange change
     

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "692333FF-9E2D-4EC7-A51A-33873F38A7F3"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "40384B7B-B36E-4326-801B-E720AA807A5D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "620"
+            endingLineNumber = "620"
+            landmarkName = "vas_dynamicFirChannel_prepareInputSignal(x)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "40384B7B-B36E-4326-801B-E720AA807A5D - 6fa72a7972f91e7d"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_prepareInputSignal"
+                  moduleName = "rwa_binauralrir~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "618"
+                  endingLineNumber = "618"
+                  offsetFromSymbolStart = "477">
+               </Location>
+               <Location
+                  uuid = "40384B7B-B36E-4326-801B-E720AA807A5D - f2361649b55863cd"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_prepareInputSignal"
+                  moduleName = "vas_binaural~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "618"
+                  endingLineNumber = "618"
+                  offsetFromSymbolStart = "477">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B4A6AB8C-D5D3-43A7-8D52-814D5B8D9B93"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "620"
+            endingLineNumber = "620"
+            landmarkName = "vas_dynamicFirChannel_prepareInputSignal(x)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "B4A6AB8C-D5D3-43A7-8D52-814D5B8D9B93 - 6fa72a7972f91e7d"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_prepareInputSignal"
+                  moduleName = "rwa_binauralrir~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "618"
+                  endingLineNumber = "618"
+                  offsetFromSymbolStart = "477">
+               </Location>
+               <Location
+                  uuid = "B4A6AB8C-D5D3-43A7-8D52-814D5B8D9B93 - f2361649b55863cd"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_prepareInputSignal"
+                  moduleName = "vas_binaural~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "618"
+                  endingLineNumber = "618"
+                  offsetFromSymbolStart = "477">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9DC007AD-F490-45A2-A525-3EE1F425E9D3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "vas_dynamicFirChannel_input_reset(x, currentNumberOfSegments)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "9DC007AD-F490-45A2-A525-3EE1F425E9D3 - 9dc1145e686badff"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_input_reset"
+                  moduleName = "rwa_binauralrir~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "34">
+               </Location>
+               <Location
+                  uuid = "9DC007AD-F490-45A2-A525-3EE1F425E9D3 - 50286eafcad04f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_input_reset"
+                  moduleName = "vas_binaural~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5FCC3836-9913-4261-A746-9B9C9CB17492"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "vas_dynamicFirChannel_input_reset(x, currentNumberOfSegments)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "5FCC3836-9913-4261-A746-9B9C9CB17492 - 9dc1145e686badff"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_input_reset"
+                  moduleName = "rwa_binauralrir~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "34">
+               </Location>
+               <Location
+                  uuid = "5FCC3836-9913-4261-A746-9B9C9CB17492 - 50286eafcad04f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_input_reset"
+                  moduleName = "vas_binaural~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEB488B1-FD5B-4E17-BECF-D8340DF633B6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "vas_dynamicFirChannel_input_reset(x, currentNumberOfSegments)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "FEB488B1-FD5B-4E17-BECF-D8340DF633B6 - 9dc1145e686badff"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_input_reset"
+                  moduleName = "rwa_binauralrir~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "34">
+               </Location>
+               <Location
+                  uuid = "FEB488B1-FD5B-4E17-BECF-D8340DF633B6 - 50286eafcad04f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_input_reset"
+                  moduleName = "vas_binaural~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5F1429DD-E632-424F-933E-4CD5D67FC88E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "rwa_firobject.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "rwa_firobject_read1(x, s, segmentSize)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F01C39D8-4040-4458-BCE3-E9174490CFA3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "498"
+            endingLineNumber = "498"
+            landmarkName = "vas_dynamicFirChannel_process(x, in, out, vectorSize, flags)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "F01C39D8-4040-4458-BCE3-E9174490CFA3 - 2cfbab48000576d2"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_process"
+                  moduleName = "rwa_binauralrir~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "497"
+                  endingLineNumber = "497"
+                  offsetFromSymbolStart = "66">
+               </Location>
+               <Location
+                  uuid = "F01C39D8-4040-4458-BCE3-E9174490CFA3 - b16a9778c7a40b62"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_process"
+                  moduleName = "vas_binaural~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "497"
+                  endingLineNumber = "497"
+                  offsetFromSymbolStart = "66">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8396B963-D279-4CA3-AC84-98E0696CAA3B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
+            landmarkName = "vas_dynamicFirChannel_process(x, in, out, vectorSize, flags)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -173,7 +173,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 118.65873
+  field of view: 45.327663
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -198,13 +198,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134527861}
-  m_LocalRotation: {x: 0.2779014, y: 0.0010059648, z: -0.00029102268, w: 0.9606091}
-  m_LocalPosition: {x: -0.2, y: 8, z: -109.7}
+  m_LocalRotation: {x: 0.068015285, y: 0.00104479, z: -0.00007122666, w: 0.99768376}
+  m_LocalPosition: {x: -0.2, y: 8, z: -138.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 32.27, y: 0.12, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.8, y: 0.12, z: 0}
 --- !u!114 &134527865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,7 +638,10 @@ MonoBehaviour:
   ReverbTail: fr_pos0_tail.txt
   inverseAzimuth: 0
   inverseElevation: 0
-  bypass: 1
+  bypass: 0
+  listenerOrientationOnly: 0
+  segmentSizeEarlyReverb: 1024
+  segmentSizeLateReverb: 4096
 --- !u!82 &745503713
 AudioSource:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@
  * @author Thomas Resch <br>
  * Audiocommunication Group, Technische Universität Berlin <br>
  * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
- * Tools for calculating convolution based virtual acoustics (mainly dynamic binaural synthesis) <br>
+ * Tools for calculating convolution based stuff.<br>
  * Many thanks to gpakosz for whereami <br>
  * https://github.com/gpakosz/whereami <br>
  * Many thanks to digilus for readline for windows <br>
@@ -17,22 +17,28 @@
 #ifndef ak_utilities_h
 #define ak_utilities_h
 
-#include <immintrin.h>
-
 //#define VAS_USE_KISSFFT
-#define VAS_USE_AVX
+//#define VAS_USE_AVX
 
 #if !defined(VAS_USE_VDSP) && !defined(VAS_USE_KISSFFT) && !defined(VAS_USE_FFTW)
 
-#ifdef _WIN32
-#define VAS_EXPORT __declspec(dllexport)
-#define _USE_MATH_DEFINES
-#include <math.h>
-#define VAS_USE_KISSFFT
-#else
+#ifdef __APPLE__
+
 #include <math.h>
 #define VAS_EXPORT
 #define VAS_USE_VDSP
+
+#else
+
+#ifdef _WIN32
+#define VAS_EXPORT __declspec(dllexport)
+#else
+#define VAS_EXPORT
+#endif
+#define _USE_MATH_DEFINES
+#include <math.h>
+#define VAS_USE_KISSFFT
+
 #endif
 
 #endif
@@ -57,6 +63,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "vas_util_vectorIntrinsics.h"
 
 #ifdef VAS_USE_VDSP
 #include <Accelerate/Accelerate.h>
@@ -84,7 +91,7 @@ typedef float VAS_OUTPUTBUFFER;
 //typedef double VAS_OUTPUTBUFFER;
 //#endif
 
-#define VAS_MAXVECTORSIZE 1024
+#define VAS_MAXVECTORSIZE 4096
 
 #define VAS_ELEVATION_ANGLES_MAX 90
 #define VAS_AZIMUTH_ANGLES_MAX 180
@@ -221,6 +228,8 @@ const char *vas_util_getFileExtension(const char *filename);
 void vas_util_getFileExtension1(const char *filename, char *fileExtension);
 
 float vas_utilities_degrees2radians(float degrees);
+
+float vas_utilities_radians2degrees(float radians);
 
 bool vas_utilities_isValidSegmentSize(int segmentSize);
 

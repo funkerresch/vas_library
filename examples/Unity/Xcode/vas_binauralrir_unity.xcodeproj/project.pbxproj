@@ -16,6 +16,8 @@
 		842BEF4921BE64DD0044FDEA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842BEF4821BE64DD0044FDEA /* OpenGL.framework */; };
 		84A20751218712CC004C96CB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A20750218712CC004C96CB /* Accelerate.framework */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
+		E414B9F423682FF500835219 /* vas_util_vectorIntrinsics.c in Sources */ = {isa = PBXBuildFile; fileRef = E414B9F323682FF500835219 /* vas_util_vectorIntrinsics.c */; };
+		E414B9F523682FF500835219 /* vas_util_vectorIntrinsics.c in Sources */ = {isa = PBXBuildFile; fileRef = E414B9F323682FF500835219 /* vas_util_vectorIntrinsics.c */; };
 		E42C2A6E22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */; };
 		E42C2A6F22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */; };
 		E42C2A7222AE4B5A0056C6D7 /* vas_delay.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A7122AE4B5A0056C6D7 /* vas_delay.c */; };
@@ -73,6 +75,8 @@
 		84A20750218712CC004C96CB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		8D576316048677EA00EA77CD /* AudioPlugin_VAS_Binaural.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioPlugin_VAS_Binaural.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E414B9F223682FF500835219 /* vas_util_vectorIntrinsics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_util_vectorIntrinsics.h; path = ../../../source/vas_util_vectorIntrinsics.h; sourceTree = "<group>"; };
+		E414B9F323682FF500835219 /* vas_util_vectorIntrinsics.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_util_vectorIntrinsics.c; path = ../../../source/vas_util_vectorIntrinsics.c; sourceTree = "<group>"; };
 		E42C2A6C22AE49890056C6D7 /* vas_fir_binauralReflection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_fir_binauralReflection.h; path = ../../../source/vas_fir_binauralReflection.h; sourceTree = "<group>"; };
 		E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_fir_binauralReflection.c; path = ../../../source/vas_fir_binauralReflection.c; sourceTree = "<group>"; };
 		E42C2A7022AE4B5A0056C6D7 /* vas_delay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_delay.h; path = ../../../source/vas_delay.h; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 				842BEF3A21BE64A70044FDEA /* vas_fir.h */,
 				842BEF3D21BE64A70044FDEA /* vas_mem.c */,
 				842BEF3F21BE64A80044FDEA /* vas_mem.h */,
+				E414B9F223682FF500835219 /* vas_util_vectorIntrinsics.h */,
+				E414B9F323682FF500835219 /* vas_util_vectorIntrinsics.c */,
 				842BEF4021BE64A80044FDEA /* vas_util.c */,
 				842BEF3E21BE64A80044FDEA /* vas_util.h */,
 				E43DE8DA229D0EB100F2E32A /* kiss_fftr.c */,
@@ -309,6 +315,7 @@
 				E4F6BA74233B7919003957F8 /* AudioPluginUtil.cpp in Sources */,
 				E4F6BA77233B7ABA003957F8 /* VasUnitySpatializer.cpp in Sources */,
 				E42C2A7222AE4B5A0056C6D7 /* vas_delay.c in Sources */,
+				E414B9F423682FF500835219 /* vas_util_vectorIntrinsics.c in Sources */,
 				E42C2A6E22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */,
 				E4A69BDE234F43AB00E4E570 /* vas_fir_list.c in Sources */,
 				842BEF4321BE64A80044FDEA /* vas_fir.c in Sources */,
@@ -331,6 +338,7 @@
 				E4E0C48222A7C24C002B9564 /* vas_fir.c in Sources */,
 				E4E0C48122A7C249002B9564 /* vas_fir_binaural.c in Sources */,
 				E4E0C48022A7C245002B9564 /* vas_dynamicFirChannel.c in Sources */,
+				E414B9F523682FF500835219 /* vas_util_vectorIntrinsics.c in Sources */,
 				E4E0C48422A7C252002B9564 /* vas_util.c in Sources */,
 				E4E0C47B22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m in Sources */,
 				E42C2A7722AE64480056C6D7 /* vas_delay_crossfade.c in Sources */,
@@ -348,16 +356,17 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
-				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				CLANG_X86_VECTOR_INSTRUCTIONS = default;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(PROJECT_DIR)/../SpatializerTest/Assets/Plugins/x86_64";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_WITH_AVERAGE_SEGMENTPOWER,
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GCC_UNROLL_LOOPS = YES;
@@ -387,7 +396,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
-				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				CLANG_X86_VECTOR_INSTRUCTIONS = default;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(PROJECT_DIR)/../SpatializerTest/Assets/Plugins/x86_64";
@@ -396,6 +405,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_WITH_AVERAGE_SEGMENTPOWER,
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GCC_UNROLL_LOOPS = YES;
