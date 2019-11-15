@@ -1,0 +1,2 @@
+#N canvas 649 410 450 300 10;
+#X obj 157 122 vas_binaural~ 1024 fr_pos0.txt;

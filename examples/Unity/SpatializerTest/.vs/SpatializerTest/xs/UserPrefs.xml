@@ -4,7 +4,7 @@
       <File FileName="Assets/uOSC/Scripts/uOscServer.cs" Line="27" Column="6" />
       <File FileName="Assets/ReceiveHeadtrackerData.cs" />
       <File FileName="Assets/VasSpatConfigManual.cs" />
-      <File FileName="Assets/VasSpatConfigAuto.cs" Line="300" Column="32" />
+      <File FileName="Assets/VasSpatConfigAuto.cs" Line="536" Column="1" />
       <File FileName="Assets/VasSpatConfigSimple.cs" Line="376" Column="17" />
       <File FileName="Assets/uOSC/Scripts/Core/DotNet/Udp.cs" />
     </Files>

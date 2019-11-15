@@ -860,7 +860,9 @@ void vas_util_fscale(float *dest, float scale,  int length)
     int n = length;
     while (n--)
     {
-        *dest++ *= scale;
+        float tmp = *dest; // prevents gcc generating segmentation fault with avx optimization
+        tmp *= scale;
+        *dest++ = scale;
     }
 #endif
     
