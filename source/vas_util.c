@@ -988,7 +988,7 @@ void vas_util_complexMultiplyAdd(VAS_COMPLEX *signalIn, VAS_COMPLEX *filter, VAS
             destReal = _mm256_add_ps(destReal, _mm256_sub_ps(_mm256_mul_ps(signalInReal, filterReal), _mm256_mul_ps(signalInImag, filterImag)));
             destImag = _mm256_add_ps(destImag, _mm256_add_ps(_mm256_mul_ps(signalInReal, filterImag), _mm256_mul_ps(signalInImag, filterReal)));
             
-            //destImag = _mm256_fmadd_ps(signalInReal, filterImag, _mm256_fmadd_ps(filterReal, signalInImag, destImag));
+            //destImag = _mm256_fmadd_ps(signalInReal, filterImag, _mm256_fmadd_ps(filterReal, signalInImag, destImag)); //AVX2
 
           /*  float* resReal = (float*)&destReal;
             float* resImag = (float*)&destImag;

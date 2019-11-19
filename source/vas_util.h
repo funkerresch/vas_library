@@ -75,6 +75,11 @@ typedef COMPLEX_SPLIT VAS_COMPLEX;
 typedef kiss_fft_cpx VAS_COMPLEX;
 #endif
 
+#ifdef VAS_USE_PFFFT
+#include "pffft.h"
+typedef float VAS_COMPLEX;
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -12,7 +12,7 @@ FuncPtr Debug = NULL;
 
 #define VAS_MAXNUMBEROFRAYS 6
 #define VAS_MAXREFLECTIONORDER 10
-#define VAS_DEBUG_TO_UNITY
+//#define VAS_DEBUG_TO_UNITY
 
 #define VAS_SPAT_CONFIG_SIMPLE 1
 #define VAS_SPAT_CONFIG_MANUAL 2
@@ -369,7 +369,10 @@ namespace Spatializer
             }
             else
             {
-                *heading = vas_utilities_radians2degrees(atan2(-matrix[8], matrix[0]));
+                float radians = atan2(matrix[8], matrix[0]);
+                radians += M_PI;
+                    
+                *heading = vas_utilities_radians2degrees(radians);
                 *elevation = vas_utilities_radians2degrees(atan2f(-matrix[6],matrix[5]+0.001f));
             }
         }
@@ -673,9 +676,10 @@ namespace Spatializer
             data->numberOfRays = data->p[index];
         if(index == P_REFLECTIONORDER)
             data->reflectionOrder = data->p[index];
-        
+#ifdef VAS_DEBUG_TO_UNITY
         if(Debug)
             Debug(data->debugString);
+#endif
         
         return UNITY_AUDIODSP_OK;
     }

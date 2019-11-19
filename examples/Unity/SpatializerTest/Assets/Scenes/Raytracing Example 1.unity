@@ -735,11 +735,12 @@ MonoBehaviour:
   horizontalFullPowerRange: 60
   numberOfRays: 6
   reflectionOrder: 10
-  raycastMaterial: {fileID: 0}
+  raycastMaterial: {fileID: 2100000, guid: 2763eaefe15aa48a2aa5a2871fbc6a23, type: 2}
   bypass: 0
   listenerOrientationOnly: 0
   segmentSizeEarlyReverb: 256
   segmentSizeLateReverb: 4096
+  rayColor: {r: 0.7161851, g: 0, b: 1, a: 1}
 --- !u!82 &745503713
 AudioSource:
   m_ObjectHideFlags: 0

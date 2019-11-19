@@ -4234,6 +4234,7 @@ MonoBehaviour:
   listenerOrientationOnly: 0
   segmentSizeEarlyReverb: 256
   segmentSizeLateReverb: 4096
+  rayColor: {r: 0, g: 0, b: 0.8235294, a: 1}
 --- !u!82 &1964549869
 AudioSource:
   m_ObjectHideFlags: 0

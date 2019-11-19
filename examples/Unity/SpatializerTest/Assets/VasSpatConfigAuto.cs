@@ -301,6 +301,7 @@ public class VasSpatConfigAuto : MonoBehaviour
     public bool listenerOrientationOnly = false;
     public int segmentSizeEarlyReverb = 1024;
     public int segmentSizeLateReverb = 4096;
+    public Color rayColor;
 
     private bool lastBypassState = false;
     private Transform goTransform;
@@ -374,6 +375,9 @@ public class VasSpatConfigAuto : MonoBehaviour
 
     void BypassSpat(bool onOff)
     {
+        if (!mySource)
+            return;
+
         if (onOff == true)
             mySource.SetSpatializerFloat((int)SpatParams.P_BYPASS, 1f);
         else
@@ -382,16 +386,38 @@ public class VasSpatConfigAuto : MonoBehaviour
 
     void ListenerOrientationOnly(bool onOff)
     {
+        if (!mySource)
+            return;
+
         if (onOff == true)
             mySource.SetSpatializerFloat((int)SpatParams.P_LISTENERORIENTATIONONLY, 1f);
         else
             mySource.SetSpatializerFloat((int)SpatParams.P_LISTENERORIENTATIONONLY, 0);
     }
 
+    void InverseAzimuth(bool onOff)    {        if (!mySource)
+            return;
+
+        if (onOff == true)            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEAZI, 1f);        else            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEAZI, 0);    }    void InverseElevation(bool onOff)    {        if (!mySource)
+            return;
+
+        if (onOff == true)            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEELE, 1f);        else            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEELE, 0);    }
+
+    void updateRayColors()
+    {
+        if (!mySource)
+            return;
+
+        for (int i = 0; i < numberOfRays; i++)
+            lineRenderer[i].material.SetColor("_EmissionColor", rayColor);
+    }
+
     void OnValidate()
     {
         BypassSpat(bypass);
         ListenerOrientationOnly(listenerOrientationOnly);
+        InverseAzimuth(inverseAzimuth);        InverseElevation(inverseElevation);
+        updateRayColors();
     }
 
     void Awake()
@@ -416,6 +442,8 @@ public class VasSpatConfigAuto : MonoBehaviour
             lineRenderer[i] = lineRenderObject[i].AddComponent<LineRenderer>();
             lineRenderer[i].material = raycastMaterial;
             lineRenderer[i].SetWidth(0.15f, 0.15f);
+            lineRenderer[i].shadowCastingMode = 0;
+            lineRenderer[i].material.SetColor("_EmissionColor", rayColor);
         }
     }
 
@@ -528,11 +556,8 @@ public class VasSpatConfigAuto : MonoBehaviour
         mySource.SetSpatializerFloat((int)SpatParams.P_REFLECTIONORDER, reflectionOrder);
         mySource.SetSpatializerFloat((int)SpatParams.P_SEGMENTSIZE_EARLYPART, segmentSizeEarlyReverb);
         mySource.SetSpatializerFloat((int)SpatParams.P_SEGMENTSIZE_LATEPART, segmentSizeLateReverb);
-
-        if (inverseAzimuth == true)
-            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEAZI, (float)1f);
-        if (inverseElevation == true)
-            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEELE, (float)1f);
+        InverseAzimuth(inverseAzimuth);
+        InverseElevation(inverseElevation);
 
         VAS_Unity_Spatializer = GetInstance(spatId);
 

@@ -1,4 +1,4 @@
-#N canvas 659 60 620 402 10;
+#N canvas 659 60 561 408 10;
 #X obj 352 539 oscparse;
 #X obj 352 508 netreceive -u -b;
 #X msg 352 477 listen 51080;
@@ -23,7 +23,7 @@
 #X floatatom 453 323 5 0 0 0 - - -;
 #X floatatom 263 524 5 0 0 0 - - -;
 #X obj 97 70 vsl 40 200 1 86 0 0 empty empty empty 0 -9 0 10 -258113
--1 -1 3500 1;
+-1 -1 0 1;
 #X msg 97 632 activepartitions \$1;
 #X text 149 67 All partitions active;
 #X text 148 265 Only one partition active;
@@ -31,10 +31,10 @@
 #X obj 97 607 receive activepartitions;
 #X obj 374 24 loadbang;
 #X obj 95 429 loadbang;
-#X obj 98 815 rwa_hpcomp~ 256 dt770.txt;
-#X obj 98 664 rwa_binauralrir~ 256 VSEb_S00_R00.txt;
-#X obj 339 663 rwa_reverb~ 256 VSEb_S00_R00_tail.txt;
 #X msg 374 47 50;
+#X obj 98 664 vas_binaural~ 256 VSEb_S00_R00.txt;
+#X obj 339 663 vas_reverb~ 256 VSEb_S00_R00_tail.txt;
+#X obj 98 815 vas_hpcomp~ 256 dt770.txt;
 #X connect 0 0 8 0;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
@@ -50,8 +50,8 @@
 #X connect 9 0 30 1;
 #X connect 10 0 2 0;
 #X connect 11 0 3 0;
-#X connect 12 0 29 1;
-#X connect 13 0 29 0;
+#X connect 12 0 32 1;
+#X connect 13 0 32 0;
 #X connect 15 0 17 0;
 #X connect 17 0 16 0;
 #X connect 17 0 19 0;
@@ -61,12 +61,12 @@
 #X connect 21 0 25 0;
 #X connect 22 0 30 0;
 #X connect 26 0 22 0;
-#X connect 27 0 32 0;
+#X connect 27 0 29 0;
 #X connect 28 0 5 0;
-#X connect 29 0 14 0;
-#X connect 29 1 14 1;
+#X connect 29 0 15 0;
 #X connect 30 0 13 0;
 #X connect 30 1 12 0;
 #X connect 31 0 13 0;
 #X connect 31 1 12 0;
-#X connect 32 0 15 0;
+#X connect 32 0 14 0;
+#X connect 32 1 14 1;
