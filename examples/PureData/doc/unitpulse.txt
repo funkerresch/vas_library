@@ -1,0 +1,12 @@
+metadata {
+length 16
+directionformat single
+audioformat stereo
+lineformat ir
+elevationstride 1
+azimuthstride 1
+}
+left {
+0, 1.000000, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, }
+right {
+0, 1.000000, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, }

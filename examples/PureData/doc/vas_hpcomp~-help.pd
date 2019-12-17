@@ -1,0 +1,61 @@
+#N canvas 627 298 884 506 10;
+#X obj 28 160 readsf~;
+#X msg 75 135 1;
+#X obj 24 40 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 74 67 t b b;
+#X obj 666 71 vsl 40 110 0 200 0 0 empty empty empty 0 -9 0 10 -261682
+-1 -1 2398 1;
+#X obj 666 220 send volume;
+#X obj 666 196 / 127;
+#X floatatom 745 220 5 0 0 0 - - -;
+#X obj 666 26 loadbang;
+#X obj 24 17 loadbang;
+#X msg 666 48 44;
+#X msg 27 112 open cicerospeech.wav;
+#X msg 102 15 \; pd dsp 0;
+#X obj 248 391 *~ 0.5;
+#X obj 160 393 *~ 0.5;
+#X obj 193 349 receive volume;
+#X obj 160 427 dac~ 1 2;
+#X obj 90 367 vu 8 80 empty empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 90 329 env~ 128;
+#X obj 89 347 - 100;
+#X text 168 262 1st inlet is the signal and message input.;
+#X msg 108 135 0;
+#X text 296 193 read loads IRs from a vas text file.;
+#X msg 158 193 read dt770.txt 256;
+#X obj 160 302 vas_hpcomp~ 256;
+#X text 275 299 1st argument (optional) is partition size. 2nd argument
+(optional) IR (set) to load.;
+#X text 232 86 vas_hpcomp~ performs an input1 to output1 and input2
+to output2 convolution.;
+#X msg 206 141 read unitpulse.txt 256;
+#X text 356 143 Have a look at the unitpulse text files for the vas
+fileformat.;
+#X connect 0 0 24 0;
+#X connect 0 0 24 1;
+#X connect 0 1 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 3 1 11 0;
+#X connect 4 0 6 0;
+#X connect 6 0 5 0;
+#X connect 6 0 7 0;
+#X connect 8 0 10 0;
+#X connect 9 0 2 0;
+#X connect 10 0 4 0;
+#X connect 11 0 0 0;
+#X connect 13 0 16 1;
+#X connect 14 0 16 0;
+#X connect 15 0 14 1;
+#X connect 15 0 13 1;
+#X connect 18 0 19 0;
+#X connect 19 0 17 0;
+#X connect 21 0 0 0;
+#X connect 23 0 24 0;
+#X connect 24 0 14 0;
+#X connect 24 0 18 0;
+#X connect 24 1 13 0;
+#X connect 27 0 24 0;

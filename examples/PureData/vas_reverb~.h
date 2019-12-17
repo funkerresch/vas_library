@@ -11,6 +11,7 @@ typedef struct vas_reverb
 #ifdef PUREDATA
     RWA_FIROBJECT_PD
 #endif
+    void *lateConvolutionEngine;
     
 } vas_reverb;
 

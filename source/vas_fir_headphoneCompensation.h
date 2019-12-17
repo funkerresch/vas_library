@@ -4,7 +4,7 @@
  * @date 4 Jan 2018
  * @brief C - Convenience Class for Headphone Compensation <br>
  *
- * A Stereo Headphone Compensation Filter with 2048 samples length <br>
+ * A Stereo Headphone Compensation Filter <br>
  * Performs a left-to-left and right-to-right channel convolution
  * with the loaded filter
  *

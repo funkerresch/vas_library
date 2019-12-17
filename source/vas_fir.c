@@ -70,9 +70,14 @@ void vas_fir_setDirectionFormat(vas_fir *x, int directionFormat)
     }
 }
 
-void vas_fir_setMetaData(vas_fir *x, int directionFormat, int eleStride, int aziStride)
+void vas_fir_setMetaData(vas_fir *x, int directionFormat, int length)
 {
-
+    x->description.filterLength = length;
+    vas_fir_setDirectionFormat(x, directionFormat);
+    x->description.audioFormat = VAS_IR_AUDIOFORMAT_STEREO;
+    x->description.lineFormat = VAS_IR_LINEFORMAT_IR;
+    x->description.azimuthStride = 3;
+    x->description.elevationStride = 3;
 }
 
 #ifdef VAS_USE_LIBMYSOFA
@@ -233,7 +238,7 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
             value = vas_strsep(&lineAdr, " ");
             value = vas_strsep(&lineAdr, " ");
             x->description.azimuthStride = atoi(value);
-            if(x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE || x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH)
+            if(x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE)
                 x->description.aziRange = 1;
             else
                 x->description.aziRange = 360/x->description.azimuthStride;
@@ -412,27 +417,12 @@ static void vas_filter_read_lineFormat_ir1(vas_fir *x, FILE *filePtr, char **lin
             if(x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI)
             {
                 vas_filter_extractAngleFromText(angle, &currentElevation2Read, &lineAdr);
-#ifdef VERBOSE
-#if(defined(MAXMSPSDK) || defined(PUREDATA))
-                post("Elevation: %d", currentElevation2Read);
-#else
-                printf("Elevation: %d", currentElevation2Read);
-#endif
-#endif
             }
             
             if(x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH
                || x->description.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI)
             {
-                
                 vas_filter_extractAngleFromText(angle, &currentAzimuth2Read, &lineAdr);
-#ifdef VERBOSE
-#if(defined(MAXMSPSDK) || defined(PUREDATA))
-                post("Azimuth: %d", currentAzimuth2Read);
-#else
-                printf("Azimuth: %d", currentAzimuth2Read);
-#endif
-#endif
             }
             
             currentIrIndex2Read = 0;
@@ -542,30 +532,3 @@ void vas_fir_readText_Ir1(vas_fir *x, FILE *filePtr, int offset)
             free(line);
     }
 }
-
-/*void vas_fir_readText_Ir(vas_fir *x, FILE *filePtr)
-{
-    char * line = NULL;
-    
-    if (!filePtr)
-    {
-#ifdef VERBOSE
-#if(defined(MAXMSPSDK) || defined(PUREDATA))
-        post("Could not open");
-#endif
-#endif
-        return;
-    }
-    else
-    {
-        if(x->description.lineFormat == VAS_IR_LINEFORMAT_IR)
-            vas_filter_read_lineFormat_ir(x, filePtr, &line);
-        if(x->description.lineFormat == VAS_IR_LINEFORMAT_VALUE)
-            vas_filter_read_lineFormat_value(x, filePtr, &line);
-        
-        fclose(filePtr);
-        if(line)
-            free(line);
-    }
-}*/
-

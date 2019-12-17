@@ -13,6 +13,7 @@ vas_delay_crossfade *vas_delay_crossfade_new(long maxDelayTime)
     x->current = vas_delay_new(maxDelayTime);
     x->target = vas_delay_new(maxDelayTime);
     x->fadeLength = 8192;
+    x->maxDelayTime = maxDelayTime;
     x->fadeOut = (float *)vas_mem_alloc(sizeof(float) * x->fadeLength);
     x->fadeIn = (float *)vas_mem_alloc(sizeof(float) * x->fadeLength);
     x->outputCurrent = (float *)vas_mem_alloc(sizeof(float) * x->fadeLength);
@@ -32,6 +33,12 @@ void vas_delay_crossfade_updateDelayTime(vas_delay_crossfade *x)
 {
     vas_delay_setDelayTime(x->current, x->target->delay_in_samples);
     vas_delay_setDelayTime(x->target, x->delayTimeTmp);
+}
+
+void vas_delay_crossfade_clear(vas_delay_crossfade *x)
+{
+    memset(x->current, 0, x->maxDelayTime * sizeof(float));
+    memset(x->target, 0, x->maxDelayTime * sizeof(float));
 }
 
 void vas_delay_crossfade_process(vas_delay_crossfade *x, float *in, float *out, int vectorSize)

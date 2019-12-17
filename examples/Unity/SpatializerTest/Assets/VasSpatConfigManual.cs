@@ -31,242 +31,362 @@ public class VasSpatConfigManual : MonoBehaviour
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
         P_REF_1_1_Z,
+        P_REF_1_1_MAT,
+        P_REF_1_1_MUTE,
 
         P_REF_1_2_X, //13
         P_REF_1_2_Y,
         P_REF_1_2_Z,
+        P_REF_1_2_MAT,
+        P_REF_1_2_MUTE,
 
         P_REF_1_3_X,
         P_REF_1_3_Y,
         P_REF_1_3_Z,
+        P_REF_1_3_MAT,
+        P_REF_1_3_MUTE,
 
         P_REF_1_4_X,
         P_REF_1_4_Y,
         P_REF_1_4_Z,
+        P_REF_1_4_MAT,
+        P_REF_1_4_MUTE,
 
         P_REF_1_5_X,
         P_REF_1_5_Y,
         P_REF_1_5_Z,
+        P_REF_1_5_MAT,
+        P_REF_1_5_MUTE,
 
         P_REF_1_6_X,
         P_REF_1_6_Y,
         P_REF_1_6_Z,
+        P_REF_1_6_MAT,
+        P_REF_1_6_MUTE,
 
         P_REF_1_7_X,
         P_REF_1_7_Y,
         P_REF_1_7_Z,
+        P_REF_1_7_MAT,
+        P_REF_1_7_MUTE,
 
         P_REF_1_8_X,
         P_REF_1_8_Y,
         P_REF_1_8_Z,
+        P_REF_1_8_MAT,
+        P_REF_1_8_MUTE,
 
         P_REF_1_9_X,
         P_REF_1_9_Y,
         P_REF_1_9_Z,
+        P_REF_1_9_MAT,
+        P_REF_1_9_MUTE,
 
         P_REF_1_10_X,
         P_REF_1_10_Y,
         P_REF_1_10_Z,
+        P_REF_1_10_MAT,
+        P_REF_1_10_MUTE,
 
         P_REF_2_1_X, //9
         P_REF_2_1_Y,
         P_REF_2_1_Z,
+        P_REF_2_1_MAT,
+        P_REF_2_1_MUTE,
 
         P_REF_2_2_X, //13
         P_REF_2_2_Y,
         P_REF_2_2_Z,
+        P_REF_2_2_MAT,
+        P_REF_2_2_MUTE,
 
         P_REF_2_3_X,
         P_REF_2_3_Y,
         P_REF_2_3_Z,
+        P_REF_2_3_MAT,
+        P_REF_2_3_MUTE,
 
         P_REF_2_4_X,
         P_REF_2_4_Y,
         P_REF_2_4_Z,
+        P_REF_2_4_MAT,
+        P_REF_2_4_MUTE,
 
         P_REF_2_5_X,
         P_REF_2_5_Y,
         P_REF_2_5_Z,
+        P_REF_2_5_MAT,
+        P_REF_2_5_MUTE,
 
         P_REF_2_6_X,
         P_REF_2_6_Y,
         P_REF_2_6_Z,
+        P_REF_2_6_MAT,
+        P_REF_2_6_MUTE,
 
         P_REF_2_7_X,
         P_REF_2_7_Y,
         P_REF_2_7_Z,
+        P_REF_2_7_MAT,
+        P_REF_2_7_MUTE,
 
         P_REF_2_8_X,
         P_REF_2_8_Y,
         P_REF_2_8_Z,
+        P_REF_2_8_MAT,
+        P_REF_2_8_MUTE,
 
         P_REF_2_9_X,
         P_REF_2_9_Y,
         P_REF_2_9_Z,
+        P_REF_2_9_MAT,
+        P_REF_2_9_MUTE,
 
         P_REF_2_10_X,
         P_REF_2_10_Y,
         P_REF_2_10_Z,
+        P_REF_2_10_MAT,
+        P_REF_2_10_MUTE,
 
         P_REF_3_1_X, //9
         P_REF_3_1_Y,
         P_REF_3_1_Z,
+        P_REF_3_1_MAT,
+        P_REF_3_1_MUTE,
 
         P_REF_3_2_X, //13
         P_REF_3_2_Y,
         P_REF_3_2_Z,
+        P_REF_3_2_MAT,
+        P_REF_3_2_MUTE,
 
         P_REF_3_3_X,
         P_REF_3_3_Y,
         P_REF_3_3_Z,
+        P_REF_3_3_MAT,
+        P_REF_3_3_MUTE,
 
         P_REF_3_4_X,
         P_REF_3_4_Y,
         P_REF_3_4_Z,
+        P_REF_3_4_MAT,
+        P_REF_3_4_MUTE,
 
         P_REF_3_5_X,
         P_REF_3_5_Y,
         P_REF_3_5_Z,
+        P_REF_3_5_MAT,
+        P_REF_3_5_MUTE,
 
         P_REF_3_6_X,
         P_REF_3_6_Y,
         P_REF_3_6_Z,
+        P_REF_3_6_MAT,
+        P_REF_3_6_MUTE,
 
         P_REF_3_7_X,
         P_REF_3_7_Y,
         P_REF_3_7_Z,
+        P_REF_3_7_MAT,
+        P_REF_3_7_MUTE,
 
         P_REF_3_8_X,
         P_REF_3_8_Y,
         P_REF_3_8_Z,
+        P_REF_3_8_MAT,
+        P_REF_3_8_MUTE,
 
         P_REF_3_9_X,
         P_REF_3_9_Y,
         P_REF_3_9_Z,
+        P_REF_3_9_MAT,
+        P_REF_3_9_MUTE,
 
         P_REF_3_10_X,
         P_REF_3_10_Y,
         P_REF_3_10_Z,
+        P_REF_3_10_MAT,
+        P_REF_3_10_MUTE,
 
         P_REF_4_1_X, //9
         P_REF_4_1_Y,
         P_REF_4_1_Z,
+        P_REF_4_1_MAT,
+        P_REF_4_1_MUTE,
 
         P_REF_4_2_X, //13
         P_REF_4_2_Y,
         P_REF_4_2_Z,
+        P_REF_4_2_MAT,
+        P_REF_4_2_MUTE,
 
         P_REF_4_3_X,
         P_REF_4_3_Y,
         P_REF_4_3_Z,
+        P_REF_4_3_MAT,
+        P_REF_4_3_MUTE,
 
         P_REF_4_4_X,
         P_REF_4_4_Y,
         P_REF_4_4_Z,
+        P_REF_4_4_MAT,
+        P_REF_4_4_MUTE,
 
         P_REF_4_5_X,
         P_REF_4_5_Y,
         P_REF_4_5_Z,
+        P_REF_4_5_MAT,
+        P_REF_4_5_MUTE,
 
         P_REF_4_6_X,
         P_REF_4_6_Y,
         P_REF_4_6_Z,
+        P_REF_4_6_MAT,
+        P_REF_4_6_MUTE,
 
         P_REF_4_7_X,
         P_REF_4_7_Y,
         P_REF_4_7_Z,
+        P_REF_4_7_MAT,
+        P_REF_4_7_MUTE,
 
         P_REF_4_8_X,
         P_REF_4_8_Y,
         P_REF_4_8_Z,
+        P_REF_4_8_MAT,
+        P_REF_4_8_MUTE,
 
         P_REF_4_9_X,
         P_REF_4_9_Y,
         P_REF_4_9_Z,
+        P_REF_4_9_MAT,
+        P_REF_4_9_MUTE,
 
         P_REF_4_10_X,
         P_REF_4_10_Y,
         P_REF_4_10_Z,
+        P_REF_4_10_MAT,
+        P_REF_4_10_MUTE,
 
         P_REF_5_1_X, //9
         P_REF_5_1_Y,
         P_REF_5_1_Z,
+        P_REF_5_1_MAT,
+        P_REF_5_1_MUTE,
 
         P_REF_5_2_X, //13
         P_REF_5_2_Y,
         P_REF_5_2_Z,
+        P_REF_5_2_MAT,
+        P_REF_5_2_MUTE,
 
         P_REF_5_3_X,
         P_REF_5_3_Y,
         P_REF_5_3_Z,
+        P_REF_5_3_MAT,
+        P_REF_5_3_MUTE,
 
         P_REF_5_4_X,
         P_REF_5_4_Y,
         P_REF_5_4_Z,
+        P_REF_5_4_MAT,
+        P_REF_5_4_MUTE,
 
         P_REF_5_5_X,
         P_REF_5_5_Y,
         P_REF_5_5_Z,
+        P_REF_5_5_MAT,
+        P_REF_5_5_MUTE,
 
         P_REF_5_6_X,
         P_REF_5_6_Y,
         P_REF_5_6_Z,
+        P_REF_5_6_MAT,
+        P_REF_5_6_MUTE,
 
         P_REF_5_7_X,
         P_REF_5_7_Y,
         P_REF_5_7_Z,
+        P_REF_5_7_MAT,
+        P_REF_5_7_MUTE,
 
         P_REF_5_8_X,
         P_REF_5_8_Y,
         P_REF_5_8_Z,
+        P_REF_5_8_MAT,
+        P_REF_5_8_MUTE,
 
         P_REF_5_9_X,
         P_REF_5_9_Y,
         P_REF_5_9_Z,
+        P_REF_5_9_MAT,
+        P_REF_5_9_MUTE,
 
         P_REF_5_10_X,
         P_REF_5_10_Y,
         P_REF_5_10_Z,
+        P_REF_5_10_MAT,
+        P_REF_5_10_MUTE,
 
         P_REF_6_1_X, //9
         P_REF_6_1_Y,
         P_REF_6_1_Z,
+        P_REF_6_1_MAT,
+        P_REF_6_1_MUTE,
 
         P_REF_6_2_X, //13
         P_REF_6_2_Y,
         P_REF_6_2_Z,
+        P_REF_6_2_MAT,
+        P_REF_6_2_MUTE,
 
         P_REF_6_3_X,
         P_REF_6_3_Y,
         P_REF_6_3_Z,
+        P_REF_6_3_MAT,
+        P_REF_6_3_MUTE,
 
         P_REF_6_4_X,
         P_REF_6_4_Y,
         P_REF_6_4_Z,
+        P_REF_6_4_MAT,
+        P_REF_6_4_MUTE,
 
         P_REF_6_5_X,
         P_REF_6_5_Y,
         P_REF_6_5_Z,
+        P_REF_6_5_MAT,
+        P_REF_6_5_MUTE,
 
         P_REF_6_6_X,
         P_REF_6_6_Y,
         P_REF_6_6_Z,
+        P_REF_6_6_MAT,
+        P_REF_6_6_MUTE,
 
         P_REF_6_7_X,
         P_REF_6_7_Y,
         P_REF_6_7_Z,
+        P_REF_6_7_MAT,
+        P_REF_6_7_MUTE,
 
         P_REF_6_8_X,
         P_REF_6_8_Y,
         P_REF_6_8_Z,
+        P_REF_6_8_MAT,
+        P_REF_6_8_MUTE,
 
         P_REF_6_9_X,
         P_REF_6_9_Y,
         P_REF_6_9_Z,
+        P_REF_6_9_MAT,
+        P_REF_6_9_MUTE,
 
         P_REF_6_10_X,
         P_REF_6_10_Y,
         P_REF_6_10_Z,
+        P_REF_6_10_MAT,
+        P_REF_6_10_MUTE,
 
         P_NUM
     }

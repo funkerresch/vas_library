@@ -9,21 +9,33 @@ public class ReceiveHeadtrackerData : MonoBehaviour
 
     int[] movingAverage = new int[10000];
     int counter = 0;
+    int azimuth = 0;
+
+    float azimuthOffset = 0;
+    float elevationOffset = 0;
+
+    public bool calibrate = false;
+
+    void OnValidate()
+    {
+        azimuthOffset = azimuth;
+        calibrate = false;
+    }
 
     void OnDataReceived(Message message)
     {
-        if (message.address == "/azimuth")
+        if (message.address == "/azi")
         {
-            int azimuth = (int)message.values.GetValue(0);
+            azimuth = (int)message.values.GetValue(0);
 
             Vector3 newRotation = transform.rotation.eulerAngles;
-            newRotation.y =  azimuth;
+            newRotation.y =  azimuth-azimuthOffset;
             transform.eulerAngles = newRotation;
-           // print(azimuth);
+            print(azimuth);
            // transform.rotation.
         }
 
-        if (message.address == "/elevation")
+        if (message.address == "/ele")
         {
             message.values.GetValue(0);
         }

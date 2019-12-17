@@ -11,13 +11,24 @@ vas_fir_binauralReflection *vas_fir_binauralReflection_new(vas_fir_binaural *mai
 {
     vas_fir_binauralReflection *x = (vas_fir_binauralReflection *) vas_mem_alloc(sizeof(vas_fir_binauralReflection));
     x->binauralEngine = vas_fir_binaural_new(0);
-     
+    x->scale = 1.0;
     x->delay = vas_delay_crossfade_new(maxDelayTime);
-    x->filterHP = vas_iir_biquad_new(VAS_IIR_BIQUAD_HIGHPASS, 1000, 10);
-    x->filterLP = vas_iir_biquad_new(VAS_IIR_BIQUAD_LOWPASS, 17000, 10);
+    x->filterHP = vas_iir_biquad_new(VAS_IIR_BIQUAD_HIGHPASS, 500, 20);
+    x->filterLP = vas_iir_biquad_new(VAS_IIR_BIQUAD_LOWPASS, 17000, 20);
     vas_utilities_writeZeros(VAS_MAXVECTORSIZE, x->tmp);
 
     return x;
+}
+
+void vas_fir_binauralReflection_setDistance(vas_fir_binauralReflection *x, float distance)
+{
+    float tmp = distance * 0.001;
+    x->scale = 1 - tmp;
+}
+
+void vas_fir_binauralReflection_clear(vas_fir_binauralReflection *x)
+{
+    vas_delay_crossfade_clear(x->delay);
 }
 
 void vas_fir_binauralReflection_setHighPassFrequency(vas_fir_binauralReflection *x, float frequency)
@@ -30,7 +41,7 @@ void vas_fir_binauralReflection_setLowPassFrequency(vas_fir_binauralReflection *
     vas_iir_biquad_setFrequency(x->filterLP, frequency);
 }
 
-void vas_fir_binaural_setReflectionMaterial(vas_fir_binauralReflection *x, vas_reflectionMaterial material)
+void vas_fir_binauralReflection_setMaterial(vas_fir_binauralReflection *x, int material)
 {
     switch(material)
     {
@@ -46,17 +57,17 @@ void vas_fir_binaural_setReflectionMaterial(vas_fir_binauralReflection *x, vas_r
             
         case MIXED:
             vas_fir_binauralReflection_setHighPassFrequency(x, 1200);
-            vas_fir_binauralReflection_setLowPassFrequency(x, 14000);
+            vas_fir_binauralReflection_setLowPassFrequency(x, 5000);
             break;
             
         case WOOD:
-            vas_fir_binauralReflection_setHighPassFrequency(x, 1000);
-            vas_fir_binauralReflection_setLowPassFrequency(x, 10000);
+            vas_fir_binauralReflection_setHighPassFrequency(x, 300);
+            vas_fir_binauralReflection_setLowPassFrequency(x, 800);
             break;
             
         case TEXTILE:
-            vas_fir_binauralReflection_setHighPassFrequency(x, 2000);
-            vas_fir_binauralReflection_setLowPassFrequency(x, 8000);
+            vas_fir_binauralReflection_setHighPassFrequency(x, 300);
+            vas_fir_binauralReflection_setLowPassFrequency(x, 300);
             break;
         default:
             vas_fir_binauralReflection_setHighPassFrequency(x, 1000);
@@ -85,6 +96,7 @@ void vas_fir_binauralReflection_process(vas_fir_binauralReflection *x, float *in
     vas_iir_biquad_process(x->filterHP, in, x->tmp, vectorSize);
     vas_iir_biquad_process(x->filterLP, x->tmp, x->tmp, vectorSize);
     vas_delay_crossfade_process(x->delay, x->tmp, x->tmp, vectorSize);
+    vas_util_fscale(x->tmp, x->scale, vectorSize);  // simplified Air Absorbtion
     vas_util_fcopy(x->tmp, in, vectorSize);
     vas_fir_binaural_processOutputInPlace(x->binauralEngine, x->tmp, outL, outR, vectorSize);
 }

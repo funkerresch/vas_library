@@ -17,7 +17,7 @@ static t_int *vas_reverb_perform(t_int *w)
     
     n = (int)(w[5]);
     
-    vas_fir_binaural_process(x->convolutionEngine, x->inputBuffer, outL, outR, n);
+    vas_fir_reverb_process(x->convolutionEngine, x->inputBuffer, outL, outR, n);
     
     return (w+6);
 }
@@ -29,7 +29,7 @@ static void vas_reverb_dsp(vas_reverb *x, t_signal **sp)
 
 static void vas_reverb_free(vas_reverb *x)
 {
-    vas_fir_binaural_free(x->convolutionEngine);
+    vas_fir_reverb_free(x->convolutionEngine);
     outlet_free(x->outL);
     outlet_free(x->outR);
 }
@@ -85,10 +85,11 @@ void vas_reverb_tilde_setup(void)
     vas_reverb_class = class_new(gensym("vas_reverb~"), (t_newmethod)vas_reverb_new, (t_method)vas_reverb_free,
     	sizeof(vas_reverb), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("vas_reverb~ v0.5");
+    post("vas_reverb~ v0.6");
    
     CLASS_MAINSIGNALIN(vas_reverb_class, vas_reverb, f);
    
     class_addmethod(vas_reverb_class, (t_method)vas_reverb_dsp, gensym("dsp"), 0);
     class_addmethod(vas_reverb_class, (t_method)rwa_firobject_read2, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, 0);
+    class_addmethod(vas_reverb_class, (t_method)vas_firobject_set, gensym("set"), A_DEFSYM, A_DEFSYM, 0);
 }

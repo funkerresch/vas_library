@@ -1,3 +1,15 @@
+/**
+* @file vas_hpcomp~.h
+* @author Thomas Resch
+* @date 4 Jan 2018
+* @brief C - ~Pure Data/MaxMSP Headphone Compensation <br>
+*
+* A Stereo Headphone Compensation Filter <br>
+* Performs a left-to-left and right-to-right channel convolution
+* with the loaded filter
+*
+*/
+
 #include "vas_firobject.h"
 
 #ifndef _rwa_hpcomp_

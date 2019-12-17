@@ -39,9 +39,20 @@ static void vas_binaural_postInactivePartionIndexes(vas_binaural *x)
     }
 }
 
+static void vas_binaural_aziDirection(vas_binaural *x, float aziDirection)
+{
+    if(aziDirection >= 1)
+        x->aziDirection = 1;
+    if(aziDirection < 1)
+        x->aziDirection = 0;
+}
+
 static void vas_binaural_setAzimuth(vas_binaural *x, float azimuth)
 {
     vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
+    if(x->aziDirection)
+        azimuth = 360 - azimuth;
+    
     vas_dynamicFirChannel_setAzimuth(binauralEngine->left, azimuth);
     vas_dynamicFirChannel_setAzimuth(binauralEngine->right, azimuth);
 }
@@ -106,6 +117,8 @@ static void *vas_binaural_new(t_symbol *s, int argc, t_atom *argv)
     x->filterSize = 0;
     x->f = 0;
     x->fullpath[0] = '\0';
+    x->aziDirection = 1;
+    x->eleDirection = 1;
     sprintf(x->canvasDirectory, "%s", canvas_getcurrentdir()->s_name);
 
     if(argc >= 1)
@@ -151,13 +164,14 @@ void vas_binaural_tilde_setup(void)
     vas_binaural_class = class_new(gensym("vas_binaural~"), (t_newmethod)vas_binaural_new, (t_method)vas_binaural_free,
     	sizeof(vas_binaural), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("vas_binaural~ v0.7");
+    post("vas_binaural~ v0.71");
    
     CLASS_MAINSIGNALIN(vas_binaural_class, vas_binaural, f);
    
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_dsp, gensym("dsp"), 0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setAzimuth, gensym("azimuth"), A_DEFFLOAT,0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setElevation, gensym("elevation"), A_DEFFLOAT,0);
+    class_addmethod(vas_binaural_class, (t_method)vas_binaural_aziDirection, gensym("azidirection"), A_DEFFLOAT,0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setSegmentThreshold, gensym("thresh"), A_DEFFLOAT,0);
     class_addmethod(vas_binaural_class, (t_method)rwa_firobject_read2, gensym("read"), A_DEFSYM, A_FLOAT, A_FLOAT, 0);
     class_addmethod(vas_binaural_class, (t_method)vas_firobject_set, gensym("set"), A_DEFSYM, A_DEFSYM, 0);

@@ -37,6 +37,7 @@ typedef struct vas_delay_crossfade
     vas_delay *target;
     int fadeCounter;
     int numberOfFramesForCrossfade;
+    int maxDelayTime;
 } vas_delay_crossfade;
     
 vas_delay_crossfade *vas_delay_crossfade_new(long maxDelayTime);
@@ -44,6 +45,8 @@ vas_delay_crossfade *vas_delay_crossfade_new(long maxDelayTime);
 void vas_delay_crossfade_setDelayTime(vas_delay_crossfade *x, float delayTime);
     
 void vas_delay_crossfade_process(vas_delay_crossfade *x, float *in, float *out, int vectorSize);
+
+void vas_delay_crossfade_clear(vas_delay_crossfade *x);
     
 void vas_delay_crossfade_free(vas_delay_crossfade *x);
     

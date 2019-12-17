@@ -94,33 +94,6 @@ void vas_dynamicFirChannel_filter_reset(vas_dynamicFirChannel_filter *x)
     x->numberOfSegments = 0;
 }
 
-void vas_dynamicFirChannel_init(vas_dynamicFirChannel *x, int segmentSize, vas_fir_metaData *metaData) // filter init must be called, if either segmentSize, eleRange or aziRange change
-{
-    if(x->init)
-    {
-        vas_dynamicFirChannel_input_reset(x->input, x->filter->numberOfSegments);
-        vas_dynamicFirChannel_filter_reset(x->filter);
-        x->init = 0;
-    }
-    
-    x->frameCounter = 0;
-    x->filter->referenceCounter = 1;
-    x->filter->segmentSize = segmentSize;
-    x->filter->fftSize = segmentSize * 2;
-    x->filter->fftSizeLog2 = log2(x->filter->fftSize);
-    x->filter->directionFormat = metaData->directionFormat;
-    x->filter->eleStride = metaData->elevationStride;
-    x->filter->aziStride = metaData->azimuthStride;
-    x->filter->aziRange = metaData->aziRange;
-    x->filter->eleRange = metaData->eleRange;
-    x->filter->eleMin = metaData->eleMin;
-    x->filter->eleMax = metaData->eleMax;
-    x->filter->eleZero = metaData->eleZero;
-    
-    vas_dynamicFirChannel_setFilterSize(x, metaData->filterLength);
-    vas_dynamicFirChannel_prepareArrays(x);
-}
-
 void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *metaData, int segmentSize, int offset) // filter init must be called, if either segmentSize, eleRange or aziRange change
 {
     if(x->init)
@@ -719,7 +692,7 @@ void vas_dynamicFirChannel_leaveActivePartitions(vas_dynamicFirChannel *x, int n
             
             else
             {
-                while(j++ < numberOfActivePartions)
+                while(j++ < numberOfActivePartions )
                 {
                     int maxIndex = -1;
                     double maxAverageSegmentPower = -10000;

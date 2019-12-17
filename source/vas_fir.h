@@ -19,8 +19,6 @@
 extern "C" {
 #endif
 
-    
-
 /**
  * @brief Struct vas_fir <br>
  * A "base"-class for all stereo fir filters <br>
@@ -43,7 +41,7 @@ void vas_fir_setInitFlag(vas_fir *x);
 int vas_fir_getInitFlag(vas_fir *x);
 void vas_fir_removeInitFlag(vas_fir *x);
 void vas_fir_prepareChannelsWithSharedFilter(vas_fir *x,  vas_dynamicFirChannel *left, vas_dynamicFirChannel *right);
-
+void vas_fir_setMetaData(vas_fir *x, int directionFormat, int length);
 void vas_fir_readText_1ValuePerLine(vas_fir *x, char *fullpath);
 FILE *vas_fir_readText_metaData1(vas_fir *x, char *fullpath);
 void vas_fir_readText_Ir1(vas_fir *x, FILE *filePtr, int offset);

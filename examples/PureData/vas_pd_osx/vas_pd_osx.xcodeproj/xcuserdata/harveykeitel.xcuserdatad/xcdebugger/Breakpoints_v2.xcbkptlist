@@ -16,7 +16,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "620"
             endingLineNumber = "620"
-            landmarkName = "vas_dynamicFirChannel_prepareInputSignal(x)"
+            landmarkName = "vas_dynamicFirChannel_setFilterSize(x, filterSize)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "620"
             endingLineNumber = "620"
-            landmarkName = "vas_dynamicFirChannel_prepareInputSignal(x)"
+            landmarkName = "vas_dynamicFirChannel_setFilterSize(x, filterSize)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -112,7 +112,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
             endingLineNumber = "222"
-            landmarkName = "vas_dynamicFirChannel_input_reset(x, currentNumberOfSegments)"
+            landmarkName = "vas_dynamicFirChannel_input_free(x, currentNumberOfSegments)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -160,7 +160,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "223"
             endingLineNumber = "223"
-            landmarkName = "vas_dynamicFirChannel_input_reset(x, currentNumberOfSegments)"
+            landmarkName = "vas_dynamicFirChannel_input_free(x, currentNumberOfSegments)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -208,7 +208,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "224"
             endingLineNumber = "224"
-            landmarkName = "vas_dynamicFirChannel_input_reset(x, currentNumberOfSegments)"
+            landmarkName = "vas_dynamicFirChannel_input_free(x, currentNumberOfSegments)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -322,6 +322,86 @@
             endingLineNumber = "516"
             landmarkName = "vas_dynamicFirChannel_process(x, in, out, vectorSize, flags)"
             landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "8396B963-D279-4CA3-AC84-98E0696CAA3B - b16a9778c7a40b62"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_process"
+                  moduleName = "vas_binaural~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "517"
+                  endingLineNumber = "517"
+                  offsetFromSymbolStart = "311">
+               </Location>
+               <Location
+                  uuid = "8396B963-D279-4CA3-AC84-98E0696CAA3B - 6b5d7583abb5c2b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_dynamicFirChannel_process"
+                  moduleName = "vas_reverb~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "517"
+                  endingLineNumber = "517"
+                  offsetFromSymbolStart = "311">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "46A745FB-1F61-43E1-81DA-C8C5E2E185FF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_firobject.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "46A745FB-1F61-43E1-81DA-C8C5E2E185FF - 8ecf7d0a10e7538b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_firobject_set"
+                  moduleName = "vas_binaural~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_firobject.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "46A745FB-1F61-43E1-81DA-C8C5E2E185FF - 54f89ff17cf69a51"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "vas_firobject_set"
+                  moduleName = "vas_reverb~.pd_darwin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_firobject.c"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "26">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

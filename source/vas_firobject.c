@@ -8,27 +8,51 @@ extern vas_fir_list IRs;
 }
 #endif
 
-void vas_firobject_set(rwa_firobject *x, t_symbol *left, t_symbol *right)
+void vas_firobject_getFloatArrayAndLength(rwa_firobject *x, t_symbol *arrayname, t_word **array, int *length)
 {
     t_garray *a;
 
-    x->x_arrayname = left;
-    if (!(a = (t_garray *)pd_findbyclass(x->x_arrayname, garray_class)))
+    if (!(a = (t_garray *)pd_findbyclass(arrayname, garray_class)))
     {
-        if (*left->s_name) pd_error(x, "vas_binaural~: %s: no such array",
-            x->x_arrayname->s_name);
-        x->x_vec = 0;
+        if (*arrayname->s_name) pd_error(x, "vas_binaural~: %s: no such array",
+            arrayname->s_name);
+        *array = 0;
     }
-    else if (!garray_getfloatwords(a, &x->x_nsampsintab, &x->x_vec))
+    else if (!garray_getfloatwords(a, length, array))
     {
-        pd_error(x, "%s: bad template for vas_binaural~", x->x_arrayname->s_name);
-        x->x_vec = 0;
+        pd_error(x, "%s: bad template for vas_binaural~", arrayname->s_name);
+        *array = 0;
     }
     else
     {
-        garray_usedindsp(a);
-        post("Reading IRs from array %s", left->s_name);
+        post("Reading IRs from array %s", arrayname->s_name);
     }
+}
+
+ // very quick and dirty reading from pd array
+
+void vas_firobject_set(rwa_firobject *x, t_symbol *left, t_symbol *right)
+{
+    vas_fir *engine = x->convolutionEngine;
+    vas_firobject_getFloatArrayAndLength(x, left, &x->leftArray, &x->leftArrayLength);
+    vas_firobject_getFloatArrayAndLength(x, right, &x->rightArray, &x->rightArrayLength);
+    vas_fir_setMetaData((vas_fir *)engine, VAS_IR_DIRECTIONFORMAT_SINGLE, x->leftArrayLength);
+    vas_fir_initFilter2((vas_fir *)engine, x->segmentSize, 0);
+    float *currentIr = (float *)vas_mem_alloc( x->leftArrayLength * sizeof(float));
+    
+    for (int i=0;i<x->leftArrayLength;i++)
+        currentIr[i] = x->leftArray[i].w_float;
+    
+    vas_dynamicFirChannel_prepareFilter(engine->left, currentIr, 0, 0);
+    
+    for (int i=0;i<x->rightArrayLength;i++)
+        currentIr[i] = x->rightArray[i].w_float;
+    
+    vas_dynamicFirChannel_prepareFilter(engine->right, currentIr, 0, 0);
+    vas_fir_setInitFlag((vas_fir *)engine);
+    //post("%d %d", x->leftArrayLength, x->rightArrayLength);
+    
+    vas_mem_free(currentIr);
 }
 
 void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float offset)

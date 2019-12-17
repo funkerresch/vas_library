@@ -206,39 +206,17 @@ enum HeadtrackerType {
         }
     }
     
-    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        //print("Discovered \(String(describing: peripheral.name)) at \(RSSI)")
-                switch(headtrackerType)
+    public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber)
+    {
+        if(peripheral.name == headtrackerId)
         {
-        case .RWAHEADTRACKER_BNO055:
-            var advdata = advertisementData
-            let rwaTrackerId:String? = String(describing: advdata.removeValue(forKey: "kCBAdvDataLocalName")!)
-            
-            print( "\(rwaTrackerId!)  \(headtrackerId)" )
-            
-            if (rwaTrackerId! == headtrackerId)
-            {
-                if self.peripheral != peripheral {
-
-                    self.peripheral = peripheral
-                    print("Connecting to peripheral: \(peripheral)")
-                    centralManager?.connect(peripheral, options: nil)
-                }
+            if self.peripheral != peripheral {
+                
+                // save a reference to the peripheral object so Core Bluetooth doesn't get rid of it
+                self.peripheral = peripheral
+                print("Connecting to peripheral: \(peripheral)")
+                centralManager?.connect(peripheral, options: nil)
             }
-        
-        case .RWAHEADTRACKER_BNO080:
-            if(peripheral.name == headtrackerId)
-            {
-                if self.peripheral != peripheral {
-                    
-                    // save a reference to the peripheral object so Core Bluetooth doesn't get rid of it
-                    self.peripheral = peripheral
-                    print("Connecting to peripheral: \(peripheral)")
-                    centralManager?.connect(peripheral, options: nil)
-                }
-            }
-        default:
-            return
         }
     }
     

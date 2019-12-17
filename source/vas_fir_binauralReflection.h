@@ -23,29 +23,34 @@ typedef struct vas_fir_binauralReflection {
     vas_iir_biquad *filterHP;
     vas_iir_biquad *filterLP;
     float tmp[VAS_MAXVECTORSIZE];
+    float scale;
 } vas_fir_binauralReflection;
 
-typedef enum {
-    UNDEFINED,
-    CONCRETE,
-    MIXED,
-    WOOD,
-    TEXTILE
-} vas_reflectionMaterial;
+
+#define UNDEFINED 0
+#define CONCRETE 1
+#define MIXED 2
+#define WOOD 3
+#define TEXTILE 4
+
     
 vas_fir_binauralReflection *vas_fir_binauralReflection_new(vas_fir_binaural *mainSource, long maxDelayTime);
     
 void vas_fir_binauralReflection_setDelayTime(vas_fir_binauralReflection *x, float delayTime);
     
 void vas_fir_binauralReflection_setAzimuth(vas_fir_binauralReflection *x, float azimuth);
+
+void vas_fir_binauralReflection_setDistance(vas_fir_binauralReflection *x, float distance);
     
 void vas_fir_binauralReflection_setElevation(vas_fir_binauralReflection *x, float elevation);
+
+void vas_fir_binauralReflection_clear(vas_fir_binauralReflection *x);
 
 void vas_fir_binauralReflection_setHighPassFrequency(vas_fir_binauralReflection *x, float frequency);
 
 void vas_fir_binauralReflection_setLowPassFrequency(vas_fir_binauralReflection *x, float frequency);
 
-void vas_fir_binaural_setReflectionMaterial(vas_fir_binauralReflection *x, vas_reflectionMaterial material);
+void vas_fir_binauralReflection_setMaterial(vas_fir_binauralReflection *x, int material);
     
 void vas_fir_binauralReflection_process(vas_fir_binauralReflection *x, float *in, float *outL, float *outR, int vectorSize);
     

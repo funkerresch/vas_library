@@ -37,6 +37,8 @@
     int filterSize; \
     int segmentSize; \
     int useGlobalFilter; \
+    int aziDirection; \
+    int eleDirection; \
 \
     float *currentHrir;
 
@@ -46,9 +48,10 @@
     t_outlet *outR; \
     float inputBuffer[VAS_MAXVECTORSIZE]; \
     float f; \
-    t_word *x_vec; \
-    t_symbol *x_arrayname; \
-    int x_nsampsintab; \
+    t_word *leftArray; \
+    t_word *rightArray; \
+    int leftArrayLength; \
+    int rightArrayLength; \
 \
     RWA_FIROBJECT
 

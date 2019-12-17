@@ -78,7 +78,6 @@ typedef struct vas_dynamicFirChannel_filter
     kiss_fftr_cfg  forwardFFT;
     kiss_fftr_cfg  inverseFFT;
 #endif
-    
     bool *segmentIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     int zeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     int nonZeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
@@ -342,8 +341,6 @@ void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float t
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize);
 
 void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *metaData, int segmentSize, int offset);
-    
-void vas_dynamicFirChannel_init(vas_dynamicFirChannel *x, int segmentSize, vas_fir_metaData *metaData); // filter init must be called, if either segmentSize, eleRange or aziRange change
     
 void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x);
 

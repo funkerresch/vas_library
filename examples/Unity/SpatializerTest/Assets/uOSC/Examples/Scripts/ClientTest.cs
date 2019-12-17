@@ -2,15 +2,17 @@
 
 namespace uOSC
 {
-
-[RequireComponent(typeof(uOscClient))]
-public class ClientTest : MonoBehaviour
-{
-    void Update()
+    [RequireComponent(typeof(uOscClient))]
+    public class ClientTest : MonoBehaviour
     {
-        var client = GetComponent<uOscClient>();
-        client.Send("/uOSC/test", 10, "hoge", "hogehoge", 1.234f, 123f);
-    }
-}
+        public string receiverName = "/uOSC/test";
 
+        void Update()
+        {
+            float x = transform.position.x;
+
+            var client = GetComponent<uOscClient>();
+            client.Send(receiverName, 10, "hoge", "hogehoge", x, 123f);
+        }
+    }
 }
