@@ -63,7 +63,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include "vas_util_vectorIntrinsics.h"
 
 #ifdef VAS_USE_VDSP
 #include <Accelerate/Accelerate.h>
@@ -72,6 +71,7 @@ typedef COMPLEX_SPLIT VAS_COMPLEX;
 
 #ifdef VAS_USE_KISSFFT
 #include "kiss_fftr.h"
+#include "vas_util_vectorIntrinsics.h"
 typedef kiss_fft_cpx VAS_COMPLEX;
 #endif
 
