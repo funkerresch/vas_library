@@ -55,7 +55,7 @@ void vas_firobject_set(rwa_firobject *x, t_symbol *left, t_symbol *right)
     vas_mem_free(currentIr);
 }
 
-void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float offset)
+void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float offset, float end)
 {
     const char *fileExtension;
     const char *filename = s->s_name;
@@ -99,7 +99,7 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
     {
         if(vas_fir_getInitFlag(engine))
         {
-            vas_fir_list_removeNode(&IRs, engine->description.fullPath);
+            vas_fir_list_removeNode(&IRs, engine->metaData.fullPath);
             post("remove current filter node");
         }
             
@@ -109,9 +109,9 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
         {
             if(segmentSize == existingFilter->left->filter->segmentSize)
             {
-                size_t size = strlen(existingFilter->description.fullPath);
-                engine->description.fullPath = vas_mem_alloc(sizeof(char) * size);
-                strcpy(engine->description.fullPath, existingFilter->description.fullPath);
+                size_t size = strlen(existingFilter->metaData.fullPath);
+                engine->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
+                strcpy(engine->metaData.fullPath, existingFilter->metaData.fullPath);
                 vas_fir_prepareChannelsWithSharedFilter((vas_fir *)existingFilter, engine->left, engine->right);
                 vas_fir_setInitFlag((vas_fir *)engine);
                 return;
@@ -121,10 +121,16 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
         if(file)
         {
             post("Load Filter from File with segmenSize: %d", x->segmentSize);
+            
+            ((vas_fir *)engine)->metaData.filterOffset = offset;
+            if(end > 0 && (end < ((vas_fir *)engine)->metaData.filterLength) )
+                ((vas_fir *)engine)->metaData.filterLength = end;
             vas_fir_initFilter2((vas_fir *)engine, x->segmentSize, offset);
             vas_fir_readText_Ir1((vas_fir *)engine, file, offset); // move fclose out of this function..
             vas_fir_list_addNode(&IRs, vas_fir_listNode_new(engine));
             vas_fir_setInitFlag((vas_fir *)engine);
         }
+        else
+            error("Could not open %s", x->fullpath);
     }
 }

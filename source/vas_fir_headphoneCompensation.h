@@ -17,7 +17,7 @@
 
 typedef struct vas_fir_headphoneCompensation
 {
-    vas_fir_metaData description;
+    vas_fir_metaData metaData;
     vas_dynamicFirChannel *left;
     vas_dynamicFirChannel *right;
     

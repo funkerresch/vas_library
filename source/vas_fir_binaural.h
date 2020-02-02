@@ -24,7 +24,7 @@ extern "C" {
  
 typedef struct vas_fir_binaural
 {
-    vas_fir_metaData description;
+    vas_fir_metaData metaData;
     vas_dynamicFirChannel *left;
     vas_dynamicFirChannel *right;
     

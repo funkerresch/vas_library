@@ -35,7 +35,7 @@ void vas_fir_binaural_setElevation(vas_fir_binaural *x, int elevation)
 vas_fir_binaural *vas_fir_binaural_new(int flags)
 {
     vas_fir_binaural *x = ( vas_fir_binaural * )vas_mem_alloc(sizeof(vas_fir_binaural));
-    vas_filter_metaData_init(&x->description);
+    vas_filter_metaData_init(&x->metaData);
     int leftSetup = flags;
     int rightSetup = flags;
 
@@ -47,7 +47,7 @@ vas_fir_binaural *vas_fir_binaural_new(int flags)
 
 void vas_fir_binaural_free(vas_fir_binaural *x)
 {
-    vas_mem_free(x->description.fullPath );
+    vas_mem_free(x->metaData.fullPath );
     vas_dynamicFirChannel_free(x->left);
     vas_dynamicFirChannel_free(x->right);
 }

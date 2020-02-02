@@ -95,8 +95,6 @@
     <None Include="Assets\StreamingAssets\fabian_dir256.txt" />
     <None Include="Assets\StreamingAssets\fr_pos0_tail.txt" />
     <None Include="Assets\StreamingAssets\fr_pos6.txt" />
-    <None Include="Assets\StreamingAssets\HMB1_S00_R00_tail.txt" />
-    <None Include="Assets\StreamingAssets\HMB1_S00_R00.txt" />
     <None Include="Assets\StreamingAssets\fr_pos6_tail.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

@@ -82,7 +82,7 @@ static void *vas_hpcomp_new(t_symbol *s, int argc, t_atom *argv)
     }
     
     if(path)
-        rwa_firobject_read2((rwa_firobject *)x, path, x->segmentSize, 0);
+        rwa_firobject_read2((rwa_firobject *)x, path, x->segmentSize, 0, 0);
     
     return (x);
 }

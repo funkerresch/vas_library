@@ -47,6 +47,8 @@ typedef struct vas_fir_metaData
 {
     char *fullPath;
     int filterLength;
+    int filterOffset;
+    int filterEnd;
     int directionFormat;
     int audioFormat;
     int lineFormat;
@@ -102,6 +104,7 @@ typedef struct vas_dynamicFirChannel_filter
     int eleStride;
     int aziRange;
     int aziStride;
+    int offset;
 
 } vas_dynamicFirChannel_filter;
 
@@ -148,6 +151,7 @@ typedef struct vas_dynamicFirChannel_output
     vas_dynamicFirChannel_target current;
     vas_dynamicFirChannel_target next;
     float *outputSegment;
+    float *nextOutputSegment;
 } vas_dynamicFirChannel_output;
 
 /**
@@ -161,6 +165,8 @@ typedef struct vas_dynamicFirChannel
     float *tmp;                                 // tmp is used for zeropadding before calculating the frequency response
     float *fadeOut;                             // holds the fadeout array necessary for the crossfade
     float *fadeIn;                              // holds the fadein array necessary for the crossfade
+    float *deInterleaveReal;                     // deInterleaveTmp is used deainterleaving the kissffts
+    float *deInterleaveImag;                     // deInterleaveTmp is used deainterleaving the kissffts
     
     vas_dynamicFirChannel_input *input;          // my signal input
     vas_dynamicFirChannel_output output;        // calculated output
@@ -188,6 +194,7 @@ typedef struct vas_dynamicFirChannel
     int useSharedInput;
     int useSharedFilter;
     int frameCounter;
+    int startCrossfade;
     
     float gain;
     float segmentThreshold;

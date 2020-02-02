@@ -20,7 +20,7 @@
 //#define VAS_USE_KISSFFT
 //#define VAS_USE_AVX
 
-#if !defined(VAS_USE_VDSP) && !defined(VAS_USE_KISSFFT) && !defined(VAS_USE_FFTW)
+#if !defined(VAS_USE_VDSP) && !defined(VAS_USE_KISSFFT)
 
 #ifdef __APPLE__
 
@@ -144,7 +144,9 @@ typedef float VAS_OUTPUTBUFFER;
     
 #define VAS_NOERROR 0
 #define VAS_ERROR_MEM 1
-#define VAS_ERROR_READFILE 2
+#define VAS_ERROR_READFILE 1 << 1
+#define VAS_ERROR_METADATA 1 << 2
+
 
 #ifndef WHEREAMI_H
 #define WHEREAMI_H
@@ -227,6 +229,10 @@ void vas_util_complexCopy(VAS_COMPLEX *source, VAS_COMPLEX *dest, int length);
 void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int n);
 
 void vas_util_complexMultiplyAdd(VAS_COMPLEX *signalIn, VAS_COMPLEX *filter, VAS_COMPLEX *dest, int length);
+
+void vas_util_complexMultiplyAdd2(VAS_COMPLEX *signalIn, VAS_COMPLEX *filter, VAS_COMPLEX *dest, int length);
+
+void vas_util_deinterleaveComplexArray2(VAS_COMPLEX *input, float *realArray, float *imagArray, int length);
 
 const char *vas_util_getFileExtension(const char *filename);
 

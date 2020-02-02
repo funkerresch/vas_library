@@ -1,4 +1,4 @@
-#N canvas 447 314 990 705 10;
+#N canvas 485 80 990 705 10;
 #X obj 195 99 oscparse;
 #X obj 195 76 netreceive -u -b;
 #X msg 195 53 listen 51080;
@@ -11,13 +11,12 @@
 #X obj 195 144 route azimuth elevation;
 #X obj 195 30 loadbang;
 #X obj 811 123 vsl 40 110 0 200 0 0 empty empty empty 0 -9 0 10 -261682
--1 -1 0 1;
+-1 -1 2398 1;
 #X obj 811 245 / 127;
 #X floatatom 904 270 5 0 0 0 - - -;
 #X obj 811 78 loadbang;
 #X obj 24 29 loadbang;
 #X msg 811 100 44;
-#X msg 27 124 open cicerospeech.wav;
 #X msg 881 77 \; pd dsp 0;
 #N canvas 0 23 450 300 (subpatch) 0;
 #X array arrayL 145156 float 0;
@@ -30,13 +29,11 @@
 #X array arrayR 145156 float 0;
 #X coords 0 1 145155 -1 200 80 1 0 0;
 #X restore 571 393 graph;
-#X obj 91 526 vas_binaural~ 256 fabian_dir256.txt;
 #X obj 166 617 *~ 0.5;
 #X obj 91 617 *~ 0.5;
 #X obj 91 651 dac~ 1 2;
 #X floatatom 194 454 5 0 0 0 - - -;
 #X floatatom 298 455 5 0 0 0 - - -;
-#X msg 28 249 read fr_pos0_tail.txt 2048 3000;
 #X msg 59 309 read fabian_dir256.txt 1024 0;
 #X msg 354 357 set arrayL arrayR;
 #X msg 694 32 read -resize MediumStage.aif arrayL arrayR \;;
@@ -47,11 +44,8 @@
 #X obj 262 166 s ele;
 #X obj 194 432 r azi;
 #X obj 298 432 r ele;
-#X text 309 520 1st argument is partition size. 2nd argument IR (set)
-to load.;
 #X text 96 485 1st inlet is the signal and message input. 2nd inlet
 is for azimuth. 3rd inlet is for elevation.;
-#X obj 297 585 vas_binaural~ 256 fabian_dir256.txt;
 #X text 309 19 Receive elevation and azimuth from a headtracker via
 osc. Instructions for building the vas headtracker are a available
 at the vas git repository: github.com/funkerresch/vas_library;
@@ -60,7 +54,6 @@ size and IR set will share the filter with the first object \, that
 loaded the IR set. It does not allocate extra memory for the Impulse
 Responses. As long as any object references a filter set \, the object
 that loaded the original set will not accept a new IR set.;
-#X obj 298 615 vas_binaural~ 256 fabian_dir256.txt;
 #N canvas 446 318 1021 631 vas_fileformat 0;
 #X obj 165 247 vas_binaural~;
 #X msg 164 39 read multipulse.txt 256 0;
@@ -136,8 +129,7 @@ allocation in Unity is terrebly slow..);
 #X connect 21 0 0 0;
 #X restore 415 180 pd vas_fileformat;
 #X obj 28 195 s~ source;
-#X obj 91 431 r~ source;
-#X msg 43 278 read fr_pos0.txt 2048 0;
+#X obj 90 408 r~ source;
 #X obj 811 269 send vol_main;
 #X obj 124 573 receive vol_main;
 #X obj 868 118 r mute_main;
@@ -148,44 +140,55 @@ partition size for the fft (default is 256). 3rd argument is the offset
 in samples for the IR set. 4rth argument the end in samples.;
 #X text 352 323 Ir (sets) can also be loaded from pd arrays with the
 set function.;
+#X msg 27 124 open 20200112_Chor_1st01_Sopran.wav;
+#X msg 100 366 testIr;
+#X obj 189 355 osc~ 440;
+#X obj 206 399 *~ 0.2;
+#X obj 254 343 osc~ 880;
+#X obj 91 526 vas_binaural~ 256 fabian_dir256.txt;
+#X msg 43 278 read HMB1c_S00_R04.txt 512 0;
+#X msg 28 226 read fr_pos0_tail.txt 2048 3000 80000;
 #X connect 0 0 7 0;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
-#X connect 3 0 47 0;
+#X connect 3 0 41 0;
 #X connect 3 1 5 0;
 #X connect 4 0 3 0;
 #X connect 5 0 6 0;
 #X connect 6 0 4 0;
-#X connect 6 1 16 0;
+#X connect 6 1 49 0;
 #X connect 7 0 8 0;
-#X connect 8 0 36 0;
-#X connect 8 1 37 0;
+#X connect 8 0 33 0;
+#X connect 8 1 34 0;
 #X connect 9 0 2 0;
 #X connect 10 0 11 0;
 #X connect 11 0 12 0;
-#X connect 11 0 50 0;
+#X connect 11 0 43 0;
 #X connect 13 0 15 0;
 #X connect 14 0 5 0;
 #X connect 15 0 10 0;
-#X connect 16 0 3 0;
-#X connect 19 0 20 0;
-#X connect 23 0 25 0;
-#X connect 23 0 34 0;
-#X connect 23 1 24 0;
-#X connect 24 0 26 1;
-#X connect 25 0 26 0;
-#X connect 27 0 23 1;
-#X connect 28 0 23 2;
-#X connect 29 0 23 0;
-#X connect 30 0 23 0;
-#X connect 31 0 23 0;
-#X connect 32 0 19 0;
-#X connect 34 0 35 0;
-#X connect 35 0 33 0;
-#X connect 38 0 27 0;
-#X connect 39 0 28 0;
-#X connect 48 0 23 0;
-#X connect 49 0 23 0;
-#X connect 51 0 25 1;
-#X connect 51 0 24 1;
-#X connect 52 0 10 0;
+#X connect 18 0 19 0;
+#X connect 22 0 24 1;
+#X connect 23 0 24 0;
+#X connect 25 0 54 1;
+#X connect 26 0 54 2;
+#X connect 27 0 54 0;
+#X connect 28 0 54 0;
+#X connect 29 0 18 0;
+#X connect 31 0 32 0;
+#X connect 32 0 30 0;
+#X connect 35 0 25 0;
+#X connect 36 0 26 0;
+#X connect 42 0 54 0;
+#X connect 44 0 23 1;
+#X connect 44 0 22 1;
+#X connect 45 0 10 0;
+#X connect 49 0 3 0;
+#X connect 50 0 54 0;
+#X connect 51 0 52 0;
+#X connect 53 0 52 0;
+#X connect 54 0 23 0;
+#X connect 54 0 31 0;
+#X connect 54 1 22 0;
+#X connect 55 0 54 0;
+#X connect 56 0 54 0;

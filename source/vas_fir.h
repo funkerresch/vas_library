@@ -32,7 +32,7 @@ extern "C" {
 
 typedef struct vas_fir
 {
-    vas_fir_metaData description;
+    vas_fir_metaData metaData;
     vas_dynamicFirChannel *left;
     vas_dynamicFirChannel *right;    
 } vas_fir;
@@ -48,6 +48,8 @@ void vas_fir_readText_Ir1(vas_fir *x, FILE *filePtr, int offset);
 void vas_fir_initFilter2(vas_fir *x, int segmentSize, int offset);
 void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath);
 int vas_fir_readSofa_getFilter(vas_fir *x, void *filter);
+void vas_fir_setMetaData_manually(vas_fir *x, int filterLength, int segmentSize, int directionFormat, int eleStride, int aziStride, int audioFormat, int lineFormat);
+void vas_fir_test_4096_1024_azimuthStride3(vas_fir *x);
     
 #ifdef __cplusplus
 }

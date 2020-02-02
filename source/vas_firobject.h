@@ -77,6 +77,8 @@ typedef struct rwa_firobject
 
 void vas_firobject_set(rwa_firobject *x, t_symbol *left, t_symbol *right);
 
-void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float offset);
+void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float offset, float end);
+
+
 
 #endif

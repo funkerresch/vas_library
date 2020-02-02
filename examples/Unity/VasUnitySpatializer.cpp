@@ -565,9 +565,9 @@ namespace Spatializer
                         if(Debug != NULL)
                             Debug("Use existing filter");
 #endif
-                        size_t size = strlen(existingFilter->description.fullPath);
-                        x->description.fullPath = (char *)vas_mem_alloc(sizeof(char) * size);
-                        strcpy(x->description.fullPath, existingFilter->description.fullPath);
+                        size_t size = strlen(existingFilter->metaData.fullPath);
+                        x->metaData.fullPath = (char *)vas_mem_alloc(sizeof(char) * size);
+                        strcpy(x->metaData.fullPath, existingFilter->metaData.fullPath);
                         vas_fir_prepareChannelsWithSharedFilter((vas_fir *)existingFilter, x->left, x->right);
                         vas_fir_setInitFlag((vas_fir *)x);
                         return;

@@ -33,7 +33,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "883"
             endingLineNumber = "883"
-            landmarkName = "vas_dynamicFirChannel_prepareFilter(x, filter, ele, azi)"
+            landmarkName = "vas_dynamicFirChannel_free(x)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -49,7 +49,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "885"
             endingLineNumber = "885"
-            landmarkName = "vas_dynamicFirChannel_prepareFilter(x, filter, ele, azi)"
+            landmarkName = "vas_dynamicFirChannel_free(x)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -65,7 +65,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "884"
             endingLineNumber = "884"
-            landmarkName = "vas_dynamicFirChannel_prepareFilter(x, filter, ele, azi)"
+            landmarkName = "vas_dynamicFirChannel_free(x)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -81,7 +81,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "357"
             endingLineNumber = "357"
-            landmarkName = "vas_dynamicFirChannel_setSegmentSize(x, segmentSize)"
+            landmarkName = "vas_dynamicFirChannel_multiplyAddSegments(x, target)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

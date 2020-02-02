@@ -533,7 +533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				DSTROOT = "$(PROJECT_DIR)/..";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -557,6 +557,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -572,7 +573,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				DSTROOT = "$(PROJECT_DIR)/..";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -597,6 +598,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -612,7 +614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				DSTROOT = "$(PROJECT_DIR)/..";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -636,6 +638,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -651,7 +654,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				DSTROOT = "$(PROJECT_DIR)/..";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -676,6 +679,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -717,6 +721,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/build/src",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -760,6 +765,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/build/src",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -856,7 +862,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				DSTROOT = "$(PROJECT_DIR)/..";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -876,6 +882,7 @@
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
@@ -891,7 +898,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
 				DSTROOT = "$(PROJECT_DIR)/..";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -912,6 +919,7 @@
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,
