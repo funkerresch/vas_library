@@ -85,11 +85,11 @@ void vas_reverb_tilde_setup(void)
     vas_reverb_class = class_new(gensym("vas_reverb~"), (t_newmethod)vas_reverb_new, (t_method)vas_reverb_free,
     	sizeof(vas_reverb), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("vas_reverb~ v0.6");
+    post("vas_reverb~ v0.7");
    
     CLASS_MAINSIGNALIN(vas_reverb_class, vas_reverb, f);
    
     class_addmethod(vas_reverb_class, (t_method)vas_reverb_dsp, gensym("dsp"), 0);
-    class_addmethod(vas_reverb_class, (t_method)rwa_firobject_read2, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, 0);
-    class_addmethod(vas_reverb_class, (t_method)vas_firobject_set, gensym("set"), A_DEFSYM, A_DEFSYM, 0);
+    class_addmethod(vas_reverb_class, (t_method)rwa_firobject_read2, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT,0);
+    class_addmethod(vas_reverb_class, (t_method)vas_firobject_set1, gensym("set"), A_DEFSYM, A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT, 0);
 }

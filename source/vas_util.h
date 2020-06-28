@@ -14,8 +14,8 @@
  * All kinds of utility functions, mostly vector math
  */
 
-#ifndef ak_utilities_h
-#define ak_utilities_h
+#ifndef vas_util_h
+#define vas_util_h
 
 //#define VAS_USE_KISSFFT
 //#define VAS_USE_AVX
@@ -71,7 +71,7 @@ typedef COMPLEX_SPLIT VAS_COMPLEX;
 
 #ifdef VAS_USE_KISSFFT
 #include "kiss_fftr.h"
-#include "vas_util_vectorIntrinsics.h"
+//#include "vas_util_vectorIntrinsics.h"
 typedef kiss_fft_cpx VAS_COMPLEX;
 #endif
 

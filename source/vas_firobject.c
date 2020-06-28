@@ -31,27 +31,41 @@ void vas_firobject_getFloatArrayAndLength(rwa_firobject *x, t_symbol *arrayname,
 
  // very quick and dirty reading from pd array
 
-void vas_firobject_set(rwa_firobject *x, t_symbol *left, t_symbol *right)
+void vas_firobject_set1(rwa_firobject *x, t_symbol *left, t_symbol *right, float segmentSize, float offset, float end)
 {
     vas_fir *engine = x->convolutionEngine;
+    int filterLenghtMinusOffset = 0;
+    int minLength = 0;
+    int currentIndex2Write = 0;
+    
+    x->segmentSize = segmentSize;
     vas_firobject_getFloatArrayAndLength(x, left, &x->leftArray, &x->leftArrayLength);
     vas_firobject_getFloatArrayAndLength(x, right, &x->rightArray, &x->rightArrayLength);
-    vas_fir_setMetaData((vas_fir *)engine, VAS_IR_DIRECTIONFORMAT_SINGLE, x->leftArrayLength);
-    vas_fir_initFilter2((vas_fir *)engine, x->segmentSize, 0);
-    float *currentIr = (float *)vas_mem_alloc( x->leftArrayLength * sizeof(float));
     
-    for (int i=0;i<x->leftArrayLength;i++)
-        currentIr[i] = x->leftArray[i].w_float;
+    minLength = x->leftArrayLength;
+    if(x->rightArrayLength < minLength)
+        minLength = x->rightArrayLength;
+
+    vas_fir_setMetaData_manually1((vas_fir *)engine, minLength, segmentSize, VAS_IR_DIRECTIONFORMAT_SINGLE, 1, 1, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR, offset, end);
+        
+    filterLenghtMinusOffset = ((vas_fir *)engine)->metaData.filterLength-offset;
+    float *currentIr = (float *)vas_mem_alloc( filterLenghtMinusOffset * sizeof(float));
+    engine->left->filter->filterLength = filterLenghtMinusOffset;
+    engine->right->filter->filterLength = filterLenghtMinusOffset;
+       
+    currentIndex2Write = 0;
+    for (int i=offset;i<filterLenghtMinusOffset;i++)
+        currentIr[currentIndex2Write++] = x->leftArray[i].w_float;
     
     vas_dynamicFirChannel_prepareFilter(engine->left, currentIr, 0, 0);
     
-    for (int i=0;i<x->rightArrayLength;i++)
-        currentIr[i] = x->rightArray[i].w_float;
+    currentIndex2Write = 0;
+    for (int i=offset;i<filterLenghtMinusOffset;i++)
+        currentIr[currentIndex2Write] = x->rightArray[i].w_float;
     
     vas_dynamicFirChannel_prepareFilter(engine->right, currentIr, 0, 0);
-    vas_fir_setInitFlag((vas_fir *)engine);
-    //post("%d %d", x->leftArrayLength, x->rightArrayLength);
     
+    vas_fir_setInitFlag((vas_fir *)engine);
     vas_mem_free(currentIr);
 }
 
@@ -87,7 +101,8 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
         void *filter = vas_fir_readSofa_getMetaData(engine, x->fullpath);
         if(filter)
         {
-            vas_fir_initFilter2((vas_fir *)engine, x->segmentSize, 0);
+            vas_fir_setMultiDirection3DegreeGridResoluion(engine, engine->metaData.filterLength, segmentSize, 0, 0);
+            vas_fir_initFilter2((vas_fir *)engine, x->segmentSize);
             vas_fir_readSofa_getFilter(engine, filter);
             vas_fir_setInitFlag((vas_fir *)engine);
         }
@@ -103,29 +118,32 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
             post("remove current filter node");
         }
             
-        vas_fir *existingFilter = vas_fir_list_find(&IRs, x->fullpath);
+        vas_fir *existingFilter = vas_fir_list_find1(&IRs, x->fullpath, segmentSize, offset, end);
         
         if(existingFilter != NULL)
         {
-            if(segmentSize == existingFilter->left->filter->segmentSize)
-            {
-                size_t size = strlen(existingFilter->metaData.fullPath);
-                engine->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
-                strcpy(engine->metaData.fullPath, existingFilter->metaData.fullPath);
-                vas_fir_prepareChannelsWithSharedFilter((vas_fir *)existingFilter, engine->left, engine->right);
-                vas_fir_setInitFlag((vas_fir *)engine);
-                return;
-            }
+            size_t size = strlen(existingFilter->metaData.fullPath);
+            engine->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
+            strcpy(engine->metaData.fullPath, existingFilter->metaData.fullPath);
+            vas_fir_prepareChannelsWithSharedFilter((vas_fir *)existingFilter, engine->left, engine->right);
+            vas_fir_setInitFlag((vas_fir *)engine);
+            post("Use existing filter");
+            return;
         }
+        
         FILE *file = vas_fir_readText_metaData1((vas_fir *)engine, x->fullpath);
         if(file)
         {
             post("Load Filter from File with segmenSize: %d", x->segmentSize);
             
             ((vas_fir *)engine)->metaData.filterOffset = offset;
+            ((vas_fir *)engine)->metaData.segmentSize = segmentSize;
+            
             if(end > 0 && (end < ((vas_fir *)engine)->metaData.filterLength) )
                 ((vas_fir *)engine)->metaData.filterLength = end;
-            vas_fir_initFilter2((vas_fir *)engine, x->segmentSize, offset);
+            
+            ((vas_fir *)engine)->metaData.filterLengthMinusOffset = ((vas_fir *)engine)->metaData.filterLength - ((vas_fir *)engine)->metaData.filterOffset;
+            vas_fir_initFilter2((vas_fir *)engine, x->segmentSize);
             vas_fir_readText_Ir1((vas_fir *)engine, file, offset); // move fclose out of this function..
             vas_fir_list_addNode(&IRs, vas_fir_listNode_new(engine));
             vas_fir_setInitFlag((vas_fir *)engine);

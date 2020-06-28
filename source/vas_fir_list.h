@@ -41,6 +41,8 @@ void vas_fir_list_addNode(vas_fir_list *x, vas_fir_listNode *node);
 
 vas_fir *vas_fir_list_find(vas_fir_list *x, const char *match);
 
+vas_fir *vas_fir_list_find1(vas_fir_list *x, const char *match, int segmentSize, int offset, int end);
+
 void vas_fir_list_removeNode(vas_fir_list *x, const char *match);
 
 #ifdef __cplusplus

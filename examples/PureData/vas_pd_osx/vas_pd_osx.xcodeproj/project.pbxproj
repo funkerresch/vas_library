@@ -22,7 +22,6 @@
 		84DA7EFF20401E1B00CDC513 /* vas_mem.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DA7EF520401E1A00CDC513 /* vas_mem.h */; };
 		84DA7F0120401E1B00CDC513 /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF720401E1A00CDC513 /* vas_mem.c */; };
 		84DA7F0220401E1B00CDC513 /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF820401E1A00CDC513 /* vas_util.c */; };
-		84DA7F0320401E1B00CDC513 /* vas_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DA7EF920401E1B00CDC513 /* vas_util.h */; };
 		84DA7F0E2040487A00CDC513 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
 		84DA7F0F2040487A00CDC513 /* vas_dynamicFirChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84DA7F0D2040487A00CDC513 /* vas_dynamicFirChannel.h */; };
 		84E5E14821FB48E6002216EF /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
@@ -48,7 +47,6 @@
 		E417C3FB236C70DC001A9C1B /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
 		E417C3FC236C70DC001A9C1B /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A69BD3234C947C00E4E570 /* vas_fir_list.c */; };
 		E417C3FD236C70DC001A9C1B /* vas_firobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E417C3E9236C6FDE001A9C1B /* vas_firobject.c */; };
-		E417C3FF236C70DC001A9C1B /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
 		E417C400236C70DC001A9C1B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
 		E417C402236C70DC001A9C1B /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
 		E417C404236C70DC001A9C1B /* vas_firobject.h in Headers */ = {isa = PBXBuildFile; fileRef = E417C3E8236C6FDE001A9C1B /* vas_firobject.h */; };
@@ -60,9 +58,6 @@
 		E448C072230FE4B800D3C142 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
 		E448C074230FE4B900D3C142 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
 		E448C075230FE4B900D3C142 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
-		E481CB3222A2CF80001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
-		E481CB3422A2CFBB001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
-		E481CB3522A2CFD3001927DC /* libmysofa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E481CB3122A2CF80001927DC /* libmysofa.a */; };
 		E4A69BD4234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
 		E4A69BD6234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
 		E4A69BD7234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
@@ -147,7 +142,6 @@
 		E417C40A236C70DC001A9C1B /* vas_binaural~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "vas_binaural~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E417C40B236C72C4001A9C1B /* vas_binaural~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "vas_binaural~.c"; path = "../vas_binaural~.c"; sourceTree = "<group>"; };
 		E417C40C236C72C4001A9C1B /* vas_binaural~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vas_binaural~.h"; path = "../vas_binaural~.h"; sourceTree = "<group>"; };
-		E481CB3122A2CF80001927DC /* libmysofa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmysofa.a; path = ../../../libmysofa/build/src/libmysofa.a; sourceTree = "<group>"; };
 		E4A69BD2234C947C00E4E570 /* vas_fir_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_fir_list.h; path = ../../../source/vas_fir_list.h; sourceTree = "<group>"; };
 		E4A69BD3234C947C00E4E570 /* vas_fir_list.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_fir_list.c; path = ../../../source/vas_fir_list.c; sourceTree = "<group>"; };
 		E4BE83CE2379699900A84A1D /* vas_hpcomp~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "vas_hpcomp~.c"; path = "../vas_hpcomp~.c"; sourceTree = "<group>"; };
@@ -164,7 +158,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E481CB3422A2CFBB001927DC /* libmysofa.a in Frameworks */,
 				84C9E396213ACA5D004C6B54 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,7 +166,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E481CB3522A2CFD3001927DC /* libmysofa.a in Frameworks */,
 				84E5E15321FB48E6002216EF /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,7 +174,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E417C3FF236C70DC001A9C1B /* libmysofa.a in Frameworks */,
 				E417C400236C70DC001A9C1B /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,7 +182,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E481CB3222A2CF80001927DC /* libmysofa.a in Frameworks */,
 				844237761FB4A887005ACA50 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,7 +192,6 @@
 		844237731FB4A6E1005ACA50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E481CB3122A2CF80001927DC /* libmysofa.a */,
 				844237741FB4A6E2005ACA50 /* Accelerate.framework */,
 			);
 			name = Frameworks;
@@ -303,7 +292,6 @@
 				84DA7F0F2040487A00CDC513 /* vas_dynamicFirChannel.h in Headers */,
 				844237661FB4A69E005ACA50 /* m_pd.h in Headers */,
 				842E090520C67E8B0089C3D9 /* vas_fir_binaural.h in Headers */,
-				84DA7F0320401E1B00CDC513 /* vas_util.h in Headers */,
 				E4A69BD4234C947C00E4E570 /* vas_fir_list.h in Headers */,
 				84DA7EFF20401E1B00CDC513 /* vas_mem.h in Headers */,
 				E4BE83E32379699A00A84A1D /* rwa_binauralsimple~.h in Headers */,
@@ -706,7 +694,6 @@
 					PUREDATA,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
 					VAS_INPUTVECTOR_USE_FLOAT,
-					VAS_USE_LIBMYSOFA,
 					VAS_DEBUG_MEM,
 					VAS_WITH_AVERAGE_SEGMENTPOWER,
 					VERBOSE,
@@ -750,7 +737,6 @@
 					PUREDATA,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
 					VAS_INPUTVECTOR_USE_FLOAT,
-					VAS_USE_LIBMYSOFA,
 					VAS_DEBUG_MEM,
 					VAS_WITH_AVERAGE_SEGMENTPOWER,
 					VERBOSE,

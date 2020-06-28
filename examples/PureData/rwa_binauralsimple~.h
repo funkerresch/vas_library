@@ -1,3 +1,7 @@
+/*
+ Leftover for compatibility with RWA, is going to be replaced with vas_binaural~
+ */
+
 #include "vas_firobject.h"
 
 #ifndef _binauralsimple_

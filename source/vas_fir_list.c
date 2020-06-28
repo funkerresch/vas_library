@@ -61,6 +61,26 @@ vas_fir *vas_fir_list_find(vas_fir_list *x, const char *match)
     return NULL;
 }
 
+vas_fir *vas_fir_list_find1(vas_fir_list *x, const char *match, int segmentSize, int offset, int end)
+{
+    vas_fir_listNode *current = x->firstElement;
+    while(current)
+    {
+        if(current->data->metaData.fullPath != NULL)
+        {
+            
+            if(!strcmp(current->data->metaData.fullPath, match)
+               && current->data->metaData.segmentSize == segmentSize
+               && current->data->metaData.filterOffset == offset
+               && current->data->metaData.filterEnd == end)
+                return current->data;
+        }
+        
+        current = current->next;
+    }
+    return NULL;
+}
+
 void vas_fir_list_clear(vas_fir_list *x)
 {
     vas_fir_listNode *current = x->firstElement;

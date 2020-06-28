@@ -856,7 +856,9 @@ void vas_util_fscale(float *dest, float scale,  int length)
 {
 #ifdef VAS_USE_VDSP
     vDSP_vsmul(dest, 1, &scale, dest, 1, length);
-#else
+#endif
+    
+#ifdef VAS_USE_KISSFFT
     int n = length;
     while (n--)
     {
@@ -940,7 +942,7 @@ void vas_util_deinterleaveComplexArray2(VAS_COMPLEX *input, float *realArray, fl
 
     int n = length;
     double * p;
-    
+
     while (n)
     {
         p = (double*)inputPtr;
@@ -955,14 +957,14 @@ void vas_util_deinterleaveComplexArray2(VAS_COMPLEX *input, float *realArray, fl
         imag+=8;
         n-=8;
     }
-    
+
     n = length;
     real = realArray;
     imag = imagArray;
     inputPtr = input;
     float *writeBackReal = (float *)input;
     float *writeBackImag = (float *)(&(input[imagIndex]));
-    
+
     while (n)
     {
         destReal = _mm256_load_ps(real);

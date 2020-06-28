@@ -33,6 +33,7 @@
 #include <stdio.h>
 #include "vas_mem.h"
 #include "vas_util.h"
+//#include <pthread.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -47,8 +48,10 @@ typedef struct vas_fir_metaData
 {
     char *fullPath;
     int filterLength;
+    int filterLengthMinusOffset;
     int filterOffset;
     int filterEnd;
+    int segmentSize;
     int directionFormat;
     int audioFormat;
     int lineFormat;
@@ -204,9 +207,6 @@ typedef struct vas_dynamicFirChannel
 /**
  * @brief Creates a new dynamicFirChannel. <br>
  * @param setup An integer containing byte flags for the filter configuration (have a look at vas_util.h) <br>
- * @param segmentSize The segmentSize must be set in advance in order to calculate the partitioned <br>
- * filter segments and prepare the input array. <br>
- * @param firConfig Configuration data struct for individual designed filters. <br>
  * @return Returns a new, initialized fir channel. <br>
  * The dynamicFirChannel is a mono to mono channel containing all structures necessary for calculating <br>
  * an angle dependent convolution. Complex multichannel configurations can be created by using multiple instances <br>
@@ -218,7 +218,6 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup);
 /**
  * @brief Frees a dynamicFirChannel. <br>
  * @param x The channel to be freed <br>
- * @return Returns void
  */
 
 void vas_dynamicFirChannel_free(vas_dynamicFirChannel *x);
@@ -347,7 +346,7 @@ void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float t
 
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize);
 
-void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *metaData, int segmentSize, int offset);
+void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *metaData, int segmentSize);
     
 void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x);
 

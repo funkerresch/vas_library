@@ -70,7 +70,7 @@ static void *vas_hpcomp_new(t_symbol *s, int argc, t_atom *argv)
 
     if(!x->convolutionEngine)
     {
-        post("Could not create rwa_binauralrir.");
+        post("Could not create hpcomp~");
         free(x);
         return NULL;
     }

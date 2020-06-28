@@ -1,4 +1,4 @@
-# Makefile to build class 'helloworld' for Pure Data.
+# Makefile to build class 'vas_binaural' for Pure Data.
 # Needs Makefile.pdlibbuilder as helper makefile for platform-dependent build
 # settings and rules.
 
@@ -25,7 +25,7 @@ datafiles =
 PDLIBBUILDER_DIR=pd-lib-builder/
 
 CC += $(INCLUDES) -DPUREDATA -DVAS_WITH_AVERAGE_SEGMENTPOWER 
-CC +=  -mavx -DVAS_USE_AVX
+# CC +=  -mavx -DVAS_USE_AVX
 
 include $(PDLIBBUILDER_DIR)/Makefile.pdlibbuilder
 

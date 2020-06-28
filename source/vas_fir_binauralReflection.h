@@ -37,6 +37,8 @@ typedef struct vas_fir_binauralReflection {
 vas_fir_binauralReflection *vas_fir_binauralReflection_new(vas_fir_binaural *mainSource, long maxDelayTime);
     
 void vas_fir_binauralReflection_setDelayTime(vas_fir_binauralReflection *x, float delayTime);
+
+void vas_fir_binauralReflection_setScaling(vas_fir_binauralReflection *x, float scaling);
     
 void vas_fir_binauralReflection_setAzimuth(vas_fir_binauralReflection *x, float azimuth);
 
@@ -53,6 +55,8 @@ void vas_fir_binauralReflection_setLowPassFrequency(vas_fir_binauralReflection *
 void vas_fir_binauralReflection_setMaterial(vas_fir_binauralReflection *x, int material);
     
 void vas_fir_binauralReflection_process(vas_fir_binauralReflection *x, float *in, float *outL, float *outR, int vectorSize);
+
+void vas_fir_binauralReflection_process_mute(vas_fir_binauralReflection *x, float *in, int vectorSize);
     
 void vas_fir_binauralReflection_free(vas_fir_binauralReflection *x);
     

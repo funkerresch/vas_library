@@ -28,10 +28,10 @@
 #X obj 160 302 vas_hpcomp~ 256;
 #X text 275 299 1st argument (optional) is partition size. 2nd argument
 (optional) IR (set) to load.;
-#X text 232 86 vas_hpcomp~ performs an input1 to output1 and input2
+#X text 249 52 vas_hpcomp~ performs an input1 to output1 and input2
 to output2 convolution.;
-#X msg 206 141 read unitpulse.txt 256;
-#X text 356 143 Have a look at the unitpulse text files for the vas
+#X msg 185 147 read unitpulse.txt 256;
+#X text 334 141 Have a look at the unitpulse text files for the vas
 fileformat.;
 #X connect 0 0 24 0;
 #X connect 0 0 24 1;

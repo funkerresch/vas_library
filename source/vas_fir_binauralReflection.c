@@ -26,6 +26,11 @@ void vas_fir_binauralReflection_setDistance(vas_fir_binauralReflection *x, float
     x->scale = 1 - tmp;
 }
 
+void vas_fir_binauralReflection_setScaling(vas_fir_binauralReflection *x, float scaling)
+{
+    x->scale = scaling;
+}
+
 void vas_fir_binauralReflection_clear(vas_fir_binauralReflection *x)
 {
     vas_delay_crossfade_clear(x->delay);
@@ -46,13 +51,13 @@ void vas_fir_binauralReflection_setMaterial(vas_fir_binauralReflection *x, int m
     switch(material)
     {
         case UNDEFINED:
-            vas_fir_binauralReflection_setHighPassFrequency(x, 1000);
-            vas_fir_binauralReflection_setLowPassFrequency(x, 17000);
+            vas_fir_binauralReflection_setHighPassFrequency(x, 10);
+            vas_fir_binauralReflection_setLowPassFrequency(x, 20000);
             break;
             
         case CONCRETE:
-            vas_fir_binauralReflection_setHighPassFrequency(x, 1000);
-            vas_fir_binauralReflection_setLowPassFrequency(x, 17000);
+            vas_fir_binauralReflection_setHighPassFrequency(x, 300);
+            vas_fir_binauralReflection_setLowPassFrequency(x, 19000);
             break;
             
         case MIXED:
@@ -70,8 +75,8 @@ void vas_fir_binauralReflection_setMaterial(vas_fir_binauralReflection *x, int m
             vas_fir_binauralReflection_setLowPassFrequency(x, 300);
             break;
         default:
-            vas_fir_binauralReflection_setHighPassFrequency(x, 1000);
-            vas_fir_binauralReflection_setLowPassFrequency(x, 17000);
+            vas_fir_binauralReflection_setHighPassFrequency(x, 10);
+            vas_fir_binauralReflection_setLowPassFrequency(x, 20000);
             break;
     }
 }
@@ -93,12 +98,22 @@ void vas_fir_binauralReflection_setElevation(vas_fir_binauralReflection *x, floa
 
 void vas_fir_binauralReflection_process(vas_fir_binauralReflection *x, float *in, float *outL, float *outR, int vectorSize)
 {
+    vas_util_fcopy(in, x->tmp, vectorSize);
+    vas_iir_biquad_process(x->filterHP, in, x->tmp, vectorSize);
+    vas_iir_biquad_process(x->filterLP, x->tmp, x->tmp, vectorSize);
+    vas_delay_crossfade_process(x->delay, x->tmp, x->tmp, vectorSize);
+    //vas_util_fscale(x->tmp, x->scale, vectorSize);  // simplified Air Absorbtion
+    vas_util_fcopy(x->tmp, in, vectorSize);
+    vas_fir_binaural_processOutputInPlace(x->binauralEngine, x->tmp, outL, outR, vectorSize);
+}
+
+void vas_fir_binauralReflection_process_mute(vas_fir_binauralReflection *x, float *in, int vectorSize)
+{
     vas_iir_biquad_process(x->filterHP, in, x->tmp, vectorSize);
     vas_iir_biquad_process(x->filterLP, x->tmp, x->tmp, vectorSize);
     vas_delay_crossfade_process(x->delay, x->tmp, x->tmp, vectorSize);
     vas_util_fscale(x->tmp, x->scale, vectorSize);  // simplified Air Absorbtion
     vas_util_fcopy(x->tmp, in, vectorSize);
-    vas_fir_binaural_processOutputInPlace(x->binauralEngine, x->tmp, outL, outR, vectorSize);
 }
 
 void vas_fir_binauralReflection_free(vas_fir_binauralReflection *x)

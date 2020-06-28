@@ -8,7 +8,6 @@
 
 import Cocoa
 
-
 let TRACKERID = "rwaht81"
 
 extension String {
@@ -52,7 +51,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         else {
             btconnect.azimuthInverted = false
         }
-        
     }
     
     @IBAction func updateTare(_ sender: Any) {

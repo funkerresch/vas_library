@@ -70,6 +70,12 @@ void vas_fir_setDirectionFormat(vas_fir *x, int directionFormat)
     }
 }
 
+void vas_fir_setAziStride(vas_fir *x, int aziStride)
+{}
+
+void vas_fir_setEleStride(vas_fir *x, int aziStride)
+{}
+
 void vas_fir_setMetaData(vas_fir *x, int directionFormat, int length)
 {
     x->metaData.filterLength = length;
@@ -85,12 +91,12 @@ void vas_fir_setMetaData(vas_fir *x, int directionFormat, int length)
 void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
 {
     int err = 0;
-    struct MYSOFA_EASY *hrtf;
+    struct MYSOFA_EASY *hrtf = NULL;
     int filterLength;
     
     hrtf = mysofa_open(fullpath, 44100, &filterLength, &err);
     
-    if(err)
+    if(!hrtf)
     {
 #if defined(MAXMSPSDK) || defined(PUREDATA)
         post("Can't open %s", fullpath);
@@ -112,8 +118,9 @@ void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
         printf("Filtersize is: %d", filterLength);
 #endif
         x->metaData.filterLength = filterLength;
-        x->metaData.elevationStride = 3;
-        x->metaData.azimuthStride = 3;
+        
+        post("%f %f %f %f %f %f", hrtf->hrtf->ReceiverPosition.values[0], hrtf->hrtf->ReceiverPosition.values[1],hrtf->hrtf->ReceiverPosition.values[2],
+        hrtf->hrtf->ReceiverPosition.values[3],hrtf->hrtf->ReceiverPosition.values[4],hrtf->hrtf->ReceiverPosition.values[5]);
         return hrtf;
     }
 }
@@ -129,11 +136,11 @@ int vas_fir_readSofa_getFilter(vas_fir *x, void *filter)
     float leftDelay;          // unit is sec.
     float rightDelay;         // unit is sec.
     
-    int eleRange = 180;
-    int aziRange = 360;
+    int eleRange = 60;
+    int aziRange = 120;
     int eleStride = 3;
     int aziStride = 3;
-    int eleZero = 90;
+    int eleZero = 30;
     
 #if defined(MAXMSPSDK) || defined(PUREDATA)
     post("EleRange: %d", eleRange);
@@ -157,6 +164,9 @@ int vas_fir_readSofa_getFilter(vas_fir *x, void *filter)
             float z = sinf(elev);
             
             mysofa_getfilter_float(hrtf , xx, y, z, leftIR, rightIR, &leftDelay, &rightDelay);
+            
+            
+            
             
             vas_dynamicFirChannel_prepareFilter(x->left, leftIR,  eleCount, aziCount);
             vas_dynamicFirChannel_prepareFilter(x->right, rightIR,  eleCount, aziCount);
@@ -227,6 +237,9 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
     char *value;
     int error = 0;
     char *lineAdr;
+    
+    x->metaData.filterOffset = 0;
+    x->metaData.filterEnd = 0;
     
     while ((read = vas_getline(line, &len, filePtr)) != -1)
     {
@@ -343,7 +356,7 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
     return error;
 }
 
-void vas_fir_setMetaData_manually(vas_fir *x, int filterLength, int segmentSize, int directionFormat, int eleStride, int aziStride, int audioFormat, int lineFormat)
+void vas_fir_setMetaData_manually1(vas_fir *x, int filterLength, int segmentSize, int directionFormat, int eleStride, int aziStride, int audioFormat, int lineFormat, int offset, int end)
 {
     x->metaData.filterLength = filterLength;
     vas_fir_setDirectionFormat(x, directionFormat);
@@ -367,8 +380,26 @@ void vas_fir_setMetaData_manually(vas_fir *x, int filterLength, int segmentSize,
 
     x->metaData.audioFormat = audioFormat;
     x->metaData.lineFormat = lineFormat;
+    x->metaData.segmentSize = segmentSize;
     
-    vas_fir_initFilter2(x, segmentSize, 0);
+    if(end > 0 && (end < x->metaData.filterLength) )
+            x->metaData.filterLength = end;
+        
+    x->metaData.filterOffset = offset;
+    x->metaData.segmentSize = segmentSize;
+     
+    if(offset >= x->metaData.filterLength)
+    {
+#if(defined(MAXMSPSDK) || defined(PUREDATA))
+        post("Offset greater than filter length.");
+#else
+        printf("Offset greater than filter length.");
+#endif
+        x->metaData.filterOffset = 0;
+    }
+        
+    x->metaData.filterLengthMinusOffset = x->metaData.filterLength - x->metaData.filterOffset;
+    vas_fir_initFilter2(x, segmentSize);
     
 #ifdef VERBOSE
 #if(defined(MAXMSPSDK) || defined(PUREDATA))
@@ -384,6 +415,11 @@ void vas_fir_setMetaData_manually(vas_fir *x, int filterLength, int segmentSize,
     printf("audioformat: %d", x->description.audioFormat);
 #endif
 #endif
+}
+
+void vas_fir_setMultiDirection3DegreeGridResoluion(vas_fir *x, int filterLength, int segmentSize, int offset, int end)
+{
+    vas_fir_setMetaData_manually1(x, filterLength, segmentSize, VAS_IR_DIRECTIONFORMAT_MULTI, 3, 3, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR, offset, end);
 }
 
 static void vas_filter_extractAngleFromText(char *angle, int *currentAngle, char **line)
@@ -551,10 +587,10 @@ static void vas_filter_read_lineFormat_ir1(vas_fir *x, FILE *filePtr, char **lin
 #endif
 }
 
-void vas_fir_initFilter2(vas_fir *x, int segmentSize, int offset)
+void vas_fir_initFilter2(vas_fir *x, int segmentSize)
 {
-    vas_dynamicFirChannel_init1(x->left, &x->metaData, segmentSize, offset);
-    vas_dynamicFirChannel_init1(x->right,&x->metaData, segmentSize, offset);
+    vas_dynamicFirChannel_init1(x->left, &x->metaData, segmentSize);
+    vas_dynamicFirChannel_init1(x->right,&x->metaData, segmentSize);
 }
 
 FILE *vas_fir_readText_metaData1(vas_fir *x, char *fullpath)
@@ -613,7 +649,7 @@ void vas_fir_readText_Ir1(vas_fir *x, FILE *filePtr, int offset)
 
 void vas_fir_test_4096_1024_azimuthStride3(vas_fir *x)
 {
-    vas_fir_setMetaData_manually(x, 8192, 32, VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH, 1, 3, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR);
+    vas_fir_setMetaData_manually1(x, 8192, 32, VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH, 1, 3, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR,0,0);
     float currentIr[8192];
     
     for(int i = 0; i < 8192; i++)

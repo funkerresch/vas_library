@@ -13,8 +13,11 @@ void *vas_mem_alloc(long size)
     return malloc(size);
 
 #elif defined(PUREDATA)
-    
+#ifdef VAS_USE_AVX
+        _mm_malloc(32,32);
+#else
     return malloc(size);
+#endif
     
 #else
     
@@ -33,11 +36,13 @@ void *vas_mem_resize(void *ptr, long size)
     return realloc(ptr, size);
     
 #elif defined(PUREDATA)
-    
+//#ifdef VAS_USE_AVX
+//    _mm_malloc(32,32);
+//#else
     void *tmp = realloc(ptr, size);
     memset(tmp, 0, size);
-    
     return tmp;
+//#endif
     
 #else
 

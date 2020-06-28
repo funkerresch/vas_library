@@ -19,8 +19,12 @@
 extern "C" {
 #endif
 
+#define VAS_IIR_BIQUAD_UNDEFINED 0
 #define VAS_IIR_BIQUAD_LOWPASS 1
 #define VAS_IIR_BIQUAD_HIGHPASS 2
+#define VAS_IIR_BIQUAD_LOWSHELF 3
+#define VAS_IIR_BIQUAD_HIGHSHELF 4
+#define VAS_IIR_BIQUAD_PK 5
 
 typedef struct vas_iir_biquad
 {

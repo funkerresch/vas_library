@@ -16,8 +16,6 @@
 		842BEF4921BE64DD0044FDEA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842BEF4821BE64DD0044FDEA /* OpenGL.framework */; };
 		84A20751218712CC004C96CB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A20750218712CC004C96CB /* Accelerate.framework */; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
-		E414B9F423682FF500835219 /* vas_util_vectorIntrinsics.c in Sources */ = {isa = PBXBuildFile; fileRef = E414B9F323682FF500835219 /* vas_util_vectorIntrinsics.c */; };
-		E414B9F523682FF500835219 /* vas_util_vectorIntrinsics.c in Sources */ = {isa = PBXBuildFile; fileRef = E414B9F323682FF500835219 /* vas_util_vectorIntrinsics.c */; };
 		E42C2A6E22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */; };
 		E42C2A6F22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */; };
 		E42C2A7222AE4B5A0056C6D7 /* vas_delay.c in Sources */ = {isa = PBXBuildFile; fileRef = E42C2A7122AE4B5A0056C6D7 /* vas_delay.c */; };
@@ -34,6 +32,8 @@
 		E4A69BDF234F43AB00E4E570 /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A69BDC234F43AB00E4E570 /* vas_fir_list.c */; };
 		E4C817F7237FF65A000A9E8F /* vas_iir_biquad_crossfade.c in Sources */ = {isa = PBXBuildFile; fileRef = E4C817F6237FF65A000A9E8F /* vas_iir_biquad_crossfade.c */; };
 		E4C817F8237FF65A000A9E8F /* vas_iir_biquad_crossfade.c in Sources */ = {isa = PBXBuildFile; fileRef = E4C817F6237FF65A000A9E8F /* vas_iir_biquad_crossfade.c */; };
+		E4DA16E02432056F001C53BD /* vas_iir_cascadedBiquad.c in Sources */ = {isa = PBXBuildFile; fileRef = E4DA16DF2432056F001C53BD /* vas_iir_cascadedBiquad.c */; };
+		E4DA16E12432056F001C53BD /* vas_iir_cascadedBiquad.c in Sources */ = {isa = PBXBuildFile; fileRef = E4DA16DF2432056F001C53BD /* vas_iir_cascadedBiquad.c */; };
 		E4E0C47B22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E0C47A22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m */; };
 		E4E0C47C22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E4E0C47922A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h */; };
 		E4E0C48022A7C245002B9564 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 842BEF3721BE64A70044FDEA /* vas_dynamicFirChannel.c */; };
@@ -95,6 +95,8 @@
 		E4A69BDD234F43AB00E4E570 /* vas_fir_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir_list.h; path = ../../../source/vas_fir_list.h; sourceTree = "<group>"; };
 		E4C817F5237FF65A000A9E8F /* vas_iir_biquad_crossfade.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_iir_biquad_crossfade.h; path = ../../../source/vas_iir_biquad_crossfade.h; sourceTree = "<group>"; };
 		E4C817F6237FF65A000A9E8F /* vas_iir_biquad_crossfade.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_iir_biquad_crossfade.c; path = ../../../source/vas_iir_biquad_crossfade.c; sourceTree = "<group>"; };
+		E4DA16DE2432056F001C53BD /* vas_iir_cascadedBiquad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_iir_cascadedBiquad.h; path = ../../../source/vas_iir_cascadedBiquad.h; sourceTree = "<group>"; };
+		E4DA16DF2432056F001C53BD /* vas_iir_cascadedBiquad.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_iir_cascadedBiquad.c; path = ../../../source/vas_iir_cascadedBiquad.c; sourceTree = "<group>"; };
 		E4E0C47722A7BB90002B9564 /* libAudioPlugin_VAS_Binaural_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAudioPlugin_VAS_Binaural_iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E0C47922A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlugin_VAS_Binaural_iOS.h; sourceTree = "<group>"; };
 		E4E0C47A22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlugin_VAS_Binaural_iOS.m; sourceTree = "<group>"; };
@@ -165,10 +167,12 @@
 				E42C2A7522AE64480056C6D7 /* vas_delay_crossfade.c */,
 				E49062B522ABA67D0065D10F /* vas_interpolDelay.c */,
 				E49062B622ABA67D0065D10F /* vas_interpolDelay.h */,
-				E49062B222ABA6720065D10F /* vas_iir_biquad.c */,
 				E49062B122ABA6720065D10F /* vas_iir_biquad.h */,
+				E49062B222ABA6720065D10F /* vas_iir_biquad.c */,
 				E4C817F5237FF65A000A9E8F /* vas_iir_biquad_crossfade.h */,
 				E4C817F6237FF65A000A9E8F /* vas_iir_biquad_crossfade.c */,
+				E4DA16DE2432056F001C53BD /* vas_iir_cascadedBiquad.h */,
+				E4DA16DF2432056F001C53BD /* vas_iir_cascadedBiquad.c */,
 				E42C2A6C22AE49890056C6D7 /* vas_fir_binauralReflection.h */,
 				E42C2A6D22AE49890056C6D7 /* vas_fir_binauralReflection.c */,
 				842BEF3721BE64A70044FDEA /* vas_dynamicFirChannel.c */,
@@ -321,7 +325,7 @@
 				E4F6BA74233B7919003957F8 /* AudioPluginUtil.cpp in Sources */,
 				E4F6BA77233B7ABA003957F8 /* VasUnitySpatializer.cpp in Sources */,
 				E42C2A7222AE4B5A0056C6D7 /* vas_delay.c in Sources */,
-				E414B9F423682FF500835219 /* vas_util_vectorIntrinsics.c in Sources */,
+				E4DA16E02432056F001C53BD /* vas_iir_cascadedBiquad.c in Sources */,
 				E42C2A6E22AE49890056C6D7 /* vas_fir_binauralReflection.c in Sources */,
 				E4A69BDE234F43AB00E4E570 /* vas_fir_list.c in Sources */,
 				842BEF4321BE64A80044FDEA /* vas_fir.c in Sources */,
@@ -346,10 +350,10 @@
 				E4E0C48222A7C24C002B9564 /* vas_fir.c in Sources */,
 				E4E0C48122A7C249002B9564 /* vas_fir_binaural.c in Sources */,
 				E4E0C48022A7C245002B9564 /* vas_dynamicFirChannel.c in Sources */,
-				E414B9F523682FF500835219 /* vas_util_vectorIntrinsics.c in Sources */,
 				E4E0C48422A7C252002B9564 /* vas_util.c in Sources */,
 				E4E0C47B22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m in Sources */,
 				E42C2A7722AE64480056C6D7 /* vas_delay_crossfade.c in Sources */,
+				E4DA16E12432056F001C53BD /* vas_iir_cascadedBiquad.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +373,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = X68HKQ3ZCY;
 				DSTROOT = "$(PROJECT_DIR)/../SpatializerTest/Assets/Plugins/x86_64";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -413,7 +417,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = X68HKQ3ZCY;
 				DSTROOT = "$(PROJECT_DIR)/../SpatializerTest/Assets/Plugins/x86_64";
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -537,7 +541,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = X68HKQ3ZCY;
-				DSTROOT = /Users/harveykeitel/Repositories/raytracingpic/Assets/Plugins/iOS;
+				DSTROOT = "$(PROJECT_DIR)/../SpatializerTest/Assets/Plugins/iOS";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -549,7 +553,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -582,7 +586,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = X68HKQ3ZCY;
-				DSTROOT = /Users/harveykeitel/Repositories/raytracingpic/Assets/Plugins/iOS;
+				DSTROOT = "$(PROJECT_DIR)/../SpatializerTest/Assets/Plugins/iOS";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -590,7 +594,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
 				INSTALL_PATH = /;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;

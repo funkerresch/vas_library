@@ -55,31 +55,62 @@ void vas_iir_biquad_setFrequency(vas_iir_biquad *x, float f0)
     x->sinW0 = sinf(x->w0);
     x->alpha = x->sinW0/2*x->Q;
     
-    if(x->filterType == VAS_IIR_BIQUAD_LOWPASS)
+    switch (x->filterType)
     {
-        x->a0 = 1 + x->alpha;
-        x->a1 = -2*x->cosW0;
-        x->a2 = 1 - x->alpha;
-        x->b0 = (1 - x->cosW0)/2;
-        x->b1 = 1 - x->cosW0;
-        x->b2 = (1 - x->cosW0)/2;
-    }
+        case VAS_IIR_BIQUAD_LOWPASS:
+            x->a0 = 1 + x->alpha;
+            x->a1 = -2*x->cosW0;
+            x->a2 = 1 - x->alpha;
+            x->b0 = (1 - x->cosW0)/2;
+            x->b1 = 1 - x->cosW0;
+            x->b2 = (1 - x->cosW0)/2;
+            break;
 
-    if(x->filterType == VAS_IIR_BIQUAD_HIGHPASS)
-    {
-        x->a0 = 1 + x->alpha;
-        x->a1 = -2*x->cosW0;
-        x->a2 = 1 - x->alpha;
-        x->b0 = (1 + x->cosW0)/2;
-        x->b1 = -(1 + x->cosW0);
-        x->b2 = (1 + x->cosW0)/2;
-    }
+        case VAS_IIR_BIQUAD_HIGHPASS:
+            x->a0 = 1 + x->alpha;
+            x->a1 = -2*x->cosW0;
+            x->a2 = 1 - x->alpha;
+            x->b0 = (1 + x->cosW0)/2;
+            x->b1 = -(1 + x->cosW0);
+            x->b2 = (1 + x->cosW0)/2;
+            break;
+
+        case VAS_IIR_BIQUAD_LOWSHELF:
+            x->b0 = x->A*((x->A+1) - (x->A-1)*x->cosW0 + 2*sqrtf(x->A)*x->alpha);
+            x->b1 = 2*x->A*((x->A-1) - (x->A+1)*x->cosW0);
+            x->b2 = x->A*((x->A+1) - (x->A-1)*x->cosW0 - 2*sqrtf(x->A)*x->alpha);
+            x->a0 = (x->A+1) + (x->A-1)*x->cosW0 + 2*sqrtf(x->A)*x->alpha;
+            x->a1 = -2*((x->A-1) + (x->A+1)*x->cosW0);
+            x->a2 = (x->A+1) + (x->A-1)*x->cosW0 - 2*sqrtf(x->A)*x->alpha;
+            break;
+
+        case VAS_IIR_BIQUAD_HIGHSHELF:
+            x->b0 = x->A*((x->A+1) + (x->A-1)*x->cosW0 + 2*sqrtf(x->A)*x->alpha);
+            x->b1 = -2*x->A*((x->A-1) + (x->A+1)*x->cosW0);
+            x->b2 = x->A*((x->A+1) + (x->A-1)*x->cosW0 - 2*sqrtf(x->A)*x->alpha);
+            x->a0 = (x->A+1) - (x->A-1)*x->cosW0 + 2*sqrtf(x->A)*x->alpha;
+            x->a1 = 2*((x->A-1) - (x->A+1)*x->cosW0);
+            x->a2 = (x->A+1) - (x->A-1)*x->cosW0 - 2*sqrtf(x->A)*x->alpha;
+            break;
+
+        case VAS_IIR_BIQUAD_PK:
+            x->a0 = 1 + x->alpha/x->A;
+            x->a1 = -2 * x->cosW0;
+            x->a2 = 1 - x->alpha/x->A;
+            x->b0 = 1 + x->alpha*x->A;
+            x->b1 = -2 * x->cosW0;
+            x->b2 = 1 - x->alpha*x->A;
+            break;
     
-    x->b0_over_a0 = x->b0/x->a0;
-    x->a1_over_a0 = x->a1/x->a0;
-    x->a2_over_a0 = x->a2/x->a0;
-    x->b1_over_a0 = x->b1/x->a0;
-    x->b2_over_a0 = x->b2/x->a0;
+            default:
+                break;
+        }
+        
+        x->b0_over_a0 = x->b0/x->a0;
+        x->a1_over_a0 = x->a1/x->a0;
+        x->a2_over_a0 = x->a2/x->a0;
+        x->b1_over_a0 = x->b1/x->a0;
+        x->b2_over_a0 = x->b2/x->a0;
 }
 
 void vas_iir_biquad_process(vas_iir_biquad *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize)
