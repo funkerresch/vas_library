@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Raytracing Example 1.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/BRIR Example 1.unity
     guid: 754e6fa2de84d443093efc664c0b0666
+  - enabled: 1
+    path: Assets/Scenes/Raytracing Example 2.unity
+    guid: 79c371f9ad879461d88eb6ae1dc630bc
   m_configObjects: {}

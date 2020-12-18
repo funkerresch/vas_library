@@ -8,6 +8,16 @@ extern vas_fir_list IRs;
 }
 #endif
 
+void vas_fir_binaural_processLeftChannel(vas_fir_binaural *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *outLeft, int vectorSize)
+{
+    vas_dynamicFirChannel_process(x->left, in, outLeft, vectorSize, 0);
+}
+
+void vas_fir_binaural_processRightChannel(vas_fir_binaural *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *outRight, int vectorSize)
+{
+    vas_dynamicFirChannel_process(x->right, in, outRight, vectorSize, 0);
+}
+
 void vas_fir_binaural_process(vas_fir_binaural *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *outLeft, VAS_OUTPUTBUFFER *outRight, int vectorSize)
 {
     vas_dynamicFirChannel_process(x->left, in, outLeft, vectorSize, 0);

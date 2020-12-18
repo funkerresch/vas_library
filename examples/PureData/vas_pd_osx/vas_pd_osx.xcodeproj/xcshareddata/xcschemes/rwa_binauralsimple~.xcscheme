@@ -62,6 +62,20 @@
                ReferencedContainer = "container:vas_pd_osx.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E4C45CFD2534795B000D9303"
+               BuildableName = "vas_dynconv~.pd_darwin"
+               BlueprintName = "vas_dynconv~"
+               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -97,7 +111,7 @@
       </PathRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-open $(PROJECT_DIR)/../../../AES_HeadphoneConference2019_ListeningTests/VAS_ListeningTest_Template.pd"
+            argument = "-open $(PROJECT_DIR)/../doc/vas_dynconv~-help.pd"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -112,6 +126,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E417C3F2236C70DC001A9C1B"
+            BuildableName = "vas_binaural~.pd_darwin"
+            BlueprintName = "vas_binaural~"
+            ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

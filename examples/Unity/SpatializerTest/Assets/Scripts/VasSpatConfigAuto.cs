@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
-
+using System.Threading;
 using System;
 using System.IO;
 using UnityEditor;
+using UnityEngine.Networking;
 
 [Serializable]
 public struct RayControl
@@ -100,12 +102,9 @@ public class VasSpatConfigAuto : VasSpat
             lineRenderer[i].material.SetColor("_EmissionColor", rayColor);
     }
 
-    void OnValidate()
+    new void OnValidate()
     {
         base.OnValidate();
-        BypassSpat(bypass);
-        ListenerOrientationOnly(listenerOrientationOnly);
-        InverseAzimuth(inverseAzimuth);        InverseElevation(inverseElevation);
         updateRayColors();
         Debug.Log("Validate");
     }
@@ -312,8 +311,8 @@ public class VasSpatConfigAuto : VasSpat
                 
 
                 mySource.SetSpatializerFloat(paramIndex + 6, lastDistance);
-                Debug.Log("Scale: " + i + " " + scale);
-                Debug.Log("Dist: " + i + " " + lastDistance);
+                //Debug.Log("Scale: " + i + " " + scale);
+                //Debug.Log("Dist: " + i + " " + lastDistance);
                 //Debug.Log(scale);
             }
             else
@@ -325,52 +324,34 @@ public class VasSpatConfigAuto : VasSpat
         }
     }
 
-   
-
-    void Awake()
+    new void Awake()
     {
-        spatIdCounter = 0;
-#if UNITY_IPHONE
-        ;
-#else
-        //DebugDelegate callback_delegate = new DebugDelegate(DebugCallback);
-        //IntPtr intptr_delegate = Marshal.GetFunctionPointerForDelegate(callback_delegate);
-        //SetDebugFunction(intptr_delegate);
-#endif
+        base.Awake();
+        reflControl = new ReflectionControl(numberOfRays, reflectionOrder);
+        goTransform = this.GetComponent<Transform>();
+        if (lineRenderer == null)
+        {
+            lineRenderer = new LineRenderer[numberOfRays];
+            lineRenderObject = new GameObject[numberOfRays];
+            listener = GameObject.FindObjectOfType<AudioListener>();
+            listenerTransform = listener.GetComponent<Transform>();
 
-        if (Application.isPlaying)
-        {   
-            reflControl = new ReflectionControl(numberOfRays, reflectionOrder);
-
-            mySource = GetComponent<AudioSource>();
-            goTransform = this.GetComponent<Transform>();
-            if (lineRenderer == null)
+            for (int i = 0; i < numberOfRays; i++)
             {
-                lineRenderer = new LineRenderer[numberOfRays];
-                lineRenderObject = new GameObject[numberOfRays];
-                listener = GameObject.FindObjectOfType<AudioListener>();
-                listenerTransform = listener.GetComponent<Transform>();
-
-                for (int i = 0; i < numberOfRays; i++)
-                {
-                    lineRenderObject[i] = new GameObject("MyGameObject");
-                    lineRenderObject[i].hideFlags = HideFlags.HideInHierarchy;
-                    lineRenderer[i] = lineRenderObject[i].AddComponent<LineRenderer>();
-                    lineRenderer[i].sharedMaterial = raycastMaterial;
-                    lineRenderer[i].startWidth = 0.3f;
-                    lineRenderer[i].endWidth = 0.3f;
-                    lineRenderer[i].shadowCastingMode = 0;
-                    lineRenderer[i].sharedMaterial.SetColor("_EmissionColor", rayColor);
-                }
+                lineRenderObject[i] = new GameObject("MyGameObject");
+                lineRenderObject[i].hideFlags = HideFlags.HideInHierarchy;
+                lineRenderer[i] = lineRenderObject[i].AddComponent<LineRenderer>();
+                lineRenderer[i].sharedMaterial = raycastMaterial;
+                lineRenderer[i].startWidth = 0.3f;
+                lineRenderer[i].endWidth = 0.3f;
+                lineRenderer[i].shadowCastingMode = 0;
+                lineRenderer[i].sharedMaterial.SetColor("_EmissionColor", rayColor);
             }
-        }
+        }  
     }
 
     void Start()
     {
-        if (!Application.isPlaying)
-            return;
-
         spatId = spatIdCounter++;
         Debug.Log("SpatId: " + spatId);
 
@@ -379,51 +360,39 @@ public class VasSpatConfigAuto : VasSpat
 
         CalculateSource2ListenerAziAndEle();
         mySource.SetSpatializerFloat(3, (float)spatId);
+        VAS_Unity_Spatializer = GetInstance(spatId);
+        SetConfig(VAS_Unity_Spatializer, (int)VAS_CONFIG.AUTO);
         rayDistance = horizontalFullPowerRange / numberOfRays;
 
         mySource.SetSpatializerFloat((int)SpatParams.P_H_SOURCEDIRECTIVITY, horizontalSourceDirectivity);
         mySource.SetSpatializerFloat((int)SpatParams.P_H_FULLPOWERRANGE, horizontalFullPowerRange);
         mySource.SetSpatializerFloat((int)SpatParams.P_NUMBEROFRAYS, numberOfRays);
-        mySource.SetSpatializerFloat((int)SpatParams.P_REFLECTIONORDER, reflectionOrder);
+        mySource.SetSpatializerFloat((int)SpatParams.P_REFLECTIONORDER, reflectionOrder);  
         mySource.SetSpatializerFloat((int)SpatParams.P_SEGMENTSIZE_EARLYPART, segmentSizeEarlyReverb);
         mySource.SetSpatializerFloat((int)SpatParams.P_SEGMENTSIZE_LATEPART, segmentSizeLateReverb);
-        InverseAzimuth(inverseAzimuth);
-        InverseElevation(inverseElevation);
-
-        VAS_Unity_Spatializer = GetInstance(spatId);
-        Debug.Log(spatId);
-
-        if (VAS_Unity_Spatializer != IntPtr.Zero)
-        {
-            SetConfig(VAS_Unity_Spatializer, (int)VAS_CONFIG.AUTO);
-            String fullpath = Path.Combine(Application.streamingAssetsPath, IrSet);
-            Debug.Log(fullpath);
-            LoadHRTF(VAS_Unity_Spatializer, fullpath);
-            BypassSpat(bypass);
-        }
-        else
-            print("No Renderer Reference");
+        mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_EARLY, scalingEarly);
+        mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_LATE, scalingLate);
+        InverseAzimuth(inverseAzimuth);        InverseElevation(inverseElevation);        BypassSpat(bypass);        ListenerOrientationOnly(listenerOrientationOnly);        ReadImpulseResponse();
     }
 
-    void Update()
+    new void Update()
     {
-        if (Application.isPlaying)
+        base.Update();
+
+        CalculateSource2ListenerAziAndEle();
+        mySource.SetSpatializerFloat((int)SpatParams.P_H_SOURCEDIRECTIVITY, horizontalSourceDirectivity);
+        mySource.SetSpatializerFloat((int)SpatParams.P_H_FULLPOWERRANGE, horizontalFullPowerRange);
+        mySource.SetSpatializerFloat((int)SpatParams.P_NUMBEROFRAYS, numberOfRays);
+        mySource.SetSpatializerFloat((int)SpatParams.P_REFLECTIONORDER, reflectionOrder);
+        //mySource.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
+        CalculateHDirectivityScaling();
+        CalculateVDirectivityScaling();
+        mySource.SetSpatializerFloat((int)SpatParams.P_H_DIRECTIVITYDAMPING, hDirectivityScaling);
+        mySource.SetSpatializerFloat((int)SpatParams.P_V_DIRECTIVITYDAMPING, vDirectivityScaling);
+        for (int i = 0; i < numberOfRays; i++)
         {
-            CalculateSource2ListenerAziAndEle();
-            mySource.SetSpatializerFloat((int)SpatParams.P_H_SOURCEDIRECTIVITY, horizontalSourceDirectivity);
-            mySource.SetSpatializerFloat((int)SpatParams.P_H_FULLPOWERRANGE, horizontalFullPowerRange);
-            mySource.SetSpatializerFloat((int)SpatParams.P_NUMBEROFRAYS, numberOfRays);
-            mySource.SetSpatializerFloat((int)SpatParams.P_REFLECTIONORDER, reflectionOrder);
-            //mySource.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
-            CalculateSource2ListenerAziAndEle();
-            CalculateHDirectivityScaling();
-            CalculateVDirectivityScaling();
-            mySource.SetSpatializerFloat((int)SpatParams.P_H_DIRECTIVITYDAMPING, hDirectivityScaling);
-            mySource.SetSpatializerFloat((int)SpatParams.P_V_DIRECTIVITYDAMPING, vDirectivityScaling);
-            for (int i = 0; i < numberOfRays; i++)
-            {
-                RaytraceReflections(i, i * rayDistance, 0);
-            }
+            RaytraceReflections(i, i * rayDistance, 0);
         }
+        
     }
 }

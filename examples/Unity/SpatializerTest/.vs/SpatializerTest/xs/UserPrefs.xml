@@ -1,21 +1,28 @@
 ﻿<Properties StartupConfiguration="{2D3045C8-E717-5BED-B927-B4B4D0EF0512}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/VasSpatConfigAuto.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/VasSpatConfigManual.cs">
     <Files>
-      <File FileName="Assets/Scripts/VasSpatConfigAuto.cs" Line="99" Column="47" />
-      <File FileName="Assets/Scripts/VasSpatConfigSimple.cs" Line="37" Column="6" />
-      <File FileName="Assets/Scripts/VasSpatConfigManual.cs" Line="6" Column="17" />
+      <File FileName="Assets/Scripts/VasSpatConfigAuto.cs" Line="66" Column="25" />
+      <File FileName="Assets/Scripts/VasSpatConfigSimple.cs" />
+      <File FileName="Assets/Scripts/VasSpatConfigManual.cs" Line="95" Column="52" />
+      <File FileName="Assets/Scripts/VasSpat.cs" />
+      <File FileName="Assets/Scripts/EqualizerCustomGUI.cs" />
+      <File FileName="Assets/Scripts/GUIHelpers.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="SpatializerTest" expanded="True" selected="True" />
+          <Node name="SpatializerTest" expanded="True">
+            <Node name="Assets" expanded="True" selected="True">
+              <Node name="Scripts" expanded="True" />
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="27907022-ede1-4781-a793-fa35993f7e8e" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="56400041-2ba5-41c4-957c-151e2c9701c1" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

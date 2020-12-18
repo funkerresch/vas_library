@@ -7,7 +7,6 @@
 */
 
 #include "vas_fir_binaural.h"
-#include "vas_fir_headphoneCompensation.h"
 
 #define RWA_BINAURALENGINE 0
 #define RWA_REVERBENGINE 1
@@ -79,6 +78,14 @@ void vas_firobject_set1(rwa_firobject *x, t_symbol *left, t_symbol *right, float
 
 void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float offset, float end);
 
+void vas_firobject_prepareForInterpolatedIrs(rwa_firobject *x, float segmentSize, float maxLength, float numberOfIrs);
 
+void vas_firobject_loadIr2ArrayIndex(rwa_firobject *x, t_symbol *left, float index);
+
+void vas_firobject_setAndInterpolateBetweenIndexes(rwa_firobject *x, t_symbol *start, t_symbol *end, float startIndex, float endIndex, float mode);
+
+void vas_firobject_setAndInterpolateBetweenIndexes1(rwa_firobject *x, t_symbol *s, int argc, t_atom *argv);
+
+void vas_firobject_set_mono_simple(rwa_firobject *x, t_symbol *left, float segmentSize);
 
 #endif

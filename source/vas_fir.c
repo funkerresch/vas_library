@@ -378,6 +378,7 @@ void vas_fir_setMetaData_manually1(vas_fir *x, int filterLength, int segmentSize
     else
         x->metaData.aziRange = 360/x->metaData.azimuthStride;
 
+    x->metaData.numberOfIrs = x->metaData.aziRange;
     x->metaData.audioFormat = audioFormat;
     x->metaData.lineFormat = lineFormat;
     x->metaData.segmentSize = segmentSize;

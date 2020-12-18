@@ -40,6 +40,7 @@ typedef struct vas_delay
     long targetDelayTime;
     long buffer_size;           /**< Size of the delay buffer */
     float *circular_pointer;    /**< Circular pointer to delay buffer */
+    float *circularPointerMinusVS;    /**< Circular pointer to delay buffer */
     float delay_sample;         /**< The current sample from the delay buffer */
 } vas_delay;
 

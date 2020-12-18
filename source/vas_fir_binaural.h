@@ -35,6 +35,8 @@ typedef vas_fir_binaural vas_fir_reverb;
 vas_fir_binaural *vas_fir_binaural_new(int flags);
 void vas_fir_binaural_free(vas_fir_binaural *x);
 void vas_fir_binaural_process(vas_fir_binaural *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *outLeft, VAS_OUTPUTBUFFER *outRight, int vectorSize);
+void vas_fir_binaural_processLeftChannel(vas_fir_binaural *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *outLeft, int vectorSize);
+void vas_fir_binaural_processRightChannel(vas_fir_binaural *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *outRight, int vectorSize);
 void vas_fir_binaural_setAzimuth(vas_fir_binaural *x, int azimuth);
 void vas_fir_binaural_setElevation(vas_fir_binaural *x, int elevation);
 void vas_fir_binaural_shareInput(vas_fir_binaural *x, vas_fir_binaural *sharedInput);
@@ -44,6 +46,7 @@ void vas_fir_binaural_processOutputInPlace(vas_fir_binaural *x, VAS_INPUTBUFFER 
 #define vas_fir_reverb_new vas_fir_binaural_new
 #define vas_fir_reverb_free vas_fir_binaural_free
 #define vas_fir_reverb_process vas_fir_binaural_process
+#define vas_fir_dynconv_process vas_fir_binaural_processLeftChannel
     
 #ifdef __cplusplus
 }

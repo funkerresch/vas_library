@@ -62,6 +62,7 @@ typedef struct vas_fir_metaData
     int eleMin;
     int eleMax;
     int aziRange;
+    int numberOfIrs;
 } vas_fir_metaData;
 
 void vas_filter_metaData_init(vas_fir_metaData *x);
@@ -84,6 +85,7 @@ typedef struct vas_dynamicFirChannel_filter
     kiss_fftr_cfg  inverseFFT;
 #endif
     bool *segmentIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    bool indexIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     int zeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     int nonZeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
 #ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
@@ -337,6 +339,8 @@ void vas_dynamicFirChannel_crossfadeBetweenOldAndNewFilter(vas_dynamicFirChannel
 void vas_dynamicFirChannel_updateAzimuthAndElevation(vas_dynamicFirChannel *x);
 
 void vas_dynamicFirChannel_calculateConvolution(vas_dynamicFirChannel *x);
+
+void vas_dynamicFirChannel_selectIR(vas_dynamicFirChannel *x, int index);
 
 void vas_dynamicFirChannel_setAzimuth(vas_dynamicFirChannel *x, int azimuth);
 

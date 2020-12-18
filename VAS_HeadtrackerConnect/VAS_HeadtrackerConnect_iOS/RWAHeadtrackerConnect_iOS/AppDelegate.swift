@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  RWAHeadtrackerConnect_iOS
 //
-//  Created by Harvey Keitel on 05.06.19.
+//  Created by Thomas Resch on 05.06.19.
 //  Copyright © 2019 Beryllium Design. All rights reserved.
 //
 

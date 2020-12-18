@@ -6,6 +6,7 @@ vas_delay *vas_delay_new(long _buffer_size)
     x-> buffer_size = _buffer_size;
     x-> buffer = (float *) calloc (x-> buffer_size + 1 , sizeof(float));
     x-> circular_pointer = x-> buffer;
+    x-> circularPointerMinusVS = x-> buffer;
     x-> delay_sample = .0;
     x-> delay_in_samples = .0;
     x->targetDelayTime = 0;
@@ -27,6 +28,7 @@ void vas_delay_perform(vas_delay *x, float *in, float *out, int vectorSize)
         *(x->circular_pointer) = in[i];
         out[i] = vas_delay_tap_into_buffer(x->buffer_size, x->buffer, x->circular_pointer, x->delay_in_samples);
         vas_delay_decrement_circular_pointer(x->buffer_size, x->buffer, &(x->circular_pointer));
+        
         i++;
     }
 }

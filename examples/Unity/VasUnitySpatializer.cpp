@@ -31,7 +31,7 @@ FuncPtr Debug = NULL;
 #define VAS_MAXNUMBEROFRAYS 12
 #define VAS_MAXREFLECTIONORDER 12
 #define VAS_REFLECTIONPARAMETERS 7
-#define VAS_DEBUG_TO_UNITY
+//#define VAS_DEBUG_TO_UNITY
 
 #define VAS_SPAT_CONFIG_SIMPLE 1
 #define VAS_SPAT_CONFIG_MANUAL 2
@@ -41,6 +41,21 @@ using namespace std;
 
 namespace Spatializer
 {
+    enum
+    {
+        P_REF_X,
+        P_REF_Y,
+        P_REF_Z,
+        P_REF_MAT,
+        P_REF_MUTE,
+        P_REF_SCALE,
+        P_REF_DIST,
+        P_REF_DUMMY1,
+        P_REF_DUMMY2,
+        P_REF_DUMMY3,
+        P_REF_SIZE
+    };
+
     enum
     {
         P_AUDIOSRCATTN,
@@ -63,6 +78,8 @@ namespace Spatializer
         P_SEGMENTSIZE_LATEPART,
         P_DISTANCE_SCALING,
         P_OCCLUSION,
+        P_SCALING_EARLY,
+        P_SCALING_LATE,
         
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
@@ -1229,6 +1246,7 @@ namespace Spatializer
         float outputR[VAS_MAXVECTORSIZE];
         float lastReflectionInput[VAS_MAXVECTORSIZE];
         float tmp[VAS_MAXVECTORSIZE];
+        float reflectionParameters[10000];
         
         int reflectionOrder = 1;
         int numberOfRays = 6;
@@ -1348,6 +1366,36 @@ namespace Spatializer
             effectData->config = config;
         }
     
+        VAS_EXPORT bool EarlyPartIsLoaded(EffectData *effectData)
+        {
+
+            if(effectData->init)
+            {
+#ifdef VAS_DEBUG_TO_UNITY
+                        if(Debug != NULL)
+                            Debug("LOADED");
+#endif
+                return true;
+            }
+            
+            else
+            {
+#ifdef VAS_DEBUG_TO_UNITY
+                        if(Debug != NULL)
+                            Debug("NOT LOADED");
+#endif
+                return false;
+            }
+        }
+    
+        VAS_EXPORT bool LatePartIsLoaded(EffectData *effectData)
+        {
+            if(effectData->initReverbTail)
+                return true;
+            else
+                return false;
+        }
+    
         void readIR(vas_fir *x, char *fullpath, int segmentSize, int offset)
         {
             const char *fileExtension;
@@ -1442,7 +1490,7 @@ namespace Spatializer
 #endif
                 readIR(x, fullpath, segmentSize, 0);
                     
-                if(effectData->config == VAS_SPAT_CONFIG_AUTO)
+                if(effectData->config != VAS_SPAT_CONFIG_SIMPLE)
                 {
                     for(int i = 0; i < effectData->numberOfRays; i++)
                     {
@@ -1489,6 +1537,17 @@ namespace Spatializer
 #endif
             }
         }
+    
+        VAS_EXPORT void SetReflectionParameter(EffectData *effectData, int rayNumber, int reflectionNumber, int reflectionParameter, float value)
+        {
+
+        }
+    
+        VAS_EXPORT float GetReflectionParameter(EffectData *effectData, int rayNumber, int reflectionNumber, int reflectionParameter)
+        {
+            int paramIndex =  VAS_MAXNUMBEROFRAYS * rayNumber * P_REF_SIZE + reflectionNumber * P_REF_SIZE;
+            return 0;
+        }
     }
 
     inline bool IsHostCompatible(UnityAudioEffectState* state)
@@ -1528,6 +1587,8 @@ namespace Spatializer
         RegisterParameter(definition, "SegSizeLate", "", 0.0f, 4096.0f, 1024.0f, 1.0f, 1.0f, P_SEGMENTSIZE_LATEPART, "Segment size late reverb");
         RegisterParameter(definition, "Dist Scaling", "", 0.0f, 10000.0f, 1.0f, 1.0f, 1.0f, P_DISTANCE_SCALING, "Scale Roomsize");
         RegisterParameter(definition, "Occlusion", "", 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, P_OCCLUSION, "Occlusion");
+        RegisterParameter(definition, "Scaling Early", "", 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, P_SCALING_EARLY, "Scaling early part");
+        RegisterParameter(definition, "Scaling Late", "", 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, P_SCALING_LATE, "Scaling late part");
 
         for(int i = 0; i < VAS_MAXNUMBEROFRAYS; i++)
         {
@@ -1640,6 +1701,17 @@ namespace Spatializer
         EffectData* data = state->GetEffectData<EffectData>();
         if (index >= P_NUM)
             return UNITY_AUDIODSP_ERR_UNSUPPORTED;
+        
+#ifdef VAS_DEBUG_TO_UNITY
+        if(Debug)
+        {
+            if(index == P_REF_1_3_DIST)
+            {
+            sprintf(data->debugString, "dist: %f", value);
+            Debug(data->debugString);
+            }
+        }
+#endif
             
         data->p[index] = value;
         
@@ -1661,6 +1733,7 @@ namespace Spatializer
     UNITY_AUDIODSP_RESULT UNITY_AUDIODSP_CALLBACK GetFloatParameterCallback(UnityAudioEffectState* state, int index, float* value, char *valuestr)
     {
         EffectData* data = state->GetEffectData<EffectData>();
+        
         if (index >= P_NUM)
             return UNITY_AUDIODSP_ERR_UNSUPPORTED;
         if (value != NULL)
@@ -1678,6 +1751,7 @@ namespace Spatializer
 
     UNITY_AUDIODSP_RESULT UNITY_AUDIODSP_CALLBACK ProcessCallback(UnityAudioEffectState* state, float* inbuffer, float* outbuffer, unsigned int length, int inchannels, int outchannels)
     {
+         
         if (inchannels != 2 || outchannels != 2 || state->spatializerdata == NULL)
         {
             memset(outbuffer, 0, length * outchannels * sizeof(float));
@@ -1690,6 +1764,9 @@ namespace Spatializer
             memset(outbuffer, 0, length * outchannels * sizeof(float));
             return UNITY_AUDIODSP_OK;
         }
+        
+        //memcpy(outbuffer, inbuffer, length * outchannels * sizeof(float));
+        //return UNITY_AUDIODSP_OK;
 
         static const float kRad2Deg = 180.0f / kPI;
         float azimuth, elevation;
@@ -1700,7 +1777,16 @@ namespace Spatializer
         float dir_x, dir_y, dir_z;
      
         if(data->p[P_LISTENERORIENTATIONONLY])
+        {
            HeadingAndElevationFromTranformationMatrix(listener, &azimuth, &elevation);
+//#ifdef VAS_DEBUG_TO_UNITY
+//            if(Debug)
+//            {
+//                sprintf(data->debugString, "Azimuth: %f Elevation :%f", azimuth, elevation);
+//                Debug(data->debugString);
+//            }
+//#endif
+        }
         
         else
         {
@@ -1722,6 +1808,7 @@ namespace Spatializer
         for(unsigned int n = 0; n < length; n++)
         {
             data->input[n] = inbuffer[n * inchannels]; // last reflectionInput deleted
+            data->lastReflectionInput[n] = inbuffer[n * inchannels]; // last reflectionInput deleted
         }
      
         if(data->p[P_INVERSEAZI])
@@ -1733,17 +1820,22 @@ namespace Spatializer
         float r_hDirectivityDamping = data->p[P_H_DIRECTIVITYDAMPING];
         float r_vDirectivityDamping = data->p[P_V_DIRECTIVITYDAMPING];
         
-        if(data->config == VAS_SPAT_CONFIG_AUTO)
+        if(data->config != VAS_SPAT_CONFIG_SIMPLE)
         {
             vas_iir_biquad_setFrequency(data->directivityDamping, r_hDirectivityDamping * r_vDirectivityDamping * 20000);
             vas_iir_biquad_process(data->directivityDamping, data->input, data->input, length);
         }
         
+        vas_util_fscale(data->input, data->p[P_SCALING_EARLY], length);
         vas_fir_binaural_process(data->binauralEngine, data->input, data->outputL, data->outputR, length);
+
         if(data->initReverbTail)
-            vas_fir_binaural_processOutputInPlace(data->reverbEngine, data->input, data->outputL, data->outputR, length); // input was lastReflectionInput
+        {
+            vas_util_fscale(data->lastReflectionInput, data->p[P_SCALING_LATE], length);
+            vas_fir_binaural_processOutputInPlace(data->reverbEngine, data->lastReflectionInput, data->outputL, data->outputR, length); // input was lastReflectionInput
+        }
         
-        if(data->config == VAS_SPAT_CONFIG_AUTO)
+        if(data->config != VAS_SPAT_CONFIG_SIMPLE)
         {
             float r_px;
             float r_py;
@@ -1759,6 +1851,8 @@ namespace Spatializer
                 for(int n = 0; n < length; n++)
                     data->lastReflectionInput[n] = inbuffer[n * inchannels];
                 
+                vas_util_fscale(data->lastReflectionInput, data->p[P_SCALING_EARLY], length);
+                
                 for (int j = 0; j < data->reflectionOrder; j ++)
                 {
                     paramIndex = reflectionOffset + VAS_MAXNUMBEROFRAYS * i * VAS_REFLECTIONPARAMETERS + j * VAS_REFLECTIONPARAMETERS;
@@ -1769,15 +1863,6 @@ namespace Spatializer
                     mute =  data->p[paramIndex+4];
                     r_scaling = data->p[paramIndex+5];
                     r_distance = data->p[paramIndex+6];
-                    
-//                    if(Debug)
-//                    {
-//                        if(mute)
-//                        {
-//                            sprintf(data->debugString, "%d %d", paramIndex, mute);
-//                            Debug(data->debugString);
-//                        }
-//                    }
                      
                     //distance = sqrt(pow(r_px-px, 2) + pow(r_py-py, 2) + pow(r_pz-pz, 2)); // bullshit... need to set distance as parameter
                     float delayTime = r_distance/343.0 * 44100.0;
@@ -1786,11 +1871,11 @@ namespace Spatializer
                     vas_fir_binauralReflection_setMaterial(data->reflections[i][j], material); // for a very simplyfied material characteristics
                     vas_fir_binauralReflection_setDelayTime(data->reflections[i][j], delayTime); // these should be called from game loop, not within the dsp loop
                     
-                    /*if(Debug)
-                    {
-                        sprintf(data->debugString, "%d %d %f",i, j, delayTime);
-                        Debug(data->debugString);
-                    }*/
+//                    if(Debug)
+//                    {
+//                        sprintf(data->debugString, "%d %d %f",i, j, r_distance);
+//                        Debug(data->debugString);
+//                    }
                      
                     if(!mute)
                     {

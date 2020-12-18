@@ -3,19 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 using System.IO;
+using System.Threading;
 
-[ExecuteInEditMode]
+
+public enum SelectLoadingFunction
+{
+    EarlyIr,
+    LateIr
+};
+
 [RequireComponent(typeof(AudioSource))]
 abstract public class VasSpat : MonoBehaviour
 {
+    protected class ReadingIrThreadData
+    {
+        public int threadIndex;
+        public string irName;
+        public SelectLoadingFunction Read;
+    }
+    private bool androidEarlyIrDownloadFinished = false;
+    private bool androidLateIrDownloadFinished = false;
+    protected string androidPersistantDataPath;
+
+    protected bool earlyIrIsLoading = false;
+    protected bool lateIrIsLoading = false;
+
     protected static int spatIdCounter = 0;
     protected int spatId;
     protected IntPtr VAS_Unity_Spatializer = IntPtr.Zero;
 
     public string IrSet = "";    public string ReverbTail = "";
+    [Range(0.0f, 1.0f)]
+    public float scalingEarly = 1.0f;
+    [Range(0.0f, 1.0f)]
+    public float scalingLate = 1.0f;
     public bool inverseAzimuth = false;
     public bool inverseElevation = false;
     public bool bypass = false;
@@ -45,10 +69,13 @@ abstract public class VasSpat : MonoBehaviour
     protected static extern void SetConfig(IntPtr x, int config);
 
     [DllImport ("__Internal")]
-    public static extern void SetDebugFunction(IntPtr fp);
+    protected static extern bool EarlyPartIsLoaded(IntPtr x);
 
-   // [DllImport ("__Internal")]
-   // public static extern void SetDebugFunction(IntPtr fp);
+    [DllImport ("__Internal")]
+    protected static extern bool LatePartIsLoaded(IntPtr x);
+
+    [DllImport ("__Internal")]
+    public static extern void SetDebugFunction(IntPtr fp);
 
 #else
     [DllImport("AudioPlugin_VAS_Binaural", CallingConvention = CallingConvention.Cdecl)]
@@ -64,12 +91,18 @@ abstract public class VasSpat : MonoBehaviour
     protected static extern void SetConfig(IntPtr x, int config);
 
     [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
+    protected static extern bool EarlyPartIsLoaded(IntPtr x);
+
+    [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
+    protected static extern bool LatePartIsLoaded(IntPtr x);
+
+    [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
     public static extern void SetDebugFunction(IntPtr fp);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void DebugDelegate(string str);
 
-    static void DebugCallback(string str)
+    public static void DebugCallback(string str)
     {
         Debug.Log(str);
     }
@@ -97,6 +130,8 @@ abstract public class VasSpat : MonoBehaviour
         P_SEGMENTSIZE_LATEPART,
         P_DISTANCE_SCALING,
         P_OCCLUSION,
+        P_SCALING_EARLY,
+        P_SCALING_LATE,
 
         P_REF_1_1_X, //9
         P_REF_1_1_Y,
@@ -1270,6 +1305,139 @@ abstract public class VasSpat : MonoBehaviour
         AUTO
     }
 
+    protected void SetSpatializerInstanceAndConfig(VAS_CONFIG configuration)
+    {
+        spatId = spatIdCounter++;        Debug.Log("SpatId: " + spatId);        mySource.SetSpatializerFloat(3, (float)spatId);
+        VAS_Unity_Spatializer = GetInstance(spatId);
+        SetConfig(VAS_Unity_Spatializer, (int)configuration);
+    }
+
+    protected IEnumerator DownloadEarlyIr2PersistantDataPathForAndroid()
+    {
+        String fullpath = Path.Combine(Application.streamingAssetsPath, IrSet);
+        UnityWebRequest www = UnityWebRequest.Get(fullpath);
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log("ERROR");
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("NO ERROR");
+            Debug.Log(www.downloadHandler.text.Length);
+            File.WriteAllText(Application.persistentDataPath + "/" + IrSet, www.downloadHandler.text);
+            androidEarlyIrDownloadFinished = true;
+        }
+    }
+
+    protected IEnumerator DownloadLateIr2PersistantDataPathForAndroid()
+    {
+        String fullpath = Path.Combine(Application.streamingAssetsPath, ReverbTail);
+        UnityWebRequest www = UnityWebRequest.Get(fullpath);
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log("ERROR");
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("NO ERROR");
+            Debug.Log(www.downloadHandler.text.Length);
+            File.WriteAllText(Application.persistentDataPath + "/" + ReverbTail, www.downloadHandler.text);
+            androidLateIrDownloadFinished = true;
+        }
+    }
+
+    protected String GetFullIrPath(String name)
+    {
+#if UNITY_ANDROID
+        String fullpath = Path.Combine(androidPersistantDataPath + "/", name);
+#else
+        String fullpath = Path.Combine(Application.streamingAssetsPath, name);
+#endif
+        return fullpath;
+    }
+
+    protected void ReadImpulseResponse_ThreadPool(System.Object a)
+    {
+        ReadingIrThreadData threadData = a as ReadingIrThreadData;
+        try
+        {
+            if (threadData.Read == SelectLoadingFunction.EarlyIr)
+            {
+                earlyIrIsLoading = true;
+#if UNITY_ANDROID
+                while (!androidEarlyIrDownloadFinished)
+                    ;
+                Debug.Log("Android Download Early IR Finished");
+#endif
+            }
+            if (threadData.Read == SelectLoadingFunction.LateIr)
+            {
+                lateIrIsLoading = true;
+#if UNITY_ANDROID
+                while (!androidLateIrDownloadFinished)
+                    ;
+                Debug.Log("Android Download Late IR Finished");
+#endif
+            }
+
+            String fullpath = GetFullIrPath(threadData.irName);
+            Debug.Log(fullpath);
+            if(threadData.Read == SelectLoadingFunction.EarlyIr)
+                LoadHRTF(VAS_Unity_Spatializer, fullpath);
+            if (threadData.Read == SelectLoadingFunction.LateIr)
+                LoadReverbTail(VAS_Unity_Spatializer, fullpath);
+        }
+        finally
+        {
+            if (threadData.Read == SelectLoadingFunction.EarlyIr)
+            {
+                earlyIrIsLoading = false;
+                Debug.Log("Early IR is loaded");
+            }
+
+            if (threadData.Read == SelectLoadingFunction.LateIr)
+            {
+                lateIrIsLoading = false;
+                Debug.Log("Late IR is loaded");
+            }
+        }
+    }
+
+    protected void ReadImpulseResponse()
+    {
+        if (VAS_Unity_Spatializer != IntPtr.Zero)
+        {
+            if (!String.IsNullOrWhiteSpace(IrSet))
+            {
+                ReadingIrThreadData earlyIR = new ReadingIrThreadData();
+                earlyIR.irName = IrSet;
+                earlyIR.Read = SelectLoadingFunction.EarlyIr;
+#if UNITY_ANDROID
+                StartCoroutine(DownloadEarlyIr2PersistantDataPathForAndroid());
+#endif
+                ThreadPool.QueueUserWorkItem(new WaitCallback(ReadImpulseResponse_ThreadPool), earlyIR);
+            }
+            if (!String.IsNullOrWhiteSpace(ReverbTail))
+            {
+                ReadingIrThreadData lateIR = new ReadingIrThreadData();
+                lateIR.irName = ReverbTail;
+                lateIR.Read = SelectLoadingFunction.LateIr;
+#if UNITY_ANDROID
+                StartCoroutine(DownloadLateIr2PersistantDataPathForAndroid());
+#endif
+                ThreadPool.QueueUserWorkItem(new WaitCallback(ReadImpulseResponse_ThreadPool), lateIR);
+            }
+        }
+        else
+            print("No Renderer Reference");
+    }
+
     protected void BypassSpat(bool onOff)
     {
         if (!mySource)
@@ -1300,38 +1468,26 @@ abstract public class VasSpat : MonoBehaviour
 
         if (onOff == true)            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEELE, 1f);        else            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEELE, 0);    }
 
-    void Reset()
+    protected void Update()
     {
-        //Output the message to the Console
-        Debug.Log("Reset");
+        mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_EARLY, scalingEarly);
+        mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_LATE, scalingLate);
     }
 
-    protected void Awake()
-    {
-        
-    }
+    protected void Awake()    {
+        spatIdCounter = 0;
+        mySource = GetComponent<AudioSource>();
+        androidPersistantDataPath = Application.persistentDataPath;
+
+#if UNITY_EDITOR
+        DebugDelegate callback_delegate = new DebugDelegate(DebugCallback);
+        IntPtr intptr_delegate = Marshal.GetFunctionPointerForDelegate(callback_delegate);
+        SetDebugFunction(intptr_delegate);
+#endif    }
 
     protected void OnValidate()
     {
-       /* spatScripts = FindObjectsOfType<VasSpat>();
-        if (spatScripts.Length != numberOfSpatScripts)
-        {
-            Debug.Log("new Vas  Script");
-            numberOfSpatScripts = spatScripts.Length;
-        }*/
-    }
-
-    void OnEnable()
-    {      
-        //Scene current = EditorSceneManager.GetActiveScene();
-
-        //  spatScripts = FindObjectsOfType<VasSpat>();
-        //  if (spatScripts.Length != numberOfSpatScripts && current.isDirty && !Application.isPlaying)
-        //  {
-        //      numberOfSpatScripts = spatScripts.Length;
-        //      bool v = EditorSceneManager.SaveScene(current);
-        //      EditorSceneManager.OpenScene(current.path, OpenSceneMode.Single);
-        //      Debug.Log("Save Scene");
-        //  }
+        BypassSpat(bypass);        ListenerOrientationOnly(listenerOrientationOnly);        InverseAzimuth(inverseAzimuth);        InverseElevation(inverseElevation);
+        Debug.Log("Validate");
     }
 }

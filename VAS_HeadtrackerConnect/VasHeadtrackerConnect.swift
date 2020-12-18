@@ -2,8 +2,8 @@
 //  btheadtracker.swift
 //  btheadtracker
 //
-//  Created by Thomas Resch on 27.05.19.
-//  Copyright © 2019 Harvey Keitel. All rights reserved.
+//  Created by Thomas Resch on 05.06.19.
+//  Copyright © 2019 Beryllium Design. All rights reserved.
 //
 
 import CoreBluetooth
@@ -314,37 +314,46 @@ enum HeadtrackerType {
         }
         
         let words = nextChunk.components(separatedBy: " ")
-        if characteristic.uuid == CBUUID(string: Device.TRACKERSERVICETX)
+        if characteristic.uuid == CBUUID(string: Device.TransferCharacteristic)
         {
-            if words.count < 3 {
+            if words.count < 2 {
                 return;
             }
             
-            let azimuthTmp = words[0]
-            let elevationTmp = words[1]
-            
-            azimuthOrg = Int(NSString(string: azimuthTmp).intValue)
-            azimuth = azimuthOrg-azimuthOffset
-            if(azimuth < 0) {
-                azimuth += 360 }
-            
-            if(azimuthInverted)
+            if(words[0] == "l")
             {
-                azimuth = 360 - azimuth
+                print(words[1])
+               
             }
-            
-            elevationOrg = Int(NSString(string: elevationTmp).intValue)
-            elevation = elevationOrg-elevationOffset
-            
-            if(SEND_TO_LOCALHOST == true)
+            else
             {
-                var message = OSCMessage(OSCAddressPattern("/azimuth"), azimuth)
-                client.send(message);
-                message = OSCMessage(OSCAddressPattern("/elevation"), elevation)
-                client.send(message);
-                print(azimuth);
-                //sendTimestamp();
+                let azimuthTmp = words[0]
+                let elevationTmp = words[1]
+                
+                azimuthOrg = Int(NSString(string: azimuthTmp).intValue)
+                azimuth = azimuthOrg-azimuthOffset
+                if(azimuth < 0) {
+                    azimuth += 360 }
+                
+                if(azimuthInverted)
+                {
+                    azimuth = 360 - azimuth
+                }
+                
+                elevationOrg = Int(NSString(string: elevationTmp).intValue)
+                elevation = elevationOrg-elevationOffset
+                
+                
+                if(SEND_TO_LOCALHOST == true)
+                {
+                    var message = OSCMessage(OSCAddressPattern("/azimuth"), azimuth)
+                    client.send(message);
+                    message = OSCMessage(OSCAddressPattern("/elevation"), elevation)
+                    client.send(message);
+                    print(azimuth);
+                    //sendTimestamp();
 
+                }
             }
         }
         else {

@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEngine;
 using System;
@@ -105,3 +107,4 @@ public abstract class GUIHelpers
         }
     }
 }
+#endif

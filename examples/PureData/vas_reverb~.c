@@ -30,8 +30,14 @@ static void vas_reverb_dsp(vas_reverb *x, t_signal **sp)
 static void vas_reverb_free(vas_reverb *x)
 {
     vas_fir_reverb_free(x->convolutionEngine);
+    
     outlet_free(x->outL);
     outlet_free(x->outR);
+    
+    if(x->leftArray)
+        vas_mem_free(x->leftArray);
+    if(x->rightArray)
+        vas_mem_free(x->rightArray);
 }
 
 static void *vas_reverb_new(t_symbol *s, int argc, t_atom *argv)
@@ -46,6 +52,10 @@ static void *vas_reverb_new(t_symbol *s, int argc, t_atom *argv)
     x->filterSize = 0;
     x->f = 0;
     x->fullpath[0] = '\0';
+    
+    x->leftArray = NULL;
+    x->rightArray = NULL;
+    
     sprintf(x->canvasDirectory, "%s", canvas_getcurrentdir()->s_name);
 
     if(argc >= 1)
@@ -78,6 +88,12 @@ static void *vas_reverb_new(t_symbol *s, int argc, t_atom *argv)
         rwa_firobject_read2((rwa_firobject *)x, path, x->segmentSize, 0, 0);
 
     return (x);
+}
+
+static void vas_reverb_setIndex(vas_reverb *x, float index)
+{
+    vas_fir_reverb *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
+    vas_dynamicFirChannel_selectIR(binauralEngine->left, index);
 }
 
 void vas_reverb_tilde_setup(void)

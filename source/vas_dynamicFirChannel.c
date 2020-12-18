@@ -10,6 +10,7 @@ void vas_filter_metaData_init(vas_fir_metaData *x)
     x->filterLength = 0;
     x->lineFormat = 0;
     x->segmentSize = 256;
+    x->numberOfIrs = 0;
     x->fullPath = NULL;
 }
 
@@ -50,6 +51,8 @@ vas_dynamicFirChannel_filter *vas_dynamicFirChannel_filter_new()
 #endif
             x->pointerToFFTSegments[eleCount][aziCount] = vas_mem_alloc( sizeof(VAS_COMPLEX *));
             x->segmentIsZero[eleCount][aziCount] = vas_mem_alloc( sizeof(bool));
+            x->indexIsZero[eleCount][aziCount] = true;
+            
         }
     }
     return x;
@@ -267,6 +270,12 @@ void vas_dynamicFirChannel_output_free(vas_dynamicFirChannel_output *x)
     vas_mem_free(x->current.signalComplex);
     vas_mem_free(x->next.signalComplex);
 #endif
+}
+
+void vas_dynamicFirChannel_selectIR(vas_dynamicFirChannel *x, int index)
+{
+    if(!x->filter->indexIsZero[0][index])
+         x->azimuthTmp = index;
 }
 
 void vas_dynamicFirChannel_setAzimuth(vas_dynamicFirChannel *x, int azimuth)

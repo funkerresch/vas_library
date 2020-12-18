@@ -34,10 +34,30 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>vas_binaural~ copy.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>vas_dynconv~ copy.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>vas_dynconv~.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>84FFFFAB2125808F00294898</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4C45CFD2534795B000D9303</key>
 		<dict>
 			<key>primary</key>
 			<true/>

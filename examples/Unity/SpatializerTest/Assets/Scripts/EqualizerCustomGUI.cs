@@ -1,7 +1,10 @@
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEditor;
 using System;
 using MathHelpers;
+
 
 public abstract class FilterCurveUI : IAudioEffectPluginGUI
 {
@@ -267,3 +270,4 @@ public class EqualizerCustomGUI : FilterCurveUI
         return true;
     }
 }
+#endif
