@@ -221,6 +221,8 @@ void vas_util_fcopy(float *source, float *dest, int length);
 void vas_util_fcopy_noavx(float *source, float *dest, int length);
     
 void vas_util_fscale(float *dest, float scale,  int length);
+
+void vas_util_fmulitplyScalar(float *source, float scale, float *dest, int length);
     
 void vas_util_complexScale(VAS_COMPLEX *dest, float scale,  int length);
 

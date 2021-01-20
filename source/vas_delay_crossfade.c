@@ -32,7 +32,7 @@ void vas_delay_crossfade_setDelayTime(vas_delay_crossfade *x, float delayTime)
 
 void vas_delay_crossfade_updateDelayTime(vas_delay_crossfade *x)
 {
-    vas_delay_setDelayTime(x->current, x->target->delay_in_samples);
+    vas_delay_setDelayTime(x->current, x->target->delayTimeInSamples);
     vas_delay_setDelayTime(x->target, x->delayTimeTmp);
 }
 
@@ -52,7 +52,7 @@ void vas_delay_crossfade_process(vas_delay_crossfade *x, float *in, float *out, 
     vas_delay_perform(x->current, in, x->outputCurrent, vectorSize);
     vas_delay_perform(x->target, in, x->outputTarget, vectorSize);
     
-    if(x->current->delay_in_samples != x->target->delay_in_samples)
+    if(x->current->delayTimeInSamples != x->target->delayTimeInSamples)
     {
         vas_util_fmultiply(x->fadeOut+x->fadeCounter*vectorSize, x->outputCurrent, x->outputCurrent, vectorSize);
         vas_util_fmultiply(x->fadeIn+x->fadeCounter*vectorSize, x->outputTarget, x->outputTarget, vectorSize);

@@ -60,6 +60,8 @@ void vas_iir_biquad_free(vas_iir_biquad *x);
 void vas_iir_biquad_setFrequency(vas_iir_biquad *x, float f0);
 
 void vas_iir_biquad_process(vas_iir_biquad *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize);
+
+void vas_iir_biquad_processInPlace(vas_iir_biquad *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize);
     
 #ifdef __cplusplus
 }

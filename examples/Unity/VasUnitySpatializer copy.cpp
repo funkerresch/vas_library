@@ -31,7 +31,7 @@ FuncPtr Debug = NULL;
 #define VAS_MAXNUMBEROFRAYS 12
 #define VAS_MAXREFLECTIONORDER 12
 #define VAS_REFLECTIONPARAMETERS 7
-#define VAS_DEBUG_TO_UNITY
+//#define VAS_DEBUG_TO_UNITY
 
 #define VAS_SPAT_CONFIG_SIMPLE 1
 #define VAS_SPAT_CONFIG_MANUAL 2
@@ -1490,7 +1490,7 @@ namespace Spatializer
 #endif
                 readIR(x, fullpath, segmentSize, 0);
                     
-                if(effectData->config == VAS_SPAT_CONFIG_AUTO)
+                if(effectData->config != VAS_SPAT_CONFIG_SIMPLE)
                 {
                     for(int i = 0; i < effectData->numberOfRays; i++)
                     {
@@ -1779,13 +1779,13 @@ namespace Spatializer
         if(data->p[P_LISTENERORIENTATIONONLY])
         {
            HeadingAndElevationFromTranformationMatrix(listener, &azimuth, &elevation);
-#ifdef VAS_DEBUG_TO_UNITY
-            if(Debug)
-            {
-                sprintf(data->debugString, "Azimuth: %f Elevation :%f", azimuth, elevation);
-                Debug(data->debugString);
-            }
-#endif
+//#ifdef VAS_DEBUG_TO_UNITY
+//            if(Debug)
+//            {
+//                sprintf(data->debugString, "Azimuth: %f Elevation :%f", azimuth, elevation);
+//                Debug(data->debugString);
+//            }
+//#endif
         }
         
         else
@@ -1863,7 +1863,6 @@ namespace Spatializer
                     mute =  data->p[paramIndex+4];
                     r_scaling = data->p[paramIndex+5];
                     r_distance = data->p[paramIndex+6];
-                    
                      
                     //distance = sqrt(pow(r_px-px, 2) + pow(r_py-py, 2) + pow(r_pz-pz, 2)); // bullshit... need to set distance as parameter
                     float delayTime = r_distance/343.0 * 44100.0;

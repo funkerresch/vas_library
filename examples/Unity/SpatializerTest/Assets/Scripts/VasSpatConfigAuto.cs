@@ -33,9 +33,9 @@ public struct ReflectionControl
 
 public class VasSpatConfigAuto : VasSpat
 {
-    [Range(0.0f, 12.0f)]
+    [Range(0.0f, 100.0f)]
     public int numberOfRays = 6;
-    [Range(1.0f, 12.0f)]
+    [Range(1.0f, 10.0f)]
     public int reflectionOrder = 1;
 
     public float horizontalSourceDirectivity = 180;
@@ -235,10 +235,10 @@ public class VasSpatConfigAuto : VasSpat
 
     void MuteReflections(int rayNumber, int reflectionNumber)
     {
-        int paramIndex = reflectionOffset + rayNumber * VAS_MAXREFLECTIONORDER * VAS_REFLECTIONPARAMETERS + reflectionNumber * VAS_REFLECTIONPARAMETERS;
+        int paramIndex = rayNumber * VAS_MAXREFLECTIONORDER * VAS_REFLECTIONPARAMETERS + reflectionNumber * VAS_REFLECTIONPARAMETERS;
         bool value = reflControl.ray[rayNumber].onOff[reflectionNumber];
         float fval = (float)Convert.ToInt32(value);
-        mySource.SetSpatializerFloat(paramIndex + 4, fval);
+       // SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, reflectionNumber, (int)ReflectionParams.P_REF_MUTE, fval);
     }
 
     void RaytraceReflections(int rayNumber, float azimuth, float elevation)
@@ -273,52 +273,51 @@ public class VasSpatConfigAuto : VasSpat
 
         for (int i = 0; i < reflectionOrder; i++)
         {   
-            paramIndex = reflectionOffset + rayNumber * VAS_MAXREFLECTIONORDER * VAS_REFLECTIONPARAMETERS + i * VAS_REFLECTIONPARAMETERS;
+            paramIndex = rayNumber * VAS_MAXREFLECTIONORDER * VAS_REFLECTIONPARAMETERS + i * VAS_REFLECTIONPARAMETERS;
             
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000))
-            {
-                //Debug.Log("NO MUTE");
-                MuteReflections(rayNumber, i);
-                inDirection = Vector3.Reflect(ray.direction, hit.normal);
-                ray = new Ray(hit.point, inDirection);
-                lineRenderer[rayNumber].SetPosition(i + 1, hit.point);
+            //if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000))
+            //{
+            //    //Debug.Log("NO MUTE");
+            //    MuteReflections(rayNumber, i);
+            //    inDirection = Vector3.Reflect(ray.direction, hit.normal);
+            //    ray = new Ray(hit.point, inDirection);
+            //    lineRenderer[rayNumber].SetPosition(i + 1, hit.point);
 
-                lastDistance += Vector3.Distance(lastReflection, hit.point);
-                lastReflection = hit.point;
+            //    lastDistance += Vector3.Distance(lastReflection, hit.point);
+            //    lastReflection = hit.point;
                 
-                float dist = 1f / maxDistance * lastDistance;
-                float scale = curve.Evaluate(dist) * inverseSourceListenerScale;
-                //Debug.Log("Reflection Number: " + i);
-                //Debug.Log("Distance: " + lastDistance);
-                //Debug.Log("Scale: " + scale);
+            //    float dist = 1f / maxDistance * lastDistance;
+            //    float scale = curve.Evaluate(dist) * inverseSourceListenerScale;
+            //    //Debug.Log("Reflection Number: " + i);
+            //    //Debug.Log("Distance: " + lastDistance);
+            //    //Debug.Log("Scale: " + scale);
 
-                mySource.SetSpatializerFloat(paramIndex, hit.point.x);
-                mySource.SetSpatializerFloat(paramIndex + 1, hit.point.y);
-                mySource.SetSpatializerFloat(paramIndex + 2, hit.point.z);
+            //    SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_X, hit.point.x);
+            //    SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_Y, hit.point.y);
+            //    SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_Z, hit.point.z);
 
-                if (hit.transform.tag == "CONCRETE")
-                    mySource.SetSpatializerFloat(paramIndex + 3, 1f);
-                else if (hit.transform.tag == "MIXED")
-                    mySource.SetSpatializerFloat(paramIndex + 3, 2f);
-                else if (hit.transform.tag == "WOOD")
-                    mySource.SetSpatializerFloat(paramIndex + 3, 3f);
-                else if (hit.transform.tag == "TEXTILE")
-                    mySource.SetSpatializerFloat(paramIndex + 3, 4f);
-                else
-                    mySource.SetSpatializerFloat(paramIndex + 3, 1f);
+            //    if (hit.transform.tag == "CONCRETE")
+            //        SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_MAT, 1f);
+            //    else if (hit.transform.tag == "MIXED")
+            //        SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_MAT, 2f);
+            //    else if (hit.transform.tag == "WOOD")
+            //        SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_MAT, 3f);
+            //    else if (hit.transform.tag == "TEXTILE")
+            //        SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_MAT, 4f);
+            //    else
+            //        SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_MAT, 1f);
 
-                mySource.SetSpatializerFloat(paramIndex + 5, scale);
-                
+            //    SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_SCALE, scale);
 
-                mySource.SetSpatializerFloat(paramIndex + 6, lastDistance);
-                //Debug.Log("Scale: " + i + " " + scale);
-                //Debug.Log("Dist: " + i + " " + lastDistance);
-                //Debug.Log(scale);
-            }
-            else
-            {  
-                mySource.SetSpatializerFloat(paramIndex + 4, 1f);
-            }
+            //    SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_DIST, lastDistance);
+            //    Debug.Log("Scale: " + i + " " + scale);
+            //    Debug.Log("Dist: " + i + " " + lastDistance);
+            //    Debug.Log(scale);
+            //}
+            //else
+            //{  
+            //    SetReflectionParameter(VAS_Unity_Spatializer, rayNumber, i, (int)ReflectionParams.P_REF_MUTE, 1f);
+            //}
             totalReflectionCount++;
             
         }
@@ -352,16 +351,11 @@ public class VasSpatConfigAuto : VasSpat
 
     void Start()
     {
-        spatId = spatIdCounter++;
-        Debug.Log("SpatId: " + spatId);
+        SetSpatializerInstanceAndConfig(VAS_CONFIG.AUTO);
 
         listenerMatrix = new float[16];
         sourceMatrix = new float[16];
-
         CalculateSource2ListenerAziAndEle();
-        mySource.SetSpatializerFloat(3, (float)spatId);
-        VAS_Unity_Spatializer = GetInstance(spatId);
-        SetConfig(VAS_Unity_Spatializer, (int)VAS_CONFIG.AUTO);
         rayDistance = horizontalFullPowerRange / numberOfRays;
 
         mySource.SetSpatializerFloat((int)SpatParams.P_H_SOURCEDIRECTIVITY, horizontalSourceDirectivity);
@@ -373,6 +367,12 @@ public class VasSpatConfigAuto : VasSpat
         mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_EARLY, scalingEarly);
         mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_LATE, scalingLate);
         InverseAzimuth(inverseAzimuth);        InverseElevation(inverseElevation);        BypassSpat(bypass);        ListenerOrientationOnly(listenerOrientationOnly);        ReadImpulseResponse();
+        for (int i = 0; i < numberOfRays; i++)
+        {
+            RaytraceReflections(i, i * rayDistance, 0);
+        }
+
+
     }
 
     new void Update()
@@ -382,17 +382,13 @@ public class VasSpatConfigAuto : VasSpat
         CalculateSource2ListenerAziAndEle();
         mySource.SetSpatializerFloat((int)SpatParams.P_H_SOURCEDIRECTIVITY, horizontalSourceDirectivity);
         mySource.SetSpatializerFloat((int)SpatParams.P_H_FULLPOWERRANGE, horizontalFullPowerRange);
-        mySource.SetSpatializerFloat((int)SpatParams.P_NUMBEROFRAYS, numberOfRays);
-        mySource.SetSpatializerFloat((int)SpatParams.P_REFLECTIONORDER, reflectionOrder);
+
         //mySource.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
         CalculateHDirectivityScaling();
         CalculateVDirectivityScaling();
         mySource.SetSpatializerFloat((int)SpatParams.P_H_DIRECTIVITYDAMPING, hDirectivityScaling);
         mySource.SetSpatializerFloat((int)SpatParams.P_V_DIRECTIVITYDAMPING, vDirectivityScaling);
-        for (int i = 0; i < numberOfRays; i++)
-        {
-            RaytraceReflections(i, i * rayDistance, 0);
-        }
         
+
     }
 }

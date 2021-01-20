@@ -21,15 +21,16 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\kissfft\kiss_fft.h" />
     <ClInclude Include="..\..\..\kissfft\tools\kiss_fftr.h" />
-    <ClInclude Include="..\..\..\source\vas_delay.h" />
-    <ClInclude Include="..\..\..\source\vas_delay_crossfade.h" />
+    <ClInclude Include="..\..\..\source\vas_delayTap.h" />
+    <ClInclude Include="..\..\..\source\vas_delayTap_crossfade.h" />
     <ClInclude Include="..\..\..\source\vas_dynamicFirChannel.h" />
     <ClInclude Include="..\..\..\source\vas_fir.h" />
     <ClInclude Include="..\..\..\source\vas_fir_binaural.h" />
-    <ClInclude Include="..\..\..\source\vas_fir_binauralReflection.h" />
+    <ClInclude Include="..\..\..\source\vas_fir_binauralReflection1.h" />
     <ClInclude Include="..\..\..\source\vas_fir_list.h" />
     <ClInclude Include="..\..\..\source\vas_iir_biquad.h" />
     <ClInclude Include="..\..\..\source\vas_mem.h" />
+    <ClInclude Include="..\..\..\source\vas_ringBuffer.h" />
     <ClInclude Include="..\..\..\source\vas_util.h" />
     <ClInclude Include="..\AudioPluginInterface.h" />
     <ClInclude Include="..\AudioPluginUtil.h" />
@@ -38,15 +39,16 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\kissfft\kiss_fft.c" />
     <ClCompile Include="..\..\..\kissfft\tools\kiss_fftr.c" />
-    <ClCompile Include="..\..\..\source\vas_delay.c" />
-    <ClCompile Include="..\..\..\source\vas_delay_crossfade.c" />
+    <ClCompile Include="..\..\..\source\vas_delayTap.c" />
+    <ClCompile Include="..\..\..\source\vas_delayTap_crossfade.c" />
     <ClCompile Include="..\..\..\source\vas_dynamicFirChannel.c" />
     <ClCompile Include="..\..\..\source\vas_fir.c" />
     <ClCompile Include="..\..\..\source\vas_fir_binaural.c" />
-    <ClCompile Include="..\..\..\source\vas_fir_binauralReflection.c" />
+    <ClCompile Include="..\..\..\source\vas_fir_binauralReflection1.c" />
     <ClCompile Include="..\..\..\source\vas_fir_list.c" />
     <ClCompile Include="..\..\..\source\vas_iir_biquad.c" />
     <ClCompile Include="..\..\..\source\vas_mem.c" />
+    <ClCompile Include="..\..\..\source\vas_ringBuffer.c" />
     <ClCompile Include="..\..\..\source\vas_util.c" />
     <ClCompile Include="..\AudioPluginUtil.cpp" />
     <ClCompile Include="..\VasUnitySpatializer.cpp" />
@@ -213,7 +215,7 @@ copy $(TargetPath) ..\..\Assets\Plugins\x86\$(TargetName).dll
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <ExceptionHandling>false</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>

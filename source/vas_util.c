@@ -870,6 +870,24 @@ void vas_util_fscale(float *dest, float scale,  int length)
     
 }
 
+void vas_util_fmulitplyScalar(float *source, float scale, float *dest, int length)
+{
+#ifdef VAS_USE_VDSP
+    vDSP_vsmul(source, 1, &scale, dest, 1, length);
+#endif
+    
+#ifdef VAS_USE_KISSFFT
+    int n = length;
+    while (n--)
+    {
+        float tmp = *source; // prevents gcc generating segmentation fault with avx optimization
+        tmp *= scale;
+        *dest++ = tmp;
+    }
+#endif
+    
+}
+
 void vas_util_fgenerateUnitImpulse(float *dest, int length)
 {
     

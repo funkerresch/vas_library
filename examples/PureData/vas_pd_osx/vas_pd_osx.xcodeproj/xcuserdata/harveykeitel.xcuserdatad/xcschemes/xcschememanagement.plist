@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>rwa_binauralspace~.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>rwa_hpcomp~.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -37,7 +42,7 @@
 		<key>vas_binaural~ copy.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>vas_dynconv~ copy.xcscheme_^#shared#^_</key>
 		<dict>
@@ -58,6 +63,11 @@
 			<true/>
 		</dict>
 		<key>E4C45CFD2534795B000D9303</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4F9E79225A3553300CE8119</key>
 		<dict>
 			<key>primary</key>
 			<true/>

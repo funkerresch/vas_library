@@ -76,6 +76,20 @@
                ReferencedContainer = "container:vas_pd_osx.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E4F9E79225A3553300CE8119"
+               BuildableName = "vas_binauralspace~.pd_darwin"
+               BlueprintName = "vas_binauralspace~"
+               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

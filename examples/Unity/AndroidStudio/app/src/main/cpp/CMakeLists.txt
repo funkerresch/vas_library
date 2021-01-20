@@ -5,6 +5,7 @@
 
 cmake_minimum_required(VERSION 3.10.2)
 
+
 # Declares and names the project.
 
 project("vas_binaural")
@@ -39,11 +40,11 @@ add_library( # Sets the name of the library.
         ${UNITYPLUGINPATH}/AudioPluginUtil.cpp
         ${VASPATH}/vas_delay.c
         ${VASPATH}/vas_delay_crossfade.c
-        ${VASPATH}/vas_interpolDelay.c
+        ${VASPATH}/vas_ringBuffer.c
+        ${VASPATH}/vas_delayTap.c
+        ${VASPATH}/vas_delayTap_crossfade.c
         ${VASPATH}/vas_iir_biquad.c
-        ${VASPATH}/vas_iir_biquad_crossfade.c
-        ${VASPATH}/vas_iir_cascadedBiquad.c
-        ${VASPATH}/vas_fir_binauralReflection.c
+        ${VASPATH}/vas_fir_binauralReflection1.c
         ${VASPATH}/vas_dynamicFirChannel.c
         ${VASPATH}/vas_fir_binaural.c
         ${VASPATH}/vas_fir_list.c
@@ -55,8 +56,8 @@ add_library( # Sets the name of the library.
         ${KISSFFT}/kiss_fft.c)
 
 target_compile_options(AudioPlugin_VAS_Binaural PRIVATE
-        "$<$<CONFIG:RELEASE>:-O3>"
-        "$<$<CONFIG:DEBUG>:-O3>"
+        "$<$<CONFIG:RELEASE>:-Ofast>"
+        "$<$<CONFIG:DEBUG>:-Ofast>"
         )
 
 # Searches for a specified prebuilt library and stores the path as a

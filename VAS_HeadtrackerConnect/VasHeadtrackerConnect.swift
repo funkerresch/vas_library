@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+
 import os.log
 
 var DEBUG_LEGACY = true;
@@ -19,8 +20,8 @@ enum HeadtrackerType {
 }
 
 @objc public class VasHeadtrackerConnect: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, OSCServerDelegate {
-    var azimuth = 0;
-    var elevation = 0;
+    @objc public var azimuth = 20;
+    @objc public var elevation = 0;
     var azimuthOffset = 0
     var elevationOffset = 0
     var azimuthOrg = 0
@@ -35,10 +36,15 @@ enum HeadtrackerType {
     var autoReconnect:Bool;
     var client = OSCClient(address: "localhost", port: 51080)
     
+    @objc public func setHeadtrackerID(name: UnsafePointer<CChar>)
+    {
+        headtrackerId = String(cString: name);
+    }
+    
     @objc public init(headtrackerId: String, portNumber: Int)
     {        
         self.dataBuffer = NSMutableData()
-        self.headtrackerId = headtrackerId;
+        self.headtrackerId = "rwaht00";
         self.headTrackerConnected = false
         self.headtrackerType = HeadtrackerType.RWAHEADTRACKER_BNO080
         self.autoReconnect = true
@@ -55,7 +61,7 @@ enum HeadtrackerType {
         connect()
     }
     
-    public func setAzimuthOffset()
+    @objc public func setAzimuthOffset()
     {
         azimuthOffset = azimuthOrg
     }
@@ -161,8 +167,29 @@ enum HeadtrackerType {
             return
         }
         
-        startScanning()
-        
+        switch central.state {
+        case .unauthorized:
+            print("error")
+            
+        case .unknown:
+            print("error")
+            
+        case .resetting:
+            print("error")
+            
+        case .unsupported:
+            print("error")
+            
+        case .poweredOff:
+            print("error")
+            
+        case .poweredOn:
+            startScanning()
+            
+        @unknown default:
+            print("error")    
+        }
+          
         guard let peripheral = self.peripheral else {
             return
         }
@@ -208,8 +235,10 @@ enum HeadtrackerType {
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber)
     {
-        if(peripheral.name == headtrackerId)
+        print(peripheral.name);
+        if(peripheral.name == "rwaht00")
         {
+            
             if self.peripheral != peripheral {
                 
                 // save a reference to the peripheral object so Core Bluetooth doesn't get rid of it

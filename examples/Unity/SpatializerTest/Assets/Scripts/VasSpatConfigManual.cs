@@ -106,7 +106,7 @@ public class VasSpatConfigManual : VasSpat
 
         for (int i = 0; i < reflectionOrder; i++)
         {
-            paramIndex = reflectionOffset + rayNumber * VAS_MAXREFLECTIONORDER * VAS_REFLECTIONPARAMETERS + i * VAS_REFLECTIONPARAMETERS;
+            paramIndex = rayNumber * VAS_MAXREFLECTIONORDER * VAS_REFLECTIONPARAMETERS + i * VAS_REFLECTIONPARAMETERS;
 
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000))
             {
@@ -294,7 +294,7 @@ public class VasSpatConfigManual : VasSpat
         mySource.SetSpatializerFloat((int)SpatParams.P_H_DIRECTIVITYDAMPING, hDirectivityScaling);
         mySource.SetSpatializerFloat((int)SpatParams.P_V_DIRECTIVITYDAMPING, vDirectivityScaling);
 
-        float sourceListenerDistance1 = Vector3.Distance(reflection1.transform.position, listener.transform.position);
+       /* float sourceListenerDistance1 = Vector3.Distance(reflection1.transform.position, listener.transform.position);
 
         mySource.SetSpatializerFloat((int)SpatParams.P_REF_1_1_X, (float)reflection1.transform.position.x);
         mySource.SetSpatializerFloat((int)SpatParams.P_REF_1_1_Y, (float)reflection1.transform.position.y);
@@ -376,6 +376,6 @@ public class VasSpatConfigManual : VasSpat
         mySource.SetSpatializerFloat((int)SpatParams.P_REF_8_1_MAT, (float)1f);
         mySource.SetSpatializerFloat((int)SpatParams.P_REF_8_1_SCALE, (float)0.8f);
 
-        mySource.SetSpatializerFloat((int)SpatParams.P_REF_8_1_DIST, (float)sourceListenerDistance8);    
+        mySource.SetSpatializerFloat((int)SpatParams.P_REF_8_1_DIST, (float)sourceListenerDistance8);  */  
     }
 }
