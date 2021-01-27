@@ -49,8 +49,8 @@ namespace Spatializer
         P_REF_MUTE,
         P_REF_SCALE,
         P_REF_DIST,
-        P_REF_DUMMY1,
-        P_REF_DUMMY2,
+        P_REF_AZI,
+        P_REF_ELE,
         P_REF_DUMMY3,
         P_REF_SIZE
     };
@@ -82,6 +82,8 @@ namespace Spatializer
         P_SCALING_DIRECT,
         P_SCALING_STEREO,
         P_BINAURALREFLECTIONS,
+        P_AZI,
+        P_ELE,
         
         P_NUM
     };
@@ -106,7 +108,6 @@ namespace Spatializer
         vas_fir_reverb *reverbEngine;
         vas_iir_biquad *directivityDamping;
         vas_iir_biquad *stereoReverbDamping;
-        vas_iir_biquad *stereoReverbDampingR;
         vas_ringBuffer *ringBuffer;
         vas_fir_binauralReflection1 *reflections1[VAS_SPAT_MAXNUMBEROFREFLECTIONS*P_REF_SIZE];
         
@@ -425,7 +426,8 @@ namespace Spatializer
         RegisterParameter(definition, "Scaling Direct", "", 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, P_SCALING_DIRECT, "Scaling direct part");
         RegisterParameter(definition, "Scaling Stereo", "", 0.0f, 10.0f, 1.0f, 1.0f, 1.0f, P_SCALING_STEREO, "Scaling stereo part");
         RegisterParameter(definition, "Binaural Reflcs", "", 0.0f, 1000.0f, 50.0f, 1.0f, 1.0f, P_BINAURALREFLECTIONS, "Number of binaural reflections");
-        
+        RegisterParameter(definition, "Azimuth", "", 0.0f, 360.0f, 0.0f, 1.0f, 1.0f, P_AZI, "Azimuth");
+        RegisterParameter(definition, "Elevation", "", -90.0f, 90.0f, 0.0f, 1.0f, 1.0f, P_ELE, "Elevation");
         definition.flags |= UnityAudioEffectDefinitionFlags_IsSpatializer;
         return numparams;
     }
@@ -454,7 +456,6 @@ namespace Spatializer
         effectdata->reflectionOrder = 0;
         effectdata->directivityDamping = vas_iir_biquad_new(VAS_IIR_BIQUAD_LOWPASS, 20000, 10);
         effectdata->stereoReverbDamping = vas_iir_biquad_new(VAS_IIR_BIQUAD_LOWPASS, 5000, 20);
-        effectdata->stereoReverbDampingR = vas_iir_biquad_new(VAS_IIR_BIQUAD_LOWPASS, 5000, 20);
         currentInstance[instanceCounter++] = effectdata;
         
         if (IsHostCompatible(state))
@@ -494,12 +495,13 @@ namespace Spatializer
         
         vas_iir_biquad_free(data->directivityDamping);
         vas_iir_biquad_free(data->stereoReverbDamping);
-        vas_iir_biquad_free(data->stereoReverbDampingR);
  
         if(data->config != VAS_SPAT_CONFIG_SIMPLE)
         {
             for (int i = 0; i < data->reflectionOrder; i++)
+            {
                 vas_fir_binauralReflection1_free(data->reflections1[i]);
+            }
             
             vas_ringBuffer_free(data->ringBuffer);
         }
@@ -568,42 +570,10 @@ namespace Spatializer
             return UNITY_AUDIODSP_OK;
         }
 
-        static const float kRad2Deg = 180.0f / kPI;
         float azimuth, elevation;
-
-        float* listener = state->spatializerdata->listenermatrix;
-        float* source = state->spatializerdata->sourcematrix;
-        float px, py, pz;
-        float dir_x, dir_y, dir_z;
-     
-        if(data->p[P_LISTENERORIENTATIONONLY])
-        {
-           HeadingAndElevationFromTranformationMatrix(listener, &azimuth, &elevation);
-//#ifdef VAS_DEBUG_TO_UNITY
-//            if(Debug)
-//            {
-//                sprintf(data->debugString, "Azimuth: %f Elevation :%f", azimuth, elevation);
-//                Debug(data->debugString);
-//            }
-//#endif
-        }
         
-        else
-        {
-            px = source[12];
-            py = source[13];
-            pz = source[14];
-            
-            dir_x = listener[0] * px + listener[4] * py + listener[8] * pz + listener[12];
-            dir_y = listener[1] * px + listener[5] * py + listener[9] * pz + listener[13];
-            dir_z = listener[2] * px + listener[6] * py + listener[10] * pz + listener[14];
-            
-            azimuth = (fabsf(dir_z) < 0.001f) ? 0.0f : atan2f(dir_x, dir_z);
-            if (azimuth < 0.0f)
-                azimuth += 2.0f * kPI;
-            azimuth = FastClip(azimuth * kRad2Deg, 0.0f, 360.0f);
-            elevation = atan2f(dir_y, sqrtf(dir_x * dir_x + dir_z * dir_z) + 0.001f) * kRad2Deg;
-        }
+        azimuth = data->p[P_AZI];
+        elevation = data->p[P_ELE];
         
         for(unsigned int n = 0; n < length; n++)
         {
@@ -611,9 +581,6 @@ namespace Spatializer
             data->lastReflectionInput[n] = inbuffer[n * inchannels]; // last reflectionInput deleted
             data->tmp[n] = inbuffer[n * inchannels]; // last reflectionInput deleted
         }
-     
-        if(data->p[P_INVERSEAZI])
-            azimuth = 360 - azimuth;
         
         vas_fir_binaural_setAzimuth(data->binauralEngine, azimuth);
         vas_fir_binaural_setElevation(data->binauralEngine, elevation);
@@ -629,9 +596,6 @@ namespace Spatializer
         
         vas_util_fscale(data->input, data->p[P_SCALING_DIRECT], length);
         vas_fir_binaural_process(data->binauralEngine, data->input, data->outputL, data->outputR, length);
-        vas_util_fscale(data->tmp, data->p[P_SCALING_EARLY], length);
-        vas_iir_biquad_process(data->stereoReverbDamping, data->tmp, data->tmp, length);
-        vas_ringBuffer_process(data->ringBuffer, data->tmp, length);
 
         if(data->initReverbTail)
         {
@@ -641,21 +605,18 @@ namespace Spatializer
           
         if(data->config != VAS_SPAT_CONFIG_SIMPLE)
         {
-            float r_px;
-            float r_py;
-            float r_pz;
             float r_scaling;
             float r_distance;
             int material;
             int paramIndex;
             
+            vas_util_fscale(data->tmp, data->p[P_SCALING_EARLY], length);
+            vas_iir_biquad_process(data->stereoReverbDamping, data->tmp, data->tmp, length);
+            vas_ringBuffer_process(data->ringBuffer, data->tmp, length);
+            
             for (int i = 0; i < data->reflectionOrder; i++)
             {
                 paramIndex = i * P_REF_SIZE;
-                
-                r_px = data->reflectionParameters[paramIndex + P_REF_X];
-                r_py = data->reflectionParameters[paramIndex + P_REF_Y];
-                r_pz = data->reflectionParameters[paramIndex + P_REF_Z];
                 material = (int)data->reflectionParameters[paramIndex + P_REF_MAT];
                 r_scaling = data->reflectionParameters[paramIndex + P_REF_SCALE];;
                 r_distance = data->reflectionParameters[paramIndex + P_REF_DIST];
@@ -677,18 +638,8 @@ namespace Spatializer
                 }
                 else
                 {
-                    dir_x = listener[0] * r_px + listener[4] * r_py + listener[8] * r_pz + listener[12];
-                    dir_y = listener[1] * r_px + listener[5] * r_py + listener[9] * r_pz + listener[13];
-                    dir_z = listener[2] * r_px + listener[6] * r_py + listener[10] * r_pz + listener[14];
-                     
-                    azimuth = (fabsf(dir_z) < 0.001f) ? 0.0f : atan2f(dir_x, dir_z);
-                    if (azimuth < 0.0f)
-                        azimuth += 2.0f * kPI;
-                    azimuth = FastClip(azimuth * kRad2Deg, 0.0f, 360.0f);
-                    if(data->p[P_INVERSEAZI])
-                        azimuth = 360 - azimuth;
-                     
-                    elevation = atan2f(dir_y, sqrtf(dir_x * dir_x + dir_z * dir_z) + 0.001f) * kRad2Deg;
+                    azimuth = data->reflectionParameters[paramIndex + P_REF_AZI];
+                    elevation= data->reflectionParameters[paramIndex + P_REF_ELE];
                     
                     vas_fir_binauralReflection1_setAzimuth(data->reflections1[i], azimuth);
                     vas_fir_binauralReflection1_setElevation(data->reflections1[i], elevation);

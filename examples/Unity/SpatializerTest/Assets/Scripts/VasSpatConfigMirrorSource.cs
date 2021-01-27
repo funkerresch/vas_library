@@ -164,6 +164,8 @@ public class VasSpatConfigMirrorSource : VasSpat{
             MirrorSource zero = new MirrorSource(this.gameObject.transform.position, 0, materials);
             CalculateImageSources(zero, null, reflectionOrder - 1);
         }    }    void Start()    {
+        SetSpatializerInstanceAndConfig(VAS_CONFIG.AUTO);
+
         reflections = new List<MirrorSource>();
         walls = GameObject.FindGameObjectsWithTag(wallTag);
         curve = mySource.GetCustomCurve(AudioSourceCurveType.CustomRolloff);
@@ -176,12 +178,12 @@ public class VasSpatConfigMirrorSource : VasSpat{
             CalculateImageSources(zero, null, reflectionOrder - 1);
         }
 
+        // Raytracing will be used for calcultating directivity independent reverb
+
         //RaytraceReflections(1, 90, 0);
 
         Debug.Log("Number of calculated Mirror Sources: " + reflections.Count);
-        
-        SetSpatializerInstanceAndConfig(VAS_CONFIG.AUTO);
-
+    
         mySource.SetSpatializerFloat((int)SpatParams.P_SEGMENTSIZE_EARLYPART, segmentSizeEarlyReverb);
         mySource.SetSpatializerFloat((int)SpatParams.P_SEGMENTSIZE_LATEPART, segmentSizeLateReverb);
         mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_DIRECT, scalingDirect);
@@ -195,30 +197,35 @@ public class VasSpatConfigMirrorSource : VasSpat{
         ReadImpulseResponse();
     }    new void Update()
     {
+        base.Update();
+        float azimuth, elevation;
+        float dist;
+        float OneOverScaledDistance;
+        float scale;
+        //float hScaling;
+        //float vScaling;
         int i = 0;
-#if (!UNITY_ANDROID && !UNITY_EDITOR_WIN)
-        int azi = VasHeadtrackerConnect.GetAzimuth();
-        int ele = VasHeadtrackerConnect.GetElevation();
-        Vector3 rotation = Camera.main.transform.rotation.eulerAngles;
-        rotation.y = azi;
-        rotation.x = ele;
-        Camera.main.transform.rotation = Quaternion.Euler(rotation);
-#endif
-        
+
+        // Simple version of prototyped directivity patterns
+
+        //CalculateSource2ListenerAzimuthAndElevation(out azimuth, out elevation);
+        //CalculateHDirectivityScaling(azimuth, out hScaling);
+        //CalculateVDirectivityScaling(elevation, out vScaling);
+
         foreach (MirrorSource s in reflections)
         {
-            float dist = Vector3.Distance(s.position, listener1.transform.position);
-            float OneOverScaledDistance = 1f / maxDistance * dist;
-            float scale = curve.Evaluate(OneOverScaledDistance);
+            dist = Vector3.Distance(s.position, listener1.transform.position);
+            OneOverScaledDistance = 1f / maxDistance * dist;
+            scale = curve.Evaluate(OneOverScaledDistance);
+            CalculateAziAndElevation(s.position, out azimuth, out elevation);
 
             mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_DIRECT, scalingDirect);
             mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_EARLY, scalingEarly);
             mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_LATE, scalingLate);
             mySource.SetSpatializerFloat((int)SpatParams.P_BINAURALREFLECTIONS, binauralReflectionCount);
 
-            SetReflectionParameter(VAS_Unity_Spatializer, i, (int)ReflectionParams.P_REF_X, s.position.x);
-            SetReflectionParameter(VAS_Unity_Spatializer, i, (int)ReflectionParams.P_REF_Y, s.position.y);
-            SetReflectionParameter(VAS_Unity_Spatializer, i, (int)ReflectionParams.P_REF_Z, s.position.z);
+            SetReflectionParameter(VAS_Unity_Spatializer, i, (int)ReflectionParams.P_REF_AZI, azimuth);
+            SetReflectionParameter(VAS_Unity_Spatializer, i, (int)ReflectionParams.P_REF_ELE, elevation);
             SetReflectionParameter(VAS_Unity_Spatializer, i, (int)ReflectionParams.P_REF_SCALE, scale);
             SetReflectionParameter(VAS_Unity_Spatializer, i, (int)ReflectionParams.P_REF_DIST, dist);
             SetReflectionParameter(VAS_Unity_Spatializer, i, (int)ReflectionParams.P_REF_MAT, 2f);

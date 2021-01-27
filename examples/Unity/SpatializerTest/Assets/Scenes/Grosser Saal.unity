@@ -151,9 +151,9 @@ AudioSource:
   m_GameObject: {fileID: 102692843}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: e22b6a5ee633c42a1a6e0dc424dd7042,
+  OutputAudioMixerGroup: {fileID: 4055771514364388359, guid: e22b6a5ee633c42a1a6e0dc424dd7042,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 3ee22828a0225415ca426825d0edf819, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3393d0373c5314c73b7467664ae0d1f2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -329,29 +329,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 102692843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd75dd242dc2343b1a1aa903e1ec2cb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 35991d9bd4f6d439daaaff79eb456174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IrSet: fabian_dir256.txt
-  ReverbTail: 
-  ReverbClip: {fileID: 8300000, guid: 8d74a455e4e404459a8e965da6c97983, type: 3}
-  scalingDirect: 0.35
+  IrSet: MUA_S02_R00.txt
+  ReverbTail: MUA_S02_R00_tail.txt
+  ReverbClip: {fileID: 0}
+  scalingDirect: 1
   scalingEarly: 1
   scalingLate: 1
-  inverseAzimuth: 1
+  inverseAzimuth: 0
   inverseElevation: 0
   bypass: 0
-  listenerOrientationOnly: 0
-  segmentSizeEarlyReverb: 256
-  segmentSizeLateReverb: 1024
-  binauralReflectionCount: 20
+  listenerOrientationOnly: 1
+  segmentSizeEarlyReverb: 1024
+  segmentSizeLateReverb: 4096
+  binauralReflectionCount: 100
   recalculate: 0
-  wallTag: Wall
-  visualizeMirrorSources: 0
-  reflectionOrder: 2
-  numberOfRays: 5
-  raycastMaterial: {fileID: 2100000, guid: 11b6ec273991e427b97b9e97cc46df03, type: 2}
-  rayColor: {r: 1, g: 0.9238702, b: 0, a: 0}
 --- !u!135 &102692846
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -420,8 +414,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102692843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 3, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.36, y: 1.5, z: 7}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -642,6 +636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headtrackerID: rwaht00
   tare: 0
+  autocConnectHeadtracker: 0
 --- !u!4 &385177914
 Transform:
   m_ObjectHideFlags: 0
@@ -872,9 +867,9 @@ AudioSource:
   m_GameObject: {fileID: 1072966632}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: e22b6a5ee633c42a1a6e0dc424dd7042,
+  OutputAudioMixerGroup: {fileID: 4055771514364388359, guid: e22b6a5ee633c42a1a6e0dc424dd7042,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8b312c9c4719e49c4a46766e65239b6d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0a0eeed0bfb3a4fd88acc1713891f205, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1050,29 +1045,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1072966632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd75dd242dc2343b1a1aa903e1ec2cb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 35991d9bd4f6d439daaaff79eb456174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IrSet: fabian_dir256.txt
-  ReverbTail: 
-  ReverbClip: {fileID: 8300000, guid: 8d74a455e4e404459a8e965da6c97983, type: 3}
-  scalingDirect: 0.35
+  IrSet: MUA_S01_R00.txt
+  ReverbTail: MUA_S01_R00_tail.txt
+  ReverbClip: {fileID: 0}
+  scalingDirect: 1
   scalingEarly: 1
   scalingLate: 1
-  inverseAzimuth: 1
+  inverseAzimuth: 0
   inverseElevation: 0
   bypass: 0
-  listenerOrientationOnly: 0
-  segmentSizeEarlyReverb: 256
-  segmentSizeLateReverb: 1024
-  binauralReflectionCount: 20
+  listenerOrientationOnly: 1
+  segmentSizeEarlyReverb: 1024
+  segmentSizeLateReverb: 4096
+  binauralReflectionCount: 100
   recalculate: 0
-  wallTag: Wall
-  visualizeMirrorSources: 0
-  reflectionOrder: 2
-  numberOfRays: 5
-  raycastMaterial: {fileID: 2100000, guid: 11b6ec273991e427b97b9e97cc46df03, type: 2}
-  rayColor: {r: 1, g: 0.9238702, b: 0, a: 0}
 --- !u!135 &1072966635
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1141,8 +1130,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072966632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 3, z: 8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.39, y: 1.5, z: 7}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -1270,9 +1259,9 @@ AudioSource:
   m_GameObject: {fileID: 1117919193}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: e22b6a5ee633c42a1a6e0dc424dd7042,
+  OutputAudioMixerGroup: {fileID: 4055771514364388359, guid: e22b6a5ee633c42a1a6e0dc424dd7042,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 69c7d9e4252ce441c9821c60e4d8cb7c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8c1a70617625a45cba1fca1fbdea9228, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1448,29 +1437,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117919193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd75dd242dc2343b1a1aa903e1ec2cb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 35991d9bd4f6d439daaaff79eb456174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IrSet: fabian_dir256.txt
-  ReverbTail: 
-  ReverbClip: {fileID: 8300000, guid: 8d74a455e4e404459a8e965da6c97983, type: 3}
-  scalingDirect: 0.35
+  IrSet: MUA_S03_R00.txt
+  ReverbTail: MUA_S03_R00_tail.txt
+  ReverbClip: {fileID: 0}
+  scalingDirect: 1
   scalingEarly: 1
   scalingLate: 1
-  inverseAzimuth: 1
+  inverseAzimuth: 0
   inverseElevation: 0
   bypass: 0
-  listenerOrientationOnly: 0
-  segmentSizeEarlyReverb: 256
-  segmentSizeLateReverb: 1024
-  binauralReflectionCount: 20
+  listenerOrientationOnly: 1
+  segmentSizeEarlyReverb: 1024
+  segmentSizeLateReverb: 4096
+  binauralReflectionCount: 100
   recalculate: 0
-  wallTag: Wall
-  visualizeMirrorSources: 0
-  reflectionOrder: 2
-  numberOfRays: 5
-  raycastMaterial: {fileID: 2100000, guid: 11b6ec273991e427b97b9e97cc46df03, type: 2}
-  rayColor: {r: 1, g: 0.9238702, b: 0, a: 0}
 --- !u!135 &1117919196
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1539,8 +1522,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117919193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 3, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 9, y: 1.5, z: 2.7}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -1568,8 +1551,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303597569}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.70090926, z: 0, w: 0.71325046}
+  m_LocalPosition: {x: 0, y: 0, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1389050940}
@@ -1580,7 +1563,7 @@ Transform:
   - {fileID: 1018671678}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 89, z: 0}
 --- !u!1 &1350055941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,7 +1848,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 71
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1890,13 +1873,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666347553}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 19.58, y: 4.07, z: 6.81}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.68, y: 2.4, z: 2.057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1675031191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,9 +1910,9 @@ AudioSource:
   m_GameObject: {fileID: 1675031191}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: e22b6a5ee633c42a1a6e0dc424dd7042,
+  OutputAudioMixerGroup: {fileID: 4055771514364388359, guid: e22b6a5ee633c42a1a6e0dc424dd7042,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6ea327b30e7de40d9b6db8488af7669c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4e53b1943ef1146638bae902b6f8dcfa, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2105,29 +2088,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1675031191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd75dd242dc2343b1a1aa903e1ec2cb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 35991d9bd4f6d439daaaff79eb456174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IrSet: fabian_dir256.txt
-  ReverbTail: 
-  ReverbClip: {fileID: 8300000, guid: 8d74a455e4e404459a8e965da6c97983, type: 3}
-  scalingDirect: 0.35
+  IrSet: MUA_S00_R00.txt
+  ReverbTail: MUA_S00_R00_tail.txt
+  ReverbClip: {fileID: 0}
+  scalingDirect: 1
   scalingEarly: 1
   scalingLate: 1
-  inverseAzimuth: 1
+  inverseAzimuth: 0
   inverseElevation: 0
   bypass: 0
-  listenerOrientationOnly: 0
-  segmentSizeEarlyReverb: 256
-  segmentSizeLateReverb: 1024
-  binauralReflectionCount: 20
+  listenerOrientationOnly: 1
+  segmentSizeEarlyReverb: 1024
+  segmentSizeLateReverb: 4096
+  binauralReflectionCount: 100
   recalculate: 0
-  wallTag: Wall
-  visualizeMirrorSources: 0
-  reflectionOrder: 2
-  numberOfRays: 5
-  raycastMaterial: {fileID: 2100000, guid: 11b6ec273991e427b97b9e97cc46df03, type: 2}
-  rayColor: {r: 1, g: 0.9238702, b: 0, a: 0}
 --- !u!135 &1675031194
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2196,8 +2173,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675031191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 3, z: 11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.27, y: 1.5, z: 2.7}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -2217,13 +2194,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3007953125664478543}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 11.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &3007953125664478543
 GameObject:
   m_ObjectHideFlags: 0

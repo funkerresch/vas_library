@@ -65,27 +65,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Connect2Headtracker.cs" />
-    <Compile Include="Assets\Scripts\EqualizerCustomGUI.cs" />
-    <Compile Include="Assets\Scripts\GUIHelpers.cs" />
-    <Compile Include="Assets\Scripts\MathHelpers.cs" />
     <Compile Include="Assets\Scripts\Reflect.cs" />
     <Compile Include="Assets\Scripts\StartAudio.cs" />
     <Compile Include="Assets\Scripts\VasHeadtrackerConnect.cs" />
     <Compile Include="Assets\Scripts\VasSpat.cs" />
-    <Compile Include="Assets\Scripts\VasSpatConfigAuto.cs" />
-    <Compile Include="Assets\Scripts\VasSpatConfigManual.cs" />
     <Compile Include="Assets\Scripts\VasSpatConfigMirrorSource.cs" />
     <Compile Include="Assets\Scripts\VasSpatConfigSimple.cs" />
-    <Compile Include="Assets\Scripts\VasSpatMaterialEq.cs" />
     <None Include="Assets\StreamingAssets\fr_pos0_tail.txt" />
+    <None Include="Assets\StreamingAssets\MUA_S02_R00.txt" />
+    <None Include="Assets\StreamingAssets\MUA_S03_R00.txt" />
+    <None Include="Assets\StreamingAssets\MUA_S01_R00_tail.txt" />
+    <None Include="Assets\StreamingAssets\MUA_S02_R00_tail.txt" />
     <None Include="Assets\StreamingAssets\VSEb_S00_R01.txt" />
     <None Include="Assets\StreamingAssets\VSEb_S00_R00_tail.txt" />
+    <None Include="Assets\StreamingAssets\MUA_S01_R00.txt" />
     <None Include="Assets\StreamingAssets\fabian_dir256.txt" />
-    <None Include="Assets\StreamingAssets\fabian_dir256_2.txt" />
+    <None Include="Assets\StreamingAssets\MUA_S00_R00_tail.txt" />
+    <None Include="Assets\StreamingAssets\MUA_S03_R00_tail.txt" />
+    <None Include="Assets\StreamingAssets\MUA_S00_R00.txt" />
     <None Include="Assets\StreamingAssets\VSEb_S00_R02.txt" />
     <None Include="Assets\StreamingAssets\VSEb_S00_R01_tail.txt" />
-    <None Include="Assets\StreamingAssets\fabian_dir256_3.txt" />
-    <None Include="Assets\StreamingAssets\fabian_dir256_1.txt" />
     <None Include="Assets\StreamingAssets\VSEb_S00_R02_tail.txt" />
     <None Include="Assets\StreamingAssets\VSEb_S00_R00.txt" />
     <None Include="Assets\StreamingAssets\fr_pos0.txt" />

@@ -16,8 +16,16 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Image
+    - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
   sceneClasses:
-    Assets/Scenes/Grosser Saal.unity:
+    Assets/Scenes/Mirror Source Example.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -49,18 +57,42 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11886}
+      Script: {instanceID: 11282}
     - Class: 114
-      Script: {instanceID: 11956}
+      Script: {instanceID: 11302}
     - Class: 114
-      Script: {instanceID: 12554}
+      Script: {instanceID: 11550}
+    - Class: 114
+      Script: {instanceID: 11882}
+    - Class: 114
+      Script: {instanceID: 11952}
+    - Class: 114
+      Script: {instanceID: 12066}
+    - Class: 114
+      Script: {instanceID: 12548}
+    - Class: 114
+      Script: {instanceID: 13218}
+    - Class: 114
+      Script: {instanceID: 13672}
+    - Class: 114
+      Script: {instanceID: 13690}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 135
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     - Class: 241
       Script: {instanceID: 0}
@@ -347,7 +379,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: bebec9e0c6b3366ae0cfe7c56d559061
+      Hash: 91a7cc2dbfb60904ea612a887983368c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Connect2Headtracker
@@ -605,5 +637,5 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 9
   scenePathNames:
-  - Assets/Scenes/Grosser Saal.unity
+  - Assets/Scenes/Mirror Source Example.unity
   playerPath: /Users/harveykeitel/Desktop/iostest7

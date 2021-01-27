@@ -7,7 +7,7 @@ using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 
-public enum SelectLoadingFunction
+public enum IrType
 {
     EarlyIr,
     LateIr
@@ -20,16 +20,15 @@ abstract public class VasSpat : MonoBehaviour
     {
         public int threadIndex;
         public string irName;
-        public SelectLoadingFunction Read;
+        public IrType Read;
     }
 
     static private List<string> loadedIRs = new List<string>();
     static private int loadIrCounter = 0;
-    private bool nothing2Download = false;
     protected string androidPersistantDataPath;
 
-    protected bool earlyIrIsLoading = false;
-    protected bool lateIrIsLoading = false;
+    protected bool noEarlyIr2Download = false;
+    protected bool noLateIr2Download = false;
 
     protected static int spatIdCounter = 0;
     protected int spatId;
@@ -53,6 +52,12 @@ abstract public class VasSpat : MonoBehaviour
     [Range(0.0f, 1000.0f)]
     public int binauralReflectionCount = 100;
     public bool recalculate = false;
+
+    // not in use, therefore private for now
+    private float horizontalSourceDirectivity = 360;
+    private float horizontalFullPowerRange = 360;
+    private float verticalSourceDirectivity = 360;
+    private float verticalFullPowerRange = 360;
 
     protected int VAS_MAXREFLECTIONORDER = 10;
     protected int VAS_MAXNUMBEROFRAYS = 100;
@@ -161,6 +166,8 @@ abstract public class VasSpat : MonoBehaviour
         P_SCALING_DIRECT,
         P_SCALING_STEREO,
         P_BINAURALREFLECTIONS,
+        P_AZI,
+        P_ELE,
 
         P_NUM
     }
@@ -174,8 +181,8 @@ abstract public class VasSpat : MonoBehaviour
         P_REF_MUTE,
         P_REF_SCALE,
         P_REF_DIST,
-        P_REF_DUMMY1,
-        P_REF_DUMMY2,
+        P_REF_AZI,
+        P_REF_ELE,
         P_REF_DUMMY3,
         P_REF_SIZE
     };
@@ -195,6 +202,147 @@ abstract public class VasSpat : MonoBehaviour
         AUTO
     }
 
+    protected void CalculateVDirectivityScaling(float s2lFullSphericElevation, out float vDirectivityScaling)
+    {
+        float verticalDirectivityOver2 = verticalSourceDirectivity * 0.5f;
+        float verticalFullEnergyOver2 = verticalFullPowerRange * 0.5f;
+        float top = 360 - verticalDirectivityOver2;
+        float bottom = verticalDirectivityOver2;
+        float topFull = 360 - verticalFullEnergyOver2;
+        float bottomFull = verticalFullEnergyOver2;
+        float vDiff = topFull - top;
+
+        if (s2lFullSphericElevation <= bottomFull || s2lFullSphericElevation >= topFull)
+            vDirectivityScaling = 1.0f;
+
+        else if (s2lFullSphericElevation > bottomFull && s2lFullSphericElevation <= bottom)
+        {
+            vDirectivityScaling = (bottom - s2lFullSphericElevation) / vDiff;
+        }
+
+        else if (s2lFullSphericElevation < topFull && s2lFullSphericElevation >= top)
+        {
+            vDirectivityScaling = Mathf.Abs(top - s2lFullSphericElevation) / vDiff;
+        }
+        else
+        {
+            vDirectivityScaling = 0.0f;
+        }
+
+        vDirectivityScaling = ((Mathf.Pow(10f, vDirectivityScaling)) - 1f) / 9f;
+    }
+
+    protected void CalculateHDirectivityScaling(float s2lAzimuth, out float hDirectivityScaling)
+    {
+        float horizontalDirectivityOver2 = horizontalSourceDirectivity * 0.5f;
+        float horizontalFullEnergyOver2 = horizontalFullPowerRange * 0.5f;
+        float left = 360 - horizontalDirectivityOver2;
+        float right = horizontalDirectivityOver2;
+        float leftFull = 360 - horizontalFullEnergyOver2;
+        float rightFull = horizontalFullEnergyOver2;
+        float hDiff = leftFull - left;
+
+        if (s2lAzimuth <= rightFull || s2lAzimuth >= leftFull)
+            hDirectivityScaling = 1.0f;
+
+        else if (s2lAzimuth > rightFull && s2lAzimuth <= right)
+            hDirectivityScaling = (right - s2lAzimuth) / hDiff;
+
+        else if (s2lAzimuth < leftFull && s2lAzimuth >= left)
+            hDirectivityScaling = Mathf.Abs(left - s2lAzimuth) / hDiff;
+        else
+            hDirectivityScaling = 0.0f;
+
+        hDirectivityScaling = ((Mathf.Pow(10f, hDirectivityScaling)) - 1f) / 9f;
+    }
+
+    protected void CalculateSource2ListenerAzimuthAndElevation(out float source2ListenerAzimuth, out float source2ListenerElevation)
+    {
+        var listenerMatrix = listener1.transform.localToWorldMatrix;
+        var sourceMatrix = mySource.transform.localToWorldMatrix;
+
+        float px = listenerMatrix[12];
+        float py = listenerMatrix[13];
+        float pz = listenerMatrix[14];
+
+        float listenerpos_x = -(sourceMatrix[0] * sourceMatrix[12] + sourceMatrix[1] * sourceMatrix[13] + sourceMatrix[2] * sourceMatrix[14]);
+        float listenerpos_y = -(sourceMatrix[4] * sourceMatrix[12] + sourceMatrix[5] * sourceMatrix[13] + sourceMatrix[6] * sourceMatrix[14]);
+        float listenerpos_z = -(sourceMatrix[8] * sourceMatrix[12] + sourceMatrix[9] * sourceMatrix[13] + sourceMatrix[10] * sourceMatrix[14]);
+
+        float dir_x = sourceMatrix[0] * px + sourceMatrix[4] * py + sourceMatrix[8] * pz + listenerpos_x;
+        float dir_y = sourceMatrix[1] * px + sourceMatrix[5] * py + sourceMatrix[9] * pz + listenerpos_y;
+        float dir_z = sourceMatrix[2] * px + sourceMatrix[6] * py + sourceMatrix[10] * pz + listenerpos_z;
+
+        float azimuth = (Mathf.Abs(dir_z) < 0.001f) ? 0.0f : Mathf.Atan2(dir_x, dir_z);
+        if (azimuth < 0.0f)
+            azimuth += 2.0f * kPI;
+
+        azimuth = Mathf.Clamp(azimuth * kRad2Deg, 0.0f, 360.0f);
+        source2ListenerAzimuth = azimuth;
+
+        float elevation = (Mathf.Abs(dir_z) < 0.001f) ? 0.0f : Mathf.Atan2(dir_y, dir_z);
+        if (elevation < 0.0f)
+            elevation += 2.0f * kPI;
+
+        elevation = Mathf.Clamp(elevation * kRad2Deg, 0.0f, 360.0f);
+        source2ListenerElevation = elevation;
+    }
+
+    protected void CalculateAziAndElevation(Vector3 sourcePosition, out float azimuth, out float elevation)
+    {
+        var cameraMatrix = listener1.transform.localToWorldMatrix;
+        var listenerMatrix = cameraMatrix.inverse;
+
+        float px = sourcePosition.x;
+        float py = sourcePosition.y;
+        float pz = sourcePosition.z;
+
+        float dir_x = listenerMatrix[0] * px + listenerMatrix[4] * py + listenerMatrix[8] * pz + listenerMatrix[12];
+        float dir_y = listenerMatrix[1] * px + listenerMatrix[5] * py + listenerMatrix[9] * pz + listenerMatrix[13];
+        float dir_z = listenerMatrix[2] * px + listenerMatrix[6] * py + listenerMatrix[10] * pz + listenerMatrix[14];
+
+        azimuth = (Mathf.Abs(dir_z) < 0.001f) ? 0.0f : Mathf.Atan2(dir_x, dir_z);
+        if (azimuth < 0.0f)
+            azimuth += 2.0f * kPI;
+        azimuth = Mathf.Clamp(azimuth * kRad2Deg, 0.0f, 360.0f);
+
+        if (inverseAzimuth)
+            azimuth = 360 - azimuth;
+
+        elevation = Mathf.Atan2(dir_y, Mathf.Sqrt(dir_x * dir_x + dir_z * dir_z) + 0.001f) * kRad2Deg;
+    }
+
+    protected void CalculateAziAndElevationFromListenerOrientationOnly(out float azimuth, out float elevation)
+    {
+        var cameraMatrix = listener1.transform.localToWorldMatrix;
+        var listenerMatrix = cameraMatrix.inverse;
+        float aziInRadians;
+
+        if (listenerMatrix[0] == 1.0f)
+        {
+            aziInRadians = Mathf.Atan2(listenerMatrix[2], listenerMatrix[11]);
+            elevation = Mathf.Atan2(-listenerMatrix[6], listenerMatrix[5] + 0.001f) * kRad2Deg;
+        }
+        else if (listenerMatrix[0] == -1.0f)
+        {
+            aziInRadians = Mathf.Atan2(listenerMatrix[2], listenerMatrix[11]);
+            elevation = Mathf.Atan2(-listenerMatrix[6], listenerMatrix[5] + 0.001f) * kRad2Deg;
+        }
+        else
+        {
+            aziInRadians = Mathf.Atan2(listenerMatrix[8], listenerMatrix[0]);
+            elevation = Mathf.Atan2(-listenerMatrix[6], listenerMatrix[5] + 0.001f) * kRad2Deg;
+        }
+
+        if (aziInRadians < 0)
+            aziInRadians += 2*kPI;
+
+        azimuth = aziInRadians * kRad2Deg;
+
+        if (inverseAzimuth)
+            azimuth = 360 - azimuth;
+    }
+
     protected void SetSpatializerInstanceAndConfig(VAS_CONFIG configuration)
     {
         spatId = spatIdCounter++;        Debug.Log("SpatId: " + spatId);        mySource.SetSpatializerFloat(3, (float)spatId);
@@ -202,9 +350,9 @@ abstract public class VasSpat : MonoBehaviour
         SetConfig(VAS_Unity_Spatializer, (int)configuration);
     }
 
-    protected IEnumerator DownloadEarlyIr2PersistantDataPathForAndroid()
+    protected IEnumerator DownloadIr2PersistantDataPathForAndroid(string fileName)
     {
-        String fullpath = Path.Combine(Application.streamingAssetsPath, IrSet);
+        String fullpath = Path.Combine(Application.streamingAssetsPath, fileName);
         UnityWebRequest www = UnityWebRequest.Get(fullpath);
         yield return www.SendWebRequest();
 
@@ -217,27 +365,7 @@ abstract public class VasSpat : MonoBehaviour
         {
             Debug.Log("NO ERROR");
             Debug.Log(www.downloadHandler.text.Length);
-            File.WriteAllText(Application.persistentDataPath + "/" + IrSet, www.downloadHandler.text);
-            loadIrCounter--;
-        }
-    }
-
-    protected IEnumerator DownloadLateIr2PersistantDataPathForAndroid()
-    {
-        String fullpath = Path.Combine(Application.streamingAssetsPath, ReverbTail);
-        UnityWebRequest www = UnityWebRequest.Get(fullpath);
-        yield return www.SendWebRequest();
-
-        if (www.isNetworkError || www.isHttpError)
-        {
-            Debug.Log("ERROR");
-            Debug.Log(www.error);
-        }
-        else
-        {
-            Debug.Log("NO ERROR");
-            Debug.Log(www.downloadHandler.text.Length);
-            File.WriteAllText(Application.persistentDataPath + "/" + ReverbTail, www.downloadHandler.text);
+            File.WriteAllText(Application.persistentDataPath + "/" + fileName, www.downloadHandler.text);
             loadIrCounter--;
         }
     }
@@ -257,18 +385,16 @@ abstract public class VasSpat : MonoBehaviour
         ReadingIrThreadData threadData = a as ReadingIrThreadData;
         try
         {
-            if (threadData.Read == SelectLoadingFunction.EarlyIr)
+            if (threadData.Read == IrType.EarlyIr)
             {
-                earlyIrIsLoading = true;
 #if UNITY_ANDROID && !UNITY_EDITOR
                 while (loadIrCounter != 0)
                     ;
                 Debug.Log("Android Download Early IR Finished");
 #endif
             }
-            if (threadData.Read == SelectLoadingFunction.LateIr)
+            if (threadData.Read == IrType.LateIr)
             {
-                lateIrIsLoading = true;
 #if UNITY_ANDROID && !UNITY_EDITOR
                 while (loadIrCounter != 0)
                     ;
@@ -278,24 +404,18 @@ abstract public class VasSpat : MonoBehaviour
 
             String fullpath = GetFullIrPath(threadData.irName);
             Debug.Log(fullpath);
-            if(threadData.Read == SelectLoadingFunction.EarlyIr)
+            if(threadData.Read == IrType.EarlyIr)
                 LoadHRTF(VAS_Unity_Spatializer, fullpath);
-            if (threadData.Read == SelectLoadingFunction.LateIr)
+            if (threadData.Read == IrType.LateIr)
                 LoadReverbTail(VAS_Unity_Spatializer, fullpath);
         }
         finally
         {
-            if (threadData.Read == SelectLoadingFunction.EarlyIr)
-            {
-                earlyIrIsLoading = false;
+            if (threadData.Read == IrType.EarlyIr)
                 Debug.Log("Early IR is loaded");
-            }
 
-            if (threadData.Read == SelectLoadingFunction.LateIr)
-            {
-                lateIrIsLoading = false;
+            if (threadData.Read == IrType.LateIr)
                 Debug.Log("Late IR is loaded");
-            }
         }
     }
 
@@ -307,12 +427,12 @@ abstract public class VasSpat : MonoBehaviour
             {
                 ReadingIrThreadData earlyIR = new ReadingIrThreadData();
                 earlyIR.irName = IrSet;
-                earlyIR.Read = SelectLoadingFunction.EarlyIr;
+                earlyIR.Read = IrType.EarlyIr;
 #if UNITY_ANDROID && !UNITY_EDITOR
-                if(nothing2Download)
+                if(noEarlyIr2Download)
                     Debug.Log("No IR to copy!");
                 else
-                    StartCoroutine(DownloadEarlyIr2PersistantDataPathForAndroid());
+                    StartCoroutine(DownloadIr2PersistantDataPathForAndroid(IrSet));
 #endif
                 ThreadPool.QueueUserWorkItem(new WaitCallback(ReadImpulseResponse_ThreadPool), earlyIR);
             }
@@ -322,12 +442,12 @@ abstract public class VasSpat : MonoBehaviour
                 {
                     ReadingIrThreadData lateIR = new ReadingIrThreadData();
                     lateIR.irName = ReverbTail;
-                    lateIR.Read = SelectLoadingFunction.LateIr;
+                    lateIR.Read = IrType.LateIr;
 #if UNITY_ANDROID && !UNITY_EDITOR
-                    if (nothing2Download)
+                    if (noLateIr2Download)
                         Debug.Log("No IR to copy!");
                     else
-                        StartCoroutine(DownloadLateIr2PersistantDataPathForAndroid());
+                        StartCoroutine(DownloadIr2PersistantDataPathForAndroid(ReverbTail));
 #endif
                     ThreadPool.QueueUserWorkItem(new WaitCallback(ReadImpulseResponse_ThreadPool), lateIR);   
                 }
@@ -383,14 +503,8 @@ abstract public class VasSpat : MonoBehaviour
 
         if (onOff == true)            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEELE, 1f);        else            mySource.SetSpatializerFloat((int)SpatParams.P_INVERSEELE, 0);    }
 
-    protected void Update()
-    {
-        mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_EARLY, scalingEarly);
-        mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_LATE, scalingLate);
-    }
-
 #if UNITY_ANDROID && !UNITY_EDITOR
-    private void AddImpulseResponse2Load(string ir)
+    private void AddImpulseResponse2Load(string ir, IrType type )
     {
         foreach (string loadedIr in loadedIRs)
         {
@@ -398,7 +512,10 @@ abstract public class VasSpat : MonoBehaviour
             if (String.Equals(ir, loadedIr))
             {
                 Debug.Log("IR SET EXISTS ALREADY");
-                nothing2Download = true;
+                if(type == IrType.EarlyIr)
+                    noEarlyIr2Download = true;
+                else
+                    noLateIr2Download = true;
                 return;
             } 
         }
@@ -422,15 +539,27 @@ abstract public class VasSpat : MonoBehaviour
 #endif
 
 #if UNITY_ANDROID && !UNITY_EDITOR        if (!String.IsNullOrWhiteSpace(IrSet))
-            AddImpulseResponse2Load(IrSet);
+            AddImpulseResponse2Load(IrSet, IrType.EarlyIr);
         if (!String.IsNullOrWhiteSpace(ReverbTail))
-            AddImpulseResponse2Load(ReverbTail);
+            AddImpulseResponse2Load(ReverbTail, IrType.LateIr);
 #endif    }
+
+    protected void Update()
+    {
+        float azimuth, elevation;
+        if (!listenerOrientationOnly)
+            CalculateAziAndElevation(mySource.transform.position, out azimuth, out elevation);
+        else
+            CalculateAziAndElevationFromListenerOrientationOnly(out azimuth, out elevation);
+
+        mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_EARLY, scalingEarly);
+        mySource.SetSpatializerFloat((int)SpatParams.P_SCALING_LATE, scalingLate);
+        mySource.SetSpatializerFloat((int)SpatParams.P_AZI, azimuth);
+        mySource.SetSpatializerFloat((int)SpatParams.P_ELE, elevation);
+    }
 
     protected void OnValidate()
     {
         BypassSpat(bypass);        ListenerOrientationOnly(listenerOrientationOnly);        InverseAzimuth(inverseAzimuth);        InverseElevation(inverseElevation);
-        
-        Debug.Log("Validate");
     }
 }
