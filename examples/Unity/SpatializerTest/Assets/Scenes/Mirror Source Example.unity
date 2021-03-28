@@ -635,8 +635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IrSet: fabian_dir256.txt
-  ReverbTail: MUA_S00_R00_tail.txt
-  ReverbClip: {fileID: 0}
+  ReverbTail: 
+  ReverbClip: {fileID: 8300000, guid: 8d74a455e4e404459a8e965da6c97983, type: 3}
   scalingDirect: 0.5
   scalingEarly: 1
   scalingLate: 1
@@ -1033,8 +1033,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IrSet: fabian_dir256.txt
-  ReverbTail: MUA_S00_R00_tail.txt
-  ReverbClip: {fileID: 0}
+  ReverbTail: 
+  ReverbClip: {fileID: 8300000, guid: 8d74a455e4e404459a8e965da6c97983, type: 3}
   scalingDirect: 0.5
   scalingEarly: 1
   scalingLate: 1
@@ -1744,7 +1744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1331689176
 MonoBehaviour:
   m_ObjectHideFlags: 0

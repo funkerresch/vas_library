@@ -91,6 +91,7 @@ void vas_fir_setMetaData(vas_fir *x, int directionFormat, int length)
 void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
 {
     int err = 0;
+    size_t size = strlen(fullpath);
     struct MYSOFA_EASY *hrtf = NULL;
     int filterLength;
     
@@ -118,9 +119,12 @@ void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
         printf("Filtersize is: %d", filterLength);
 #endif
         x->metaData.filterLength = filterLength;
-        
+        x->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
+        strcpy(x->metaData.fullPath, fullpath);
+#if defined(MAXMSPSDK) || defined(PUREDATA)
         post("%f %f %f %f %f %f", hrtf->hrtf->ReceiverPosition.values[0], hrtf->hrtf->ReceiverPosition.values[1],hrtf->hrtf->ReceiverPosition.values[2],
         hrtf->hrtf->ReceiverPosition.values[3],hrtf->hrtf->ReceiverPosition.values[4],hrtf->hrtf->ReceiverPosition.values[5]);
+#endif
         return hrtf;
     }
 }
@@ -164,10 +168,6 @@ int vas_fir_readSofa_getFilter(vas_fir *x, void *filter)
             float z = sinf(elev);
             
             mysofa_getfilter_float(hrtf , xx, y, z, leftIR, rightIR, &leftDelay, &rightDelay);
-            
-            
-            
-            
             vas_dynamicFirChannel_prepareFilter(x->left, leftIR,  eleCount, aziCount);
             vas_dynamicFirChannel_prepareFilter(x->right, rightIR,  eleCount, aziCount);
         }
@@ -356,6 +356,30 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
     return error;
 }
 
+void vas_fir_setAdditionalMetaData(vas_fir *x, int segmentSize, int offset, int end)
+{
+    x->metaData.segmentSize = segmentSize;
+    
+    if(end > 0 && (end < x->metaData.filterLength) )
+        x->metaData.filterLength = end;
+        
+    x->metaData.filterOffset = offset;
+    x->metaData.segmentSize = segmentSize;
+     
+    if(offset >= x->metaData.filterLength)
+    {
+#if(defined(MAXMSPSDK) || defined(PUREDATA))
+        post("Offset greater than filter length.");
+#else
+        printf("Offset greater than filter length.");
+#endif
+        x->metaData.filterOffset = 0;
+    }
+        
+    x->metaData.filterLengthMinusOffset = x->metaData.filterLength - x->metaData.filterOffset;
+    vas_fir_initFilter2(x, segmentSize);
+}
+
 void vas_fir_setMetaData_manually1(vas_fir *x, int filterLength, int segmentSize, int directionFormat, int eleStride, int aziStride, int audioFormat, int lineFormat, int offset, int end)
 {
     x->metaData.filterLength = filterLength;
@@ -423,6 +447,29 @@ void vas_fir_setMultiDirection3DegreeGridResoluion(vas_fir *x, int filterLength,
     vas_fir_setMetaData_manually1(x, filterLength, segmentSize, VAS_IR_DIRECTIONFORMAT_MULTI, 3, 3, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR, offset, end);
 }
 
+void vas_fir_read_prepareForInterpolatedIrs(vas_fir *x, int segmentSize, float maxLength, int numberOfIrs)
+{
+    int scaleIrArraySize = 18;
+    
+    // Max Number of possible IRs is currently 180 -> 360 degrees with a maximum grid resolution of 2
+    // Grid resolution was reduced to 2 because memory allocation inside Unity took very long
+    
+    if(numberOfIrs >= 15)
+        scaleIrArraySize = 12;
+    if(numberOfIrs >= 20)
+        scaleIrArraySize = 9;
+    if(numberOfIrs >= 36)
+        scaleIrArraySize = 5;
+    if(numberOfIrs >= 45)
+        scaleIrArraySize = 4;
+    if(numberOfIrs >= 60)
+        scaleIrArraySize = 3;
+    if(numberOfIrs >= 90)
+        scaleIrArraySize = 2;
+       
+    vas_fir_setMetaData_manually1(x, maxLength, segmentSize, VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH, 1, scaleIrArraySize, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR, 0, 0);
+}
+
 static void vas_filter_extractAngleFromText(char *angle, int *currentAngle, char **line)
 {
     int index = 0;
@@ -483,6 +530,96 @@ static void vas_filter_read_lineFormat_value(vas_fir *x, FILE *filePtr, char **l
     
     if(currentIr)
         vas_mem_free(currentIr);
+}
+
+static void vas_filter_read_lineFormat_ir2(vas_fir *x, FILE *filePtr, char **line)
+{
+    int currentAzimuth2Read = 0;
+    int currentIndex2Write = 0;
+    int currentElevation2Read = 0;
+    int currentIrIndex2Read = 0;
+    char *filterCoefficients = NULL;
+    char angle[50];
+    float fvalue = 0;
+    float *currentIr = NULL;
+    bool getChannel = 1;
+    char *lineAdr;
+    
+    vas_dynamicFirChannel *currentChannel2Read = x->left;
+    
+    size_t len = 0;
+    size_t read = 0;
+    
+    currentIr = (float *)vas_mem_alloc( x->metaData.filterLengthMinusOffset * sizeof(float));
+    x->left->filter->filterLength = x->metaData.filterLengthMinusOffset;
+    x->right->filter->filterLength = x->metaData.filterLengthMinusOffset;
+
+    while ((read = vas_getline(line, &len, filePtr)) != -1)
+    {
+        lineAdr = *line;
+        if( (x->metaData.audioFormat >= VAS_IR_AUDIOFORMAT_STEREO) && getChannel)
+        {
+            currentChannel2Read = extractChannel2(x, lineAdr);
+            getChannel = false;
+        }
+        else
+        {
+            if(x->metaData.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI)
+            {
+                vas_filter_extractAngleFromText(angle, &currentElevation2Read, &lineAdr);
+            }
+            
+            if(x->metaData.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI_AZIMUTH
+               || x->metaData.directionFormat == VAS_IR_DIRECTIONFORMAT_MULTI)
+            {
+                vas_filter_extractAngleFromText(angle, &currentAzimuth2Read, &lineAdr);
+            }
+            
+            currentIrIndex2Read = 0;
+            currentIndex2Write = 0;
+            
+            while( (filterCoefficients = vas_strsep(&lineAdr,", ")) != NULL )
+            {
+                if(strlen(filterCoefficients) != 0 )
+                {
+                    if(*filterCoefficients == '}')
+                        getChannel = true;
+                    else
+                    {
+                        fvalue = atof(filterCoefficients);
+                        if(currentIrIndex2Read < x->metaData.filterLength && currentIrIndex2Read >= x->metaData.filterOffset)
+                        {
+                            currentIr[currentIndex2Write] = fvalue;
+                            currentIndex2Write++;
+                            currentIrIndex2Read++;
+                        }
+                        else
+                            currentIrIndex2Read++;
+                    }
+                }
+            }
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
+            vas_dynmaicFirChannel_resetMinMaxAverageSegmentPower(currentChannel2Read, currentElevation2Read/x->metaData.elevationStride, currentAzimuth2Read/x->metaData.azimuthStride);
+#endif
+            vas_dynamicFirChannel_prepareFilter(currentChannel2Read, currentIr, currentElevation2Read/x->metaData.elevationStride, currentAzimuth2Read/x->metaData.azimuthStride);
+        }
+    }
+   
+    if(currentIr)
+        vas_mem_free(currentIr);
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
+#if defined(MAXMSPSDK) || defined(PUREDATA)
+    post("Min Average Segment Power Left: %.14f", x->left->filter->minAverageSegmentPower[0][0]);
+    post("Max Average Segment Power Left: %.14f", x->left->filter->maxAverageSegmentPower[0][0]);
+   // post("Number of Segments Left: %d", x->left->filter->numberOfSegments);
+    post("Segments below Threshhold Left: %d", x->left->filter->zeroCounter[0][0]);
+    
+    post("Min Average Segment Power Right: %.14f", x->right->filter->minAverageSegmentPower[0][0]);
+    post("Max Average Segment Power Right: %.14f", x->right->filter->maxAverageSegmentPower[0][0]);
+   // post("Number of Segments Right: %d", x->right->filter->numberOfSegments);
+    post("Segments below Threshhold Right: %d", x->right->filter->zeroCounter[0][0]);
+#endif
+#endif
 }
 
 static void vas_filter_read_lineFormat_ir1(vas_fir *x, FILE *filePtr, char **line, int offset)
@@ -619,6 +756,31 @@ FILE *vas_fir_readText_metaData1(vas_fir *x, char *fullpath)
             free(line);
         
         return filePtr;
+    }
+}
+
+void vas_fir_readText_Ir2(vas_fir *x, FILE *filePtr)
+{
+    char * line = NULL;
+    
+    if (!filePtr)
+    {
+#ifdef VERBOSE
+#if(defined(MAXMSPSDK) || defined(PUREDATA))
+        post("Could not open");
+#endif
+#endif
+        return;
+    }
+    else
+    {
+        if(x->metaData.lineFormat == VAS_IR_LINEFORMAT_IR)
+            vas_filter_read_lineFormat_ir2(x, filePtr, &line);
+        if(x->metaData.lineFormat == VAS_IR_LINEFORMAT_VALUE)
+            vas_filter_read_lineFormat_value(x, filePtr, &line);
+        
+        if(line)
+            free(line);
     }
 }
 

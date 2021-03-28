@@ -14,6 +14,62 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E417C3F2236C70DC001A9C1B"
+               BuildableName = "vas_binaural~.pd_darwin"
+               BlueprintName = "vas_binaural~"
+               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84C9E38D213ACA5D004C6B54"
+               BuildableName = "vas_reverb~.pd_darwin"
+               BlueprintName = "vas_reverb~"
+               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84E5E14621FB48E6002216EF"
+               BuildableName = "vas_hpcomp~.pd_darwin"
+               BlueprintName = "vas_hpcomp~"
+               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FA2927EB1A899B4C005A2BA9"
+               BuildableName = "rwa_binauralsimple~.pd_darwin"
+               BlueprintName = "rwa_binauralsimple~"
+               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4F9E79225A3553300CE8119"
                BuildableName = "vas_binauralspace~.pd_darwin"
                BlueprintName = "vas_binauralspace~"
@@ -40,6 +96,20 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/Applications/Pd-0.50-0.app/Contents/MacOS/Pd">
+      </PathRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = ""
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = " -open /Users/harveykeitel/Repositories/vas_library/examples/PureData/doc/vas_binaural~-help.pd"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -50,9 +120,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4F9E79225A3553300CE8119"
-            BuildableName = "vas_binauralspace~.pd_darwin"
-            BlueprintName = "vas_binauralspace~"
+            BlueprintIdentifier = "E417C3F2236C70DC001A9C1B"
+            BuildableName = "vas_binaural~.pd_darwin"
+            BlueprintName = "vas_binaural~"
             ReferencedContainer = "container:vas_pd_osx.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

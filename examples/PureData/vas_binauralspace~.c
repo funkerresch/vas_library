@@ -1,5 +1,5 @@
 #include "vas_binauralspace~.h"
-#include "vas_firobject.h"
+#include "vas_fir_read.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,31 +11,21 @@ extern vas_fir_list IRs;
 
 static t_class *vas_binauralspace_class;
 
-static void vas_binauralspace_leaveNumberOfPartionsActive(vas_binauralspace *x, float i)
+vas_binauralspace_reflection *vas_binauralspace_reflection_new(vas_fir *sharedFilter, vas_ringBuffer *ringBuffer)
 {
-    vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
-    if(x->fullpath[0] != '\0')
-    {
-        vas_dynamicFirChannel_leaveActivePartitions(binauralEngine->left, i);
-        vas_dynamicFirChannel_leaveActivePartitions(binauralEngine->right, i);
-    }
-}
-
-static void vas_binauralspace_setSegmentThreshold(vas_binauralspace *x, float thresh)
-{
-    vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
-    vas_dynamicFirChannel_setSegmentThreshold(binauralEngine->left, thresh);
-    vas_dynamicFirChannel_setSegmentThreshold(binauralEngine->right, thresh);
-}
-
-static void vas_binauralspace_postInactivePartionIndexes(vas_binauralspace *x)
-{
-    vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
-    for(int i=0; i < binauralEngine->right->filter->numberOfSegments; i++ )
-    {
-        if( binauralEngine->right->filter->segmentIsZero[0][0][i])
-            post("%d", i);
-    }
+    vas_binauralspace_reflection *x = ( vas_binauralspace_reflection * )vas_mem_alloc(sizeof(vas_binauralspace_reflection));
+    x->tap = vas_delayTap_crossfade_new(ringBuffer);
+    x->convolutionEngine = (vas_fir *)vas_fir_binaural_new(0);
+    vas_fir_prepareChannelsWithSharedFilter((vas_fir *)sharedFilter, x->convolutionEngine->left, x->convolutionEngine->right);
+    vas_fir_setInitFlag(x->convolutionEngine);
+    
+    x->active = false;
+    x->delayTime = 0;
+    x->azimuth = 0;
+    x->elevation = 0;
+    x->damping = -1; // if damping < 0, use 1/r
+    
+    return x;
 }
 
 static void vas_binauralspace_aziDirection(vas_binauralspace *x, float aziDirection)
@@ -52,20 +42,36 @@ static void vas_binauralspace_setAzimuth(vas_binauralspace *x, float azimuth)
     if(x->aziDirection)
         azimuth = 360 - azimuth;
     
-    vas_dynamicFirChannel_setAzimuth(binauralEngine->left, azimuth);
-    vas_dynamicFirChannel_setAzimuth(binauralEngine->right, azimuth);
+    vas_fir_binaural_setAzimuth(binauralEngine, azimuth);
 }
 
-static void vas_binauralspace_setDelayTime(vas_binauralspace *x, float delayTime)
+static void vas_binauralspace_setReflectionDelayTime(vas_binauralspace *x, float reflectionNumber, float delayTime)
 {
-    vas_delayTap_crossfade_setDelayTime(x->tap, delayTime);
+    int refNumber = (int)floorf(reflectionNumber);
+    vas_delayTap_crossfade_setDelayTime(x->tap[refNumber], delayTime);
+}
+
+static void vas_binauralspace_setReflectionAzimuth(vas_binauralspace *x, float reflectionNumber, float azimuth)
+{
+    int refNumber = (int)floorf(reflectionNumber);
+    vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->binauralReflectionEngine[refNumber];
+    if(x->aziDirection)
+        azimuth = 360 - azimuth;
+    
+    vas_fir_binaural_setAzimuth(binauralEngine, azimuth);
+}
+
+static void vas_binauralspace_setReflectionElevation(vas_binauralspace *x, float reflectionNumber, float elevation)
+{
+    int refNumber = (int)floorf(reflectionNumber);
+    vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->binauralReflectionEngine[refNumber];
+    vas_fir_binaural_setElevation(binauralEngine, elevation);
 }
 
 static void vas_binauralspace_setElevation(vas_binauralspace *x, float elevation)
 {
     vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
-    vas_dynamicFirChannel_setElevation(binauralEngine->left, elevation);
-    vas_dynamicFirChannel_setElevation(binauralEngine->right, elevation);
+    vas_fir_binaural_setElevation(binauralEngine, elevation);
 }
 
 static t_int *vas_binauralspace_perform(t_int *w)
@@ -79,14 +85,15 @@ static t_int *vas_binauralspace_perform(t_int *w)
     int n = (int)(w[5]);
     
     vas_ringBuffer_process(x->ringbuffer, in, n);
-    
-    while(n--)
-        *inputBufferPtr++ = *in++;
- 
-    n = (int)(w[5]);
-
+    vas_util_fcopy(inputBufferPtr, in, n);
     vas_fir_binaural_process(x->convolutionEngine, x->inputBuffer, outL, outR, n);
-    vas_delayTap_crossfade_process(x->tap, outL, n);
+    
+    for(int i=0; i<VAS_REFLECTIONS_MAXSIZE; i++)
+    {
+        vas_delayTap_crossfade_process(x->tap[i], x->inputBuffer, n);
+        vas_fir_binaural_processOutputInPlace((vas_fir_binaural *)x->binauralReflectionEngine[i], x->inputBuffer, outL, outR, n);
+    }
+    
     vas_util_fcopy(outL, outR, n);
     
     return (w+6);
@@ -120,8 +127,8 @@ static void *vas_binauralspace_new(t_symbol *s, int argc, t_atom *argv)
     int offset = 0;
     int end = 0;
     vas_binauralspace *x = (vas_binauralspace *)pd_new(vas_binauralspace_class);
+    
     x->ringbuffer = vas_ringBuffer_new(VAS_RINGBUFFER_MAXSIZE);
-    x->tap = vas_delayTap_crossfade_new(x->ringbuffer);
     
     t_symbol *path = NULL;
     x->outL = outlet_new(&x->x_obj, gensym("signal"));
@@ -149,6 +156,11 @@ static void *vas_binauralspace_new(t_symbol *s, int argc, t_atom *argv)
     }
     
     x->convolutionEngine = vas_fir_binaural_new(0);
+    for(int i=0;i < VAS_REFLECTIONS_MAXSIZE; i++)
+    {
+        x->binauralReflectionEngine[i] = (vas_fir*) vas_fir_binaural_new(0);
+        x->tap[i] = vas_delayTap_crossfade_new(x->ringbuffer);
+    }
 
     if(!x->convolutionEngine)
     {
@@ -176,7 +188,21 @@ static void *vas_binauralspace_new(t_symbol *s, int argc, t_atom *argv)
     }
     
     if(path)
-        rwa_firobject_read2((rwa_firobject *)x, path, x->segmentSize, offset, end);
+        vas_pdmaxobject_read((vas_pdmaxobject *)x, path, x->segmentSize, offset, end);
+    
+    if(vas_fir_getInitFlag(x->convolutionEngine))
+    {
+        post("Init shared filter for reflections");
+        for(int i=0;i < VAS_REFLECTIONS_MAXSIZE; i++)
+        {
+            x->binauralReflectionEngine[i] = (vas_fir *)vas_fir_binaural_new(0);
+            vas_fir_prepareChannelsWithSharedFilter((vas_fir *)x->convolutionEngine, x->binauralReflectionEngine[i]->left, x->binauralReflectionEngine[i]->right);
+            vas_fir_setInitFlag(x->binauralReflectionEngine[i]);
+            
+            vas_binauralspace_setReflectionAzimuth(x, i, (i+1)*40);
+            vas_binauralspace_setReflectionDelayTime(x, i, (i+1)*5000);
+        }
+    }
 
     return (x);
 }
@@ -193,14 +219,11 @@ void vas_binauralspace_tilde_setup(void)
     class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_dsp, gensym("dsp"), 0);
     class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_setAzimuth, gensym("azimuth"), A_DEFFLOAT,0);
     class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_setElevation, gensym("elevation"), A_DEFFLOAT,0);
-    class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_setDelayTime, gensym("delaytime"), A_DEFFLOAT, 0);
+    class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_setReflectionDelayTime, gensym("delaytime"), A_DEFFLOAT, A_DEFFLOAT, 0);
+    class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_setReflectionAzimuth, gensym("reflectionazimuth"), A_DEFFLOAT, A_DEFFLOAT, 0);
+    class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_setReflectionElevation, gensym("reflectionelevation"), A_DEFFLOAT, A_DEFFLOAT, 0);
     class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_aziDirection, gensym("azidirection"), A_DEFFLOAT,0);
-    class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_setSegmentThreshold, gensym("thresh"), A_DEFFLOAT,0);
-    class_addmethod(vas_binauralspace_class, (t_method)rwa_firobject_read2, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT,0);
-    class_addmethod(vas_binauralspace_class, (t_method)vas_firobject_set1, gensym("set"), A_DEFSYM, A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT, 0);
-    class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_postInactivePartionIndexes, gensym("zeroindexes"),0);
-    class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_leaveNumberOfPartionsActive,  gensym("activepartitions"),A_DEFFLOAT, 0);
-   // class_addmethod(vas_binauralspace_class, (t_method)vas_binauralspace_loadTestIr,  gensym("testIr"), 0);
+    class_addmethod(vas_binauralspace_class, (t_method)vas_pdmaxobject_read, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT,0);
 }
 
 

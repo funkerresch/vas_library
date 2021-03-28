@@ -1,6 +1,5 @@
 #include "vas_binaural~.h"
-
-#include "vas_firobject.h"
+#include "vas_fir_read.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,6 +11,7 @@ extern vas_fir_list IRs;
 
 static t_class *vas_binaural_class;
 
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
 static void vas_binaural_leaveNumberOfPartionsActive(vas_binaural *x, float i)
 {
     vas_fir_binaural *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
@@ -38,6 +38,7 @@ static void vas_binaural_postInactivePartionIndexes(vas_binaural *x)
             post("%d", i);
     }
 }
+#endif
 
 static void vas_binaural_aziDirection(vas_binaural *x, float aziDirection)
 {
@@ -166,7 +167,7 @@ static void *vas_binaural_new(t_symbol *s, int argc, t_atom *argv)
     }
     
     if(path)
-        rwa_firobject_read2((rwa_firobject *)x, path, x->segmentSize, offset, end);
+        vas_pdmaxobject_read((vas_pdmaxobject *)x, path, x->segmentSize, offset, end);
 
     return (x);
 }
@@ -176,7 +177,7 @@ void vas_binaural_tilde_setup(void)
     vas_binaural_class = class_new(gensym("vas_binaural~"), (t_newmethod)vas_binaural_new, (t_method)vas_binaural_free,
     	sizeof(vas_binaural), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("vas_binaural~ v0.73");
+    post("vas_binaural~ v0.75");
    
     CLASS_MAINSIGNALIN(vas_binaural_class, vas_binaural, f);
    
@@ -184,11 +185,13 @@ void vas_binaural_tilde_setup(void)
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setAzimuth, gensym("azimuth"), A_DEFFLOAT,0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setElevation, gensym("elevation"), A_DEFFLOAT,0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_aziDirection, gensym("azidirection"), A_DEFFLOAT,0);
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setSegmentThreshold, gensym("thresh"), A_DEFFLOAT,0);
-    class_addmethod(vas_binaural_class, (t_method)rwa_firobject_read2, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT,0);
-    class_addmethod(vas_binaural_class, (t_method)vas_firobject_set1, gensym("set"), A_DEFSYM, A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT, 0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_postInactivePartionIndexes, gensym("zeroindexes"),0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_leaveNumberOfPartionsActive,  gensym("activepartitions"),A_DEFFLOAT, 0);
+#endif
+    class_addmethod(vas_binaural_class, (t_method)vas_pdmaxobject_read, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT,0);
+
    // class_addmethod(vas_binaural_class, (t_method)vas_binaural_loadTestIr,  gensym("testIr"), 0);
 }
 

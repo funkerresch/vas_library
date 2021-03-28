@@ -157,6 +157,8 @@ typedef float VAS_OUTPUTBUFFER;
 #ifndef WAI_PREFIX
 #define WAI_PREFIX(function) wai_##function
 #endif
+
+// https://github.com/gpakosz/whereami -> include as submodule
         
         /**
          * Returns the path to the current executable.
@@ -211,6 +213,10 @@ int vas_getline(char **lineptr, size_t *n, FILE *stream);
 char* vas_strsep(char** stringp, const char* delim);
     
 void vas_util_postSomeValue(VAS_COMPLEX *dest, int length);
+
+void vas_util_single2DoublePrecision(float *in, double *out, int length);
+
+void vas_util_double2SinglePrecision(double *in, float *out, int length);
     
 void vas_util_fadd(float *input1, float *input2, float *dest, int length);
     

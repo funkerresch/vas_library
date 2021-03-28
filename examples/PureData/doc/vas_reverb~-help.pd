@@ -1,28 +1,28 @@
-#N canvas 398 85 837 534 10;
+#N canvas 421 264 978 714 10;
 #X obj 28 160 readsf~;
 #X msg 75 135 1;
 #X obj 24 40 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
 #X obj 74 67 t b b;
-#X obj 537 146 vsl 40 110 0 200 0 0 empty empty empty 0 -9 0 10 -261682
+#X obj 713 316 vsl 40 110 0 200 0 0 empty empty empty 0 -9 0 10 -261682
 -1 -1 2398 1;
-#X obj 537 295 send volume;
-#X obj 537 271 / 127;
-#X floatatom 616 295 5 0 0 0 - - -;
-#X obj 537 101 loadbang;
+#X obj 713 465 send volume;
+#X obj 713 441 / 127;
+#X floatatom 792 465 5 0 0 0 - - -;
+#X obj 713 271 loadbang;
 #X obj 24 17 loadbang;
-#X msg 537 123 44;
+#X msg 713 293 44;
 #X msg 27 112 open cicerospeech.wav;
 #X msg 102 15 \; pd dsp 0;
 #N canvas 0 23 450 300 (subpatch) 0;
-#X array arrayL 145156 float 0;
-#X coords 0 0.05 145155 -0.05 200 80 1 0 0;
+#X array arrayL 44568 float 0;
+#X coords 0 0.05 44567 -0.05 200 80 1 0 0;
 #X restore 251 404 graph;
 #X obj 199 78 soundfiler;
 #X floatatom 199 110 0 0 0 0 - - -;
 #N canvas 0 23 450 300 (subpatch) 0;
-#X array arrayR 145156 float 0;
-#X coords 0 0.05 145155 -0.05 200 80 1 0 0;
+#X array arrayR 44568 float 0;
+#X coords 0 0.05 44567 -0.05 200 80 1 0 0;
 #X restore 457 404 graph;
 #X obj 178 445 *~ 0.5;
 #X obj 85 446 *~ 0.5;
@@ -38,11 +38,15 @@
 #X text 200 352 1st argument is partition size. 2nd argument IR (set)
 to load.;
 #X text 14 212 read loads IRs from a vas text file.;
-#X msg 199 46 read -resize MediumStage.aif arrayL arrayR \;;
-#X msg 199 139 set arrayL arrayR 512 0 \$1;
 #X text 193 170 Ir (sets) can be loaded from pd arrays with the set
 function.;
 #X text 256 23 click here to load array;
+#X msg 199 46 read -resize outdoor1.wav arrayL arrayR \;;
+#X msg 495 16 read -resize MediumStage.aif arrayL arrayR \;;
+#X obj 495 48 soundfiler;
+#X floatatom 495 80 0 0 0 0 - - -;
+#X msg 199 139 set arrayL arrayR 512 0 \$1;
+#X msg 495 109 set arrayL arrayR 512 0 \$1;
 #X connect 0 0 24 0;
 #X connect 0 1 2 0;
 #X connect 1 0 0 0;
@@ -57,7 +61,7 @@ function.;
 #X connect 10 0 4 0;
 #X connect 11 0 0 0;
 #X connect 14 0 15 0;
-#X connect 15 0 31 0;
+#X connect 15 0 36 0;
 #X connect 17 0 20 1;
 #X connect 18 0 20 0;
 #X connect 19 0 18 1;
@@ -69,5 +73,9 @@ function.;
 #X connect 24 1 17 0;
 #X connect 26 0 0 0;
 #X connect 27 0 24 0;
-#X connect 30 0 14 0;
-#X connect 31 0 24 0;
+#X connect 32 0 14 0;
+#X connect 33 0 34 0;
+#X connect 34 0 35 0;
+#X connect 35 0 37 0;
+#X connect 36 0 24 0;
+#X connect 37 0 24 0;

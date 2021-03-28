@@ -1,0 +1,365 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E475061625DA964B005A87ED /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E475061525DA964B005A87ED /* maxmspsdk.xcconfig */; };
+		E475063A25DA9845005A87ED /* btree.c in Sources */ = {isa = PBXBuildFile; fileRef = E475061B25DA9845005A87ED /* btree.c */; };
+		E475063B25DA9845005A87ED /* reader.h in Headers */ = {isa = PBXBuildFile; fileRef = E475061C25DA9845005A87ED /* reader.h */; };
+		E475063C25DA9845005A87ED /* superblock.c in Sources */ = {isa = PBXBuildFile; fileRef = E475061D25DA9845005A87ED /* superblock.c */; };
+		E475063D25DA9845005A87ED /* gcol.c in Sources */ = {isa = PBXBuildFile; fileRef = E475061E25DA9845005A87ED /* gcol.c */; };
+		E475063E25DA9845005A87ED /* fractalhead.c in Sources */ = {isa = PBXBuildFile; fileRef = E475061F25DA9845005A87ED /* fractalhead.c */; };
+		E475063F25DA9845005A87ED /* gunzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062025DA9845005A87ED /* gunzip.c */; };
+		E475064025DA9845005A87ED /* dataobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062125DA9845005A87ED /* dataobject.c */; };
+		E475064125DA9845005A87ED /* minphase.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062325DA9845005A87ED /* minphase.c */; };
+		E475064225DA9845005A87ED /* mysofa.h in Headers */ = {isa = PBXBuildFile; fileRef = E475062425DA9845005A87ED /* mysofa.h */; };
+		E475064325DA9845005A87ED /* interpolate.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062525DA9845005A87ED /* interpolate.c */; };
+		E475064425DA9845005A87ED /* kdtree.h in Headers */ = {isa = PBXBuildFile; fileRef = E475062625DA9845005A87ED /* kdtree.h */; };
+		E475064525DA9845005A87ED /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062725DA9845005A87ED /* lookup.c */; };
+		E475064625DA9845005A87ED /* tools.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062825DA9845005A87ED /* tools.c */; };
+		E475064725DA9845005A87ED /* mysofa_export.h in Headers */ = {isa = PBXBuildFile; fileRef = E475062925DA9845005A87ED /* mysofa_export.h */; };
+		E475064825DA9845005A87ED /* easy.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062A25DA9845005A87ED /* easy.c */; };
+		E475064925DA9845005A87ED /* check.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062B25DA9845005A87ED /* check.c */; };
+		E475064A25DA9845005A87ED /* reader.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062C25DA9845005A87ED /* reader.c */; };
+		E475064B25DA9845005A87ED /* resample.c in Sources */ = {isa = PBXBuildFile; fileRef = E475062D25DA9845005A87ED /* resample.c */; };
+		E475064C25DA9845005A87ED /* mysofa_export.h.in in Resources */ = {isa = PBXBuildFile; fileRef = E475062E25DA9845005A87ED /* mysofa_export.h.in */; };
+		E475064D25DA9845005A87ED /* tools.h in Headers */ = {isa = PBXBuildFile; fileRef = E475062F25DA9845005A87ED /* tools.h */; };
+		E475064E25DA9845005A87ED /* kdtree.c in Sources */ = {isa = PBXBuildFile; fileRef = E475063025DA9845005A87ED /* kdtree.c */; };
+		E475064F25DA9845005A87ED /* spherical.c in Sources */ = {isa = PBXBuildFile; fileRef = E475063125DA9845005A87ED /* spherical.c */; };
+		E475065025DA9845005A87ED /* cache.c in Sources */ = {isa = PBXBuildFile; fileRef = E475063225DA9845005A87ED /* cache.c */; };
+		E475065125DA9845005A87ED /* neighbors.c in Sources */ = {isa = PBXBuildFile; fileRef = E475063325DA9845005A87ED /* neighbors.c */; };
+		E475065225DA9845005A87ED /* loudness.c in Sources */ = {isa = PBXBuildFile; fileRef = E475063425DA9845005A87ED /* loudness.c */; };
+		E475065325DA9845005A87ED /* stack_alloc.h in Headers */ = {isa = PBXBuildFile; fileRef = E475063625DA9845005A87ED /* stack_alloc.h */; };
+		E475065425DA9845005A87ED /* speex_resampler.h in Headers */ = {isa = PBXBuildFile; fileRef = E475063725DA9845005A87ED /* speex_resampler.h */; };
+		E475065525DA9845005A87ED /* speex_resampler.c in Sources */ = {isa = PBXBuildFile; fileRef = E475063825DA9845005A87ED /* speex_resampler.c */; };
+		E475065625DA9845005A87ED /* arch.h in Headers */ = {isa = PBXBuildFile; fileRef = E475063925DA9845005A87ED /* arch.h */; };
+		E475065925DA9913005A87ED /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E475065825DA9913005A87ED /* libz.tbd */; };
+		E475065C25DA9DC3005A87ED /* convertsofa.c in Sources */ = {isa = PBXBuildFile; fileRef = E475061725DA97B2005A87ED /* convertsofa.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2FBBEAE508F335360078DB84 /* convertsofa.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = convertsofa.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		E475061525DA964B005A87ED /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = maxmspsdk.xcconfig; sourceTree = "<group>"; };
+		E475061725DA97B2005A87ED /* convertsofa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = convertsofa.c; sourceTree = "<group>"; };
+		E475061B25DA9845005A87ED /* btree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = btree.c; sourceTree = "<group>"; };
+		E475061C25DA9845005A87ED /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		E475061D25DA9845005A87ED /* superblock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = superblock.c; sourceTree = "<group>"; };
+		E475061E25DA9845005A87ED /* gcol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gcol.c; sourceTree = "<group>"; };
+		E475061F25DA9845005A87ED /* fractalhead.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fractalhead.c; sourceTree = "<group>"; };
+		E475062025DA9845005A87ED /* gunzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gunzip.c; sourceTree = "<group>"; };
+		E475062125DA9845005A87ED /* dataobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dataobject.c; sourceTree = "<group>"; };
+		E475062325DA9845005A87ED /* minphase.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minphase.c; sourceTree = "<group>"; };
+		E475062425DA9845005A87ED /* mysofa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mysofa.h; sourceTree = "<group>"; };
+		E475062525DA9845005A87ED /* interpolate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = interpolate.c; sourceTree = "<group>"; };
+		E475062625DA9845005A87ED /* kdtree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kdtree.h; sourceTree = "<group>"; };
+		E475062725DA9845005A87ED /* lookup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lookup.c; sourceTree = "<group>"; };
+		E475062825DA9845005A87ED /* tools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tools.c; sourceTree = "<group>"; };
+		E475062925DA9845005A87ED /* mysofa_export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mysofa_export.h; sourceTree = "<group>"; };
+		E475062A25DA9845005A87ED /* easy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = easy.c; sourceTree = "<group>"; };
+		E475062B25DA9845005A87ED /* check.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = check.c; sourceTree = "<group>"; };
+		E475062C25DA9845005A87ED /* reader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reader.c; sourceTree = "<group>"; };
+		E475062D25DA9845005A87ED /* resample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = resample.c; sourceTree = "<group>"; };
+		E475062E25DA9845005A87ED /* mysofa_export.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mysofa_export.h.in; sourceTree = "<group>"; };
+		E475062F25DA9845005A87ED /* tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tools.h; sourceTree = "<group>"; };
+		E475063025DA9845005A87ED /* kdtree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kdtree.c; sourceTree = "<group>"; };
+		E475063125DA9845005A87ED /* spherical.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = spherical.c; sourceTree = "<group>"; };
+		E475063225DA9845005A87ED /* cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cache.c; sourceTree = "<group>"; };
+		E475063325DA9845005A87ED /* neighbors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = neighbors.c; sourceTree = "<group>"; };
+		E475063425DA9845005A87ED /* loudness.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = loudness.c; sourceTree = "<group>"; };
+		E475063625DA9845005A87ED /* stack_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack_alloc.h; sourceTree = "<group>"; };
+		E475063725DA9845005A87ED /* speex_resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_resampler.h; sourceTree = "<group>"; };
+		E475063825DA9845005A87ED /* speex_resampler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = speex_resampler.c; sourceTree = "<group>"; };
+		E475063925DA9845005A87ED /* arch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arch.h; sourceTree = "<group>"; };
+		E475065825DA9913005A87ED /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2FBBEADC08F335360078DB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E475065925DA9913005A87ED /* libz.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* iterator */ = {
+			isa = PBXGroup;
+			children = (
+				E475061925DA9818005A87ED /* libmysofa */,
+				E475061525DA964B005A87ED /* maxmspsdk.xcconfig */,
+				E475061725DA97B2005A87ED /* convertsofa.c */,
+				19C28FB4FE9D528D11CA2CBB /* Products */,
+				E475065725DA9913005A87ED /* Frameworks */,
+			);
+			name = iterator;
+			sourceTree = "<group>";
+		};
+		19C28FB4FE9D528D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2FBBEAE508F335360078DB84 /* convertsofa.mxo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E475061925DA9818005A87ED /* libmysofa */ = {
+			isa = PBXGroup;
+			children = (
+				E475061A25DA9845005A87ED /* hdf */,
+				E475062225DA9845005A87ED /* hrtf */,
+				E475063525DA9845005A87ED /* resampler */,
+			);
+			path = libmysofa;
+			sourceTree = "<group>";
+		};
+		E475061A25DA9845005A87ED /* hdf */ = {
+			isa = PBXGroup;
+			children = (
+				E475061B25DA9845005A87ED /* btree.c */,
+				E475061C25DA9845005A87ED /* reader.h */,
+				E475061D25DA9845005A87ED /* superblock.c */,
+				E475061E25DA9845005A87ED /* gcol.c */,
+				E475061F25DA9845005A87ED /* fractalhead.c */,
+				E475062025DA9845005A87ED /* gunzip.c */,
+				E475062125DA9845005A87ED /* dataobject.c */,
+			);
+			name = hdf;
+			path = ../../../../libmysofa/src/hdf;
+			sourceTree = "<group>";
+		};
+		E475062225DA9845005A87ED /* hrtf */ = {
+			isa = PBXGroup;
+			children = (
+				E475062325DA9845005A87ED /* minphase.c */,
+				E475062425DA9845005A87ED /* mysofa.h */,
+				E475062525DA9845005A87ED /* interpolate.c */,
+				E475062625DA9845005A87ED /* kdtree.h */,
+				E475062725DA9845005A87ED /* lookup.c */,
+				E475062825DA9845005A87ED /* tools.c */,
+				E475062925DA9845005A87ED /* mysofa_export.h */,
+				E475062A25DA9845005A87ED /* easy.c */,
+				E475062B25DA9845005A87ED /* check.c */,
+				E475062C25DA9845005A87ED /* reader.c */,
+				E475062D25DA9845005A87ED /* resample.c */,
+				E475062E25DA9845005A87ED /* mysofa_export.h.in */,
+				E475062F25DA9845005A87ED /* tools.h */,
+				E475063025DA9845005A87ED /* kdtree.c */,
+				E475063125DA9845005A87ED /* spherical.c */,
+				E475063225DA9845005A87ED /* cache.c */,
+				E475063325DA9845005A87ED /* neighbors.c */,
+				E475063425DA9845005A87ED /* loudness.c */,
+			);
+			name = hrtf;
+			path = ../../../../libmysofa/src/hrtf;
+			sourceTree = "<group>";
+		};
+		E475063525DA9845005A87ED /* resampler */ = {
+			isa = PBXGroup;
+			children = (
+				E475063625DA9845005A87ED /* stack_alloc.h */,
+				E475063725DA9845005A87ED /* speex_resampler.h */,
+				E475063825DA9845005A87ED /* speex_resampler.c */,
+				E475063925DA9845005A87ED /* arch.h */,
+			);
+			name = resampler;
+			path = ../../../../libmysofa/src/resampler;
+			sourceTree = "<group>";
+		};
+		E475065725DA9913005A87ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E475065825DA9913005A87ED /* libz.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2FBBEAD708F335360078DB84 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E475064425DA9845005A87ED /* kdtree.h in Headers */,
+				E475064725DA9845005A87ED /* mysofa_export.h in Headers */,
+				E475065625DA9845005A87ED /* arch.h in Headers */,
+				E475063B25DA9845005A87ED /* reader.h in Headers */,
+				E475064D25DA9845005A87ED /* tools.h in Headers */,
+				E475064225DA9845005A87ED /* mysofa.h in Headers */,
+				E475065325DA9845005A87ED /* stack_alloc.h in Headers */,
+				E475065425DA9845005A87ED /* speex_resampler.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2FBBEAD608F335360078DB84 /* max-external */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */;
+			buildPhases = (
+				2FBBEAD708F335360078DB84 /* Headers */,
+				2FBBEAD808F335360078DB84 /* Resources */,
+				2FBBEADA08F335360078DB84 /* Sources */,
+				2FBBEADC08F335360078DB84 /* Frameworks */,
+				2FBBEADF08F335360078DB84 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "max-external";
+			productName = iterator;
+			productReference = 2FBBEAE508F335360078DB84 /* convertsofa.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+			};
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "convertsofa" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				en,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FBBEAD608F335360078DB84 /* max-external */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2FBBEAD808F335360078DB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E475061625DA964B005A87ED /* maxmspsdk.xcconfig in Resources */,
+				E475064C25DA9845005A87ED /* mysofa_export.h.in in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		2FBBEADF08F335360078DB84 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2FBBEADA08F335360078DB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E475064125DA9845005A87ED /* minphase.c in Sources */,
+				E475064F25DA9845005A87ED /* spherical.c in Sources */,
+				E475065525DA9845005A87ED /* speex_resampler.c in Sources */,
+				E475063D25DA9845005A87ED /* gcol.c in Sources */,
+				E475063E25DA9845005A87ED /* fractalhead.c in Sources */,
+				E475064525DA9845005A87ED /* lookup.c in Sources */,
+				E475064325DA9845005A87ED /* interpolate.c in Sources */,
+				E475064925DA9845005A87ED /* check.c in Sources */,
+				E475064A25DA9845005A87ED /* reader.c in Sources */,
+				E475064825DA9845005A87ED /* easy.c in Sources */,
+				E475064E25DA9845005A87ED /* kdtree.c in Sources */,
+				E475064625DA9845005A87ED /* tools.c in Sources */,
+				E475063C25DA9845005A87ED /* superblock.c in Sources */,
+				E475065225DA9845005A87ED /* loudness.c in Sources */,
+				E475065025DA9845005A87ED /* cache.c in Sources */,
+				E475063A25DA9845005A87ED /* btree.c in Sources */,
+				E475065125DA9845005A87ED /* neighbors.c in Sources */,
+				E475065C25DA9DC3005A87ED /* convertsofa.c in Sources */,
+				E475064025DA9845005A87ED /* dataobject.c in Sources */,
+				E475063F25DA9845005A87ED /* gunzip.c in Sources */,
+				E475064B25DA9845005A87ED /* resample.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2FBBEAD008F335010078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		2FBBEAD108F335010078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		2FBBEAE108F335360078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E475061525DA964B005A87ED /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cycling74.sofatoheader;
+				PRODUCT_NAME = convertsofa;
+			};
+			name = Development;
+		};
+		2FBBEAE208F335360078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E475061525DA964B005A87ED /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cycling74.sofatoheader;
+				PRODUCT_NAME = convertsofa;
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "convertsofa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAD008F335010078DB84 /* Development */,
+				2FBBEAD108F335010078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAE108F335360078DB84 /* Development */,
+				2FBBEAE208F335360078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

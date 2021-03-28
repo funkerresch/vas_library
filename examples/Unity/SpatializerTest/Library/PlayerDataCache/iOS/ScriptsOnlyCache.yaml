@@ -6,8 +6,6 @@ ScriptsOnlyBuild:
     - VasSpatConfigMirrorSource
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
@@ -16,14 +14,6 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
-    UnityEngine.UI.dll:
-    - UnityEngine.EventSystems.EventSystem
-    - UnityEngine.EventSystems.StandaloneInputModule
-    - UnityEngine.UI.CanvasScaler
-    - UnityEngine.UI.GraphicRaycaster
-    - UnityEngine.UI.Image
-    - UnityEngine.UI.Text
-    - UnityEngine.UI.Toggle
   sceneClasses:
     Assets/Scenes/Mirror Source Example.unity:
     - Class: 1
@@ -57,42 +47,18 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11282}
+      Script: {instanceID: 11884}
     - Class: 114
-      Script: {instanceID: 11302}
+      Script: {instanceID: 11954}
     - Class: 114
-      Script: {instanceID: 11550}
-    - Class: 114
-      Script: {instanceID: 11882}
-    - Class: 114
-      Script: {instanceID: 11952}
-    - Class: 114
-      Script: {instanceID: 12066}
-    - Class: 114
-      Script: {instanceID: 12548}
-    - Class: 114
-      Script: {instanceID: 13218}
-    - Class: 114
-      Script: {instanceID: 13672}
-    - Class: 114
-      Script: {instanceID: 13690}
+      Script: {instanceID: 12552}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
       Script: {instanceID: 0}
     - Class: 135
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
-      Script: {instanceID: 0}
-    - Class: 213
-      Script: {instanceID: 0}
-    - Class: 222
-      Script: {instanceID: 0}
-    - Class: 223
-      Script: {instanceID: 0}
-    - Class: 224
       Script: {instanceID: 0}
     - Class: 241
       Script: {instanceID: 0}
@@ -137,6 +103,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.Advertisements.dll
     namespaceName: UnityEngine.Advertisements.Platform.Editor
     className: BannerPlaceholder
+  - hash:
+      serializedVersion: 2
+      Hash: 83e769eee07fc231384c812eedbb8224
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ForwardController
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -247,6 +219,12 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
+      Hash: 502058a3ae745841edaeecd66a75b255
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TriggerZoneReceiver
+  - hash:
+      serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -259,16 +237,16 @@ ScriptsOnlyBuild:
     className: RectMask2D
   - hash:
       serializedVersion: 2
+      Hash: 83e769eee07fc231384c812eedbb8224
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RotateLeftController
+  - hash:
+      serializedVersion: 2
       Hash: d941ab6dd93d37ffdf2277f2ea2375a0
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMeshUI
-  - hash:
-      serializedVersion: 2
-      Hash: 2107af11f1b72504ef89458ef8b99fd4
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: VasSpatConfigManual
   - hash:
       serializedVersion: 2
       Hash: f9321e1746a6b97101d5ade973ce6211
@@ -353,6 +331,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ScrollRect
+  - hash:
+      serializedVersion: 2
+      Hash: 83e769eee07fc231384c812eedbb8224
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RotateRightController
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -469,12 +453,6 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: a65e5d40c71358f4f5947f4698997726
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: VasSpatConfigAuto
-  - hash:
-      serializedVersion: 2
       Hash: f802a6f52ef1a56967d4f1189cb7b150
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -485,12 +463,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: VasSpatMaterialEq
   - hash:
       serializedVersion: 2
       Hash: 5f1752ed2092162f016c19510c28a8b9
@@ -521,6 +493,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
+  - hash:
+      serializedVersion: 2
+      Hash: 842a2024e066f309768e4c7e97d5e4fa
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TriggerZones
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -638,4 +616,4 @@ ScriptsOnlyBuild:
   platform: 9
   scenePathNames:
   - Assets/Scenes/Mirror Source Example.unity
-  playerPath: /Users/harveykeitel/Desktop/iostest7
+  playerPath: /Users/harveykeitel/Desktop/iosspattest

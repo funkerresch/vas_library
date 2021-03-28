@@ -28,6 +28,7 @@
     <ClInclude Include="..\..\..\source\vas_fir_binaural.h" />
     <ClInclude Include="..\..\..\source\vas_fir_binauralReflection1.h" />
     <ClInclude Include="..\..\..\source\vas_fir_list.h" />
+    <ClInclude Include="..\..\..\source\vas_fir_read.h" />
     <ClInclude Include="..\..\..\source\vas_iir_biquad.h" />
     <ClInclude Include="..\..\..\source\vas_mem.h" />
     <ClInclude Include="..\..\..\source\vas_ringBuffer.h" />
@@ -46,6 +47,7 @@
     <ClCompile Include="..\..\..\source\vas_fir_binaural.c" />
     <ClCompile Include="..\..\..\source\vas_fir_binauralReflection1.c" />
     <ClCompile Include="..\..\..\source\vas_fir_list.c" />
+    <ClCompile Include="..\..\..\source\vas_fir_read.c" />
     <ClCompile Include="..\..\..\source\vas_iir_biquad.c" />
     <ClCompile Include="..\..\..\source\vas_mem.c" />
     <ClCompile Include="..\..\..\source\vas_ringBuffer.c" />

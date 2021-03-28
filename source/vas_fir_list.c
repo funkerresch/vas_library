@@ -68,7 +68,9 @@ vas_fir *vas_fir_list_find1(vas_fir_list *x, const char *match, int segmentSize,
     {
         if(current->data->metaData.fullPath != NULL)
         {
-            
+ #if defined(MAXMSPSDK) || defined(PUREDATA)
+            post("%s %s", match, current->data->metaData.fullPath);
+#endif
             if(!strcmp(current->data->metaData.fullPath, match)
                && current->data->metaData.segmentSize == segmentSize
                && current->data->metaData.filterOffset == offset

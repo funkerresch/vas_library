@@ -97,7 +97,7 @@ abstract public class VasSpat : MonoBehaviour
     protected static extern bool LatePartIsLoaded(IntPtr x);
 
     [DllImport("__Internal")]
-    protected static extern bool SetReverbTailFromUnityAudioClip(IntPtr x, float[] left, float[] right, int length);
+    protected static extern bool SetReverbTailFromUnityAudioClip(IntPtr x, string name, float[] left, float[] right, int length);
 
 #else
     [DllImport("AudioPlugin_VAS_Binaural", CallingConvention = CallingConvention.Cdecl)]
@@ -125,7 +125,7 @@ abstract public class VasSpat : MonoBehaviour
     protected static extern bool LatePartIsLoaded(IntPtr x);
 
     [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
-    protected static extern bool SetReverbTailFromUnityAudioClip(IntPtr x, float[] left, float[] right, int length);
+    protected static extern bool SetReverbTailFromUnityAudioClip(IntPtr x, string name, float[] left, float[] right, int length);
 
     [DllImport("AudioPlugin_VAS_Binaural", BestFitMapping = true, CallingConvention = CallingConvention.Cdecl)]
     public static extern void SetDebugFunction(IntPtr fp);
@@ -139,7 +139,7 @@ abstract public class VasSpat : MonoBehaviour
     }
 #endif
 
-    protected enum SpatParams
+    public enum SpatParams
     {
         P_AUDIOSRCATTN,
         P_FIXEDVOLUME,
@@ -465,7 +465,7 @@ abstract public class VasSpat : MonoBehaviour
                     right[i] = all[i * 2 + 1];
                 }
      
-                SetReverbTailFromUnityAudioClip(VAS_Unity_Spatializer, left, right, ReverbClip.samples);
+                SetReverbTailFromUnityAudioClip(VAS_Unity_Spatializer, ReverbClip.name, left, right, ReverbClip.samples);
                 Debug.Log("Loaded Tail from Wav");
             }
         }

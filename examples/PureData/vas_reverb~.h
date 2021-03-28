@@ -1,4 +1,4 @@
-#include "vas_firobject.h"
+#include "vas_pdmaxobject.h"
 
 #ifndef rwa_reverb_h
 #define rwa_reverb_h
@@ -6,10 +6,10 @@
 typedef struct vas_reverb
 {
 #ifdef MAXMSPSDK
-    RWA_FIROBJECT_MAX
+    VAS_MAX_OBJECT
 #endif
 #ifdef PUREDATA
-    RWA_FIROBJECT_PD
+    VAS_PD_OBJECT
 #endif
     
 } vas_reverb;

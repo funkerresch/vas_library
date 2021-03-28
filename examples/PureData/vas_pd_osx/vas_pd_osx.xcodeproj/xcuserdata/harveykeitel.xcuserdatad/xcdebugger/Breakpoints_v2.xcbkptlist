@@ -14,8 +14,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "608"
-            endingLineNumber = "608"
+            startingLineNumber = "611"
+            endingLineNumber = "611"
             landmarkName = "vas_dynamicFirChannel_setFilterSize(x, filterSize)"
             landmarkType = "9">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "608"
-            endingLineNumber = "608"
+            startingLineNumber = "611"
+            endingLineNumber = "611"
             landmarkName = "vas_dynamicFirChannel_setFilterSize(x, filterSize)"
             landmarkType = "9">
             <Locations>
@@ -110,8 +110,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "unknown"
             landmarkType = "0">
             <Locations>
@@ -158,8 +158,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "vas_dynamicFirChannel_input_free(x, currentNumberOfSegments)"
             landmarkType = "9">
             <Locations>
@@ -206,8 +206,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "vas_dynamicFirChannel_input_free(x, currentNumberOfSegments)"
             landmarkType = "9">
             <Locations>
@@ -270,42 +270,10 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
             landmarkName = "vas_dynamicFirChannel_process(x, in, out, vectorSize, flags)"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "F01C39D8-4040-4458-BCE3-E9174490CFA3 - 2cfbab48000576d2"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "vas_dynamicFirChannel_process"
-                  moduleName = "rwa_binauralrir~.pd_darwin"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "497"
-                  endingLineNumber = "497"
-                  offsetFromSymbolStart = "66">
-               </Location>
-               <Location
-                  uuid = "F01C39D8-4040-4458-BCE3-E9174490CFA3 - b16a9778c7a40b62"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "vas_dynamicFirChannel_process"
-                  moduleName = "vas_binaural~.pd_darwin"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/harveykeitel/Repositories/vas_library/source/vas_dynamicFirChannel.c"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "497"
-                  endingLineNumber = "497"
-                  offsetFromSymbolStart = "66">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -318,8 +286,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "504"
-            endingLineNumber = "504"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
             landmarkName = "vas_dynamicFirChannel_process(x, in, out, vectorSize, flags)"
             landmarkType = "9">
             <Locations>
@@ -354,6 +322,102 @@
                   offsetFromSymbolStart = "311">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E53FBD5-D474-4886-9819-93CFA0992860"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../vas_binaural~.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "vas_binaural_perform(w)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "25E20FD0-C529-41D8-AA04-226F81C71AE5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
+            landmarkName = "vas_dynamicFirChannel_process(x, in, out, vectorSize, flags)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E336E249-589E-4C50-9513-19F9C04BD0BF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_fir.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "682"
+            endingLineNumber = "682"
+            landmarkName = "vas_filter_read_lineFormat_ir1(x, filePtr, line, offset)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ACA7F8DD-AFDE-4F64-9692-EF94A4B76253"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "846"
+            endingLineNumber = "846"
+            landmarkName = "vas_dynamicFirChannel_prepareFilter(x, filter, ele, azi)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FDA71E24-9F4C-4599-9089-9D89CE505091"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_mem.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8A16C547-6F2A-4099-8BCB-065915AA8EEA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_dynamicFirChannel.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
+            landmarkName = "vas_dynamicFirChannel_setElevation(x, elevation)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

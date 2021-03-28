@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class StartAudio : MonoBehaviour
 {
-    public AudioSource source1;
-    public AudioSource source2;
-    public AudioSource source3;
-    public AudioSource source4;
+    public GameObject sources1;
+    public GameObject sources2;
 
     // Start is called before the first frame update
     void Start()
     {
-        double startTime = AudioSettings.dspTime + 10.0f;
-        source1.PlayScheduled(startTime);
-        source2.PlayScheduled(startTime);
-        source3.PlayScheduled(startTime);
-        source4.PlayScheduled(startTime);
+        double startTime = AudioSettings.dspTime + 5.0f;
+
+        AudioSource[] childScripts;
+        childScripts = sources1.GetComponentsInChildren<AudioSource>();
+        foreach (AudioSource s in childScripts)
+            s.PlayScheduled(startTime);
+
+        childScripts = sources2.GetComponentsInChildren<AudioSource>();
+        foreach (AudioSource s in childScripts)
+            s.PlayScheduled(startTime);
     }
 }

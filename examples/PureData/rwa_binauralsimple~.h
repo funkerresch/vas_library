@@ -2,7 +2,7 @@
  Leftover for compatibility with RWA, is going to be replaced with vas_binaural~
  */
 
-#include "vas_firobject.h"
+#include "vas_pdmaxobject.h"
 
 #ifndef _binauralsimple_
 #define _binauralsimple_
@@ -10,10 +10,10 @@
 typedef struct rwa_binauralsimple
 {
 #ifdef MAXMSPSDK
-    RWA_FIROBJECT_MAX
+    VAS_MAX_OBJECT
 #endif
 #ifdef PUREDATA
-    RWA_FIROBJECT_PD
+    VAS_PD_OBJECT
     t_inlet *azi;
     t_inlet *ele;
 #endif

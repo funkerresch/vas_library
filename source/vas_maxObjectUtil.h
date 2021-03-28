@@ -21,6 +21,10 @@
 
 #include <stdio.h>
 
+void vas_maxObjectUtilities_getFullPath(t_symbol *ir, char *fullPath);
+
+void vas_maxObjectUtilities_openFile1(t_symbol *ir, char *fullPath);
+
 void vas_maxObjectUtilities_openFile(long argc, t_atom *argv, char *fullPath, char *fileExtension);
 
 

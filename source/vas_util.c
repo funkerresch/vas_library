@@ -757,7 +757,31 @@ char* vas_strsep(char** stringp, const char* delim)
     return start;
 }
 
+void vas_util_single2DoublePrecision(float *in, double *out, int length)
+{
+    #ifdef VAS_USE_VDSP
+    vDSP_vspdp(in, 1, out, 1, length);
+    #else
+    int n = length;
+    while(n--)
+    {
+        *out++ = *in++;
+    }
+    #endif
+}
 
+void vas_util_double2SinglePrecision(double *in, float *out, int length)
+{
+    #ifdef VAS_USE_VDSP
+        vDSP_vdpsp(in, 1, out, 1, length);
+    #else
+    int n = length;
+    while(n--)
+    {
+        *out++ = *in++;
+    }
+    #endif
+}
 
 void vas_util_fadd(float *input1, float *input2, float *dest, int length)
 {

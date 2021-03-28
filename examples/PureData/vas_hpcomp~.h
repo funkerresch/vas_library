@@ -10,7 +10,8 @@
 *
 */
 
-#include "vas_firobject.h"
+#include "vas_pdmaxobject.h"
+#include "vas_fir_headphoneCompensation.h"
 
 #ifndef _rwa_hpcomp_
 #define _rwa_hpcomp_
@@ -18,10 +19,10 @@
 typedef struct vas_hpcomp
 {
 #ifdef MAXMSPSDK
-    RWA_FIROBJECT_MAX
+    VAS_MAX_OBJECT
 #endif
 #ifdef PUREDATA
-    RWA_FIROBJECT_PD
+    VAS_PD_OBJECT
     void *in2;
     float inputBuffer2[VAS_MAXVECTORSIZE];
 #endif

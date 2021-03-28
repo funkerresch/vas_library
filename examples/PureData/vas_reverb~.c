@@ -42,6 +42,8 @@ static void vas_reverb_free(vas_reverb *x)
 
 static void *vas_reverb_new(t_symbol *s, int argc, t_atom *argv)
 {
+    int offset = 0;
+    int end = 0;
     vas_reverb *x = (vas_reverb *)pd_new(vas_reverb_class);
     
     t_symbol *path = NULL;
@@ -84,8 +86,20 @@ static void *vas_reverb_new(t_symbol *s, int argc, t_atom *argv)
             path = atom_getsymbolarg(1, argc, argv);
     }
     
+    if(argc >= 3)
+    {
+        if(argv[2].a_type == A_FLOAT)
+            offset = atom_getfloatarg(2, argc, argv);
+    }
+    
+    if(argc >= 4)
+    {
+        if(argv[3].a_type == A_FLOAT)
+            end = atom_getfloatarg(3, argc, argv);
+    }
+    
     if(path)
-        rwa_firobject_read2((rwa_firobject *)x, path, x->segmentSize, 0, 0);
+        vas_pdmaxobject_read((vas_pdmaxobject *)x, path, x->segmentSize, offset, end);
 
     return (x);
 }
@@ -106,6 +120,6 @@ void vas_reverb_tilde_setup(void)
     CLASS_MAINSIGNALIN(vas_reverb_class, vas_reverb, f);
    
     class_addmethod(vas_reverb_class, (t_method)vas_reverb_dsp, gensym("dsp"), 0);
-    class_addmethod(vas_reverb_class, (t_method)rwa_firobject_read2, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT,0);
-    class_addmethod(vas_reverb_class, (t_method)vas_firobject_set1, gensym("set"), A_DEFSYM, A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT, 0);
+    class_addmethod(vas_reverb_class, (t_method)vas_pdmaxobject_read, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT,0);
+    class_addmethod(vas_reverb_class, (t_method)vas_pdmaxobject_set1, gensym("set"), A_DEFSYM, A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, A_DEFFLOAT, 0);
 }

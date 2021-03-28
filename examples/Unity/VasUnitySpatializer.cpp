@@ -20,6 +20,7 @@
 #include "vas_ringBuffer.h"
 #include "vas_fir_binauralReflection1.h"
 #include "vas_iir_biquad.h"
+#include "vas_fir_read.h"
 
 #ifndef DEBUG_UNITY
 #define DEBUG_UNITY
@@ -119,28 +120,6 @@ namespace Spatializer
         static void *currentInstance[100];
         int instanceCounter = 0;
         extern vas_fir_list IRs;
-    
-        void HeadingAndElevationFromTranformationMatrix(float *matrix, float *heading, float *elevation)
-        {
-            if (matrix[0] == 1.0f)
-            {
-                *heading = vas_utilities_radians2degrees(atan2f(matrix[2], matrix[11]));
-                *elevation = vas_utilities_radians2degrees(atan2f(-matrix[6],matrix[5]+0.001f));
-            }
-            else if (matrix[0]  == -1.0f)
-            {
-                *heading = vas_utilities_radians2degrees(atan2f(matrix[2], matrix[11]));
-                *elevation = vas_utilities_radians2degrees(atan2f(-matrix[6],matrix[5]+0.001f));
-            }
-            else
-            {
-                float radians = atan2(matrix[8], matrix[0]);
-                radians += M_PI;
-                    
-                *heading = vas_utilities_radians2degrees(radians);
-                *elevation = vas_utilities_radians2degrees(atan2f(-matrix[6],matrix[5]+0.001f));
-            }
-        }
         
 		VAS_EXPORT void SetDebugFunction( FuncPtr fp )
         {
@@ -208,87 +187,6 @@ namespace Spatializer
             else
                 return false;
         }
-    
-        void readIR(vas_fir *x, char *fullpath, int segmentSize, int offset)
-        {
-            const char *fileExtension;
-            int end = 0;
-            fileExtension = vas_util_getFileExtension(fullpath);
-            if(!strcmp(fileExtension, "sofa"))
-            {
-#ifdef VAS_USE_LIBMYSOFA
-                void *filter = vas_fir_readSofa_getMetaData(x, fullpath);
-                if(filter)
-                {
-                    vas_fir_initFilter1((vas_fir *)x, segmentSize);
-                    vas_fir_readSofa_getFilter(x, filter);
-                    vas_fir_setInitFlag((vas_fir *)x);
-                }
-#else
-#ifdef VAS_DEBUG_TO_UNITY
-                if(Debug != NULL)
-                    Debug("Sofa not supported for this binary, compile again with VAS_USE_LIBMYSOFA");
-#endif
-#endif
-            }
-            if(!strcmp(fileExtension, "txt"))
-            {
-                vas_fir *existingFilter = vas_fir_list_find(&IRs, fullpath);
-                //vas_fir *existingFilter = vas_fir_list_find1(&IRs, fullpath, segmentSize, offset, end);
-                 
-                if(existingFilter != NULL)
-                {
-#ifdef VAS_DEBUG_TO_UNITY
-                    if(Debug != NULL)
-                    {
-                        Debug("Use existing filter");
-                        Debug(existingFilter->metaData.fullPath);
-                        
-                        char tmp[64];
-                        sprintf(tmp, "search for: %d %d %d", segmentSize, offset, end);
-                        Debug(tmp);
-                        
-                        sprintf(tmp, "existing is: %d %d %d", existingFilter->metaData.segmentSize, existingFilter->metaData.filterOffset, existingFilter->metaData.filterEnd);
-                        Debug(tmp);
-                    }
-#endif
-                    size_t size = strlen(existingFilter->metaData.fullPath);
-                    x->metaData.fullPath = (char *)vas_mem_alloc(sizeof(char) * size);
-                    strcpy(x->metaData.fullPath, existingFilter->metaData.fullPath);
-                    vas_fir_prepareChannelsWithSharedFilter((vas_fir *)existingFilter, x->left, x->right);
-                    vas_fir_setInitFlag((vas_fir *)x);
-                    return;
-                }
-                
-                else
-                {
-#ifdef VAS_DEBUG_TO_UNITY
-                    if(Debug != NULL)
-                        Debug("Read text file");
-#endif
-                    FILE *file = vas_fir_readText_metaData1((vas_fir *)x, fullpath);
-                    if(file)
-                    {
-                        ((vas_fir *)x)->metaData.filterOffset = offset;
-                        ((vas_fir *)x)->metaData.segmentSize = segmentSize;
-                        if(end > 0 && (end < ((vas_fir *)x)->metaData.filterLength) )
-                            ((vas_fir *)x)->metaData.filterLength = end;
-                   
-                        vas_fir_initFilter2((vas_fir *)x, segmentSize);
-                        vas_fir_readText_Ir1((vas_fir *)x, file, offset);
-                        vas_fir_list_addNode(&IRs, vas_fir_listNode_new(x));
-                        vas_fir_setInitFlag((vas_fir *)x);
-                    }
-#ifdef VAS_DEBUG_TO_UNITY
-                    else
-                    {
-                        if(Debug != NULL)
-                            Debug("Error: Could not read file");
-                    }
-#endif
-                }
-            }
-        }
         
 		VAS_EXPORT void LoadHRTF(EffectData *effectData, char *fullpath)
         {
@@ -301,7 +199,7 @@ namespace Spatializer
                 if(Debug != NULL)
                     Debug(fullpath);
 #endif
-                readIR(x, fullpath, segmentSize, 0);
+                vas_fir_read_impulseFromFile(x, fullpath, segmentSize, 0, 0);
                     
                 if(effectData->config != VAS_SPAT_CONFIG_SIMPLE)
                 {
@@ -323,15 +221,11 @@ namespace Spatializer
             }
         }
     
-        VAS_EXPORT void SetReverbTailFromUnityAudioClip(EffectData *effectData, float *left, float *right, int length)
+        VAS_EXPORT void SetReverbTailFromUnityAudioClip(EffectData *effectData, char *name, float *left, float *right, int length)
         {
             int segmentSize = effectData->p[P_SEGMENTSIZE_LATEPART];
-            vas_fir_setMetaData_manually1((vas_fir *)effectData->reverbEngine, length, segmentSize, VAS_IR_DIRECTIONFORMAT_SINGLE, 1, 1, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR, 0, 0);
-            
-            vas_dynamicFirChannel_prepareFilter(effectData->reverbEngine->left, left, 0, 0);
-            vas_dynamicFirChannel_prepareFilter(effectData->reverbEngine->right, right, 0, 0);
-            
-            vas_fir_setInitFlag((vas_fir *)effectData->reverbEngine);
+            vas_fir *x = (vas_fir *)effectData->reverbEngine;
+            vas_fir_read_singleImpulseFromFloatArray(x, name, left, right, length, segmentSize, 0, 0);
             effectData->initReverbTail = 1;
         }
     
@@ -348,7 +242,7 @@ namespace Spatializer
                     Debug(fullpath);
 #endif
                 
-                readIR(x, fullpath, segmentSize, offset);
+                vas_fir_read_impulseFromFile(x, fullpath, segmentSize, offset, 0);
                 effectData->initReverbTail = 1;
             }
             else
@@ -556,7 +450,6 @@ namespace Spatializer
 
     UNITY_AUDIODSP_RESULT UNITY_AUDIODSP_CALLBACK ProcessCallback(UnityAudioEffectState* state, float* inbuffer, float* outbuffer, unsigned int length, int inchannels, int outchannels)
     {
-         
         if (inchannels != 2 || outchannels != 2 || state->spatializerdata == NULL)
         {
             memset(outbuffer, 0, length * outchannels * sizeof(float));

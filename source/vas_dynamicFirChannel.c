@@ -122,10 +122,13 @@ void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *met
     x->filter->eleZero = metaData->eleZero;
     x->elevationTmp = metaData->eleZero;  // added
     x->filter->offset = metaData->filterOffset;
+    x->output.current.elevation = metaData->eleZero;
+    x->output.current.azimuth = 0;
+    x->output.next.elevation = metaData->eleZero;
+    x->output.next.azimuth = 0;
     
     vas_dynamicFirChannel_setFilterSize(x, metaData->filterLength - x->filter->offset);
     vas_dynamicFirChannel_prepareArrays(x);
-    
 }
 
 void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x)
@@ -752,6 +755,17 @@ void vas_dynamicFirChannel_calculateAverageSegmentPower(vas_dynamicFirChannel *x
     if(energy > x->filter->maxAverageSegmentPower[ele][azi])
         x->filter->maxAverageSegmentPower[ele][azi] = energy;
 }
+
+
+bool vas_dynamicFirChannel_isFilterSegmentBelowThreshhold1(vas_dynamicFirChannel *x, int segmentNumber, int ele, int azi)
+{
+    if(x->filter->averageSegmentPower[ele][azi][segmentNumber] > x->segmentThreshold)
+    {
+        return false;
+    }
+    else
+        return true;
+}
 #endif
 
 bool vas_dynamicFirChannel_isFilterSegmentBelowThreshhold(vas_dynamicFirChannel *x, float *filter, int ele, int azi)
@@ -847,9 +861,10 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
             vas_util_fcopy_noavx(filter+(i*x->filter->segmentSize), x->tmp, size); // size might not be a multiple of 8
 #ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
             vas_dynamicFirChannel_calculateAverageSegmentPower(x, x->tmp, i, ele, azi);
-#endif
-            if(!vas_dynamicFirChannel_isFilterSegmentBelowThreshhold(x, x->tmp, ele, azi))
+
+            if(!vas_dynamicFirChannel_isFilterSegmentBelowThreshhold1(x, i, ele, azi))
             {
+#endif
 #ifdef VAS_USE_VDSP
                 vDSP_ctoz ( ( COMPLEX * ) x->tmp , 2, &(x->filter->data[ele][azi][i]), 1, x->filter->segmentSize  );
                 vDSP_fft_zrip ( x->filter->setupReal, &x->filter->data[ele][azi][i], 1, x->filter->fftSizeLog2, FFT_FORWARD  );
@@ -866,6 +881,7 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
                 x->filter->segmentIsZero[ele][azi][i] = false;
                 x->filter->segmentIsZero[ele][azi][i+x->pointerArrayMiddle] = false;
                 x->filter->nonZeroCounter[ele][azi]++;
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
             }
             else
             {
@@ -883,6 +899,7 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
 #endif
                 x->filter->zeroCounter[ele][azi]++;
             }
+#endif
             i++;
         }
     }

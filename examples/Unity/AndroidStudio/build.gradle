@@ -24,3 +24,17 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task copySoToUnity {
+    doLast {
+        println 'This is executed last during the execution phase.'
+        copy {
+            from 'app/build/intermediates/cmake/debug/obj/arm64-v8a/libAudioPlugin_VAS_Binaural.so'
+            into 'build/../../SpatializerTest/Assets/Plugins/Android/Libs/'
+            from 'app/build/intermediates/cmake/debug/obj/armeabi-v7a/libAudioPlugin_VAS_Binaural.so'
+            into 'build/../../SpatializerTest/Assets/Plugins/Android/Libs/armeabi-v7a'
+        }
+
+    }
+}
+

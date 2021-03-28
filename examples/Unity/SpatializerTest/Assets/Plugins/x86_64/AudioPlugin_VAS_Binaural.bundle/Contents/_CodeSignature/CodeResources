@@ -3,9 +3,26 @@
 <plist version="1.0">
 <dict>
 	<key>files</key>
-	<dict/>
+	<dict>
+		<key>Resources/mysofa_export.h.in</key>
+		<data>
+		exddsRo5xrM1K9DHwR0gGKvAEDc=
+		</data>
+	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>Resources/mysofa_export.h.in</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			exddsRo5xrM1K9DHwR0gGKvAEDc=
+			</data>
+			<key>hash2</key>
+			<data>
+			JSwtlswHuz9dmWS1oPoOgY3Fcrj1X5RD3zqQEKxTuTc=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^Resources/</key>

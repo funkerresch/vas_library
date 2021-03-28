@@ -8,10 +8,17 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BRIR Example 1.unity
     guid: 754e6fa2de84d443093efc664c0b0666
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Mirror Source Example.unity
     guid: aa4019973251b4cd38896a04c23b9341
   - enabled: 0
     path: Assets/Scenes/Grosser Saal.unity
     guid: 4ef1a75ddaf094ecda7c9481f5090dcd
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/Grosser Saal 2.unity
+    guid: f3c9d9780cb22468e84b34bc5a4b9a87
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bc68334d8463f409faad820f017a54af,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 3a731b89d4e714456a36c031b67ab955,
+      type: 2}

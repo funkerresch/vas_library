@@ -1,4 +1,4 @@
-#include "vas_firobject.h"
+#include "vas_pdmaxobject.h"
 
 #ifndef _vas_binaural_
 #define _vas_binaural_
@@ -6,10 +6,10 @@
 typedef struct vas_binaural
 {
 #ifdef MAXMSPSDK
-    RWA_FIROBJECT_MAX
+    VAS_MAX_OBJECT
 #endif
 #ifdef PUREDATA
-    RWA_FIROBJECT_PD
+    VAS_PD_OBJECT
     t_inlet *azi;
     t_inlet *ele;
 #endif

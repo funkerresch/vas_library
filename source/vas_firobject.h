@@ -16,6 +16,7 @@
 #endif
 #ifdef MAXMSPSDK
 #include "z_dsp.h"
+#include "vas_maxObjectUtil.h"
 #endif
 #ifdef PUREDATA
 #include "m_pd.h"
@@ -26,6 +27,7 @@
 
 #define RWA_FIROBJECT \
     void *convolutionEngine; \
+    float inputBuffer[VAS_MAXVECTORSIZE]; \
     float azimuth; \
     float elevation; \
 \
@@ -35,7 +37,6 @@
     int fadeCounter; \
     int filterSize; \
     int segmentSize; \
-    int useGlobalFilter; \
     int aziDirection; \
     int eleDirection; \
 \
@@ -45,7 +46,6 @@
     t_object x_obj; \
     t_outlet *outL; \
     t_outlet *outR; \
-    float inputBuffer[VAS_MAXVECTORSIZE]; \
     float f; \
     t_word *leftArray; \
     t_word *rightArray; \
@@ -59,6 +59,8 @@
     long t_size; \
     char  **t_text; \
     char *ptr2handle; \
+    float outL[VAS_MAXVECTORSIZE]; \
+    float outR[VAS_MAXVECTORSIZE]; \
 \
     RWA_FIROBJECT
 
@@ -81,6 +83,8 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
 void vas_firobject_prepareForInterpolatedIrs(rwa_firobject *x, float segmentSize, float maxLength, float numberOfIrs);
 
 void vas_firobject_loadIr2ArrayIndex(rwa_firobject *x, t_symbol *left, float index);
+
+void vas_pdmaxobject_read(rwa_firobject *x, t_symbol *s, float segmentSize, float offset, float end);
 
 void vas_firobject_setAndInterpolateBetweenIndexes(rwa_firobject *x, t_symbol *start, t_symbol *end, float startIndex, float endIndex, float mode);
 

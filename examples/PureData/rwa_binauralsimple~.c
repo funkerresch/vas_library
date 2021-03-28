@@ -92,7 +92,7 @@ static void *rwa_binauralsimple_new(t_symbol *s, int argc, t_atom *argv)
     }
     
     if(path)
-        rwa_firobject_read2((rwa_firobject *)x, path, x->segmentSize, 0, 0);
+        vas_pdmaxobject_read((vas_pdmaxobject *)x, path, x->segmentSize, 0, 0);
 
     return (x);
 }
@@ -109,6 +109,6 @@ void rwa_binauralsimple_tilde_setup(void)
     class_addmethod(rwa_binauralsimple_class, (t_method)rwa_binauralsimple_dsp, gensym("dsp"), 0);
     class_addmethod(rwa_binauralsimple_class, (t_method)rwa_binauralsimple_setAzimuth, gensym("azimuth"), A_DEFFLOAT,0);
     class_addmethod(rwa_binauralsimple_class, (t_method)rwa_binauralsimple_setElevation, gensym("elevation"), A_DEFFLOAT,0);
-    class_addmethod(rwa_binauralsimple_class, (t_method)rwa_firobject_read2, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, 0);
+    class_addmethod(rwa_binauralsimple_class, (t_method)vas_pdmaxobject_read, gensym("read"), A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, 0);
 }
 
