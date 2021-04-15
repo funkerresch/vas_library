@@ -641,17 +641,26 @@
     <Reference Include="mscorlib">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.16f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.XR.Management">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Monetization">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Subsystem.Registration">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.Oculus">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.XR.Oculus.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
@@ -662,6 +671,9 @@
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.XR.Oculus.Editor">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.XR.Oculus.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -670,6 +682,12 @@
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.Management.Editor">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
@@ -680,6 +698,12 @@
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.SpatialTracking">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpatialTracking">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
@@ -689,35 +713,11 @@
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Management">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Subsystem.Registration">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Management.Editor">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.XR.Oculus">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.XR.Oculus.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Oculus.Editor">
-      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.XR.Oculus.Editor.dll</HintPath>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>/Users/harveykeitel/Repositories/vas_library/examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
