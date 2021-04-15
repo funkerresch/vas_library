@@ -2,3 +2,4 @@
 *.log
 /examples/Unity/SpatializerTest/Library
 /examples/Unity/SpatializerTest/Temp
+.DS_Store
