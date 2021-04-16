@@ -1,7 +1,12 @@
-#include "vas_pdmaxobject.h"
 
 #ifndef _vas_binaural_
 #define _vas_binaural_
+
+#include "vas_pdmaxobject.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct vas_binaural
 {
@@ -18,6 +23,10 @@ typedef struct vas_binaural
 
 #ifdef PUREDATA
 void vas_binaural_tilde_setup(void);
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

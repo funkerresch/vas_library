@@ -10,11 +10,15 @@
 *
 */
 
+#ifndef _rwa_hpcomp_
+#define _rwa_hpcomp_
+
 #include "vas_pdmaxobject.h"
 #include "vas_fir_headphoneCompensation.h"
 
-#ifndef _rwa_hpcomp_
-#define _rwa_hpcomp_
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct vas_hpcomp
 {
@@ -31,6 +35,10 @@ typedef struct vas_hpcomp
 
 #ifdef PUREDATA
 void vas_hpcomp_tilde_setup(void);
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

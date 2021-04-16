@@ -1,10 +1,13 @@
+#ifndef _vas_binauralspace_
+#define _vas_binauralspace_
 
 #include "vas_ringBuffer.h"
 #include "vas_delayTap_crossfade.h"
 #include "vas_pdmaxobject.h"
 
-#ifndef _vas_binauralspace_
-#define _vas_binauralspace_
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define VAS_REFLECTIONS_MAXSIZE 6
 
@@ -42,6 +45,10 @@ typedef struct vas_binauralspace
 
 #ifdef PUREDATA
 void vas_binauralspace_tilde_setup(void);
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

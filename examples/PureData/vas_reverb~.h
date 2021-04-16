@@ -1,7 +1,11 @@
-#include "vas_pdmaxobject.h"
-
 #ifndef rwa_reverb_h
 #define rwa_reverb_h
+
+#include "vas_pdmaxobject.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct vas_reverb
 {
@@ -16,6 +20,10 @@ typedef struct vas_reverb
 
 #ifdef PUREDATA
 void vas_reverb_tilde_setup(void);
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif
