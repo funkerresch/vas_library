@@ -32,6 +32,254 @@
 		84E5E15321FB48E6002216EF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
 		84E5E16921FB4A28002216EF /* vas_fir_headphoneCompensation.c in Sources */ = {isa = PBXBuildFile; fileRef = 84E5E16721FB4A28002216EF /* vas_fir_headphoneCompensation.c */; };
 		84E5E16A21FB4A28002216EF /* vas_fir_headphoneCompensation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E5E16821FB4A28002216EF /* vas_fir_headphoneCompensation.h */; };
+		E4114180272812A00054E681 /* pf_mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E411413E272812A00054E681 /* pf_mixer.cpp */; };
+		E4114181272812A00054E681 /* pf_mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E411413E272812A00054E681 /* pf_mixer.cpp */; };
+		E4114182272812A00054E681 /* pf_mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E411413E272812A00054E681 /* pf_mixer.cpp */; };
+		E4114183272812A00054E681 /* pf_mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E411413E272812A00054E681 /* pf_mixer.cpp */; };
+		E4114184272812A00054E681 /* pf_mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E411413E272812A00054E681 /* pf_mixer.cpp */; };
+		E4114185272812A00054E681 /* pf_mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E411413E272812A00054E681 /* pf_mixer.cpp */; };
+		E4114186272812A00054E681 /* pf_mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E411413E272812A00054E681 /* pf_mixer.cpp */; };
+		E4114187272812A00054E681 /* pf_mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E411413E272812A00054E681 /* pf_mixer.cpp */; };
+		E4114188272812A00054E681 /* pffft_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E411413F272812A00054E681 /* pffft_double.h */; };
+		E4114189272812A00054E681 /* pffft_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E411413F272812A00054E681 /* pffft_double.h */; };
+		E411418A272812A00054E681 /* pffft_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E411413F272812A00054E681 /* pffft_double.h */; };
+		E411418B272812A00054E681 /* pffft_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E411413F272812A00054E681 /* pffft_double.h */; };
+		E411418C272812A00054E681 /* pffft_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E411413F272812A00054E681 /* pffft_double.h */; };
+		E411418D272812A00054E681 /* pffft_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E411413F272812A00054E681 /* pffft_double.h */; };
+		E411418E272812A00054E681 /* pffft_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E411413F272812A00054E681 /* pffft_double.h */; };
+		E411418F272812A00054E681 /* pffft_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E411413F272812A00054E681 /* pffft_double.h */; };
+		E41141A0272812A00054E681 /* pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114143272812A00054E681 /* pffastconv.c */; };
+		E41141A1272812A00054E681 /* pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114143272812A00054E681 /* pffastconv.c */; };
+		E41141A2272812A00054E681 /* pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114143272812A00054E681 /* pffastconv.c */; };
+		E41141A3272812A00054E681 /* pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114143272812A00054E681 /* pffastconv.c */; };
+		E41141A4272812A00054E681 /* pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114143272812A00054E681 /* pffastconv.c */; };
+		E41141A5272812A00054E681 /* pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114143272812A00054E681 /* pffastconv.c */; };
+		E41141A6272812A00054E681 /* pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114143272812A00054E681 /* pffastconv.c */; };
+		E41141A7272812A00054E681 /* pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114143272812A00054E681 /* pffastconv.c */; };
+		E41141B8272812A00054E681 /* pf_cic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114146272812A00054E681 /* pf_cic.cpp */; };
+		E41141B9272812A00054E681 /* pf_cic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114146272812A00054E681 /* pf_cic.cpp */; };
+		E41141BA272812A00054E681 /* pf_cic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114146272812A00054E681 /* pf_cic.cpp */; };
+		E41141BB272812A00054E681 /* pf_cic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114146272812A00054E681 /* pf_cic.cpp */; };
+		E41141BC272812A00054E681 /* pf_cic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114146272812A00054E681 /* pf_cic.cpp */; };
+		E41141BD272812A00054E681 /* pf_cic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114146272812A00054E681 /* pf_cic.cpp */; };
+		E41141BE272812A00054E681 /* pf_cic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114146272812A00054E681 /* pf_cic.cpp */; };
+		E41141BF272812A00054E681 /* pf_cic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114146272812A00054E681 /* pf_cic.cpp */; };
+		E41141C0272812A10054E681 /* fftpack.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114147272812A00054E681 /* fftpack.h */; };
+		E41141C1272812A10054E681 /* fftpack.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114147272812A00054E681 /* fftpack.h */; };
+		E41141C2272812A10054E681 /* fftpack.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114147272812A00054E681 /* fftpack.h */; };
+		E41141C3272812A10054E681 /* fftpack.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114147272812A00054E681 /* fftpack.h */; };
+		E41141C4272812A10054E681 /* fftpack.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114147272812A00054E681 /* fftpack.h */; };
+		E41141C5272812A10054E681 /* fftpack.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114147272812A00054E681 /* fftpack.h */; };
+		E41141C6272812A10054E681 /* fftpack.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114147272812A00054E681 /* fftpack.h */; };
+		E41141C7272812A10054E681 /* fftpack.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114147272812A00054E681 /* fftpack.h */; };
+		E41141C8272812A10054E681 /* pf_cic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114148272812A00054E681 /* pf_cic.h */; };
+		E41141C9272812A10054E681 /* pf_cic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114148272812A00054E681 /* pf_cic.h */; };
+		E41141CA272812A10054E681 /* pf_cic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114148272812A00054E681 /* pf_cic.h */; };
+		E41141CB272812A10054E681 /* pf_cic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114148272812A00054E681 /* pf_cic.h */; };
+		E41141CC272812A10054E681 /* pf_cic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114148272812A00054E681 /* pf_cic.h */; };
+		E41141CD272812A10054E681 /* pf_cic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114148272812A00054E681 /* pf_cic.h */; };
+		E41141CE272812A10054E681 /* pf_cic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114148272812A00054E681 /* pf_cic.h */; };
+		E41141CF272812A10054E681 /* pf_cic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114148272812A00054E681 /* pf_cic.h */; };
+		E41141D0272812A10054E681 /* pf_carrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114149272812A00054E681 /* pf_carrier.cpp */; };
+		E41141D1272812A10054E681 /* pf_carrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114149272812A00054E681 /* pf_carrier.cpp */; };
+		E41141D2272812A10054E681 /* pf_carrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114149272812A00054E681 /* pf_carrier.cpp */; };
+		E41141D3272812A10054E681 /* pf_carrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114149272812A00054E681 /* pf_carrier.cpp */; };
+		E41141D4272812A10054E681 /* pf_carrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114149272812A00054E681 /* pf_carrier.cpp */; };
+		E41141D5272812A10054E681 /* pf_carrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114149272812A00054E681 /* pf_carrier.cpp */; };
+		E41141D6272812A10054E681 /* pf_carrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114149272812A00054E681 /* pf_carrier.cpp */; };
+		E41141D7272812A10054E681 /* pf_carrier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4114149272812A00054E681 /* pf_carrier.cpp */; };
+		E41141E0272812A10054E681 /* pf_carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414B272812A00054E681 /* pf_carrier.h */; };
+		E41141E1272812A10054E681 /* pf_carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414B272812A00054E681 /* pf_carrier.h */; };
+		E41141E2272812A10054E681 /* pf_carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414B272812A00054E681 /* pf_carrier.h */; };
+		E41141E3272812A10054E681 /* pf_carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414B272812A00054E681 /* pf_carrier.h */; };
+		E41141E4272812A10054E681 /* pf_carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414B272812A00054E681 /* pf_carrier.h */; };
+		E41141E5272812A10054E681 /* pf_carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414B272812A00054E681 /* pf_carrier.h */; };
+		E41141E6272812A10054E681 /* pf_carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414B272812A00054E681 /* pf_carrier.h */; };
+		E41141E7272812A10054E681 /* pf_carrier.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414B272812A00054E681 /* pf_carrier.h */; };
+		E41141E8272812A10054E681 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414C272812A00054E681 /* sse2neon.h */; };
+		E41141E9272812A10054E681 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414C272812A00054E681 /* sse2neon.h */; };
+		E41141EA272812A10054E681 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414C272812A00054E681 /* sse2neon.h */; };
+		E41141EB272812A10054E681 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414C272812A00054E681 /* sse2neon.h */; };
+		E41141EC272812A10054E681 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414C272812A00054E681 /* sse2neon.h */; };
+		E41141ED272812A10054E681 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414C272812A00054E681 /* sse2neon.h */; };
+		E41141EE272812A10054E681 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414C272812A00054E681 /* sse2neon.h */; };
+		E41141EF272812A10054E681 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = E411414C272812A00054E681 /* sse2neon.h */; };
+		E41141F8272812A10054E681 /* pf_neon_double_from_avx.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114150272812A00054E681 /* pf_neon_double_from_avx.h */; };
+		E41141F9272812A10054E681 /* pf_neon_double_from_avx.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114150272812A00054E681 /* pf_neon_double_from_avx.h */; };
+		E41141FA272812A10054E681 /* pf_neon_double_from_avx.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114150272812A00054E681 /* pf_neon_double_from_avx.h */; };
+		E41141FB272812A10054E681 /* pf_neon_double_from_avx.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114150272812A00054E681 /* pf_neon_double_from_avx.h */; };
+		E41141FC272812A10054E681 /* pf_neon_double_from_avx.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114150272812A00054E681 /* pf_neon_double_from_avx.h */; };
+		E41141FD272812A10054E681 /* pf_neon_double_from_avx.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114150272812A00054E681 /* pf_neon_double_from_avx.h */; };
+		E41141FE272812A10054E681 /* pf_neon_double_from_avx.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114150272812A00054E681 /* pf_neon_double_from_avx.h */; };
+		E41141FF272812A10054E681 /* pf_neon_double_from_avx.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114150272812A00054E681 /* pf_neon_double_from_avx.h */; };
+		E4114200272812A10054E681 /* pf_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114151272812A00054E681 /* pf_double.h */; };
+		E4114201272812A10054E681 /* pf_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114151272812A00054E681 /* pf_double.h */; };
+		E4114202272812A10054E681 /* pf_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114151272812A00054E681 /* pf_double.h */; };
+		E4114203272812A10054E681 /* pf_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114151272812A00054E681 /* pf_double.h */; };
+		E4114204272812A10054E681 /* pf_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114151272812A00054E681 /* pf_double.h */; };
+		E4114205272812A10054E681 /* pf_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114151272812A00054E681 /* pf_double.h */; };
+		E4114206272812A10054E681 /* pf_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114151272812A00054E681 /* pf_double.h */; };
+		E4114207272812A10054E681 /* pf_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114151272812A00054E681 /* pf_double.h */; };
+		E4114208272812A10054E681 /* pf_scalar_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114152272812A00054E681 /* pf_scalar_float.h */; };
+		E4114209272812A10054E681 /* pf_scalar_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114152272812A00054E681 /* pf_scalar_float.h */; };
+		E411420A272812A10054E681 /* pf_scalar_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114152272812A00054E681 /* pf_scalar_float.h */; };
+		E411420B272812A10054E681 /* pf_scalar_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114152272812A00054E681 /* pf_scalar_float.h */; };
+		E411420C272812A10054E681 /* pf_scalar_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114152272812A00054E681 /* pf_scalar_float.h */; };
+		E411420D272812A10054E681 /* pf_scalar_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114152272812A00054E681 /* pf_scalar_float.h */; };
+		E411420E272812A10054E681 /* pf_scalar_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114152272812A00054E681 /* pf_scalar_float.h */; };
+		E411420F272812A10054E681 /* pf_scalar_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114152272812A00054E681 /* pf_scalar_float.h */; };
+		E4114210272812A10054E681 /* pf_neon_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114153272812A00054E681 /* pf_neon_float.h */; };
+		E4114211272812A10054E681 /* pf_neon_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114153272812A00054E681 /* pf_neon_float.h */; };
+		E4114212272812A10054E681 /* pf_neon_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114153272812A00054E681 /* pf_neon_float.h */; };
+		E4114213272812A10054E681 /* pf_neon_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114153272812A00054E681 /* pf_neon_float.h */; };
+		E4114214272812A10054E681 /* pf_neon_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114153272812A00054E681 /* pf_neon_float.h */; };
+		E4114215272812A10054E681 /* pf_neon_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114153272812A00054E681 /* pf_neon_float.h */; };
+		E4114216272812A10054E681 /* pf_neon_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114153272812A00054E681 /* pf_neon_float.h */; };
+		E4114217272812A10054E681 /* pf_neon_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114153272812A00054E681 /* pf_neon_float.h */; };
+		E4114218272812A10054E681 /* pf_neon_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114154272812A00054E681 /* pf_neon_double.h */; };
+		E4114219272812A10054E681 /* pf_neon_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114154272812A00054E681 /* pf_neon_double.h */; };
+		E411421A272812A10054E681 /* pf_neon_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114154272812A00054E681 /* pf_neon_double.h */; };
+		E411421B272812A10054E681 /* pf_neon_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114154272812A00054E681 /* pf_neon_double.h */; };
+		E411421C272812A10054E681 /* pf_neon_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114154272812A00054E681 /* pf_neon_double.h */; };
+		E411421D272812A10054E681 /* pf_neon_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114154272812A00054E681 /* pf_neon_double.h */; };
+		E411421E272812A10054E681 /* pf_neon_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114154272812A00054E681 /* pf_neon_double.h */; };
+		E411421F272812A10054E681 /* pf_neon_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114154272812A00054E681 /* pf_neon_double.h */; };
+		E4114220272812A10054E681 /* pf_sse2_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114155272812A00054E681 /* pf_sse2_double.h */; };
+		E4114221272812A10054E681 /* pf_sse2_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114155272812A00054E681 /* pf_sse2_double.h */; };
+		E4114222272812A10054E681 /* pf_sse2_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114155272812A00054E681 /* pf_sse2_double.h */; };
+		E4114223272812A10054E681 /* pf_sse2_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114155272812A00054E681 /* pf_sse2_double.h */; };
+		E4114224272812A10054E681 /* pf_sse2_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114155272812A00054E681 /* pf_sse2_double.h */; };
+		E4114225272812A10054E681 /* pf_sse2_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114155272812A00054E681 /* pf_sse2_double.h */; };
+		E4114226272812A10054E681 /* pf_sse2_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114155272812A00054E681 /* pf_sse2_double.h */; };
+		E4114227272812A10054E681 /* pf_sse2_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114155272812A00054E681 /* pf_sse2_double.h */; };
+		E4114228272812A10054E681 /* pf_altivec_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114156272812A00054E681 /* pf_altivec_float.h */; };
+		E4114229272812A10054E681 /* pf_altivec_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114156272812A00054E681 /* pf_altivec_float.h */; };
+		E411422A272812A10054E681 /* pf_altivec_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114156272812A00054E681 /* pf_altivec_float.h */; };
+		E411422B272812A10054E681 /* pf_altivec_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114156272812A00054E681 /* pf_altivec_float.h */; };
+		E411422C272812A10054E681 /* pf_altivec_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114156272812A00054E681 /* pf_altivec_float.h */; };
+		E411422D272812A10054E681 /* pf_altivec_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114156272812A00054E681 /* pf_altivec_float.h */; };
+		E411422E272812A10054E681 /* pf_altivec_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114156272812A00054E681 /* pf_altivec_float.h */; };
+		E411422F272812A10054E681 /* pf_altivec_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114156272812A00054E681 /* pf_altivec_float.h */; };
+		E4114230272812A10054E681 /* pf_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114157272812A00054E681 /* pf_float.h */; };
+		E4114231272812A10054E681 /* pf_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114157272812A00054E681 /* pf_float.h */; };
+		E4114232272812A10054E681 /* pf_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114157272812A00054E681 /* pf_float.h */; };
+		E4114233272812A10054E681 /* pf_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114157272812A00054E681 /* pf_float.h */; };
+		E4114234272812A10054E681 /* pf_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114157272812A00054E681 /* pf_float.h */; };
+		E4114235272812A10054E681 /* pf_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114157272812A00054E681 /* pf_float.h */; };
+		E4114236272812A10054E681 /* pf_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114157272812A00054E681 /* pf_float.h */; };
+		E4114237272812A10054E681 /* pf_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114157272812A00054E681 /* pf_float.h */; };
+		E4114238272812A10054E681 /* pf_avx_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114158272812A00054E681 /* pf_avx_double.h */; };
+		E4114239272812A10054E681 /* pf_avx_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114158272812A00054E681 /* pf_avx_double.h */; };
+		E411423A272812A10054E681 /* pf_avx_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114158272812A00054E681 /* pf_avx_double.h */; };
+		E411423B272812A10054E681 /* pf_avx_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114158272812A00054E681 /* pf_avx_double.h */; };
+		E411423C272812A10054E681 /* pf_avx_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114158272812A00054E681 /* pf_avx_double.h */; };
+		E411423D272812A10054E681 /* pf_avx_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114158272812A00054E681 /* pf_avx_double.h */; };
+		E411423E272812A10054E681 /* pf_avx_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114158272812A00054E681 /* pf_avx_double.h */; };
+		E411423F272812A10054E681 /* pf_avx_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114158272812A00054E681 /* pf_avx_double.h */; };
+		E4114240272812A10054E681 /* pf_scalar_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114159272812A00054E681 /* pf_scalar_double.h */; };
+		E4114241272812A10054E681 /* pf_scalar_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114159272812A00054E681 /* pf_scalar_double.h */; };
+		E4114242272812A10054E681 /* pf_scalar_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114159272812A00054E681 /* pf_scalar_double.h */; };
+		E4114243272812A10054E681 /* pf_scalar_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114159272812A00054E681 /* pf_scalar_double.h */; };
+		E4114244272812A10054E681 /* pf_scalar_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114159272812A00054E681 /* pf_scalar_double.h */; };
+		E4114245272812A10054E681 /* pf_scalar_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114159272812A00054E681 /* pf_scalar_double.h */; };
+		E4114246272812A10054E681 /* pf_scalar_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114159272812A00054E681 /* pf_scalar_double.h */; };
+		E4114247272812A10054E681 /* pf_scalar_double.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114159272812A00054E681 /* pf_scalar_double.h */; };
+		E4114248272812A10054E681 /* pf_sse1_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415A272812A00054E681 /* pf_sse1_float.h */; };
+		E4114249272812A10054E681 /* pf_sse1_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415A272812A00054E681 /* pf_sse1_float.h */; };
+		E411424A272812A10054E681 /* pf_sse1_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415A272812A00054E681 /* pf_sse1_float.h */; };
+		E411424B272812A10054E681 /* pf_sse1_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415A272812A00054E681 /* pf_sse1_float.h */; };
+		E411424C272812A10054E681 /* pf_sse1_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415A272812A00054E681 /* pf_sse1_float.h */; };
+		E411424D272812A10054E681 /* pf_sse1_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415A272812A00054E681 /* pf_sse1_float.h */; };
+		E411424E272812A10054E681 /* pf_sse1_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415A272812A00054E681 /* pf_sse1_float.h */; };
+		E411424F272812A10054E681 /* pf_sse1_float.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415A272812A00054E681 /* pf_sse1_float.h */; };
+		E4114250272812A10054E681 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = E411415B272812A00054E681 /* pffft.c */; };
+		E4114251272812A10054E681 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = E411415B272812A00054E681 /* pffft.c */; };
+		E4114252272812A10054E681 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = E411415B272812A00054E681 /* pffft.c */; };
+		E4114253272812A10054E681 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = E411415B272812A00054E681 /* pffft.c */; };
+		E4114254272812A10054E681 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = E411415B272812A00054E681 /* pffft.c */; };
+		E4114255272812A10054E681 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = E411415B272812A00054E681 /* pffft.c */; };
+		E4114256272812A10054E681 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = E411415B272812A00054E681 /* pffft.c */; };
+		E4114257272812A10054E681 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = E411415B272812A00054E681 /* pffft.c */; };
+		E4114258272812A10054E681 /* pf_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415C272812A00054E681 /* pf_mixer.h */; };
+		E4114259272812A10054E681 /* pf_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415C272812A00054E681 /* pf_mixer.h */; };
+		E411425A272812A10054E681 /* pf_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415C272812A00054E681 /* pf_mixer.h */; };
+		E411425B272812A10054E681 /* pf_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415C272812A00054E681 /* pf_mixer.h */; };
+		E411425C272812A10054E681 /* pf_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415C272812A00054E681 /* pf_mixer.h */; };
+		E411425D272812A10054E681 /* pf_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415C272812A00054E681 /* pf_mixer.h */; };
+		E411425E272812A10054E681 /* pf_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415C272812A00054E681 /* pf_mixer.h */; };
+		E411425F272812A10054E681 /* pf_mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415C272812A00054E681 /* pf_mixer.h */; };
+		E4114260272812A10054E681 /* pffft_priv_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415D272812A00054E681 /* pffft_priv_impl.h */; };
+		E4114261272812A10054E681 /* pffft_priv_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415D272812A00054E681 /* pffft_priv_impl.h */; };
+		E4114262272812A10054E681 /* pffft_priv_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415D272812A00054E681 /* pffft_priv_impl.h */; };
+		E4114263272812A10054E681 /* pffft_priv_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415D272812A00054E681 /* pffft_priv_impl.h */; };
+		E4114264272812A10054E681 /* pffft_priv_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415D272812A00054E681 /* pffft_priv_impl.h */; };
+		E4114265272812A10054E681 /* pffft_priv_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415D272812A00054E681 /* pffft_priv_impl.h */; };
+		E4114266272812A10054E681 /* pffft_priv_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415D272812A00054E681 /* pffft_priv_impl.h */; };
+		E4114267272812A10054E681 /* pffft_priv_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = E411415D272812A00054E681 /* pffft_priv_impl.h */; };
+		E4114278272812A10054E681 /* pffastconv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114161272812A00054E681 /* pffastconv.h */; };
+		E4114279272812A10054E681 /* pffastconv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114161272812A00054E681 /* pffastconv.h */; };
+		E411427A272812A10054E681 /* pffastconv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114161272812A00054E681 /* pffastconv.h */; };
+		E411427B272812A10054E681 /* pffastconv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114161272812A00054E681 /* pffastconv.h */; };
+		E411427C272812A10054E681 /* pffastconv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114161272812A00054E681 /* pffastconv.h */; };
+		E411427D272812A10054E681 /* pffastconv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114161272812A00054E681 /* pffastconv.h */; };
+		E411427E272812A10054E681 /* pffastconv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114161272812A00054E681 /* pffastconv.h */; };
+		E411427F272812A10054E681 /* pffastconv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114161272812A00054E681 /* pffastconv.h */; };
+		E4114280272812A10054E681 /* pffft_double.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114162272812A00054E681 /* pffft_double.c */; };
+		E4114281272812A10054E681 /* pffft_double.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114162272812A00054E681 /* pffft_double.c */; };
+		E4114282272812A10054E681 /* pffft_double.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114162272812A00054E681 /* pffft_double.c */; };
+		E4114283272812A10054E681 /* pffft_double.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114162272812A00054E681 /* pffft_double.c */; };
+		E4114284272812A10054E681 /* pffft_double.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114162272812A00054E681 /* pffft_double.c */; };
+		E4114285272812A10054E681 /* pffft_double.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114162272812A00054E681 /* pffft_double.c */; };
+		E4114286272812A10054E681 /* pffft_double.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114162272812A00054E681 /* pffft_double.c */; };
+		E4114287272812A10054E681 /* pffft_double.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114162272812A00054E681 /* pffft_double.c */; };
+		E4114290272812A10054E681 /* test_pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114165272812A00054E681 /* test_pffastconv.c */; };
+		E4114291272812A10054E681 /* test_pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114165272812A00054E681 /* test_pffastconv.c */; };
+		E4114292272812A10054E681 /* test_pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114165272812A00054E681 /* test_pffastconv.c */; };
+		E4114293272812A10054E681 /* test_pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114165272812A00054E681 /* test_pffastconv.c */; };
+		E4114294272812A10054E681 /* test_pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114165272812A00054E681 /* test_pffastconv.c */; };
+		E4114295272812A10054E681 /* test_pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114165272812A00054E681 /* test_pffastconv.c */; };
+		E4114296272812A10054E681 /* test_pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114165272812A00054E681 /* test_pffastconv.c */; };
+		E4114297272812A10054E681 /* test_pffastconv.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114165272812A00054E681 /* test_pffastconv.c */; };
+		E41142D0272812A10054E681 /* pffft_common.c in Sources */ = {isa = PBXBuildFile; fileRef = E411416E272812A00054E681 /* pffft_common.c */; };
+		E41142D1272812A10054E681 /* pffft_common.c in Sources */ = {isa = PBXBuildFile; fileRef = E411416E272812A00054E681 /* pffft_common.c */; };
+		E41142D2272812A10054E681 /* pffft_common.c in Sources */ = {isa = PBXBuildFile; fileRef = E411416E272812A00054E681 /* pffft_common.c */; };
+		E41142D3272812A10054E681 /* pffft_common.c in Sources */ = {isa = PBXBuildFile; fileRef = E411416E272812A00054E681 /* pffft_common.c */; };
+		E41142D4272812A10054E681 /* pffft_common.c in Sources */ = {isa = PBXBuildFile; fileRef = E411416E272812A00054E681 /* pffft_common.c */; };
+		E41142D5272812A10054E681 /* pffft_common.c in Sources */ = {isa = PBXBuildFile; fileRef = E411416E272812A00054E681 /* pffft_common.c */; };
+		E41142D6272812A10054E681 /* pffft_common.c in Sources */ = {isa = PBXBuildFile; fileRef = E411416E272812A00054E681 /* pffft_common.c */; };
+		E41142D7272812A10054E681 /* pffft_common.c in Sources */ = {isa = PBXBuildFile; fileRef = E411416E272812A00054E681 /* pffft_common.c */; };
+		E41142D8272812A10054E681 /* pffft.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E411416F272812A00054E681 /* pffft.hpp */; };
+		E41142D9272812A10054E681 /* pffft.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E411416F272812A00054E681 /* pffft.hpp */; };
+		E41142DA272812A10054E681 /* pffft.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E411416F272812A00054E681 /* pffft.hpp */; };
+		E41142DB272812A10054E681 /* pffft.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E411416F272812A00054E681 /* pffft.hpp */; };
+		E41142DC272812A10054E681 /* pffft.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E411416F272812A00054E681 /* pffft.hpp */; };
+		E41142DD272812A10054E681 /* pffft.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E411416F272812A00054E681 /* pffft.hpp */; };
+		E41142DE272812A10054E681 /* pffft.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E411416F272812A00054E681 /* pffft.hpp */; };
+		E41142DF272812A10054E681 /* pffft.hpp in Headers */ = {isa = PBXBuildFile; fileRef = E411416F272812A00054E681 /* pffft.hpp */; };
+		E41142E0272812A10054E681 /* fftpack.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114170272812A00054E681 /* fftpack.c */; };
+		E41142E1272812A10054E681 /* fftpack.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114170272812A00054E681 /* fftpack.c */; };
+		E41142E2272812A10054E681 /* fftpack.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114170272812A00054E681 /* fftpack.c */; };
+		E41142E3272812A10054E681 /* fftpack.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114170272812A00054E681 /* fftpack.c */; };
+		E41142E4272812A10054E681 /* fftpack.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114170272812A00054E681 /* fftpack.c */; };
+		E41142E5272812A10054E681 /* fftpack.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114170272812A00054E681 /* fftpack.c */; };
+		E41142E6272812A10054E681 /* fftpack.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114170272812A00054E681 /* fftpack.c */; };
+		E41142E7272812A10054E681 /* fftpack.c in Sources */ = {isa = PBXBuildFile; fileRef = E4114170272812A00054E681 /* fftpack.c */; };
+		E4114300272812A10054E681 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114174272812A00054E681 /* pffft.h */; };
+		E4114301272812A10054E681 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114174272812A00054E681 /* pffft.h */; };
+		E4114302272812A10054E681 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114174272812A00054E681 /* pffft.h */; };
+		E4114303272812A10054E681 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114174272812A00054E681 /* pffft.h */; };
+		E4114304272812A10054E681 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114174272812A00054E681 /* pffft.h */; };
+		E4114305272812A10054E681 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114174272812A00054E681 /* pffft.h */; };
+		E4114306272812A10054E681 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114174272812A00054E681 /* pffft.h */; };
+		E4114307272812A10054E681 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114174272812A00054E681 /* pffft.h */; };
+		E4114318272812A10054E681 /* fmv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114177272812A00054E681 /* fmv.h */; };
+		E4114319272812A10054E681 /* fmv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114177272812A00054E681 /* fmv.h */; };
+		E411431A272812A10054E681 /* fmv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114177272812A00054E681 /* fmv.h */; };
+		E411431B272812A10054E681 /* fmv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114177272812A00054E681 /* fmv.h */; };
+		E411431C272812A10054E681 /* fmv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114177272812A00054E681 /* fmv.h */; };
+		E411431D272812A10054E681 /* fmv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114177272812A00054E681 /* fmv.h */; };
+		E411431E272812A10054E681 /* fmv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114177272812A00054E681 /* fmv.h */; };
+		E411431F272812A10054E681 /* fmv.h in Headers */ = {isa = PBXBuildFile; fileRef = E4114177272812A00054E681 /* fmv.h */; };
 		E417C3F4236C70DC001A9C1B /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
 		E417C3F5236C70DC001A9C1B /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */; };
 		E417C3F6236C70DC001A9C1B /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
@@ -371,6 +619,38 @@
 		84E5E15E21FB48E6002216EF /* vas_hpcomp~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "vas_hpcomp~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E5E16721FB4A28002216EF /* vas_fir_headphoneCompensation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_headphoneCompensation.c; path = ../../../source/vas_fir_headphoneCompensation.c; sourceTree = "<group>"; };
 		84E5E16821FB4A28002216EF /* vas_fir_headphoneCompensation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir_headphoneCompensation.h; path = ../../../source/vas_fir_headphoneCompensation.h; sourceTree = "<group>"; };
+		E411413E272812A00054E681 /* pf_mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pf_mixer.cpp; sourceTree = "<group>"; };
+		E411413F272812A00054E681 /* pffft_double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pffft_double.h; sourceTree = "<group>"; };
+		E4114143272812A00054E681 /* pffastconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pffastconv.c; sourceTree = "<group>"; };
+		E4114146272812A00054E681 /* pf_cic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pf_cic.cpp; sourceTree = "<group>"; };
+		E4114147272812A00054E681 /* fftpack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fftpack.h; sourceTree = "<group>"; };
+		E4114148272812A00054E681 /* pf_cic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_cic.h; sourceTree = "<group>"; };
+		E4114149272812A00054E681 /* pf_carrier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pf_carrier.cpp; sourceTree = "<group>"; };
+		E411414B272812A00054E681 /* pf_carrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_carrier.h; sourceTree = "<group>"; };
+		E411414C272812A00054E681 /* sse2neon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sse2neon.h; sourceTree = "<group>"; };
+		E4114150272812A00054E681 /* pf_neon_double_from_avx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_neon_double_from_avx.h; sourceTree = "<group>"; };
+		E4114151272812A00054E681 /* pf_double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_double.h; sourceTree = "<group>"; };
+		E4114152272812A00054E681 /* pf_scalar_float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_scalar_float.h; sourceTree = "<group>"; };
+		E4114153272812A00054E681 /* pf_neon_float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_neon_float.h; sourceTree = "<group>"; };
+		E4114154272812A00054E681 /* pf_neon_double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_neon_double.h; sourceTree = "<group>"; };
+		E4114155272812A00054E681 /* pf_sse2_double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_sse2_double.h; sourceTree = "<group>"; };
+		E4114156272812A00054E681 /* pf_altivec_float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_altivec_float.h; sourceTree = "<group>"; };
+		E4114157272812A00054E681 /* pf_float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_float.h; sourceTree = "<group>"; };
+		E4114158272812A00054E681 /* pf_avx_double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_avx_double.h; sourceTree = "<group>"; };
+		E4114159272812A00054E681 /* pf_scalar_double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_scalar_double.h; sourceTree = "<group>"; };
+		E411415A272812A00054E681 /* pf_sse1_float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_sse1_float.h; sourceTree = "<group>"; };
+		E411415B272812A00054E681 /* pffft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pffft.c; sourceTree = "<group>"; };
+		E411415C272812A00054E681 /* pf_mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pf_mixer.h; sourceTree = "<group>"; };
+		E411415D272812A00054E681 /* pffft_priv_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pffft_priv_impl.h; sourceTree = "<group>"; };
+		E4114161272812A00054E681 /* pffastconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pffastconv.h; sourceTree = "<group>"; };
+		E4114162272812A00054E681 /* pffft_double.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pffft_double.c; sourceTree = "<group>"; };
+		E4114165272812A00054E681 /* test_pffastconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_pffastconv.c; sourceTree = "<group>"; };
+		E411416E272812A00054E681 /* pffft_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pffft_common.c; sourceTree = "<group>"; };
+		E411416F272812A00054E681 /* pffft.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pffft.hpp; sourceTree = "<group>"; };
+		E4114170272812A00054E681 /* fftpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fftpack.c; sourceTree = "<group>"; };
+		E4114174272812A00054E681 /* pffft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pffft.h; sourceTree = "<group>"; };
+		E4114176272812A00054E681 /* bench_mixers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bench_mixers.c; sourceTree = "<group>"; };
+		E4114177272812A00054E681 /* fmv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmv.h; sourceTree = "<group>"; };
 		E417C40A236C70DC001A9C1B /* vas_binaural~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "vas_binaural~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E417C40B236C72C4001A9C1B /* vas_binaural~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "vas_binaural~.c"; path = "../vas_binaural~.c"; sourceTree = "<group>"; };
 		E417C40C236C72C4001A9C1B /* vas_binaural~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vas_binaural~.h"; path = "../vas_binaural~.h"; sourceTree = "<group>"; };
@@ -521,6 +801,54 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E411413C272812A00054E681 /* pffft */ = {
+			isa = PBXGroup;
+			children = (
+				E411413E272812A00054E681 /* pf_mixer.cpp */,
+				E411413F272812A00054E681 /* pffft_double.h */,
+				E4114143272812A00054E681 /* pffastconv.c */,
+				E4114146272812A00054E681 /* pf_cic.cpp */,
+				E4114147272812A00054E681 /* fftpack.h */,
+				E4114148272812A00054E681 /* pf_cic.h */,
+				E4114149272812A00054E681 /* pf_carrier.cpp */,
+				E411414B272812A00054E681 /* pf_carrier.h */,
+				E411414C272812A00054E681 /* sse2neon.h */,
+				E411414F272812A00054E681 /* simd */,
+				E411415B272812A00054E681 /* pffft.c */,
+				E411415C272812A00054E681 /* pf_mixer.h */,
+				E411415D272812A00054E681 /* pffft_priv_impl.h */,
+				E4114161272812A00054E681 /* pffastconv.h */,
+				E4114162272812A00054E681 /* pffft_double.c */,
+				E4114165272812A00054E681 /* test_pffastconv.c */,
+				E411416E272812A00054E681 /* pffft_common.c */,
+				E411416F272812A00054E681 /* pffft.hpp */,
+				E4114170272812A00054E681 /* fftpack.c */,
+				E4114174272812A00054E681 /* pffft.h */,
+				E4114176272812A00054E681 /* bench_mixers.c */,
+				E4114177272812A00054E681 /* fmv.h */,
+			);
+			name = pffft;
+			path = ../../../pffft;
+			sourceTree = "<group>";
+		};
+		E411414F272812A00054E681 /* simd */ = {
+			isa = PBXGroup;
+			children = (
+				E4114150272812A00054E681 /* pf_neon_double_from_avx.h */,
+				E4114151272812A00054E681 /* pf_double.h */,
+				E4114152272812A00054E681 /* pf_scalar_float.h */,
+				E4114153272812A00054E681 /* pf_neon_float.h */,
+				E4114154272812A00054E681 /* pf_neon_double.h */,
+				E4114155272812A00054E681 /* pf_sse2_double.h */,
+				E4114156272812A00054E681 /* pf_altivec_float.h */,
+				E4114157272812A00054E681 /* pf_float.h */,
+				E4114158272812A00054E681 /* pf_avx_double.h */,
+				E4114159272812A00054E681 /* pf_scalar_double.h */,
+				E411415A272812A00054E681 /* pf_sse1_float.h */,
+			);
+			path = simd;
+			sourceTree = "<group>";
+		};
 		E4E0062F24F3CB8C00144C68 /* libmysofa */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +888,7 @@
 		FA2927E31A899B4C005A2BA9 = {
 			isa = PBXGroup;
 			children = (
+				E411413C272812A00054E681 /* pffft */,
 				E4E0062F24F3CB8C00144C68 /* libmysofa */,
 				E44FB6212631A60200F96ED2 /* thpool.h */,
 				E44FB6202631A60200F96ED2 /* thpool.c */,
@@ -642,9 +971,31 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E41141C9272812A10054E681 /* pf_cic.h in Headers */,
+				E4114319272812A10054E681 /* fmv.h in Headers */,
+				E41141E1272812A10054E681 /* pf_carrier.h in Headers */,
+				E4114229272812A10054E681 /* pf_altivec_float.h in Headers */,
+				E4114301272812A10054E681 /* pffft.h in Headers */,
+				E4114261272812A10054E681 /* pffft_priv_impl.h in Headers */,
+				E4114189272812A00054E681 /* pffft_double.h in Headers */,
+				E4114211272812A10054E681 /* pf_neon_float.h in Headers */,
 				E4BE83DE2379699A00A84A1D /* vas_reverb~.h in Headers */,
 				E4A69BD6234C947C00E4E570 /* vas_fir_list.h in Headers */,
+				E4114201272812A10054E681 /* pf_double.h in Headers */,
+				E41141F9272812A10054E681 /* pf_neon_double_from_avx.h in Headers */,
+				E4114241272812A10054E681 /* pf_scalar_double.h in Headers */,
+				E4114221272812A10054E681 /* pf_sse2_double.h in Headers */,
+				E41141E9272812A10054E681 /* sse2neon.h in Headers */,
+				E4114231272812A10054E681 /* pf_float.h in Headers */,
+				E41142D9272812A10054E681 /* pffft.hpp in Headers */,
+				E4114239272812A10054E681 /* pf_avx_double.h in Headers */,
+				E4114259272812A10054E681 /* pf_mixer.h in Headers */,
+				E41141C1272812A10054E681 /* fftpack.h in Headers */,
+				E4114219272812A10054E681 /* pf_neon_double.h in Headers */,
+				E4114279272812A10054E681 /* pffastconv.h in Headers */,
 				E44FDCAB25DFF396000782E6 /* vas_pdmaxobject.h in Headers */,
+				E4114249272812A10054E681 /* pf_sse1_float.h in Headers */,
+				E4114209272812A10054E681 /* pf_scalar_float.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,10 +1003,32 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4114262272812A10054E681 /* pffft_priv_impl.h in Headers */,
+				E4114232272812A10054E681 /* pf_float.h in Headers */,
+				E411427A272812A10054E681 /* pffastconv.h in Headers */,
+				E411423A272812A10054E681 /* pf_avx_double.h in Headers */,
+				E41141C2272812A10054E681 /* fftpack.h in Headers */,
+				E41142DA272812A10054E681 /* pffft.hpp in Headers */,
+				E411424A272812A10054E681 /* pf_sse1_float.h in Headers */,
+				E4114242272812A10054E681 /* pf_scalar_double.h in Headers */,
+				E4114222272812A10054E681 /* pf_sse2_double.h in Headers */,
+				E41141FA272812A10054E681 /* pf_neon_double_from_avx.h in Headers */,
 				84E5E16A21FB4A28002216EF /* vas_fir_headphoneCompensation.h in Headers */,
+				E411425A272812A10054E681 /* pf_mixer.h in Headers */,
+				E4114212272812A10054E681 /* pf_neon_float.h in Headers */,
+				E411420A272812A10054E681 /* pf_scalar_float.h in Headers */,
+				E411431A272812A10054E681 /* fmv.h in Headers */,
 				E44FDCA925DFF396000782E6 /* vas_pdmaxobject.h in Headers */,
+				E41141EA272812A10054E681 /* sse2neon.h in Headers */,
 				E4BE83DC2379699A00A84A1D /* vas_hpcomp~.h in Headers */,
+				E4114202272812A10054E681 /* pf_double.h in Headers */,
+				E411422A272812A10054E681 /* pf_altivec_float.h in Headers */,
 				E4A69BD7234C947C00E4E570 /* vas_fir_list.h in Headers */,
+				E4114302272812A10054E681 /* pffft.h in Headers */,
+				E411418A272812A00054E681 /* pffft_double.h in Headers */,
+				E411421A272812A10054E681 /* pf_neon_double.h in Headers */,
+				E41141CA272812A10054E681 /* pf_cic.h in Headers */,
+				E41141E2272812A10054E681 /* pf_carrier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,10 +1036,32 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4114263272812A10054E681 /* pffft_priv_impl.h in Headers */,
+				E411420B272812A10054E681 /* pf_scalar_float.h in Headers */,
+				E41141FB272812A10054E681 /* pf_neon_double_from_avx.h in Headers */,
+				E4114223272812A10054E681 /* pf_sse2_double.h in Headers */,
+				E411427B272812A10054E681 /* pffastconv.h in Headers */,
+				E4114303272812A10054E681 /* pffft.h in Headers */,
+				E411431B272812A10054E681 /* fmv.h in Headers */,
 				E417C402236C70DC001A9C1B /* vas_fir_list.h in Headers */,
+				E411423B272812A10054E681 /* pf_avx_double.h in Headers */,
+				E4114213272812A10054E681 /* pf_neon_float.h in Headers */,
+				E411425B272812A10054E681 /* pf_mixer.h in Headers */,
+				E411421B272812A10054E681 /* pf_neon_double.h in Headers */,
+				E41142DB272812A10054E681 /* pffft.hpp in Headers */,
+				E411422B272812A10054E681 /* pf_altivec_float.h in Headers */,
 				E417C40E236C72C4001A9C1B /* vas_binaural~.h in Headers */,
+				E41141CB272812A10054E681 /* pf_cic.h in Headers */,
+				E411418B272812A00054E681 /* pffft_double.h in Headers */,
+				E4114203272812A10054E681 /* pf_double.h in Headers */,
+				E4114233272812A10054E681 /* pf_float.h in Headers */,
+				E4114243272812A10054E681 /* pf_scalar_double.h in Headers */,
 				E44FDCA725DFF395000782E6 /* vas_pdmaxobject.h in Headers */,
+				E41141EB272812A10054E681 /* sse2neon.h in Headers */,
 				E451E58E25DE6C3B00DD043F /* vas_fir_read.h in Headers */,
+				E41141C3272812A10054E681 /* fftpack.h in Headers */,
+				E41141E3272812A10054E681 /* pf_carrier.h in Headers */,
+				E411424B272812A10054E681 /* pf_sse1_float.h in Headers */,
 				E4F9E7C825A3567600CE8119 /* arch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -675,9 +1070,31 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E41141CE272812A10054E681 /* pf_cic.h in Headers */,
+				E411431E272812A10054E681 /* fmv.h in Headers */,
+				E41141E6272812A10054E681 /* pf_carrier.h in Headers */,
+				E411422E272812A10054E681 /* pf_altivec_float.h in Headers */,
+				E4114306272812A10054E681 /* pffft.h in Headers */,
+				E4114266272812A10054E681 /* pffft_priv_impl.h in Headers */,
+				E411418E272812A00054E681 /* pffft_double.h in Headers */,
+				E4114216272812A10054E681 /* pf_neon_float.h in Headers */,
 				E47A609B2636AD79007C786A /* vas_fir_list.h in Headers */,
 				E47A609C2636AD79007C786A /* vas_pdmaxobject.h in Headers */,
+				E4114206272812A10054E681 /* pf_double.h in Headers */,
+				E41141FE272812A10054E681 /* pf_neon_double_from_avx.h in Headers */,
+				E4114246272812A10054E681 /* pf_scalar_double.h in Headers */,
+				E4114226272812A10054E681 /* pf_sse2_double.h in Headers */,
+				E41141EE272812A10054E681 /* sse2neon.h in Headers */,
+				E4114236272812A10054E681 /* pf_float.h in Headers */,
+				E41142DE272812A10054E681 /* pffft.hpp in Headers */,
+				E411423E272812A10054E681 /* pf_avx_double.h in Headers */,
+				E411425E272812A10054E681 /* pf_mixer.h in Headers */,
+				E41141C6272812A10054E681 /* fftpack.h in Headers */,
+				E411421E272812A10054E681 /* pf_neon_double.h in Headers */,
+				E411427E272812A10054E681 /* pffastconv.h in Headers */,
 				E47A60A32636AD97007C786A /* vas_partconv~.h in Headers */,
+				E411424E272812A10054E681 /* pf_sse1_float.h in Headers */,
+				E411420E272812A10054E681 /* pf_scalar_float.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,10 +1102,32 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4114264272812A10054E681 /* pffft_priv_impl.h in Headers */,
+				E4114234272812A10054E681 /* pf_float.h in Headers */,
+				E411427C272812A10054E681 /* pffastconv.h in Headers */,
+				E411423C272812A10054E681 /* pf_avx_double.h in Headers */,
+				E41141C4272812A10054E681 /* fftpack.h in Headers */,
+				E41142DC272812A10054E681 /* pffft.hpp in Headers */,
+				E411424C272812A10054E681 /* pf_sse1_float.h in Headers */,
+				E4114244272812A10054E681 /* pf_scalar_double.h in Headers */,
+				E4114224272812A10054E681 /* pf_sse2_double.h in Headers */,
+				E41141FC272812A10054E681 /* pf_neon_double_from_avx.h in Headers */,
 				E4C5F36E2569169E00C72C66 /* vas_dynconv~.h in Headers */,
+				E411425C272812A10054E681 /* pf_mixer.h in Headers */,
+				E4114214272812A10054E681 /* pf_neon_float.h in Headers */,
+				E411420C272812A10054E681 /* pf_scalar_float.h in Headers */,
+				E411431C272812A10054E681 /* fmv.h in Headers */,
 				E44FDCAF25DFF398000782E6 /* vas_pdmaxobject.h in Headers */,
+				E41141EC272812A10054E681 /* sse2neon.h in Headers */,
 				E4C45D202534795B000D9303 /* vas_fir_list.h in Headers */,
+				E4114204272812A10054E681 /* pf_double.h in Headers */,
+				E411422C272812A10054E681 /* pf_altivec_float.h in Headers */,
 				E4F9E7C925A3567700CE8119 /* arch.h in Headers */,
+				E4114304272812A10054E681 /* pffft.h in Headers */,
+				E411418C272812A00054E681 /* pffft_double.h in Headers */,
+				E411421C272812A10054E681 /* pf_neon_double.h in Headers */,
+				E41141CC272812A10054E681 /* pf_cic.h in Headers */,
+				E41141E4272812A10054E681 /* pf_carrier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,10 +1135,32 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4114267272812A10054E681 /* pffft_priv_impl.h in Headers */,
+				E411420F272812A10054E681 /* pf_scalar_float.h in Headers */,
+				E41141FF272812A10054E681 /* pf_neon_double_from_avx.h in Headers */,
+				E4114227272812A10054E681 /* pf_sse2_double.h in Headers */,
+				E411427F272812A10054E681 /* pffastconv.h in Headers */,
+				E4114307272812A10054E681 /* pffft.h in Headers */,
+				E411431F272812A10054E681 /* fmv.h in Headers */,
 				E4D0CB89266F5C3F00ED4121 /* vas_fir_list.h in Headers */,
+				E411423F272812A10054E681 /* pf_avx_double.h in Headers */,
+				E4114217272812A10054E681 /* pf_neon_float.h in Headers */,
+				E411425F272812A10054E681 /* pf_mixer.h in Headers */,
+				E411421F272812A10054E681 /* pf_neon_double.h in Headers */,
+				E41142DF272812A10054E681 /* pffft.hpp in Headers */,
+				E411422F272812A10054E681 /* pf_altivec_float.h in Headers */,
 				E4D0CB8B266F5C3F00ED4121 /* vas_pdmaxobject.h in Headers */,
+				E41141CF272812A10054E681 /* pf_cic.h in Headers */,
+				E411418F272812A00054E681 /* pffft_double.h in Headers */,
+				E4114207272812A10054E681 /* pf_double.h in Headers */,
+				E4114237272812A10054E681 /* pf_float.h in Headers */,
+				E4114247272812A10054E681 /* pf_scalar_double.h in Headers */,
 				E4D0CB8C266F5C3F00ED4121 /* vas_fir_read.h in Headers */,
+				E41141EF272812A10054E681 /* sse2neon.h in Headers */,
 				E440D241266F5F4F00D8D83E /* vas_del~.h in Headers */,
+				E41141C7272812A10054E681 /* fftpack.h in Headers */,
+				E41141E7272812A10054E681 /* pf_carrier.h in Headers */,
+				E411424F272812A10054E681 /* pf_sse1_float.h in Headers */,
 				E4D0CB8D266F5C3F00ED4121 /* arch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -708,13 +1169,35 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E411422D272812A10054E681 /* pf_altivec_float.h in Headers */,
 				E4F9E7CD25A356B900CE8119 /* vas_delayTap.h in Headers */,
+				E411425D272812A10054E681 /* pf_mixer.h in Headers */,
 				E44FDCB125DFF399000782E6 /* vas_pdmaxobject.h in Headers */,
+				E41141E5272812A10054E681 /* pf_carrier.h in Headers */,
+				E41141CD272812A10054E681 /* pf_cic.h in Headers */,
 				E4F9E7B525A3553300CE8119 /* vas_fir_list.h in Headers */,
+				E41141C5272812A10054E681 /* fftpack.h in Headers */,
+				E4114265272812A10054E681 /* pffft_priv_impl.h in Headers */,
+				E411423D272812A10054E681 /* pf_avx_double.h in Headers */,
+				E41141FD272812A10054E681 /* pf_neon_double_from_avx.h in Headers */,
 				E4F9E7D325A3570D00CE8119 /* vas_binauralspace~.h in Headers */,
+				E411418D272812A00054E681 /* pffft_double.h in Headers */,
 				E46B186825A35FDC00170FAB /* vas_delayTap_crossfade.h in Headers */,
+				E411424D272812A10054E681 /* pf_sse1_float.h in Headers */,
+				E4114225272812A10054E681 /* pf_sse2_double.h in Headers */,
+				E411421D272812A10054E681 /* pf_neon_double.h in Headers */,
+				E41141ED272812A10054E681 /* sse2neon.h in Headers */,
+				E4114205272812A10054E681 /* pf_double.h in Headers */,
+				E411420D272812A10054E681 /* pf_scalar_float.h in Headers */,
+				E4114245272812A10054E681 /* pf_scalar_double.h in Headers */,
 				E4F9E7CA25A3567800CE8119 /* arch.h in Headers */,
+				E411431D272812A10054E681 /* fmv.h in Headers */,
 				E4F9E7CF25A356B900CE8119 /* vas_ringBuffer.h in Headers */,
+				E41142DD272812A10054E681 /* pffft.hpp in Headers */,
+				E4114215272812A10054E681 /* pf_neon_float.h in Headers */,
+				E411427D272812A10054E681 /* pffastconv.h in Headers */,
+				E4114235272812A10054E681 /* pf_float.h in Headers */,
+				E4114305272812A10054E681 /* pffft.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,12 +1207,34 @@
 			files = (
 				842E090120C67E760089C3D9 /* vas_fir.h in Headers */,
 				E44FDCAD25DFF397000782E6 /* vas_pdmaxobject.h in Headers */,
+				E4114228272812A10054E681 /* pf_altivec_float.h in Headers */,
+				E4114238272812A10054E681 /* pf_avx_double.h in Headers */,
+				E41141C8272812A10054E681 /* pf_cic.h in Headers */,
+				E4114210272812A10054E681 /* pf_neon_float.h in Headers */,
+				E4114318272812A10054E681 /* fmv.h in Headers */,
 				84DA7F0F2040487A00CDC513 /* vas_dynamicFirChannel.h in Headers */,
 				844237661FB4A69E005ACA50 /* m_pd.h in Headers */,
+				E4114200272812A10054E681 /* pf_double.h in Headers */,
+				E4114218272812A10054E681 /* pf_neon_double.h in Headers */,
+				E4114278272812A10054E681 /* pffastconv.h in Headers */,
 				842E090520C67E8B0089C3D9 /* vas_fir_binaural.h in Headers */,
+				E4114220272812A10054E681 /* pf_sse2_double.h in Headers */,
+				E4114208272812A10054E681 /* pf_scalar_float.h in Headers */,
+				E4114300272812A10054E681 /* pffft.h in Headers */,
 				E4A69BD4234C947C00E4E570 /* vas_fir_list.h in Headers */,
+				E4114258272812A10054E681 /* pf_mixer.h in Headers */,
+				E41141E0272812A10054E681 /* pf_carrier.h in Headers */,
+				E4114240272812A10054E681 /* pf_scalar_double.h in Headers */,
+				E41141E8272812A10054E681 /* sse2neon.h in Headers */,
+				E4114260272812A10054E681 /* pffft_priv_impl.h in Headers */,
+				E41141F8272812A10054E681 /* pf_neon_double_from_avx.h in Headers */,
 				84DA7EFF20401E1B00CDC513 /* vas_mem.h in Headers */,
+				E4114248272812A10054E681 /* pf_sse1_float.h in Headers */,
+				E4114230272812A10054E681 /* pf_float.h in Headers */,
 				E4BE83E32379699A00A84A1D /* rwa_binauralsimple~.h in Headers */,
+				E41142D8272812A10054E681 /* pffft.hpp in Headers */,
+				E41141C0272812A10054E681 /* fftpack.h in Headers */,
+				E4114188272812A00054E681 /* pffft_double.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +1499,7 @@
 				E466D09A260388DD0013F63F /* dataobject.c in Sources */,
 				E466D093260388DD0013F63F /* minphase.c in Sources */,
 				84C9E38F213ACA5D004C6B54 /* vas_fir.c in Sources */,
+				E41142E1272812A10054E681 /* fftpack.c in Sources */,
 				84C9E390213ACA5D004C6B54 /* vas_fir_binaural.c in Sources */,
 				E44FDCAC25DFF396000782E6 /* vas_pdmaxobject.c in Sources */,
 				E44FDCB325E00F88000782E6 /* vas_fir_read.c in Sources */,
@@ -1004,8 +1510,11 @@
 				E47A60A72636C67A007C786A /* vas_delayTap.c in Sources */,
 				E466D08F260388DD0013F63F /* interpolate.c in Sources */,
 				E466D094260388DD0013F63F /* neighbors.c in Sources */,
+				E41141D1272812A10054E681 /* pf_carrier.cpp in Sources */,
 				E466D08E260388DD0013F63F /* easy.c in Sources */,
+				E4114291272812A10054E681 /* test_pffastconv.c in Sources */,
 				E466D091260388DD0013F63F /* lookup.c in Sources */,
+				E4114181272812A00054E681 /* pf_mixer.cpp in Sources */,
 				E466D08B260388DD0013F63F /* speex_resampler.c in Sources */,
 				E466D099260388DD0013F63F /* btree.c in Sources */,
 				E466D09D260388DD0013F63F /* gunzip.c in Sources */,
@@ -1015,14 +1524,19 @@
 				E466D08C260388DD0013F63F /* cache.c in Sources */,
 				84C9E393213ACA5D004C6B54 /* vas_mem.c in Sources */,
 				E448C070230FE4B400D3C142 /* kiss_fftr.c in Sources */,
+				E41142D1272812A10054E681 /* pffft_common.c in Sources */,
 				E448C074230FE4B900D3C142 /* kiss_fft.c in Sources */,
+				E4114281272812A10054E681 /* pffft_double.c in Sources */,
 				E466D09B260388DD0013F63F /* fractalhead.c in Sources */,
+				E4114251272812A10054E681 /* pffft.c in Sources */,
+				E41141B9272812A00054E681 /* pf_cic.cpp in Sources */,
 				E466D090260388DD0013F63F /* kdtree.c in Sources */,
 				E4A69BDA234C947C00E4E570 /* vas_fir_list.c in Sources */,
 				E466D092260388DD0013F63F /* loudness.c in Sources */,
 				E466D08D260388DD0013F63F /* check.c in Sources */,
 				E466D096260388DD0013F63F /* resample.c in Sources */,
 				E4BE83E12379699A00A84A1D /* vas_reverb~.c in Sources */,
+				E41141A1272812A00054E681 /* pffastconv.c in Sources */,
 				E466D09C260388DD0013F63F /* gcol.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1033,8 +1547,11 @@
 			files = (
 				E4A69BDB234C947C00E4E570 /* vas_fir_list.c in Sources */,
 				E448C075230FE4B900D3C142 /* kiss_fft.c in Sources */,
+				E41141D2272812A10054E681 /* pf_carrier.cpp in Sources */,
+				E4114182272812A00054E681 /* pf_mixer.cpp in Sources */,
 				E4BE83D62379699A00A84A1D /* vas_hpcomp~.c in Sources */,
 				84E5E14821FB48E6002216EF /* vas_fir.c in Sources */,
+				E41141A2272812A00054E681 /* pffastconv.c in Sources */,
 				84E5E14921FB48E6002216EF /* vas_fir_binaural.c in Sources */,
 				84E5E14A21FB48E6002216EF /* vas_dynamicFirChannel.c in Sources */,
 				84E5E16921FB4A28002216EF /* vas_fir_headphoneCompensation.c in Sources */,
@@ -1043,6 +1560,12 @@
 				84E5E14E21FB48E6002216EF /* vas_mem.c in Sources */,
 				E448C071230FE4B500D3C142 /* kiss_fftr.c in Sources */,
 				E44FDCAA25DFF396000782E6 /* vas_pdmaxobject.c in Sources */,
+				E4114292272812A10054E681 /* test_pffastconv.c in Sources */,
+				E41142D2272812A10054E681 /* pffft_common.c in Sources */,
+				E4114252272812A10054E681 /* pffft.c in Sources */,
+				E41141BA272812A00054E681 /* pf_cic.cpp in Sources */,
+				E41142E2272812A10054E681 /* fftpack.c in Sources */,
+				E4114282272812A10054E681 /* pffft_double.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1050,13 +1573,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E41141D3272812A10054E681 /* pf_carrier.cpp in Sources */,
 				E4E0066E24F3CC8700144C68 /* tools.c in Sources */,
 				E4E0066024F3CC8700144C68 /* interpolate.c in Sources */,
+				E4114293272812A10054E681 /* test_pffastconv.c in Sources */,
 				E4E0064524F3CC5A00144C68 /* gunzip.c in Sources */,
 				E417C3F4236C70DC001A9C1B /* vas_fir.c in Sources */,
 				E417C3F5236C70DC001A9C1B /* vas_fir_binaural.c in Sources */,
 				E4E0066924F3CC8700144C68 /* minphase.c in Sources */,
 				E417C3F6236C70DC001A9C1B /* vas_dynamicFirChannel.c in Sources */,
+				E41142E3272812A10054E681 /* fftpack.c in Sources */,
 				E4E0065E24F3CC8700144C68 /* cache.c in Sources */,
 				E4E0066424F3CC8700144C68 /* reader.c in Sources */,
 				E4E0066B24F3CC8700144C68 /* kdtree.c in Sources */,
@@ -1065,21 +1591,27 @@
 				E4E0066224F3CC8700144C68 /* lookup.c in Sources */,
 				E4E0066724F3CC8700144C68 /* spherical.c in Sources */,
 				E44FDCA825DFF395000782E6 /* vas_pdmaxobject.c in Sources */,
+				E41141A3272812A00054E681 /* pffastconv.c in Sources */,
 				E417C3F8236C70DC001A9C1B /* vas_mem.c in Sources */,
 				E4E0064724F3CC5A00144C68 /* dataobject.c in Sources */,
 				E4E0064924F3CC5A00144C68 /* fractalhead.c in Sources */,
+				E4114283272812A10054E681 /* pffft_double.c in Sources */,
 				E417C3FA236C70DC001A9C1B /* kiss_fftr.c in Sources */,
 				E4E0067524F3CC9A00144C68 /* speex_resampler.c in Sources */,
 				E4E0066D24F3CC8700144C68 /* resample.c in Sources */,
 				E4E0066624F3CC8700144C68 /* neighbors.c in Sources */,
 				E4E0064A24F3CC5A00144C68 /* btree.c in Sources */,
+				E4114183272812A00054E681 /* pf_mixer.cpp in Sources */,
 				E4E0066124F3CC8700144C68 /* loudness.c in Sources */,
 				E417C3FB236C70DC001A9C1B /* kiss_fft.c in Sources */,
 				E4E0065F24F3CC8700144C68 /* check.c in Sources */,
+				E41141BB272812A00054E681 /* pf_cic.cpp in Sources */,
 				E417C40D236C72C4001A9C1B /* vas_binaural~.c in Sources */,
 				E4E0064B24F3CC5A00144C68 /* gcol.c in Sources */,
 				E417C3FC236C70DC001A9C1B /* vas_fir_list.c in Sources */,
 				E4E0064824F3CC5A00144C68 /* superblock.c in Sources */,
+				E4114253272812A10054E681 /* pffft.c in Sources */,
+				E41142D3272812A10054E681 /* pffft_common.c in Sources */,
 				E4E0066524F3CC8700144C68 /* easy.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1094,11 +1626,18 @@
 				E47A60772636AD79007C786A /* vas_fir_binaural.c in Sources */,
 				E47A60782636AD79007C786A /* vas_pdmaxobject.c in Sources */,
 				E47A60792636AD79007C786A /* vas_fir_read.c in Sources */,
+				E4114286272812A10054E681 /* pffft_double.c in Sources */,
 				E47A607A2636AD79007C786A /* vas_dynamicFirChannel.c in Sources */,
+				E4114296272812A10054E681 /* test_pffastconv.c in Sources */,
 				E47A607B2636AD79007C786A /* reader.c in Sources */,
+				E4114186272812A00054E681 /* pf_mixer.cpp in Sources */,
+				E41142D6272812A10054E681 /* pffft_common.c in Sources */,
 				E47A607C2636AD79007C786A /* spherical.c in Sources */,
+				E4114256272812A10054E681 /* pffft.c in Sources */,
 				E47A607D2636AD79007C786A /* tools.c in Sources */,
 				E47A607E2636AD79007C786A /* interpolate.c in Sources */,
+				E41141BE272812A00054E681 /* pf_cic.cpp in Sources */,
+				E41142E6272812A10054E681 /* fftpack.c in Sources */,
 				E47A607F2636AD79007C786A /* neighbors.c in Sources */,
 				E495499C2643D8B1008C5707 /* vas_thpool_noMalloc.c in Sources */,
 				E47A60802636AD79007C786A /* easy.c in Sources */,
@@ -1106,6 +1645,7 @@
 				E47A60822636AD79007C786A /* speex_resampler.c in Sources */,
 				E440D247266F646300D8D83E /* vas_ringBuffer.c in Sources */,
 				E47A60832636AD79007C786A /* btree.c in Sources */,
+				E41141D6272812A10054E681 /* pf_carrier.cpp in Sources */,
 				E47A60852636AD79007C786A /* gunzip.c in Sources */,
 				E47A60862636AD79007C786A /* vas_util.c in Sources */,
 				E47A60872636AD79007C786A /* superblock.c in Sources */,
@@ -1114,6 +1654,7 @@
 				E47A608A2636AD79007C786A /* vas_mem.c in Sources */,
 				E47A608B2636AD79007C786A /* kiss_fftr.c in Sources */,
 				E47A608C2636AD79007C786A /* kiss_fft.c in Sources */,
+				E41141A6272812A00054E681 /* pffastconv.c in Sources */,
 				E47A608D2636AD79007C786A /* fractalhead.c in Sources */,
 				E47A608E2636AD79007C786A /* kdtree.c in Sources */,
 				E47A608F2636AD79007C786A /* vas_fir_list.c in Sources */,
@@ -1129,13 +1670,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E41141D4272812A10054E681 /* pf_carrier.cpp in Sources */,
 				E4C45CFF2534795B000D9303 /* tools.c in Sources */,
 				E4C45D002534795B000D9303 /* interpolate.c in Sources */,
+				E4114294272812A10054E681 /* test_pffastconv.c in Sources */,
 				E44FDCB025DFF398000782E6 /* vas_pdmaxobject.c in Sources */,
 				E4C45D012534795B000D9303 /* gunzip.c in Sources */,
 				E4C45D022534795B000D9303 /* vas_fir.c in Sources */,
 				E4C45D032534795B000D9303 /* vas_fir_binaural.c in Sources */,
 				E4C45D042534795B000D9303 /* minphase.c in Sources */,
+				E41142E4272812A10054E681 /* fftpack.c in Sources */,
 				E4C45D052534795B000D9303 /* vas_dynamicFirChannel.c in Sources */,
 				E4C45D062534795B000D9303 /* cache.c in Sources */,
 				E4C45D072534795B000D9303 /* reader.c in Sources */,
@@ -1144,21 +1688,27 @@
 				E4C45D092534795B000D9303 /* vas_util.c in Sources */,
 				E4C45D0A2534795B000D9303 /* lookup.c in Sources */,
 				E4C45D0B2534795B000D9303 /* spherical.c in Sources */,
+				E41141A4272812A00054E681 /* pffastconv.c in Sources */,
 				E4C45D0C2534795B000D9303 /* vas_mem.c in Sources */,
 				E4C45D0D2534795B000D9303 /* dataobject.c in Sources */,
 				E4C45D0E2534795B000D9303 /* fractalhead.c in Sources */,
+				E4114284272812A10054E681 /* pffft_double.c in Sources */,
 				E4C45D0F2534795B000D9303 /* kiss_fftr.c in Sources */,
 				E4C45D102534795B000D9303 /* speex_resampler.c in Sources */,
 				E4C45D112534795B000D9303 /* resample.c in Sources */,
 				E4C45D122534795B000D9303 /* neighbors.c in Sources */,
 				E4C45D132534795B000D9303 /* btree.c in Sources */,
+				E4114184272812A00054E681 /* pf_mixer.cpp in Sources */,
 				E4C45D142534795B000D9303 /* loudness.c in Sources */,
 				E4C45D152534795B000D9303 /* kiss_fft.c in Sources */,
 				E4C45D162534795B000D9303 /* check.c in Sources */,
+				E41141BC272812A00054E681 /* pf_cic.cpp in Sources */,
 				E4C45D182534795B000D9303 /* gcol.c in Sources */,
 				E4C45D192534795B000D9303 /* vas_fir_list.c in Sources */,
 				E4C45D1A2534795B000D9303 /* superblock.c in Sources */,
 				E4C5F36F2569169E00C72C66 /* vas_dynconv~.c in Sources */,
+				E4114254272812A10054E681 /* pffft.c in Sources */,
+				E41142D4272812A10054E681 /* pffft_common.c in Sources */,
 				E4C45D1C2534795B000D9303 /* easy.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1173,11 +1723,18 @@
 				E4D0CB6A266F5C3F00ED4121 /* vas_fir.c in Sources */,
 				E4D0CB6B266F5C3F00ED4121 /* vas_fir_binaural.c in Sources */,
 				E4D0CB6C266F5C3F00ED4121 /* minphase.c in Sources */,
+				E4114287272812A10054E681 /* pffft_double.c in Sources */,
 				E4D0CB6D266F5C3F00ED4121 /* vas_dynamicFirChannel.c in Sources */,
+				E4114297272812A10054E681 /* test_pffastconv.c in Sources */,
 				E4D0CB6E266F5C3F00ED4121 /* cache.c in Sources */,
+				E4114187272812A00054E681 /* pf_mixer.cpp in Sources */,
+				E41142D7272812A10054E681 /* pffft_common.c in Sources */,
 				E4D0CB6F266F5C3F00ED4121 /* reader.c in Sources */,
+				E4114257272812A10054E681 /* pffft.c in Sources */,
 				E4D0CB70266F5C3F00ED4121 /* kdtree.c in Sources */,
 				E4D0CB71266F5C3F00ED4121 /* vas_fir_read.c in Sources */,
+				E41141BF272812A00054E681 /* pf_cic.cpp in Sources */,
+				E41142E7272812A10054E681 /* fftpack.c in Sources */,
 				E4D0CB72266F5C3F00ED4121 /* vas_util.c in Sources */,
 				E4D0CB73266F5C3F00ED4121 /* lookup.c in Sources */,
 				E4D0CB74266F5C3F00ED4121 /* spherical.c in Sources */,
@@ -1185,6 +1742,7 @@
 				E4D0CB76266F5C3F00ED4121 /* vas_mem.c in Sources */,
 				E440D246266F645B00D8D83E /* vas_ringBuffer.c in Sources */,
 				E4D0CB77266F5C3F00ED4121 /* dataobject.c in Sources */,
+				E41141D7272812A10054E681 /* pf_carrier.cpp in Sources */,
 				E4D0CB78266F5C3F00ED4121 /* fractalhead.c in Sources */,
 				E4D0CB79266F5C3F00ED4121 /* kiss_fftr.c in Sources */,
 				E4D0CB7A266F5C3F00ED4121 /* speex_resampler.c in Sources */,
@@ -1193,6 +1751,7 @@
 				E4D0CB7D266F5C3F00ED4121 /* btree.c in Sources */,
 				E4D0CB7E266F5C3F00ED4121 /* loudness.c in Sources */,
 				E4D0CB7F266F5C3F00ED4121 /* kiss_fft.c in Sources */,
+				E41141A7272812A00054E681 /* pffastconv.c in Sources */,
 				E4D0CB80266F5C3F00ED4121 /* check.c in Sources */,
 				E4D0CB82266F5C3F00ED4121 /* gcol.c in Sources */,
 				E4D0CB83266F5C3F00ED4121 /* vas_fir_list.c in Sources */,
@@ -1214,11 +1773,18 @@
 				E4F9E79725A3553300CE8119 /* vas_fir.c in Sources */,
 				E4F9E79825A3553300CE8119 /* vas_fir_binaural.c in Sources */,
 				E4F9E79925A3553300CE8119 /* minphase.c in Sources */,
+				E4114285272812A10054E681 /* pffft_double.c in Sources */,
 				E4F9E7D225A3570D00CE8119 /* vas_binauralspace~.c in Sources */,
+				E4114295272812A10054E681 /* test_pffastconv.c in Sources */,
 				E4F9E79A25A3553300CE8119 /* vas_dynamicFirChannel.c in Sources */,
+				E4114185272812A00054E681 /* pf_mixer.cpp in Sources */,
+				E41142D5272812A10054E681 /* pffft_common.c in Sources */,
 				E46B186725A35FDC00170FAB /* vas_delayTap_crossfade.c in Sources */,
+				E4114255272812A10054E681 /* pffft.c in Sources */,
 				E4F9E79B25A3553300CE8119 /* cache.c in Sources */,
 				E4F9E79C25A3553300CE8119 /* reader.c in Sources */,
+				E41141BD272812A00054E681 /* pf_cic.cpp in Sources */,
+				E41142E5272812A10054E681 /* fftpack.c in Sources */,
 				E4F9E79D25A3553300CE8119 /* kdtree.c in Sources */,
 				E4F9E7CE25A356B900CE8119 /* vas_ringBuffer.c in Sources */,
 				E4F9E79E25A3553300CE8119 /* vas_util.c in Sources */,
@@ -1226,6 +1792,7 @@
 				E4F9E7A025A3553300CE8119 /* spherical.c in Sources */,
 				E4F9E7A125A3553300CE8119 /* vas_mem.c in Sources */,
 				E4F9E7A225A3553300CE8119 /* dataobject.c in Sources */,
+				E41141D5272812A10054E681 /* pf_carrier.cpp in Sources */,
 				E4F9E7A325A3553300CE8119 /* fractalhead.c in Sources */,
 				E4F9E7A425A3553300CE8119 /* kiss_fftr.c in Sources */,
 				E4F9E7A525A3553300CE8119 /* speex_resampler.c in Sources */,
@@ -1234,6 +1801,7 @@
 				E4F9E7CC25A356B900CE8119 /* vas_delayTap.c in Sources */,
 				E466D08A26036AAB0013F63F /* vas_fir_read.c in Sources */,
 				E4F9E7A825A3553300CE8119 /* btree.c in Sources */,
+				E41141A5272812A00054E681 /* pffastconv.c in Sources */,
 				E4F9E7A925A3553300CE8119 /* loudness.c in Sources */,
 				E4F9E7AA25A3553300CE8119 /* kiss_fft.c in Sources */,
 				E4F9E7AB25A3553300CE8119 /* check.c in Sources */,
@@ -1249,15 +1817,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4114180272812A00054E681 /* pf_mixer.cpp in Sources */,
+				E4114280272812A10054E681 /* pffft_double.c in Sources */,
+				E41141B8272812A00054E681 /* pf_cic.cpp in Sources */,
 				84DA7F0E2040487A00CDC513 /* vas_dynamicFirChannel.c in Sources */,
+				E41141D0272812A10054E681 /* pf_carrier.cpp in Sources */,
 				842E090220C67E760089C3D9 /* vas_fir.c in Sources */,
+				E41141A0272812A00054E681 /* pffastconv.c in Sources */,
 				E44FDCAE25DFF397000782E6 /* vas_pdmaxobject.c in Sources */,
+				E41142D0272812A10054E681 /* pffft_common.c in Sources */,
 				84DA7F0220401E1B00CDC513 /* vas_util.c in Sources */,
 				842E090620C67E8B0089C3D9 /* vas_fir_binaural.c in Sources */,
 				E4BE83D72379699A00A84A1D /* rwa_binauralsimple~.c in Sources */,
 				84DA7F0120401E1B00CDC513 /* vas_mem.c in Sources */,
+				E4114290272812A10054E681 /* test_pffastconv.c in Sources */,
+				E41142E0272812A10054E681 /* fftpack.c in Sources */,
 				E448C06E230FE4B300D3C142 /* kiss_fftr.c in Sources */,
 				E448C072230FE4B800D3C142 /* kiss_fft.c in Sources */,
+				E4114250272812A10054E681 /* pffft.c in Sources */,
 				E4A69BD8234C947C00E4E570 /* vas_fir_list.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1286,6 +1863,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1329,6 +1907,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1371,6 +1950,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1414,6 +1994,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1460,6 +2041,7 @@
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1475,7 +2057,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/** $(PROJECT_DIR)/../../../pffft";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -1506,6 +2088,7 @@
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1521,7 +2104,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/** $(PROJECT_DIR)/../../../pffft";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
@@ -1549,6 +2132,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1594,6 +2178,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1641,6 +2226,7 @@
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1688,6 +2274,7 @@
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1733,6 +2320,7 @@
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1779,6 +2367,7 @@
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1825,6 +2414,7 @@
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1872,6 +2462,7 @@
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1993,6 +2584,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
@@ -2031,6 +2623,7 @@
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+					"$(PROJECT_DIR)/../../../pffft",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";

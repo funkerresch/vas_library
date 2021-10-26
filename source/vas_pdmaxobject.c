@@ -179,13 +179,13 @@ void vas_pdmaxobject_setAndInterpolateBetweenIndexes1(vas_pdmaxobject *x, t_symb
         vas_pdmaxobject_getFloatArrayAndLength(argv[i].a_w.w_symbol, &x->leftArray, &x->leftArrayLength);
         vas_pdmaxobject_getFloatArrayAndLength(argv[i+2].a_w.w_symbol, &x->rightArray, &x->rightArrayLength);
           
-        maxLengthLeft = MIN(x->leftArrayLength, filterLength);
+        maxLengthLeft = fmin(x->leftArrayLength, filterLength);
         for (int i=0;i<maxLengthLeft;i++)
         {
             startIr[i] = x->leftArray[i].w_float;
         }
 
-        maxLengthRight = MIN(x->rightArrayLength, filterLength);
+        maxLengthRight = fmin(x->rightArrayLength, filterLength);
         for (int i=0;i<maxLengthRight;i++)
         {
             endIr[i] = x->rightArray[i].w_float;
