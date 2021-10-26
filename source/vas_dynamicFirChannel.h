@@ -24,7 +24,7 @@
  * <br>
  * Many thanks to Mark Borgerding for his KissFFT <br>
  * https://github.com/mborgerding/kissfft <br>
- * which - for any low latency partition size - is almost as fast as apple's vDSP FFT. <br>
+ * also for pffft
  */
 
 #ifndef vas_dynamicFirChannel_h
@@ -33,7 +33,6 @@
 #include <stdio.h>
 #include "vas_mem.h"
 #include "vas_util.h"
-//#include <pthread.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -83,6 +82,9 @@ typedef struct vas_dynamicFirChannel_filter
 #ifdef VAS_USE_KISSFFT
     kiss_fftr_cfg  forwardFFT;
     kiss_fftr_cfg  inverseFFT;
+#endif
+#ifdef VAS_USE_PFFFT
+    PFFFT_Setup *setupReal;
 #endif
     bool *segmentIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     bool indexIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
@@ -164,6 +166,8 @@ typedef struct vas_dynamicFirChannel_output
  * Everything necessary for calculating (equal-) partitioned convolution including dynamic exchange of the filter <br>
  */
 
+
+
 typedef struct vas_dynamicFirChannel
 {
     int setup;                                  // set with flags as "VAS_GLOBALFILTER" or "VAS_LOCALFILTER", defined in vas_util.h
@@ -178,11 +182,6 @@ typedef struct vas_dynamicFirChannel
     vas_dynamicFirChannel_input *sharedInput;   // can be set if the channel uses the same input as another channel (->stereo reverb for example)
     vas_dynamicFirChannel_filter *sharedFilter; // can be set if the channel uses the same filter as another channel (->stereo reverb for example)
     vas_dynamicFirChannel_filter *filter;       // pointer to filter
-
-#ifdef VAS_USE_FFTW
-    fftwf_plan forwardFFT;
-    fftwf_plan inverseFFT;
-#endif
     
     int init;
     int pointerArrayMiddle;                     // index middle of the partitioned frequences resoponses of the filter (and input..)
@@ -204,7 +203,29 @@ typedef struct vas_dynamicFirChannel
     float gain;
     float segmentThreshold;
     double scale;
+
+#ifdef VAS_USE_PFFFT
+    float *fftWork;
+#endif
 } vas_dynamicFirChannel;
+
+#ifdef VAS_USE_MULTITHREADCONVOLUTION
+
+#include "vas_thpool_noMalloc.h"
+
+typedef struct vas_threadedConvolutionArg
+{
+    vas_job *job;
+    vas_dynamicFirChannel *x; //dynamicFirChannel
+    float *data;
+
+} vas_threadedConvolutionArg;
+
+void doWork1(void *args);
+
+void vas_dynamicFirChannel_process_threaded1(vas_threadedConvolutionArg *arg, VAS_INPUTBUFFER *in, int vectorSize);
+
+#endif
 
 /**
  * @brief Creates a new dynamicFirChannel. <br>

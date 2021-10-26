@@ -9,6 +9,9 @@
 #include "string.h"
 #include <errno.h>
 #include <limits.h>
+#ifdef __APPLE__
+#include <sys/sysctl.h> //TODO: this is not cross-compatible
+#endif
 
 #define GETLINE_MINSIZE 16
 
@@ -65,7 +68,7 @@ extern "C" {
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
-    
+
     static int WAI_PREFIX(getModulePath_)(HMODULE module, char* out, int capacity, int* dirname_length)
     {
         wchar_t buffer1[MAX_PATH];
@@ -757,6 +760,25 @@ char* vas_strsep(char** stringp, const char* delim)
     return start;
 }
 
+float vas_util_faverageSumOfmagnitudes(float *in, int length)
+{
+    float result = 0;
+#ifdef VAS_USE_VDSP
+    vDSP_svemg(in, 1, &result, length);
+#else
+    int n = length;
+    while(n--)
+        result+=fabsf(*in++);
+#endif
+    result = result/length;
+    return result;
+}
+
+float vas_util_fgain2db(float in)
+{
+    return -20.0f * log10f(in);
+}
+
 void vas_util_single2DoublePrecision(float *in, double *out, int length)
 {
     #ifdef VAS_USE_VDSP
@@ -789,7 +811,7 @@ void vas_util_fadd(float *input1, float *input2, float *dest, int length)
     vDSP_vadd(input1, 1, input2, 1, dest, 1, length);
 #endif
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
 #ifdef VAS_USE_AVX
     
     int n = length;
@@ -806,6 +828,19 @@ void vas_util_fadd(float *input1, float *input2, float *dest, int length)
         input2+=8;
         dest+=8;
     }
+#elif defined (PFFFT_ENABLE_NEON)
+    int n = length;
+    while(n)
+    {
+        float32x4_t v1 = vld1q_f32(input1);
+        float32x4_t v2 = vld1q_f32(input2);
+        float32x4_t res = vaddq_f32(v1, v2);
+        vst1q_f32(dest, res);
+        n-=4;
+        input1+=4;
+        input2+=4;
+        dest+=4;
+    }
      
 #else
     int n = length;
@@ -821,12 +856,30 @@ void vas_util_fmultiply(float *input1, float *input2, float *dest, int length)
 {
 #ifdef VAS_USE_VDSP
     vDSP_vmul(input1, 1, input2, 1, dest, 1, length);
+#endif
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
+    
+#ifdef PFFFT_ENABLE_NEON
+    int n = length;
+    while(n)
+    {
+        float32x4_t v1 = vld1q_f32(input1);
+        float32x4_t v2 = vld1q_f32(input2);
+        float32x4_t prod = vmulq_f32(v1, v2);
+        vst1q_f32(dest, prod);
+        n-=4;
+        input1+=4;
+        input2+=4;
+        dest+=4;
+    }
+    
 #else
     int n = length;
     while (n--)
     {
         *dest++ = *input1++ * *input2++;
     }
+#endif
 #endif
 }
 
@@ -836,7 +889,7 @@ void vas_util_fcopy(float *source, float *dest, int length)
     cblas_scopy(length, source, 1, dest, 1);
 #endif
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
 #ifdef VAS_USE_AVX
     
     int n = length;
@@ -848,7 +901,17 @@ void vas_util_fcopy(float *source, float *dest, int length)
         source+=8;
         dest+=8;
     }
-
+#elif defined(PFFFT_ENABLE_NEON)
+    int n = length;
+    while(n)
+    {
+        float32x4_t v1 = vld1q_f32(source);
+        vst1q_f32(dest, v1);
+        n-=4;
+        source+=4;
+        dest+=4;
+    }
+    
 #else
     int n = length;
     while (n--)
@@ -866,7 +929,7 @@ void vas_util_fcopy_noavx(float *source, float *dest, int length)
     cblas_scopy(length, source, 1, dest, 1);
 #endif
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
     int n = length;
     while (n--)
     {
@@ -882,7 +945,19 @@ void vas_util_fscale(float *dest, float scale,  int length)
     vDSP_vsmul(dest, 1, &scale, dest, 1, length);
 #endif
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
+#ifdef PFFFT_ENABLE_NEON
+    int n = length;
+    while(n)
+    {
+        float32x4_t v1 = vld1q_f32(dest);
+        v1 = vmulq_n_f32(v1, scale);
+        vst1q_f32(dest, v1);
+        n-=4;
+        dest+=4;
+    }
+
+#else
     int n = length;
     while (n--)
     {
@@ -890,6 +965,7 @@ void vas_util_fscale(float *dest, float scale,  int length)
         tmp *= scale;
         *dest++ = tmp;
     }
+#endif
 #endif
     
 }
@@ -900,7 +976,7 @@ void vas_util_fmulitplyScalar(float *source, float scale, float *dest, int lengt
     vDSP_vsmul(source, 1, &scale, dest, 1, length);
 #endif
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
     int n = length;
     while (n--)
     {
@@ -934,7 +1010,7 @@ void vas_util_complexCopy(VAS_COMPLEX *source, VAS_COMPLEX *dest, int length)
     }
 #endif
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
     while (n--)
     {
         dest->r = source->r;
@@ -958,7 +1034,7 @@ void vas_util_complexScale(VAS_COMPLEX *dest, float scale,  int length)
     }
 #endif
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
     while (n--)
     {
         dest->r *= scale;
@@ -1237,6 +1313,7 @@ void vas_util_complexMultiply(int length, VAS_COMPLEX *signalIn, VAS_COMPLEX *fi
     
 #ifdef VAS_USE_KISSFFT
     int n = length;
+
     while (n--)
     {
         dest->r = filter->r * signalIn->r - filter->i * signalIn->i;
@@ -1244,6 +1321,7 @@ void vas_util_complexMultiply(int length, VAS_COMPLEX *signalIn, VAS_COMPLEX *fi
         dest++;filter++;signalIn++;
     }
 #endif
+
 }
 
 void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int length)
@@ -1260,7 +1338,7 @@ void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int length)
     }
 #endif
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
 #ifdef VAS_USE_AVX
     n = length *2;
     float *floatPtr = (float *)dest;
@@ -1304,7 +1382,7 @@ const char *vas_util_getFileExtension(const char *filename)
 
 bool vas_utilities_isValidSegmentSize(int segmentSize)
 {
-    return  (segmentSize >= 16) && (segmentSize <= 65536)  && ((segmentSize & (segmentSize - 1)) == 0);
+    return  (segmentSize >= 16) && (segmentSize <= 131072)  && ((segmentSize & (segmentSize - 1)) == 0);
 }
 
 int vas_utilities_roundUp2NextPowerOf2(int value)
@@ -1562,6 +1640,96 @@ void vas_utilities_zmultiplyAdd_vDSP(int length, COMPLEX_SPLIT signalIn, COMPLEX
     dest.imagp[0] = preserveIRNyq * preserveSigNyq + preservePrevResult;
     filter.imagp[0] = preserveIRNyq;
     signalIn.imagp[0] = preserveSigNyq;
+}
+
+/*note: it is faster to use the vas_window_blackman lookup tables than to calculate the window each time.*/
+void vas_utilities_apply_blackman_window(VAS_INPUTBUFFER *x, int n) {
+    int M = (n % 2 == 0) ? n / 2 : (n + 1) / 2;
+    float win_factor = 0;
+    for (int i = 0; i < M; ++i) {
+        x[i] *= win_factor;
+        x[n - 1 - i] *= win_factor;
+        win_factor = 0.42f - 0.5f * cos(2 * M_PI * i / (n - 1)) + 0.08f * cos(4 * M_PI * i / (n - 1));
+    }
+}
+
+void vas_utilities_apply_window(float* window, float*data, int n) {
+    for (int i = 0; i < n/2; i++) {
+        data[i] *= window[i];
+        data[n-i] *= window[i];
+    }
+}
+
+int vas_utilities_next_power_of_2(int n) {
+    uint32_t K = n;
+    K--;
+    K |= K >> 1;
+    K |= K >> 2;
+    K |= K >> 4;
+    K |= K >> 8;
+    K |= K >> 16;
+    K++;
+    return K;
+}
+
+float vas_utilities_dB_to_lin(float dB) {
+    return powf(10, dB/20.0);
+}
+
+float vas_utilities_lin_to_dB(float lin) {
+    return 20 * log10(lin);
+}
+
+double vas_util_getWallTime(void) {
+#ifdef __APPLE__
+        struct timespec ts;
+        clock_gettime(CLOCK_MONOTONIC, &ts);
+        return ((double) (1000000000 * ts.tv_sec + ts.tv_nsec)) / 1000000000;
+#else
+    return 0
+#endif
+        /*struct timeval tv;
+        struct timezone tz;
+        gettimeofday(&tv, &tz);
+        return ((double) (1000000 * tv.tv_sec + tv.tv_usec)) / 1000000;*/
+}
+
+double vas_util_getCPUTime(void) {
+#ifdef __APPLE__
+    struct rusage r;
+    getrusage(RUSAGE_SELF, &r);
+    return ((double) (1000000 * r.ru_utime.tv_sec + r.ru_utime.tv_usec)) / 1000000;
+    #else
+        return 0
+    #endif
+    /*struct timespec ts;
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts);
+    return ((double) (1000000000 * ts.tv_sec + ts.tv_nsec)) / 1000000000;*/
+}
+
+unsigned int vas_util_getNumPhysicalCores(void)
+{
+  size_t len;
+  unsigned int ncpu = 0;
+#ifdef __APPLE__
+  len = sizeof(ncpu);
+  sysctlbyname ("hw.physicalcpu",&ncpu,&len,NULL,0);
+#endif
+
+  return ncpu;
+}
+
+unsigned int vas_util_getNumLogicalCores(void)
+{
+  size_t len;
+  unsigned int ncpu = 8;
+    
+#ifdef __APPLE__
+  len = sizeof(ncpu);
+  sysctlbyname ("hw.logicalcpu",&ncpu,&len,NULL,0);
+#endif
+
+  return ncpu;
 }
 
 #endif

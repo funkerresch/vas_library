@@ -2,13 +2,13 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/VasSpat.cs">
     <Files>
       <File FileName="Assets/Scripts/VasSpatConfigMirrorSource.cs" Line="181" Column="48" />
-      <File FileName="Assets/Scripts/VasSpat.cs" Line="101" Column="5" />
+      <File FileName="Assets/Scripts/VasSpat.cs" Line="351" Column="56" />
       <File FileName="Assets/Scripts/Connect2Headtracker.cs" />
       <File FileName="Assets/Scripts/VasHeadtrackerConnect.cs" />
-      <File FileName="Assets/Scripts/VasSpatConfigSimple.cs" Line="4" Column="6" />
+      <File FileName="Assets/Scripts/VasSpatConfigSimple.cs" Line="5" Column="26" />
       <File FileName="Assets/Scripts/TriggerZoneReceiver.cs" />
       <File FileName="Library/PackageCache/com.unity.xr.oculus@1.6.1/Editor/OculusBuildProcessor.cs" />
-      <File FileName="Assets/Scripts/StartAudio.cs" Line="25" Column="1" />
+      <File FileName="Assets/Scripts/StartAudio.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -26,7 +26,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d342a6f7-d020-438c-a90b-4388b7554da2" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="fec67653-2743-4d06-9bd1-addc4a7b9557" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

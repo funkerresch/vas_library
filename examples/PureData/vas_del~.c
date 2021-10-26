@@ -6,9 +6,10 @@ static t_int *vas_del_perform(t_int *w)
 {
     vas_del *x = (vas_del *)(w[1]) ;
     t_float *in = (t_float *)(w[2]);
-    t_float *outL = (t_float *)(w[3]);
+    t_float *out = (t_float *)(w[3]);
     int n = (int)(w[4]);
-    vas_delay_crossfade_process(x->delayEngine, in, outL, n);
+    vas_ringBuffer_process(x->buffer, in, n);
+    vas_delayTap_crossfade_process(x->delayEngine,  out, n);
     return (w+5);
 }
 
@@ -19,29 +20,24 @@ static void vas_del_dsp(vas_del *x, t_signal **sp)
 
 static void vas_del_free(vas_del *x)
 {
-    vas_mem_free(x->delayEngine);
+    vas_delayTap_crossfade_free(x->delayEngine);
+    vas_ringBuffer_free(x->buffer);
     outlet_free(x->outL);
 }
 
 static void *vas_del_new(t_symbol *s, int argc, t_atom *argv)
 {
     vas_del *x = (vas_del *)pd_new(vas_del_class);
-    x->delayEngine = vas_delay_crossfade_new(44100);
+    x->buffer = vas_ringBuffer_new(44100);
+    x->delayEngine = vas_delayTap_crossfade_new(x->buffer);
     x->outL = outlet_new(&x->x_obj, gensym("signal"));
-    x->lastDelayTime = 0;
-    x->targetDelayTime = 0;
     x->f = 0;
     return (x);
 }
 
 static void vas_del_setDelayTime(vas_del *x, float delayTime)
 {
-    x->targetDelayTime = delayTime;
-    if(fabs(x->targetDelayTime-x->lastDelayTime) > 256)
-    {
-        vas_delay_crossfade_setDelayTime(x->delayEngine, delayTime);
-        x->lastDelayTime = x->targetDelayTime;
-    }
+    vas_delayTap_crossfade_setDelayTime(x->delayEngine, delayTime);
 }
 
 void vas_del_tilde_setup(void)
@@ -49,7 +45,7 @@ void vas_del_tilde_setup(void)
     vas_del_class = class_new(gensym("vas_del~"), (t_newmethod)vas_del_new, (t_method)vas_del_free,
     	sizeof(vas_del), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("vas_del~ v0.1");
+    post("vas_del~ v0.2");
    
     CLASS_MAINSIGNALIN(vas_del_class, vas_del, f);
    

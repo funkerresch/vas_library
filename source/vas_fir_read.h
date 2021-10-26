@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "vas_fir.h"
 #include "vas_fir_list.h"
+#include "mysofa.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -18,9 +18,12 @@
 #define vas_util_h
 
 //#define VAS_USE_KISSFFT
+//#define VAS_USE_PFFFT
 //#define VAS_USE_AVX
 
-#if !defined(VAS_USE_VDSP) && !defined(VAS_USE_KISSFFT)
+//#define VAS_USE_MULTITHREADREFLECTION
+
+#if !defined(VAS_USE_VDSP) && !defined(VAS_USE_KISSFFT) && !defined(VAS_USE_PFFFT)
 
 #ifdef __APPLE__
 
@@ -37,7 +40,7 @@
 #endif
 #define _USE_MATH_DEFINES
 #include <math.h>
-#define VAS_USE_KISSFFT
+#define VAS_USE_PFFFT
 
 #endif
 
@@ -71,13 +74,21 @@ typedef COMPLEX_SPLIT VAS_COMPLEX;
 
 #ifdef VAS_USE_KISSFFT
 #include "kiss_fftr.h"
-//#include "vas_util_vectorIntrinsics.h"
 typedef kiss_fft_cpx VAS_COMPLEX;
 #endif
 
 #ifdef VAS_USE_PFFFT
+typedef struct kiss_fft_cpx // pffft's complex has the same format
+{
+    float r;
+    float i;
+} kiss_fft_cpx;
+
+typedef kiss_fft_cpx VAS_COMPLEX;
+#ifdef __arm__
+#include <arm_neon.h>
+#endif
 #include "pffft.h"
-typedef float VAS_COMPLEX;
 #endif
 
 #ifdef __cplusplus
@@ -96,15 +107,16 @@ typedef float VAS_OUTPUTBUFFER;
 //typedef double VAS_OUTPUTBUFFER;
 //#endif
 
-#define VAS_MAXVECTORSIZE 4096
+#define VAS_MAXVECTORSIZE 1024
 
-#define VAS_ELEVATION_ANGLES_MAX 90
-#define VAS_AZIMUTH_ANGLES_MAX 180
-#define VAS_ELEVATIONZERO 45
-#define VAS_AZIMUTH_STRIDE_MIN 2
-#define VAS_ELEVATION_STRIDE_MIN 2
+#define VAS_ELEVATION_ANGLES_MAX 60
+#define VAS_AZIMUTH_ANGLES_MAX 120
+#define VAS_ELEVATIONZERO 30
+#define VAS_AZIMUTH_STRIDE_MIN 3
+#define VAS_ELEVATION_STRIDE_MIN 3
 
 #define VAS_OUTPUTVECTOR_ADDINPLACE 1
+#define VAS_ONESEGMENT 2
 
 #define VAS_UNDEFINED 0
 #define VAS_GLOBALFILTER_LEFT 1
@@ -157,8 +169,6 @@ typedef float VAS_OUTPUTBUFFER;
 #ifndef WAI_PREFIX
 #define WAI_PREFIX(function) wai_##function
 #endif
-
-// https://github.com/gpakosz/whereami -> include as submodule
         
         /**
          * Returns the path to the current executable.
@@ -214,6 +224,10 @@ char* vas_strsep(char** stringp, const char* delim);
     
 void vas_util_postSomeValue(VAS_COMPLEX *dest, int length);
 
+float vas_util_fgain2db(float in);
+
+float vas_util_faverageSumOfmagnitudes(float *in, int length);
+
 void vas_util_single2DoublePrecision(float *in, double *out, int length);
 
 void vas_util_double2SinglePrecision(double *in, float *out, int length);
@@ -235,6 +249,8 @@ void vas_util_complexScale(VAS_COMPLEX *dest, float scale,  int length);
 void vas_util_complexCopy(VAS_COMPLEX *source, VAS_COMPLEX *dest, int length);
 
 void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int n);
+
+void vas_util_complexMultiply(int length, VAS_COMPLEX *signalIn, VAS_COMPLEX *filter, VAS_COMPLEX *dest);
 
 void vas_util_complexMultiplyAdd(VAS_COMPLEX *signalIn, VAS_COMPLEX *filter, VAS_COMPLEX *dest, int length);
 
@@ -305,8 +321,26 @@ void vas_utilities_zadd_vDSP(int length, COMPLEX_SPLIT signalIn, COMPLEX_SPLIT f
 void vas_utilities_zmultiply_vDSP(int length, COMPLEX_SPLIT signalIn, COMPLEX_SPLIT filter, COMPLEX_SPLIT dest);
 
 void vas_utilities_zmultiplyAdd_vDSP(int length, COMPLEX_SPLIT signalIn, COMPLEX_SPLIT filter, COMPLEX_SPLIT dest);
-    
+
 #endif
+
+void vas_utilities_apply_blackman_window(VAS_INPUTBUFFER *x, int n);
+
+void vas_utilities_apply_window(float* window, float*data, int n);
+
+int vas_utilities_next_power_of_2(int n);
+
+float vas_utilities_dB_to_lin(float dB);
+
+float vas_utilities_lin_to_dB(float lin);
+
+double vas_util_getWallTime(void);
+
+double vas_util_getCPUTime(void);
+
+unsigned int vas_util_getNumPhysicalCores(void);
+
+unsigned int vas_util_getNumLogicalCores(void);
 
 #ifdef __cplusplus
 }

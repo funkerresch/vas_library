@@ -44,6 +44,12 @@
 		E417C402236C70DC001A9C1B /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
 		E417C40D236C72C4001A9C1B /* vas_binaural~.c in Sources */ = {isa = PBXBuildFile; fileRef = E417C40B236C72C4001A9C1B /* vas_binaural~.c */; };
 		E417C40E236C72C4001A9C1B /* vas_binaural~.h in Headers */ = {isa = PBXBuildFile; fileRef = E417C40C236C72C4001A9C1B /* vas_binaural~.h */; };
+		E440D241266F5F4F00D8D83E /* vas_del~.h in Headers */ = {isa = PBXBuildFile; fileRef = E440D23F266F5F4F00D8D83E /* vas_del~.h */; };
+		E440D242266F5F4F00D8D83E /* vas_del~.c in Sources */ = {isa = PBXBuildFile; fileRef = E440D240266F5F4F00D8D83E /* vas_del~.c */; };
+		E440D244266F642D00D8D83E /* vas_delayTap_crossfade.c in Sources */ = {isa = PBXBuildFile; fileRef = E46B186525A35FDC00170FAB /* vas_delayTap_crossfade.c */; };
+		E440D245266F645000D8D83E /* vas_delayTap.c in Sources */ = {isa = PBXBuildFile; fileRef = E4F9E7BE25A355AC00CE8119 /* vas_delayTap.c */; };
+		E440D246266F645B00D8D83E /* vas_ringBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = E4F9E7C125A355AD00CE8119 /* vas_ringBuffer.c */; };
+		E440D247266F646300D8D83E /* vas_ringBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = E4F9E7C125A355AD00CE8119 /* vas_ringBuffer.c */; };
 		E448C06E230FE4B300D3C142 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
 		E448C070230FE4B400D3C142 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
 		E448C071230FE4B500D3C142 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
@@ -90,6 +96,45 @@
 		E466D09E260388DD0013F63F /* superblock.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064124F3CC5A00144C68 /* superblock.c */; };
 		E46B186725A35FDC00170FAB /* vas_delayTap_crossfade.c in Sources */ = {isa = PBXBuildFile; fileRef = E46B186525A35FDC00170FAB /* vas_delayTap_crossfade.c */; };
 		E46B186825A35FDC00170FAB /* vas_delayTap_crossfade.h in Headers */ = {isa = PBXBuildFile; fileRef = E46B186625A35FDC00170FAB /* vas_delayTap_crossfade.h */; };
+		E47A60742636AD79007C786A /* dataobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064024F3CC5A00144C68 /* dataobject.c */; };
+		E47A60752636AD79007C786A /* minphase.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065724F3CC8700144C68 /* minphase.c */; };
+		E47A60762636AD79007C786A /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
+		E47A60772636AD79007C786A /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */; };
+		E47A60782636AD79007C786A /* vas_pdmaxobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E451E59125DEB64700DD043F /* vas_pdmaxobject.c */; };
+		E47A60792636AD79007C786A /* vas_fir_read.c in Sources */ = {isa = PBXBuildFile; fileRef = E451E58D25DE6C3B00DD043F /* vas_fir_read.c */; };
+		E47A607A2636AD79007C786A /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
+		E47A607B2636AD79007C786A /* reader.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065224F3CC8700144C68 /* reader.c */; };
+		E47A607C2636AD79007C786A /* spherical.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065524F3CC8700144C68 /* spherical.c */; };
+		E47A607D2636AD79007C786A /* tools.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065C24F3CC8700144C68 /* tools.c */; };
+		E47A607E2636AD79007C786A /* interpolate.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064E24F3CC8600144C68 /* interpolate.c */; };
+		E47A607F2636AD79007C786A /* neighbors.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065424F3CC8700144C68 /* neighbors.c */; };
+		E47A60802636AD79007C786A /* easy.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065324F3CC8700144C68 /* easy.c */; };
+		E47A60812636AD79007C786A /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065024F3CC8600144C68 /* lookup.c */; };
+		E47A60822636AD79007C786A /* speex_resampler.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0067124F3CC9900144C68 /* speex_resampler.c */; };
+		E47A60832636AD79007C786A /* btree.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064324F3CC5A00144C68 /* btree.c */; };
+		E47A60852636AD79007C786A /* gunzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0063E24F3CC5A00144C68 /* gunzip.c */; };
+		E47A60862636AD79007C786A /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF820401E1A00CDC513 /* vas_util.c */; };
+		E47A60872636AD79007C786A /* superblock.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064124F3CC5A00144C68 /* superblock.c */; };
+		E47A60882636AD79007C786A /* vas_fir_partitioned.c in Sources */ = {isa = PBXBuildFile; fileRef = E47A606D2636A45E007C786A /* vas_fir_partitioned.c */; };
+		E47A60892636AD79007C786A /* cache.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064C24F3CC8600144C68 /* cache.c */; };
+		E47A608A2636AD79007C786A /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF720401E1A00CDC513 /* vas_mem.c */; };
+		E47A608B2636AD79007C786A /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
+		E47A608C2636AD79007C786A /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
+		E47A608D2636AD79007C786A /* fractalhead.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064224F3CC5A00144C68 /* fractalhead.c */; };
+		E47A608E2636AD79007C786A /* kdtree.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065924F3CC8700144C68 /* kdtree.c */; };
+		E47A608F2636AD79007C786A /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A69BD3234C947C00E4E570 /* vas_fir_list.c */; };
+		E47A60902636AD79007C786A /* loudness.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064F24F3CC8600144C68 /* loudness.c */; };
+		E47A60912636AD79007C786A /* check.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064D24F3CC8600144C68 /* check.c */; };
+		E47A60922636AD79007C786A /* resample.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065B24F3CC8700144C68 /* resample.c */; };
+		E47A60942636AD79007C786A /* gcol.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064424F3CC5A00144C68 /* gcol.c */; };
+		E47A60962636AD79007C786A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+		E47A609B2636AD79007C786A /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
+		E47A609C2636AD79007C786A /* vas_pdmaxobject.h in Headers */ = {isa = PBXBuildFile; fileRef = E451E59025DEB64700DD043F /* vas_pdmaxobject.h */; };
+		E47A60A32636AD97007C786A /* vas_partconv~.h in Headers */ = {isa = PBXBuildFile; fileRef = E47A60712636ACAE007C786A /* vas_partconv~.h */; };
+		E47A60A42636AD97007C786A /* vas_partconv~.c in Sources */ = {isa = PBXBuildFile; fileRef = E47A60702636ACAE007C786A /* vas_partconv~.c */; };
+		E47A60A72636C67A007C786A /* vas_delayTap.c in Sources */ = {isa = PBXBuildFile; fileRef = E4F9E7BE25A355AC00CE8119 /* vas_delayTap.c */; };
+		E47A60A82636C6A1007C786A /* vas_ringBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = E4F9E7C125A355AD00CE8119 /* vas_ringBuffer.c */; };
+		E495499C2643D8B1008C5707 /* vas_thpool_noMalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = E4CFCEEC2632A3FF006B8EFA /* vas_thpool_noMalloc.c */; };
 		E4A69BD4234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
 		E4A69BD6234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
 		E4A69BD7234C947C00E4E570 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
@@ -134,6 +179,41 @@
 		E4C45D202534795B000D9303 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
 		E4C5F36E2569169E00C72C66 /* vas_dynconv~.h in Headers */ = {isa = PBXBuildFile; fileRef = E4C5F36C2569169E00C72C66 /* vas_dynconv~.h */; };
 		E4C5F36F2569169E00C72C66 /* vas_dynconv~.c in Sources */ = {isa = PBXBuildFile; fileRef = E4C5F36D2569169E00C72C66 /* vas_dynconv~.c */; };
+		E4D0CB67266F5C3F00ED4121 /* tools.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065C24F3CC8700144C68 /* tools.c */; };
+		E4D0CB68266F5C3F00ED4121 /* interpolate.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064E24F3CC8600144C68 /* interpolate.c */; };
+		E4D0CB69266F5C3F00ED4121 /* gunzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0063E24F3CC5A00144C68 /* gunzip.c */; };
+		E4D0CB6A266F5C3F00ED4121 /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
+		E4D0CB6B266F5C3F00ED4121 /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */; };
+		E4D0CB6C266F5C3F00ED4121 /* minphase.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065724F3CC8700144C68 /* minphase.c */; };
+		E4D0CB6D266F5C3F00ED4121 /* vas_dynamicFirChannel.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7F0C2040487A00CDC513 /* vas_dynamicFirChannel.c */; };
+		E4D0CB6E266F5C3F00ED4121 /* cache.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064C24F3CC8600144C68 /* cache.c */; };
+		E4D0CB6F266F5C3F00ED4121 /* reader.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065224F3CC8700144C68 /* reader.c */; };
+		E4D0CB70266F5C3F00ED4121 /* kdtree.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065924F3CC8700144C68 /* kdtree.c */; };
+		E4D0CB71266F5C3F00ED4121 /* vas_fir_read.c in Sources */ = {isa = PBXBuildFile; fileRef = E451E58D25DE6C3B00DD043F /* vas_fir_read.c */; };
+		E4D0CB72266F5C3F00ED4121 /* vas_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF820401E1A00CDC513 /* vas_util.c */; };
+		E4D0CB73266F5C3F00ED4121 /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065024F3CC8600144C68 /* lookup.c */; };
+		E4D0CB74266F5C3F00ED4121 /* spherical.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065524F3CC8700144C68 /* spherical.c */; };
+		E4D0CB75266F5C3F00ED4121 /* vas_pdmaxobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E451E59125DEB64700DD043F /* vas_pdmaxobject.c */; };
+		E4D0CB76266F5C3F00ED4121 /* vas_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 84DA7EF720401E1A00CDC513 /* vas_mem.c */; };
+		E4D0CB77266F5C3F00ED4121 /* dataobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064024F3CC5A00144C68 /* dataobject.c */; };
+		E4D0CB78266F5C3F00ED4121 /* fractalhead.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064224F3CC5A00144C68 /* fractalhead.c */; };
+		E4D0CB79266F5C3F00ED4121 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BAE42211A48C0038459A /* kiss_fftr.c */; };
+		E4D0CB7A266F5C3F00ED4121 /* speex_resampler.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0067124F3CC9900144C68 /* speex_resampler.c */; };
+		E4D0CB7B266F5C3F00ED4121 /* resample.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065B24F3CC8700144C68 /* resample.c */; };
+		E4D0CB7C266F5C3F00ED4121 /* neighbors.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065424F3CC8700144C68 /* neighbors.c */; };
+		E4D0CB7D266F5C3F00ED4121 /* btree.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064324F3CC5A00144C68 /* btree.c */; };
+		E4D0CB7E266F5C3F00ED4121 /* loudness.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064F24F3CC8600144C68 /* loudness.c */; };
+		E4D0CB7F266F5C3F00ED4121 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C8BADF2211A47F0038459A /* kiss_fft.c */; };
+		E4D0CB80266F5C3F00ED4121 /* check.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064D24F3CC8600144C68 /* check.c */; };
+		E4D0CB82266F5C3F00ED4121 /* gcol.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064424F3CC5A00144C68 /* gcol.c */; };
+		E4D0CB83266F5C3F00ED4121 /* vas_fir_list.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A69BD3234C947C00E4E570 /* vas_fir_list.c */; };
+		E4D0CB84266F5C3F00ED4121 /* superblock.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064124F3CC5A00144C68 /* superblock.c */; };
+		E4D0CB85266F5C3F00ED4121 /* easy.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065324F3CC8700144C68 /* easy.c */; };
+		E4D0CB87266F5C3F00ED4121 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+		E4D0CB89266F5C3F00ED4121 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
+		E4D0CB8B266F5C3F00ED4121 /* vas_pdmaxobject.h in Headers */ = {isa = PBXBuildFile; fileRef = E451E59025DEB64700DD043F /* vas_pdmaxobject.h */; };
+		E4D0CB8C266F5C3F00ED4121 /* vas_fir_read.h in Headers */ = {isa = PBXBuildFile; fileRef = E451E58C25DE6C3B00DD043F /* vas_fir_read.h */; };
+		E4D0CB8D266F5C3F00ED4121 /* arch.h in Headers */ = {isa = PBXBuildFile; fileRef = E4F9E7C625A3565D00CE8119 /* arch.h */; };
 		E4E0064524F3CC5A00144C68 /* gunzip.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0063E24F3CC5A00144C68 /* gunzip.c */; };
 		E4E0064724F3CC5A00144C68 /* dataobject.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064024F3CC5A00144C68 /* dataobject.c */; };
 		E4E0064824F3CC5A00144C68 /* superblock.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0064124F3CC5A00144C68 /* superblock.c */; };
@@ -184,7 +264,6 @@
 		E4F9E7B125A3553300CE8119 /* easy.c in Sources */ = {isa = PBXBuildFile; fileRef = E4E0065324F3CC8700144C68 /* easy.c */; };
 		E4F9E7B325A3553300CE8119 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
 		E4F9E7B525A3553300CE8119 /* vas_fir_list.h in Headers */ = {isa = PBXBuildFile; fileRef = E4A69BD2234C947C00E4E570 /* vas_fir_list.h */; };
-		E4F9E7B625A3553300CE8119 /* vas_binaural~.h in Headers */ = {isa = PBXBuildFile; fileRef = E417C40C236C72C4001A9C1B /* vas_binaural~.h */; };
 		E4F9E7C825A3567600CE8119 /* arch.h in Headers */ = {isa = PBXBuildFile; fileRef = E4F9E7C625A3565D00CE8119 /* arch.h */; };
 		E4F9E7C925A3567700CE8119 /* arch.h in Headers */ = {isa = PBXBuildFile; fileRef = E4F9E7C625A3565D00CE8119 /* arch.h */; };
 		E4F9E7CA25A3567800CE8119 /* arch.h in Headers */ = {isa = PBXBuildFile; fileRef = E4F9E7C625A3565D00CE8119 /* arch.h */; };
@@ -233,7 +312,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E47A609D2636AD79007C786A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4C45D232534795B000D9303 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4D0CB8E266F5C3F00ED4121 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -277,12 +374,21 @@
 		E417C40A236C70DC001A9C1B /* vas_binaural~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "vas_binaural~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E417C40B236C72C4001A9C1B /* vas_binaural~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "vas_binaural~.c"; path = "../vas_binaural~.c"; sourceTree = "<group>"; };
 		E417C40C236C72C4001A9C1B /* vas_binaural~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vas_binaural~.h"; path = "../vas_binaural~.h"; sourceTree = "<group>"; };
+		E440D23F266F5F4F00D8D83E /* vas_del~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "vas_del~.h"; path = "../vas_del~.h"; sourceTree = "<group>"; };
+		E440D240266F5F4F00D8D83E /* vas_del~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "vas_del~.c"; path = "../vas_del~.c"; sourceTree = "<group>"; };
+		E44FB6202631A60200F96ED2 /* thpool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = thpool.c; path = "../../../C-Thread-Pool/thpool.c"; sourceTree = "<group>"; };
+		E44FB6212631A60200F96ED2 /* thpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thpool.h; path = "../../../C-Thread-Pool/thpool.h"; sourceTree = "<group>"; };
 		E451E58C25DE6C3B00DD043F /* vas_fir_read.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_fir_read.h; path = ../../../source/vas_fir_read.h; sourceTree = "<group>"; };
 		E451E58D25DE6C3B00DD043F /* vas_fir_read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_fir_read.c; path = ../../../source/vas_fir_read.c; sourceTree = "<group>"; };
 		E451E59025DEB64700DD043F /* vas_pdmaxobject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_pdmaxobject.h; path = ../../../source/vas_pdmaxobject.h; sourceTree = "<group>"; };
 		E451E59125DEB64700DD043F /* vas_pdmaxobject.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_pdmaxobject.c; path = ../../../source/vas_pdmaxobject.c; sourceTree = "<group>"; };
 		E46B186525A35FDC00170FAB /* vas_delayTap_crossfade.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_delayTap_crossfade.c; path = ../../../source/vas_delayTap_crossfade.c; sourceTree = "<group>"; };
 		E46B186625A35FDC00170FAB /* vas_delayTap_crossfade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_delayTap_crossfade.h; path = ../../../source/vas_delayTap_crossfade.h; sourceTree = "<group>"; };
+		E47A606C2636A45E007C786A /* vas_fir_partitioned.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_fir_partitioned.h; path = ../../../source/vas_fir_partitioned.h; sourceTree = "<group>"; };
+		E47A606D2636A45E007C786A /* vas_fir_partitioned.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_fir_partitioned.c; path = ../../../source/vas_fir_partitioned.c; sourceTree = "<group>"; };
+		E47A60702636ACAE007C786A /* vas_partconv~.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "vas_partconv~.c"; path = "../vas_partconv~.c"; sourceTree = "<group>"; };
+		E47A60712636ACAE007C786A /* vas_partconv~.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "vas_partconv~.h"; path = "../vas_partconv~.h"; sourceTree = "<group>"; };
+		E47A60A22636AD79007C786A /* vas_partconv~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "vas_partconv~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4A69BD2234C947C00E4E570 /* vas_fir_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_fir_list.h; path = ../../../source/vas_fir_list.h; sourceTree = "<group>"; };
 		E4A69BD3234C947C00E4E570 /* vas_fir_list.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_fir_list.c; path = ../../../source/vas_fir_list.c; sourceTree = "<group>"; };
 		E4BE83CE2379699900A84A1D /* vas_hpcomp~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "vas_hpcomp~.c"; path = "../vas_hpcomp~.c"; sourceTree = "<group>"; };
@@ -298,6 +404,8 @@
 		E4C5F39F256A521600C72C66 /* vas_delay_crossfade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_delay_crossfade.h; path = ../../../source/vas_delay_crossfade.h; sourceTree = "<group>"; };
 		E4C5F45E256A554500C72C66 /* vas_delay.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vas_delay.c; sourceTree = "<group>"; };
 		E4C5F45F256A554500C72C66 /* vas_delay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vas_delay.h; sourceTree = "<group>"; };
+		E4CFCEEC2632A3FF006B8EFA /* vas_thpool_noMalloc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_thpool_noMalloc.c; path = ../../../source/vas_thpool_noMalloc.c; sourceTree = "<group>"; };
+		E4D0CB93266F5C3F00ED4121 /* vas_del~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "vas_del~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E0063E24F3CC5A00144C68 /* gunzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gunzip.c; path = ../../../../libmysofa/src/hdf/gunzip.c; sourceTree = "<group>"; };
 		E4E0063F24F3CC5A00144C68 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reader.h; path = ../../../../libmysofa/src/hdf/reader.h; sourceTree = "<group>"; };
 		E4E0064024F3CC5A00144C68 /* dataobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dataobject.c; path = ../../../../libmysofa/src/hdf/dataobject.c; sourceTree = "<group>"; };
@@ -362,11 +470,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E47A60952636AD79007C786A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E47A60962636AD79007C786A /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4C45D1D2534795B000D9303 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E4C45D1E2534795B000D9303 /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4D0CB86266F5C3F00ED4121 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4D0CB87266F5C3F00ED4121 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +561,9 @@
 			isa = PBXGroup;
 			children = (
 				E4E0062F24F3CB8C00144C68 /* libmysofa */,
+				E44FB6212631A60200F96ED2 /* thpool.h */,
+				E44FB6202631A60200F96ED2 /* thpool.c */,
+				E4CFCEEC2632A3FF006B8EFA /* vas_thpool_noMalloc.c */,
 				844237651FB4A69D005ACA50 /* m_pd.h */,
 				E451E59025DEB64700DD043F /* vas_pdmaxobject.h */,
 				E451E59125DEB64700DD043F /* vas_pdmaxobject.c */,
@@ -452,6 +579,8 @@
 				E4A69BD3234C947C00E4E570 /* vas_fir_list.c */,
 				842E090320C67E8B0089C3D9 /* vas_fir_binaural.h */,
 				842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */,
+				E47A606C2636A45E007C786A /* vas_fir_partitioned.h */,
+				E47A606D2636A45E007C786A /* vas_fir_partitioned.c */,
 				84E5E16821FB4A28002216EF /* vas_fir_headphoneCompensation.h */,
 				84E5E16721FB4A28002216EF /* vas_fir_headphoneCompensation.c */,
 				843A834222560CE200CC7F80 /* vas_iir_biquad.c */,
@@ -468,12 +597,16 @@
 				E4F9E7C025A355AD00CE8119 /* vas_ringBuffer.h */,
 				E4C5F45E256A554500C72C66 /* vas_delay.c */,
 				E4C5F45F256A554500C72C66 /* vas_delay.h */,
+				E440D240266F5F4F00D8D83E /* vas_del~.c */,
+				E440D23F266F5F4F00D8D83E /* vas_del~.h */,
 				E417C40C236C72C4001A9C1B /* vas_binaural~.h */,
 				E417C40B236C72C4001A9C1B /* vas_binaural~.c */,
 				E4BE83D32379699A00A84A1D /* rwa_binauralsimple~.h */,
 				E4BE83CF2379699900A84A1D /* rwa_binauralsimple~.c */,
 				E4BE83D02379699900A84A1D /* vas_hpcomp~.h */,
 				E4BE83CE2379699900A84A1D /* vas_hpcomp~.c */,
+				E47A60712636ACAE007C786A /* vas_partconv~.h */,
+				E47A60702636ACAE007C786A /* vas_partconv~.c */,
 				E4BE83D12379699900A84A1D /* vas_reverb~.h */,
 				E4BE83D22379699A00A84A1D /* vas_reverb~.c */,
 				E4F9E7D025A3570D00CE8119 /* vas_binauralspace~.c */,
@@ -496,6 +629,8 @@
 				E417C40A236C70DC001A9C1B /* vas_binaural~.pd_darwin */,
 				E4C45D282534795B000D9303 /* vas_dynconv~.pd_darwin */,
 				E4F9E7BD25A3553300CE8119 /* vas_binauralspace~.pd_darwin */,
+				E47A60A22636AD79007C786A /* vas_partconv~.pd_darwin */,
+				E4D0CB93266F5C3F00ED4121 /* vas_del~.pd_darwin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -536,6 +671,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E47A60972636AD79007C786A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E47A609B2636AD79007C786A /* vas_fir_list.h in Headers */,
+				E47A609C2636AD79007C786A /* vas_pdmaxobject.h in Headers */,
+				E47A60A32636AD97007C786A /* vas_partconv~.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4C45D1F2534795B000D9303 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -547,6 +692,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E4D0CB88266F5C3F00ED4121 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4D0CB89266F5C3F00ED4121 /* vas_fir_list.h in Headers */,
+				E4D0CB8B266F5C3F00ED4121 /* vas_pdmaxobject.h in Headers */,
+				E4D0CB8C266F5C3F00ED4121 /* vas_fir_read.h in Headers */,
+				E440D241266F5F4F00D8D83E /* vas_del~.h in Headers */,
+				E4D0CB8D266F5C3F00ED4121 /* arch.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4F9E7B425A3553300CE8119 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -554,7 +711,6 @@
 				E4F9E7CD25A356B900CE8119 /* vas_delayTap.h in Headers */,
 				E44FDCB125DFF399000782E6 /* vas_pdmaxobject.h in Headers */,
 				E4F9E7B525A3553300CE8119 /* vas_fir_list.h in Headers */,
-				E4F9E7B625A3553300CE8119 /* vas_binaural~.h in Headers */,
 				E4F9E7D325A3570D00CE8119 /* vas_binauralspace~.h in Headers */,
 				E46B186825A35FDC00170FAB /* vas_delayTap_crossfade.h in Headers */,
 				E4F9E7CA25A3567800CE8119 /* arch.h in Headers */,
@@ -637,6 +793,25 @@
 			productReference = E417C40A236C70DC001A9C1B /* vas_binaural~.pd_darwin */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		E47A60722636AD79007C786A /* vas_partconv~ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E47A609F2636AD79007C786A /* Build configuration list for PBXNativeTarget "vas_partconv~" */;
+			buildPhases = (
+				E47A60732636AD79007C786A /* Sources */,
+				E47A60952636AD79007C786A /* Frameworks */,
+				E47A60972636AD79007C786A /* Headers */,
+				E47A609D2636AD79007C786A /* CopyFiles */,
+				E47A609E2636AD79007C786A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "vas_partconv~";
+			productName = "HelloWorld-pd-external";
+			productReference = E47A60A22636AD79007C786A /* vas_partconv~.pd_darwin */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		E4C45CFD2534795B000D9303 /* vas_dynconv~ */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4C45D252534795B000D9303 /* Build configuration list for PBXNativeTarget "vas_dynconv~" */;
@@ -654,6 +829,25 @@
 			name = "vas_dynconv~";
 			productName = "HelloWorld-pd-external";
 			productReference = E4C45D282534795B000D9303 /* vas_dynconv~.pd_darwin */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		E4D0CB65266F5C3F00ED4121 /* vas_del~ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4D0CB90266F5C3F00ED4121 /* Build configuration list for PBXNativeTarget "vas_del~" */;
+			buildPhases = (
+				E4D0CB66266F5C3F00ED4121 /* Sources */,
+				E4D0CB86266F5C3F00ED4121 /* Frameworks */,
+				E4D0CB88266F5C3F00ED4121 /* Headers */,
+				E4D0CB8E266F5C3F00ED4121 /* CopyFiles */,
+				E4D0CB8F266F5C3F00ED4121 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "vas_del~";
+			productName = "HelloWorld-pd-external";
+			productReference = E4D0CB93266F5C3F00ED4121 /* vas_del~.pd_darwin */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		E4F9E79225A3553300CE8119 /* vas_binauralspace~ */ = {
@@ -727,6 +921,8 @@
 				E417C3F2236C70DC001A9C1B /* vas_binaural~ */,
 				E4C45CFD2534795B000D9303 /* vas_dynconv~ */,
 				E4F9E79225A3553300CE8119 /* vas_binauralspace~ */,
+				E47A60722636AD79007C786A /* vas_partconv~ */,
+				E4D0CB65266F5C3F00ED4121 /* vas_del~ */,
 			);
 		};
 /* End PBXProject section */
@@ -760,7 +956,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E47A609E2636AD79007C786A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4C45D242534795B000D9303 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4D0CB8F266F5C3F00ED4121 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -791,6 +1001,7 @@
 				E466D095260388DD0013F63F /* reader.c in Sources */,
 				E466D097260388DD0013F63F /* spherical.c in Sources */,
 				E466D098260388DD0013F63F /* tools.c in Sources */,
+				E47A60A72636C67A007C786A /* vas_delayTap.c in Sources */,
 				E466D08F260388DD0013F63F /* interpolate.c in Sources */,
 				E466D094260388DD0013F63F /* neighbors.c in Sources */,
 				E466D08E260388DD0013F63F /* easy.c in Sources */,
@@ -799,6 +1010,7 @@
 				E466D099260388DD0013F63F /* btree.c in Sources */,
 				E466D09D260388DD0013F63F /* gunzip.c in Sources */,
 				84C9E392213ACA5D004C6B54 /* vas_util.c in Sources */,
+				E47A60A82636C6A1007C786A /* vas_ringBuffer.c in Sources */,
 				E466D09E260388DD0013F63F /* superblock.c in Sources */,
 				E466D08C260388DD0013F63F /* cache.c in Sources */,
 				84C9E393213ACA5D004C6B54 /* vas_mem.c in Sources */,
@@ -872,6 +1084,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E47A60732636AD79007C786A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E47A60742636AD79007C786A /* dataobject.c in Sources */,
+				E47A60752636AD79007C786A /* minphase.c in Sources */,
+				E47A60762636AD79007C786A /* vas_fir.c in Sources */,
+				E47A60772636AD79007C786A /* vas_fir_binaural.c in Sources */,
+				E47A60782636AD79007C786A /* vas_pdmaxobject.c in Sources */,
+				E47A60792636AD79007C786A /* vas_fir_read.c in Sources */,
+				E47A607A2636AD79007C786A /* vas_dynamicFirChannel.c in Sources */,
+				E47A607B2636AD79007C786A /* reader.c in Sources */,
+				E47A607C2636AD79007C786A /* spherical.c in Sources */,
+				E47A607D2636AD79007C786A /* tools.c in Sources */,
+				E47A607E2636AD79007C786A /* interpolate.c in Sources */,
+				E47A607F2636AD79007C786A /* neighbors.c in Sources */,
+				E495499C2643D8B1008C5707 /* vas_thpool_noMalloc.c in Sources */,
+				E47A60802636AD79007C786A /* easy.c in Sources */,
+				E47A60812636AD79007C786A /* lookup.c in Sources */,
+				E47A60822636AD79007C786A /* speex_resampler.c in Sources */,
+				E440D247266F646300D8D83E /* vas_ringBuffer.c in Sources */,
+				E47A60832636AD79007C786A /* btree.c in Sources */,
+				E47A60852636AD79007C786A /* gunzip.c in Sources */,
+				E47A60862636AD79007C786A /* vas_util.c in Sources */,
+				E47A60872636AD79007C786A /* superblock.c in Sources */,
+				E47A60882636AD79007C786A /* vas_fir_partitioned.c in Sources */,
+				E47A60892636AD79007C786A /* cache.c in Sources */,
+				E47A608A2636AD79007C786A /* vas_mem.c in Sources */,
+				E47A608B2636AD79007C786A /* kiss_fftr.c in Sources */,
+				E47A608C2636AD79007C786A /* kiss_fft.c in Sources */,
+				E47A608D2636AD79007C786A /* fractalhead.c in Sources */,
+				E47A608E2636AD79007C786A /* kdtree.c in Sources */,
+				E47A608F2636AD79007C786A /* vas_fir_list.c in Sources */,
+				E47A60902636AD79007C786A /* loudness.c in Sources */,
+				E47A60A42636AD97007C786A /* vas_partconv~.c in Sources */,
+				E47A60912636AD79007C786A /* check.c in Sources */,
+				E47A60922636AD79007C786A /* resample.c in Sources */,
+				E47A60942636AD79007C786A /* gcol.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4C45CFE2534795B000D9303 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -907,6 +1160,47 @@
 				E4C45D1A2534795B000D9303 /* superblock.c in Sources */,
 				E4C5F36F2569169E00C72C66 /* vas_dynconv~.c in Sources */,
 				E4C45D1C2534795B000D9303 /* easy.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4D0CB66266F5C3F00ED4121 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4D0CB67266F5C3F00ED4121 /* tools.c in Sources */,
+				E4D0CB68266F5C3F00ED4121 /* interpolate.c in Sources */,
+				E4D0CB69266F5C3F00ED4121 /* gunzip.c in Sources */,
+				E4D0CB6A266F5C3F00ED4121 /* vas_fir.c in Sources */,
+				E4D0CB6B266F5C3F00ED4121 /* vas_fir_binaural.c in Sources */,
+				E4D0CB6C266F5C3F00ED4121 /* minphase.c in Sources */,
+				E4D0CB6D266F5C3F00ED4121 /* vas_dynamicFirChannel.c in Sources */,
+				E4D0CB6E266F5C3F00ED4121 /* cache.c in Sources */,
+				E4D0CB6F266F5C3F00ED4121 /* reader.c in Sources */,
+				E4D0CB70266F5C3F00ED4121 /* kdtree.c in Sources */,
+				E4D0CB71266F5C3F00ED4121 /* vas_fir_read.c in Sources */,
+				E4D0CB72266F5C3F00ED4121 /* vas_util.c in Sources */,
+				E4D0CB73266F5C3F00ED4121 /* lookup.c in Sources */,
+				E4D0CB74266F5C3F00ED4121 /* spherical.c in Sources */,
+				E4D0CB75266F5C3F00ED4121 /* vas_pdmaxobject.c in Sources */,
+				E4D0CB76266F5C3F00ED4121 /* vas_mem.c in Sources */,
+				E440D246266F645B00D8D83E /* vas_ringBuffer.c in Sources */,
+				E4D0CB77266F5C3F00ED4121 /* dataobject.c in Sources */,
+				E4D0CB78266F5C3F00ED4121 /* fractalhead.c in Sources */,
+				E4D0CB79266F5C3F00ED4121 /* kiss_fftr.c in Sources */,
+				E4D0CB7A266F5C3F00ED4121 /* speex_resampler.c in Sources */,
+				E4D0CB7B266F5C3F00ED4121 /* resample.c in Sources */,
+				E4D0CB7C266F5C3F00ED4121 /* neighbors.c in Sources */,
+				E4D0CB7D266F5C3F00ED4121 /* btree.c in Sources */,
+				E4D0CB7E266F5C3F00ED4121 /* loudness.c in Sources */,
+				E4D0CB7F266F5C3F00ED4121 /* kiss_fft.c in Sources */,
+				E4D0CB80266F5C3F00ED4121 /* check.c in Sources */,
+				E4D0CB82266F5C3F00ED4121 /* gcol.c in Sources */,
+				E4D0CB83266F5C3F00ED4121 /* vas_fir_list.c in Sources */,
+				E4D0CB84266F5C3F00ED4121 /* superblock.c in Sources */,
+				E440D245266F645000D8D83E /* vas_delayTap.c in Sources */,
+				E4D0CB85266F5C3F00ED4121 /* easy.c in Sources */,
+				E440D242266F5F4F00D8D83E /* vas_del~.c in Sources */,
+				E440D244266F642D00D8D83E /* vas_delayTap_crossfade.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,6 +1285,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1033,6 +1328,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1074,6 +1370,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1116,6 +1413,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1161,6 +1459,7 @@
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1206,6 +1505,7 @@
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1222,6 +1522,95 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
+		E47A60A02636AD79007C786A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
+				DSTROOT = "$(PROJECT_DIR)/..";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VERBOSE,
+					VAS_INPUTVECTOR_USE_FLOAT,
+					VAS_USE_LIBMYSOFA,
+					VAS_USE_MULTITHREADING,
+					VAS_USE_MULTITHREADCONVOLUTION,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+				);
+				INSTALL_PATH = /build;
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/libmysofa/src/hrtf";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		E47A60A12636AD79007C786A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx2;
+				DSTROOT = "$(PROJECT_DIR)/..";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VERBOSE,
+					VAS_INPUTVECTOR_USE_FLOAT,
+					VAS_USE_LIBMYSOFA,
+					VAS_USE_MULTITHREADING,
+					VAS_USE_MULTITHREADCONVOLUTION,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+				);
+				INSTALL_PATH = /build;
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../..\"/**",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/libmysofa/src/hrtf";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
@@ -1251,6 +1640,7 @@
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1297,6 +1687,98 @@
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+				);
+				INSTALL_PATH = /build;
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = YES;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
+		E4D0CB91266F5C3F00ED4121 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DSTROOT = "$(PROJECT_DIR)/..";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_INPUTVECTOR_USE_FLOAT,
+					VAS_DEBUG_MEM,
+					VERBOSE,
+					VAS_USE_LIBMYSOFA,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
+					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
+				);
+				INSTALL_PATH = /build;
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/../../../libmysofa/build/src",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-mfma";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/** $(PROJECT_DIR)/../../../libmysofa/build/src/**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		E4D0CB92266F5C3F00ED4121 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = avx;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = "$(PROJECT_DIR)/..";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					PUREDATA,
+					VAS_OUTPUTVECTOR_USE_FLOAT,
+					VAS_INPUTVECTOR_USE_FLOAT,
+					VAS_DEBUG_MEM,
+					VERBOSE,
+					VAS_USE_LIBMYSOFA,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"$(PROJECT_DIR)/../../../kissfft/**",
+					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
+					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1342,6 +1824,7 @@
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1388,6 +1871,7 @@
 					"$(PROJECT_DIR)/../../../kissfft/**",
 					"\"$(SRCROOT)/../../../libmysofa/src/resampler\"",
 					"\"$(SRCROOT)/../../../libmysofa/src/hdf\"",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = (
@@ -1508,6 +1992,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
@@ -1545,6 +2030,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
 					"$(PROJECT_DIR)/../../../kissfft/**",
+					"$(PROJECT_DIR)/../../../C-Thread-Pool",
 				);
 				INSTALL_PATH = /build;
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/build/src";
@@ -1591,11 +2077,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E47A609F2636AD79007C786A /* Build configuration list for PBXNativeTarget "vas_partconv~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E47A60A02636AD79007C786A /* Debug */,
+				E47A60A12636AD79007C786A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E4C45D252534795B000D9303 /* Build configuration list for PBXNativeTarget "vas_dynconv~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4C45D262534795B000D9303 /* Debug */,
 				E4C45D272534795B000D9303 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4D0CB90266F5C3F00ED4121 /* Build configuration list for PBXNativeTarget "vas_del~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4D0CB91266F5C3F00ED4121 /* Debug */,
+				E4D0CB92266F5C3F00ED4121 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

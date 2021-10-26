@@ -94,8 +94,13 @@ void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
     size_t size = strlen(fullpath);
     struct MYSOFA_EASY *hrtf = NULL;
     int filterLength;
+    int syssr = 44100;
     
-    hrtf = mysofa_open(fullpath, 44100, &filterLength, &err);
+#if defined(PUREDATA)
+    syssr = sys_getsr();
+#endif // MaxVersion missing here
+
+    hrtf = mysofa_open(fullpath, syssr, &filterLength, &err);
     
     if(!hrtf)
     {
@@ -122,8 +127,9 @@ void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
         x->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
         strcpy(x->metaData.fullPath, fullpath);
 #if defined(MAXMSPSDK) || defined(PUREDATA)
-        post("%f %f %f %f %f %f", hrtf->hrtf->ReceiverPosition.values[0], hrtf->hrtf->ReceiverPosition.values[1],hrtf->hrtf->ReceiverPosition.values[2],
-        hrtf->hrtf->ReceiverPosition.values[3],hrtf->hrtf->ReceiverPosition.values[4],hrtf->hrtf->ReceiverPosition.values[5]);
+        //post("%f %f %f %f %f %f", hrtf->hrtf->ReceiverPosition.values[0], hrtf->hrtf->ReceiverPosition.values[1],hrtf->hrtf->ReceiverPosition.values[2],
+        //hrtf->hrtf->ReceiverPosition.values[3],hrtf->hrtf->ReceiverPosition.values[4],hrtf->hrtf->ReceiverPosition.values[5]);
+        post("Sampling Rate: %.0f", hrtf->hrtf->DataSamplingRate.values[0]);
 #endif
         return hrtf;
     }
@@ -428,7 +434,7 @@ void vas_fir_setMetaData_manually1(vas_fir *x, int filterLength, int segmentSize
     
 #ifdef VERBOSE
 #if(defined(MAXMSPSDK) || defined(PUREDATA))
-    post("filterlength: %d", x->metaData.filterLength);
+    post("filterlength: %d", x->metaData.filterLengthMinusOffset);
     post("elestride: %d", x->metaData.elevationStride);
     post("azistride: %d", x->metaData.azimuthStride);
     post("audioformat: %d", x->metaData.audioFormat);

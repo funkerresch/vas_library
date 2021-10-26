@@ -613,8 +613,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IrSet: fr_pos0.txt
-  ReverbTail: fr_pos0_tail.txt
-  ReverbClip: {fileID: 0}
+  ReverbTail: 
+  ReverbClip: {fileID: 8300000, guid: 6fe646f1641264d87b52fb0527b73a2a, type: 3}
   scalingDirect: 1
   scalingEarly: 1
   scalingLate: 1
@@ -622,8 +622,8 @@ MonoBehaviour:
   inverseElevation: 0
   bypass: 0
   listenerOrientationOnly: 0
-  segmentSizeEarlyReverb: 1024
-  segmentSizeLateReverb: 4096
+  segmentSizeEarlyReverb: 256
+  segmentSizeLateReverb: 1024
   binauralReflectionCount: 100
   recalculate: 0
 --- !u!82 &745503713

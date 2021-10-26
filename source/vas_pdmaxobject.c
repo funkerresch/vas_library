@@ -9,19 +9,18 @@
 #include "vas_pdmaxobject.h"
 
 #ifdef PUREDATA
-void vas_pdmaxobject_getFloatArrayAndLength(vas_pdmaxobject *x, t_symbol *arrayname, t_word **array, int *length)
+void vas_pdmaxobject_getFloatArrayAndLength(t_symbol *arrayname, t_word **array, int *length)
 {
     t_garray *a;
 
     if (!(a = (t_garray *)pd_findbyclass(arrayname, garray_class)))
     {
-        if (*arrayname->s_name) pd_error(x, "vas_fir: %s: no such array",
-            arrayname->s_name);
+        if (*arrayname->s_name) post("vas_fir: %s: no such array");
         *array = 0;
     }
     else if (!garray_getfloatwords(a, length, array))
     {
-        pd_error(x, "%s: bad template for vas_fir", arrayname->s_name);
+        post("bad template for vas_fir");
         *array = 0;
     }
     else
@@ -38,7 +37,7 @@ void vas_pdmaxobject_set_mono_simple(vas_pdmaxobject *x, t_symbol *left, float s
     int currentIndex2Write = 0;
     
     x->segmentSize = segmentSize;
-    vas_pdmaxobject_getFloatArrayAndLength(x, left, &x->leftArray, &x->leftArrayLength);
+    vas_pdmaxobject_getFloatArrayAndLength(left, &x->leftArray, &x->leftArrayLength);
     
     minLength = x->leftArrayLength;
 
@@ -66,15 +65,18 @@ void vas_pdmaxobject_set1(vas_pdmaxobject *x, t_symbol *left, t_symbol *right, f
     int maxLength = 0;
     
     x->segmentSize = segmentSize;
-    vas_pdmaxobject_getFloatArrayAndLength(x, left, &x->leftArray, &x->leftArrayLength);
-    vas_pdmaxobject_getFloatArrayAndLength(x, right, &x->rightArray, &x->rightArrayLength);
+    vas_pdmaxobject_getFloatArrayAndLength(left, &x->leftArray, &x->leftArrayLength);
+    vas_pdmaxobject_getFloatArrayAndLength(right, &x->rightArray, &x->rightArrayLength);
     
     maxLength = x->leftArrayLength;
     if(x->rightArrayLength > maxLength)
         maxLength = x->rightArrayLength;
         
-    float *leftIr = (float *)vas_mem_alloc( maxLength * sizeof(float));
-    float *rightIr = (float *)vas_mem_alloc( maxLength * sizeof(float));
+    size_t size = maxLength * sizeof(float);
+    float *leftIr = (float *)vas_mem_alloc( size);
+    float *rightIr = (float *)vas_mem_alloc( size);
+    memset(leftIr, 0, size);
+    memset(rightIr, 0, size);
        
     for (int i=0; i<x->leftArrayLength; i++)
         leftIr[i] = x->leftArray[i].w_float;
@@ -119,7 +121,7 @@ void vas_pdmaxobject_setAndInterpolateBetweenIndexes1(vas_pdmaxobject *x, t_symb
                     post("Even arguments must specify array name as symbol");
                     return;
             }
-            vas_pdmaxobject_getFloatArrayAndLength(x, argv[i].a_w.w_symbol, &x->leftArray, &x->leftArrayLength);
+            vas_pdmaxobject_getFloatArrayAndLength(argv[i].a_w.w_symbol, &x->leftArray, &x->leftArrayLength);
             if(x->leftArray == 0)
             {
                 post("Array is zero");
@@ -174,8 +176,8 @@ void vas_pdmaxobject_setAndInterpolateBetweenIndexes1(vas_pdmaxobject *x, t_symb
         endIndex = argv[i+3].a_w.w_float;
         distance = endIndex - startIndex + 1;
 
-        vas_pdmaxobject_getFloatArrayAndLength(x, argv[i].a_w.w_symbol, &x->leftArray, &x->leftArrayLength);
-        vas_pdmaxobject_getFloatArrayAndLength(x, argv[i+2].a_w.w_symbol, &x->rightArray, &x->rightArrayLength);
+        vas_pdmaxobject_getFloatArrayAndLength(argv[i].a_w.w_symbol, &x->leftArray, &x->leftArrayLength);
+        vas_pdmaxobject_getFloatArrayAndLength(argv[i+2].a_w.w_symbol, &x->rightArray, &x->rightArrayLength);
           
         maxLengthLeft = MIN(x->leftArrayLength, filterLength);
         for (int i=0;i<maxLengthLeft;i++)

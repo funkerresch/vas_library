@@ -16,6 +16,9 @@
 #ifndef vas_memory_h
 #define vas_memory_h
 
+#ifdef VAS_USE_PFFFT
+#include "pffft.h"
+#endif
 #include <stdlib.h>
 #include <string.h> /* memset */
 //#include <unistd.h> /* close */
@@ -30,6 +33,10 @@
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#ifdef _WIN32
+#define posix_memalign(p, a, s) (((*(p)) = _aligned_malloc((s), (a))), *(p) ?0 :errno)
 #endif
 
 void *vas_mem_alloc(long size);

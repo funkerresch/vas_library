@@ -1,16 +1,16 @@
-#include "vas_delay_crossfade.h"
+#include "vas_delayTap_crossfade.h"
+#include "vas_ringBuffer.h"
 
-#ifndef rwa_reverb_h
-#define rwa_reverb_h
+#ifndef vas_del_h
+#define vas_del_h
 
 typedef struct vas_del
 {
     t_object x_obj;
     t_outlet *outL;
     float f;
-    vas_delay_crossfade *delayEngine;
-    float lastDelayTime;
-    float targetDelayTime;
+    vas_delayTap_crossfade *delayEngine;
+    vas_ringBuffer *buffer;
 } vas_del;
 
 #ifdef PUREDATA

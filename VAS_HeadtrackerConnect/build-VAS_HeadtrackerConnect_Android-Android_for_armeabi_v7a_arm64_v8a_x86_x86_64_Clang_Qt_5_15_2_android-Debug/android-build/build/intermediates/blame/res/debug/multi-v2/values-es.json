@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/harveykeitel/Repositories/vas_library/VAS_HeadtrackerConnect/build-VAS_HeadtrackerConnect_Android-Android_for_armeabi_v7a_arm64_v8a_x86_x86_64_Clang_Qt_5_15_2_android-Debug/android-build/build/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
+            "map": [
+                {
+                    "source": "/Users/harveykeitel/Qt515/5.15.2/android/src/android/java/res/values-es/strings.xml",
+                    "from": {
+                        "startLines": "4,3,2,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "278,171,55,389",
+                        "endColumns": "110,106,115,97",
+                        "endOffsets": "384,273,166,482"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,166,273,389",
+                        "endColumns": "110,106,115,97",
+                        "endOffsets": "161,268,384,482"
+                    }
+                }
+            ]
+        }
+    ]
+}

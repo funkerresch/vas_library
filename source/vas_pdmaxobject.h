@@ -78,4 +78,8 @@ void vas_pdmaxobject_read(vas_pdmaxobject *x, t_symbol *s, float segmentSize, fl
 
 void vas_pdmaxobject_set1(vas_pdmaxobject *x, t_symbol *left, t_symbol *right, float segmentSize, float offset, float end);
 
+#ifdef PUREDATA
+void vas_pdmaxobject_getFloatArrayAndLength(t_symbol *arrayname, t_word **array, int *length);
+#endif
+
 #endif /* vas_pdmaxobject_h */

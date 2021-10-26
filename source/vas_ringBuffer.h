@@ -13,7 +13,7 @@
 #include "vas_mem.h"
 #include "vas_util.h"
 
-#define VAS_RINGBUFFER_MAXSIZE 160000
+#define VAS_RINGBUFFER_MAXSIZE 100000
 #define VAS_RINGBUFFER_MINVECTORSIZE 64
 
 #ifdef __cplusplus

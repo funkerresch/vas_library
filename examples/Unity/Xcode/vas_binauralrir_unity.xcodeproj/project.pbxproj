@@ -132,6 +132,9 @@
 		E49062B222ABA6720065D10F /* vas_iir_biquad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_iir_biquad.c; path = ../../../source/vas_iir_biquad.c; sourceTree = "<group>"; };
 		E4A69BDC234F43AB00E4E570 /* vas_fir_list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_list.c; path = ../../../source/vas_fir_list.c; sourceTree = "<group>"; };
 		E4A69BDD234F43AB00E4E570 /* vas_fir_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir_list.h; path = ../../../source/vas_fir_list.h; sourceTree = "<group>"; };
+		E4CFCEE826329656006B8EFA /* thpool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = thpool.c; path = "../../../C-Thread-Pool/thpool.c"; sourceTree = "<group>"; };
+		E4CFCEE926329656006B8EFA /* thpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thpool.h; path = "../../../C-Thread-Pool/thpool.h"; sourceTree = "<group>"; };
+		E4CFCEF22632B2E8006B8EFA /* vas_thpool_noMalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_thpool_noMalloc.h; path = ../../../source/vas_thpool_noMalloc.h; sourceTree = "<group>"; };
 		E4E0C47722A7BB90002B9564 /* libAudioPlugin_VAS_Binaural_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAudioPlugin_VAS_Binaural_iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E0C47922A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlugin_VAS_Binaural_iOS.h; sourceTree = "<group>"; };
 		E4E0C47A22A7BB90002B9564 /* AudioPlugin_VAS_Binaural_iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlugin_VAS_Binaural_iOS.m; sourceTree = "<group>"; };
@@ -230,9 +233,12 @@
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				E4CFCEF22632B2E8006B8EFA /* vas_thpool_noMalloc.h */,
 				E44FDCB825E3C799000782E6 /* libmysofa */,
 				E44FDCB525E3C676000782E6 /* vas_fir_read.c */,
 				E44FDCB425E3C676000782E6 /* vas_fir_read.h */,
+				E4CFCEE826329656006B8EFA /* thpool.c */,
+				E4CFCEE926329656006B8EFA /* thpool.h */,
 				E4F9E78A259395D700CE8119 /* vas_ringBuffer.h */,
 				E4F9E78B259395D700CE8119 /* vas_ringBuffer.c */,
 				E4F9E78E259397ED00CE8119 /* vas_delayTap.h */,
@@ -552,7 +558,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
-					VAS_WITH_AVERAGE_SEGMENTPOWER,
 					VAS_USE_LIBMYSOFA,
 					VAS_USE_MULTITHREADED_LOADING,
 				);
@@ -572,7 +577,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility $(PROJECT_DIR)/../../../kissfft \"$(SRCROOT)/../../../kissfft/tools\"/** \"$(SRCROOT)/../../../kissfft\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility $(PROJECT_DIR)/../../../kissfft \"$(SRCROOT)/../../../kissfft/tools\"/** \"$(SRCROOT)/../../../kissfft\"/** \"$(SRCROOT)/../../../C-Thread-Pool\"/**";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -597,7 +602,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					VAS_INPUTVECTOR_USE_FLOAT,
 					VAS_OUTPUTVECTOR_USE_FLOAT,
-					VAS_WITH_AVERAGE_SEGMENTPOWER,
 					VAS_USE_LIBMYSOFA,
 					VAS_USE_MULTITHREADED_LOADING,
 				);
@@ -617,7 +621,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility $(PROJECT_DIR)/../../../kissfft \"$(SRCROOT)/../../../kissfft/tools\"/** \"$(SRCROOT)/../../../kissfft\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/AudioUnitExamples/AUPublic/AUBase $(PROJECT_DIR)/AudioUnitExamples/AUPublic/OtherBases $(PROJECT_DIR)/AudioUnitExamples/AUPublic/Utility $(PROJECT_DIR)/AudioUnitExamples/PublicUtility $(PROJECT_DIR)/../../../kissfft \"$(SRCROOT)/../../../kissfft/tools\"/** \"$(SRCROOT)/../../../kissfft\"/** \"$(SRCROOT)/../../../C-Thread-Pool\"/**";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -723,7 +727,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = VAS_USE_LIBMYSOFA;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"\"$(SRCROOT)/../../../C-Thread-Pool\"",
+				);
 				INSTALL_PATH = /;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -734,6 +741,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../C-Thread-Pool\"";
 			};
 			name = Debug;
 		};
@@ -765,7 +773,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = VAS_USE_LIBMYSOFA;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../libmysofa/src/hrtf";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
+					"\"$(SRCROOT)/../../../C-Thread-Pool\"",
+				);
 				INSTALL_PATH = /;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -776,6 +787,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../../C-Thread-Pool\"";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

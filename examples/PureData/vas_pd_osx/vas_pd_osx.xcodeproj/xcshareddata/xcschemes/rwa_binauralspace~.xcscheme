@@ -76,6 +76,34 @@
                ReferencedContainer = "container:vas_pd_osx.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E47A60722636AD79007C786A"
+               BuildableName = "vas_partconv~.pd_darwin"
+               BlueprintName = "vas_partconv~"
+               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E4D0CB65266F5C3F00ED4121"
+               BuildableName = "vas_del~.pd_darwin"
+               BlueprintName = "vas_del~"
+               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -102,11 +130,7 @@
       </PathRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = ""
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = " -open /Users/harveykeitel/Repositories/vas_library/examples/PureData/doc/vas_binaural~-help.pd"
+            argument = " -open /Users/harveykeitel/Repositories/vas_library/examples/PureData/doc/vas_partconv~-help.pd"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

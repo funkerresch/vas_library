@@ -46,6 +46,8 @@ static void *vas_reverb_new(t_symbol *s, int argc, t_atom *argv)
     int end = 0;
     vas_reverb *x = (vas_reverb *)pd_new(vas_reverb_class);
     
+    //x->m = vas_util_measure_new("NORM REVERB");
+    
     t_symbol *path = NULL;
     x->outL = outlet_new(&x->x_obj, gensym("signal"));
     x->outR = outlet_new(&x->x_obj, gensym("signal"));

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="02fefce4-f9bf-4fa0-acc5-5a7a5a17e3da" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../C-Thread-Pool" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/thpool.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/thpool.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source/vas_fir_partitioned.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source/vas_fir_partitioned.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source/vas_fixedFirChannel.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source/vas_fixedFirChannel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source/vas_thpool_noMalloc.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source/vas_thpool_noMalloc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitmodules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/build/rwa_binauralsimple~.pd_darwin" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/build/rwa_binauralsimple~.pd_darwin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/build/vas_binauralspace~.pd_darwin" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/build/vas_binauralspace~.pd_darwin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/build/vas_binaural~.pd_darwin" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/build/vas_binaural~.pd_darwin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/build/vas_delay~.pd_darwin" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/build/vas_delay~.pd_darwin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/build/vas_del~.pd_darwin" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/build/vas_del~.pd_darwin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/build/vas_hpcomp~.pd_darwin" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/build/vas_hpcomp~.pd_darwin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/build/vas_reverb~.pd_darwin" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/build/vas_reverb~.pd_darwin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/doc/vas_reverb~-help.pd" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/doc/vas_reverb~-help.pd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_del~.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_del~.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_del~.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_del~.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/project.xcworkspace/xcuserdata/harveykeitel.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/project.xcworkspace/xcuserdata/harveykeitel.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/xcshareddata/xcschemes/rwa_binauralspace~.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/xcshareddata/xcschemes/rwa_binauralspace~.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/xcuserdata/harveykeitel.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/xcuserdata/harveykeitel.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/xcuserdata/harveykeitel.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_pd_osx/vas_pd_osx.xcodeproj/xcuserdata/harveykeitel.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_reverb~.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_reverb~.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/PureData/vas_reverb~.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/PureData/vas_reverb~.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/.vs/SpatializerTest/xs/UserPrefs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/.vs/SpatializerTest/xs/UserPrefs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/.vs/SpatializerTest/xs/project-cache/Assembly-CSharp-Debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/.vs/SpatializerTest/xs/project-cache/Assembly-CSharp-Debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Assembly-CSharp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Assets/Plugins/iOS/libAudioPlugin_VAS_Binaural_iOS.a" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Assets/Plugins/iOS/libAudioPlugin_VAS_Binaural_iOS.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Assets/Plugins/x86_64/AudioPlugin_VAS_Binaural.bundle/Contents/MacOS/AudioPlugin_VAS_Binaural" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Assets/Plugins/x86_64/AudioPlugin_VAS_Binaural.bundle/Contents/MacOS/AudioPlugin_VAS_Binaural" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Assets/Scenes/BRIR Example 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Assets/Scenes/BRIR Example 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/CurrentLayout-default.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/EditorUserBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/EditorUserBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/LastSceneManagerSetup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/LastSceneManagerSetup.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Assembly-CSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Assembly-CSharp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Rider.Editor.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Rider.Editor.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.TextMeshPro.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.TextMeshPro.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Timeline.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.Timeline.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.VSCode.Editor.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/Unity.VSCode.Editor.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.TestRunner.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.TestRunner.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEditor.UI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.TestRunner.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.TestRunner.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ScriptAssemblies/UnityEngine.UI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ShaderCache/EditorEncounteredVariants" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/ShaderCache/EditorEncounteredVariants" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/expandedItems" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/Library/expandedItems" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/SpatializerTest/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/Xcode/vas_binauralrir_unity.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/Xcode/vas_binauralrir_unity.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/Xcode/vas_binauralrir_unity.xcodeproj/project.xcworkspace/xcuserdata/harveykeitel.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/Xcode/vas_binauralrir_unity.xcodeproj/project.xcworkspace/xcuserdata/harveykeitel.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/Unity/Xcode/vas_binauralrir_unity.xcodeproj/xcuserdata/harveykeitel.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/Unity/Xcode/vas_binauralrir_unity.xcodeproj/xcuserdata/harveykeitel.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../max-sdk" beforeDir="false" afterPath="$PROJECT_DIR$/../../max-sdk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_delayTap_crossfade.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_delayTap_crossfade.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_delayTap_crossfade.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_delayTap_crossfade.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_dynamicFirChannel.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_dynamicFirChannel.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_dynamicFirChannel.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_dynamicFirChannel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_fir.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_fir.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_fir_read.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_fir_read.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_fir_read.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_fir_read.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_pdmaxobject.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_pdmaxobject.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_pdmaxobject.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_pdmaxobject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_ringBuffer.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_ringBuffer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_ringBuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_ringBuffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_util.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_util.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/vas_util.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/vas_util.h" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1tzGaUkE2dYkH8zEYlGVIIA5x9r" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="02fefce4-f9bf-4fa0-acc5-5a7a5a17e3da" name="Default Changelist" comment="" />
+      <created>1623764567805</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1623764567805</updated>
+    </task>
+    <servers />
+  </component>
+</project>

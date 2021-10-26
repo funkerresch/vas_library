@@ -4,77 +4,48 @@
 
 #include "vas_mem.h"
 
+// pffft's aligned memory allocation crashes on osx
+// posix memalign is used on posix systems
+// on windows
+//
+// #define posix_memalign(p, a, s) (((*(p)) = _aligned_malloc((s), (a))), *(p) ?0 :errno)
+//
+// is defined in vas_mem.h
+// there is no difference anymore between vas_mem_alloc & vas_mem_resize
+
 void *vas_mem_alloc(long size)
 {
-    
-#ifdef MAXMSPSDK
-    
-    //return sysmem_newptrclear(size);
-    return malloc(size);
-
-#elif defined(PUREDATA)
-#ifdef VAS_USE_AVX
-        _mm_malloc(32,32);
-#else
-    return malloc(size);
-#endif
-    
-#else
-    
-    return malloc(size);
-    
-#endif
-    
+    void *tmp;
+    posix_memalign(&tmp, 64, size);
+    long long *setMem = tmp;
+    memset(setMem, 0, size);
+    return tmp;
 }
 
 void *vas_mem_resize(void *ptr, long size)
 {
-    
-#ifdef MAXMSPSDK
-    
-   // return sysmem_resizeptrclear(ptr, size);
-    return realloc(ptr, size);
-    
-#elif defined(PUREDATA)
-//#ifdef VAS_USE_AVX
-//    _mm_malloc(32,32);
-//#else
-    void *tmp = realloc(ptr, size);
-    memset(tmp, 0, size);
-    return tmp;
-//#endif
-    
+    void *tmp;
+#ifdef _WIN32
+    _aligned_free(ptr);
 #else
-
-    void *tmp = realloc(ptr, size);
-    memset(tmp, 0, size);
-    
-    return tmp;
-    
-    //return realloc(ptr, size);
-    
+    if(ptr)
+        free(ptr);
 #endif
     
+    posix_memalign(&tmp, 64, size);
+    long long *setMem = tmp;
+    memset(setMem, 0, size);
+    return tmp;
 }
 
 void vas_mem_free(void *ptr)
 {
-    
-#ifdef MAXMSPSDK
-    
-   // sysmem_freeptr(ptr);
-    free(ptr);
-    
-#elif defined(PUREDATA)
-    if(ptr)
-        free(ptr);
-    
+#ifdef _WIN32
+    _aligned_free(ptr);
 #else
     if(ptr)
         free(ptr);
-    
 #endif
-    
 }
 
 #endif
