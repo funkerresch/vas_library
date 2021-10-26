@@ -10,6 +10,10 @@
 [submodule "max-sdk"]
 	path = max-sdk
 	url = https://github.com/Cycling74/max-sdk.git
+
 [submodule "C-Thread-Pool"]
 	path = C-Thread-Pool
-	url = https://github.com/Pithikos/C-Thread-Pool.git
+	url = git@github.com:Pithikos/C-Thread-Pool.git
+[submodule "pffft"]
+	path = pffft
+	url = git@github.com:marton78/pffft.git
