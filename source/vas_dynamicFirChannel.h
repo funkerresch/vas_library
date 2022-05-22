@@ -61,6 +61,9 @@ typedef struct vas_fir_metaData
     int eleMin;
     int eleMax;
     int aziRange;
+    int aziZero;
+    int aziMin;
+    int aziMax;
     int numberOfIrs;
 } vas_fir_metaData;
 
@@ -110,6 +113,9 @@ typedef struct vas_dynamicFirChannel_filter
     int eleRange;
     int eleStride;
     int aziRange;
+    int aziMin;
+    int aziMax;
+    int aziZero;
     int aziStride;
     int offset;
 
@@ -199,6 +205,8 @@ typedef struct vas_dynamicFirChannel
     int useSharedFilter;
     int frameCounter;
     int startCrossfade;
+    int aziDirection;
+    int jobQueue;
     
     float gain;
     float segmentThreshold;
@@ -212,16 +220,20 @@ typedef struct vas_dynamicFirChannel
 #ifdef VAS_USE_MULTITHREADCONVOLUTION
 
 #include "vas_thpool_noMalloc.h"
+#include "vas_threads.h"
 
 typedef struct vas_threadedConvolutionArg
 {
     vas_job *job;
     vas_dynamicFirChannel *x; //dynamicFirChannel
+    int *jobQueue;
     float *data;
 
 } vas_threadedConvolutionArg;
 
 void doWork1(void *args);
+
+void vas_dynamicFirChannel_process_threaded2(vas_threadedConvolutionArg *arg, int threadNumber, VAS_INPUTBUFFER *in, int vectorSize);
 
 void vas_dynamicFirChannel_process_threaded1(vas_threadedConvolutionArg *arg, VAS_INPUTBUFFER *in, int vectorSize);
 
@@ -362,6 +374,8 @@ void vas_dynamicFirChannel_updateAzimuthAndElevation(vas_dynamicFirChannel *x);
 void vas_dynamicFirChannel_calculateConvolution(vas_dynamicFirChannel *x);
 
 void vas_dynamicFirChannel_selectIR(vas_dynamicFirChannel *x, int index);
+
+void  vas_dynamicFirChannel_setAzimuthDirection(vas_dynamicFirChannel *x, int aziDirection);
 
 void vas_dynamicFirChannel_setAzimuth(vas_dynamicFirChannel *x, int azimuth);
 

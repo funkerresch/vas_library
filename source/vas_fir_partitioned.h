@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #include "vas_fir_binaural.h"
-#include "thpool.h"
+#include "vas_threads.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,8 +41,7 @@ typedef struct vas_fir_partitioned
     vas_threadedConvolutionArg *threadArgRight;
     int filterEnd;
     int init;
-     
-} vas_fir_partitioned;
+ } vas_fir_partitioned;
 
 vas_fir_partitioned *vas_fir_partitioned_new(int flags);
 void vas_fir_partitioned_free(vas_fir_partitioned *x);
@@ -50,6 +49,7 @@ void vas_fir_partitioned_process(vas_fir_partitioned *x, VAS_INPUTBUFFER *in, VA
 void vas_fir_partitioned_shareFilter(vas_fir_partitioned *x, vas_fir_partitioned *sharedFilter);
 void vas_fir_partitioned_setFilter(vas_fir_partitioned *x, float *left, float *right, int length);
 int vas_fir_partitioned_init(vas_fir_partitioned *x, int minSegmentSize, int maxSegmentSize, int length);
+void vas_fir_partitioned_deinit(vas_fir_partitioned *x);
 
 #ifdef __cplusplus
 }

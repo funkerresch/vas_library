@@ -441,8 +441,10 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../../../max-sdk/source/Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 				PRODUCT_NAME = "vas.binaural~";
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Development;
@@ -473,8 +475,10 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../../../max-sdk/source/Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 				PRODUCT_NAME = "vas.binaural~";
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Deployment;

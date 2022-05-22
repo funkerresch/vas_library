@@ -114,7 +114,7 @@ void vas_partconv_read(vas_partconv *x,  t_symbol *s, float segmentSize)
 {
     vas_pdmaxobject_read((vas_pdmaxobject *)x, s, 512, 0, 4096);
     x->convolutionEngine = x->partConvEngine->convolutionEngine[1];
-    vas_pdmaxobject_read((vas_pdmaxobject *)x, s, 2048, 4096, 20480);
+    vas_pdmaxobject_read((vas_pdmaxobject *)x, s, 2048, 4096, -1);
     x->convolutionEngine = x->partConvEngine->convolutionEngine[0];
 }
 

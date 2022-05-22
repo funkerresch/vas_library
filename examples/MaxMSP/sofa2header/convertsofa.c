@@ -92,7 +92,7 @@ static void sofa2text(int *err, char *filename, char *fullpath, sofa2headerfile 
 {
     struct MYSOFA_EASY *hrtf;
     int filterLength;
-    hrtf = mysofa_open(fullpath, 44100, &filterLength, err);
+    hrtf = mysofa_open(fullpath, 48000, &filterLength, err);
     
     if(hrtf==NULL)
         error("Could not open %s", filename);
@@ -256,7 +256,7 @@ static void sofa2header(int *err, char *filename, char *fullpath, sofa2headerfil
 {
     struct MYSOFA_EASY *hrtf;
     int filterLength;
-    hrtf = mysofa_open(fullpath, 44100, &filterLength, err);
+    hrtf = mysofa_open(fullpath, 48000, &filterLength, err);
     
     if(hrtf==NULL)
         error("Could not open %s", filename);

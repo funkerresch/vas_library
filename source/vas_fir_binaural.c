@@ -30,6 +30,12 @@ void vas_fir_binaural_processOutputInPlace(vas_fir_binaural *x, VAS_INPUTBUFFER 
     vas_dynamicFirChannel_process(x->right, in, outRight, vectorSize, VAS_OUTPUTVECTOR_ADDINPLACE);
 }
 
+void vas_fir_binaural_setAzimuthDirection(vas_fir_binaural *x, int aziDirection)
+{
+    vas_dynamicFirChannel_setAzimuthDirection(x->left, aziDirection);
+    vas_dynamicFirChannel_setAzimuthDirection(x->right, aziDirection);
+}
+
 void vas_fir_binaural_setAzimuth(vas_fir_binaural *x, int azimuth)
 {
     vas_dynamicFirChannel_setAzimuth(x->left, azimuth);

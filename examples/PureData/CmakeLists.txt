@@ -1,0 +1,33 @@
+# Define your standard CMake header (for example):
+cmake_minimum_required(VERSION 3.1)
+
+set(CMAKE_SUPPRESS_REGENERATION true)
+set(CMAKE_MACOSX_RPATH Off)
+set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4)
+set(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
+
+# Declare the name of the project:   
+project(vas_objects)
+
+# Include pd.cmake (1):  
+include(${CMAKE_SOURCE_DIR}/../../../pd.build/pd.cmake)
+
+
+
+# Define the path to the Pure Data sources (2):
+set_pd_sources(${project_source_dir}/../../../pure-data/src)
+
+# Set the output path for the externals (3):  
+set_pd_external_path(${CMAKE_SOURCE_DIR}/build/)
+
+
+# target_sources(vas_objects PRIVATE ${../../sources/vas_dynamicFirChannel.c})
+
+# Add one or several externals (4):   
+add_pd_external(vas_objects vas_binaural~ ${CMAKE_SOURCE_DIR}/vas_binaural~.c ${CMAKE_SOURCE_DIR}/../../vas_pdmaxobject.h)
+
+#target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/../../source)
+
+
+
+# add_pd_external(my_object2_project my_object2_name ${project_source_dir}/sources/my_object2.c)

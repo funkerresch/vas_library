@@ -94,10 +94,10 @@ void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
     size_t size = strlen(fullpath);
     struct MYSOFA_EASY *hrtf = NULL;
     int filterLength;
-    int syssr = 44100;
+    int syssr = 48000;
     
 #if defined(PUREDATA)
-    syssr = sys_getsr();
+    //syssr = sys_getsr();
 #endif // MaxVersion missing here
 
     hrtf = mysofa_open(fullpath, syssr, &filterLength, &err);
@@ -127,9 +127,14 @@ void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
         x->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
         strcpy(x->metaData.fullPath, fullpath);
 #if defined(MAXMSPSDK) || defined(PUREDATA)
+        post("Number of measurements: %d",hrtf->hrtf->M);
         //post("%f %f %f %f %f %f", hrtf->hrtf->ReceiverPosition.values[0], hrtf->hrtf->ReceiverPosition.values[1],hrtf->hrtf->ReceiverPosition.values[2],
         //hrtf->hrtf->ReceiverPosition.values[3],hrtf->hrtf->ReceiverPosition.values[4],hrtf->hrtf->ReceiverPosition.values[5]);
         post("Sampling Rate: %.0f", hrtf->hrtf->DataSamplingRate.values[0]);
+        post("Listener View: %d", hrtf->hrtf->ListenerView.elements);
+        post("Source Position: %d", hrtf->hrtf->SourcePosition.elements);
+        for(int i = 0; i<135; i++)
+            post("%f", hrtf->hrtf->SourcePosition.values[i]);
 #endif
         return hrtf;
     }
@@ -296,7 +301,10 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
             if(x->metaData.directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE)
                 x->metaData.aziRange = 1;
             else
-                x->metaData.aziRange = 360/x->metaData.azimuthStride;
+            {
+                if(x->metaData.aziRange == 0)
+                    x->metaData.aziRange = 360/x->metaData.azimuthStride;
+            }
 
 #ifdef VERBOSE
 #if(defined(MAXMSPSDK) || defined(PUREDATA))
@@ -304,6 +312,7 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
 #endif
 #endif
         }
+        
         // { .aziRange = 1, .aziStride = 1, .eleMin = 0, .eleMax = 1, .eleRange = 1, .eleStride = 1, .eleZero = 0};
         else if(strstr(*line, "directionformat"))
         {
@@ -349,6 +358,36 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
             post("lineformat: %d", x->metaData.lineFormat);
 #else
             printf("lineformat: %d", x->description.lineFormat);
+#endif
+#endif
+        }
+        
+        else if(strstr(*line, "azirange"))
+        {
+            value = vas_strsep(&lineAdr, " ");
+            value = vas_strsep(&lineAdr, " ");
+            x->metaData.aziRange = atoi(value);
+            if(x->metaData.directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE) // ignore azirange
+                x->metaData.aziRange = 1;
+            else
+            {
+                if(x->metaData.aziRange > 0)
+                {
+                    x->metaData.aziMin = -x->metaData.aziRange;
+                    x->metaData.aziMax = x->metaData.aziRange;
+                    x->metaData.aziZero = x->metaData.aziRange / x->metaData.azimuthStride + 1;
+                    x->metaData.aziRange = x->metaData.aziRange * 2 / x->metaData.azimuthStride + 1;
+                }
+                else
+                    x->metaData.aziRange = 360 / x->metaData.azimuthStride;
+            }
+
+#ifdef VERBOSE
+#if(defined(MAXMSPSDK) || defined(PUREDATA))
+            post("azirange: %d", x->metaData.aziRange);
+            post("aziMin: %d", x->metaData.aziMin);
+            post("aziMax: %d", x->metaData.aziMax);
+            post("aziZero: %d", x->metaData.aziZero);
 #endif
 #endif
         }
@@ -489,6 +528,11 @@ static void vas_filter_extractAngleFromText(char *angle, int *currentAngle, char
     (*line)++; // skip white space after angle
     angle[index] = '\0';
     *currentAngle = atoi(angle);
+    if(*currentAngle < 0)
+    {
+        *currentAngle = 360 + *currentAngle;
+        
+    }
 }
 
 static void vas_filter_read_lineFormat_value(vas_fir *x, FILE *filePtr, char **line)

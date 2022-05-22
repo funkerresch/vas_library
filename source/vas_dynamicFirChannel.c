@@ -2,6 +2,7 @@
 
 #ifdef VAS_USE_MULTITHREADCONVOLUTION
 threadpool vas_partitioned_thpool;
+vas_threads *vas_convolutionThreadPool;
 #endif
 
 void vas_filter_metaData_init(vas_fir_metaData *x)
@@ -14,6 +15,10 @@ void vas_filter_metaData_init(vas_fir_metaData *x)
     x->lineFormat = 0;
     x->segmentSize = 256;
     x->numberOfIrs = 0;
+    x->aziMin = 0;
+    x->aziMax = 1000; // some value > 359
+    x->aziRange = 0;
+    x->aziZero = 0;
     x->fullPath = NULL;
 }
 
@@ -30,6 +35,8 @@ vas_dynamicFirChannel_filter *vas_dynamicFirChannel_filter_new()
     x->aziStride = 1;
     x->eleMin = 0;
     x->eleMax = 1;
+    x->aziMin = 0;
+    x->aziMax = 1000; // some random value > 359
     
 #ifdef VAS_USE_VDSP
     x->setupReal = NULL;
@@ -127,6 +134,9 @@ void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *met
     x->filter->eleStride = metaData->elevationStride;
     x->filter->aziStride = metaData->azimuthStride;
     x->filter->aziRange = metaData->aziRange;
+    x->filter->aziZero = metaData->aziZero;
+    x->filter->aziMin = metaData->aziMin;
+    x->filter->aziMax = metaData->aziMax;
     x->filter->eleRange = metaData->eleRange;
     x->filter->eleMin = metaData->eleMin;
     x->filter->eleMax = metaData->eleMax;
@@ -296,17 +306,37 @@ void vas_dynamicFirChannel_selectIR(vas_dynamicFirChannel *x, int index)
          x->azimuthTmp = index;
 }
 
+void  vas_dynamicFirChannel_setAzimuthDirection(vas_dynamicFirChannel *x, int aziDirection)
+{
+    if(aziDirection >= 1)
+        x->aziDirection = 1;
+    if(aziDirection < 1)
+        x->aziDirection = 0;
+}
+
 void vas_dynamicFirChannel_setAzimuth(vas_dynamicFirChannel *x, int azimuth)
 {
     if(x->filter->directionFormat != VAS_IR_DIRECTIONFORMAT_SINGLE)
     {
+        int aziMin = 360 + x->filter->aziMin;
         int azi = azimuth;
-        if(azi < 0)
-            azi = 360 - azi;
         
+        if(azi < 0)
+            azi = 360 + azi;
+   
         azi = azi % 360;
+        
+        if(azi > x->filter->aziMax && azi < aziMin)
+            return;
+         
         x->azimuthTmp = azi/x->filter->aziStride;
     }
+}
+
+void vas_dynamicFirChannel_setElevation(vas_dynamicFirChannel *x, int elevation)
+{
+    if(elevation >= x->filter->eleMin && elevation < x->filter->eleMax)
+        x->elevationTmp = elevation/x->filter->eleStride+x->filter->eleZero;
 }
 
 void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float thresh)
@@ -316,12 +346,6 @@ void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float t
 #if defined(MAXMSPSDK) || defined(PUREDATA)
     post("%.20f", x->segmentThreshold);
 #endif
-}
-
-void vas_dynamicFirChannel_setElevation(vas_dynamicFirChannel *x, int elevation)
-{
-    if(elevation >= x->filter->eleMin && elevation < x->filter->eleMax)
-        x->elevationTmp = elevation/x->filter->eleStride+x->filter->eleZero;
 }
 
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize)
@@ -540,6 +564,44 @@ void doWork1(void *args)
 {
     vas_dynamicFirChannel *x = ((vas_threadedConvolutionArg *)args)->x;
     vas_dynamicFirChannel_calculateConvolution_threaded(x, ((vas_threadedConvolutionArg *)args)->data);
+}
+
+void doWork2(void *args)
+{
+    __LFQ_ADD_AND_FETCH(((vas_threadedConvolutionArg *)args)->jobQueue, 1);
+    vas_dynamicFirChannel *x = ((vas_threadedConvolutionArg *)args)->x;
+    vas_dynamicFirChannel_calculateConvolution_threaded(x, ((vas_threadedConvolutionArg *)args)->data);
+    __LFQ_ADD_AND_FETCH(((vas_threadedConvolutionArg *)args)->jobQueue, -1);
+}
+
+void vas_dynamicFirChannel_process_threaded2(vas_threadedConvolutionArg *arg, int threadNumber, VAS_INPUTBUFFER *in, int vectorSize)
+{
+    vas_dynamicFirChannel *x = arg->x;
+    float *pointerToFFTInput;
+    int vsOverSegmentSize = vectorSize/x->filter->segmentSize;
+
+    if(!x->init)
+        return;
+
+    if(!vsOverSegmentSize) // segment size > vector size
+    {
+        int segmentSizeOverVs = x->filter->segmentSize/vectorSize;
+        pointerToFFTInput = x->input->copy;
+
+        if(!x->useSharedInput)
+        {
+            pointerToFFTInput+= x->frameCounter * vectorSize;
+            vas_util_fcopy(in, pointerToFFTInput, vectorSize);
+        }
+
+        x->frameCounter++;
+
+        if(x->frameCounter == segmentSizeOverVs)
+        {
+            x->frameCounter = 0;
+            vas_threads_addWork(vas_convolutionThreadPool, threadNumber,  doWork2, arg);
+        }
+    }
 }
 
 void vas_dynamicFirChannel_process_threaded1(vas_threadedConvolutionArg *arg, VAS_INPUTBUFFER *in, int vectorSize)
@@ -1064,6 +1126,8 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup)
     x->init = 0;
     x->frameCounter = 0;
     x->startCrossfade  = 0;
+    x->aziDirection = 0;
+    x->jobQueue = 0;
 
     x->filter = vas_dynamicFirChannel_filter_new();
     x->input = vas_dynamicFirChannel_input_new();

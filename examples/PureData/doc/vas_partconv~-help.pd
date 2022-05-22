@@ -1,4 +1,4 @@
-#N canvas 476 225 1024 608 10;
+#N canvas 255 70 1210 986 10;
 #X obj 163 477 dac~;
 #X obj 107 182 readsf~;
 #X msg 154 157 1;
@@ -7,14 +7,14 @@
 #X obj 153 89 t b b;
 #X msg 181 37 \; pd dsp 0;
 #N canvas 0 23 450 300 (subpatch) 0;
-#X array arrayL 110250 float 0;
-#X coords 0 0.05 110249 -0.05 200 80 1 0 0;
+#X array arrayL 114155 float 0;
+#X coords 0 0.05 114154 -0.05 200 80 1 0 0;
 #X restore 330 426 graph;
 #X obj 278 100 soundfiler;
 #X floatatom 278 132 0 0 0 0 - - -;
 #N canvas 0 23 450 300 (subpatch) 0;
-#X array arrayR 110250 float 0;
-#X coords 0 0.05 110249 -0.05 200 80 1 0 0;
+#X array arrayR 114155 float 0;
+#X coords 0 0.05 114154 -0.05 200 80 1 0 0;
 #X restore 536 426 graph;
 #X obj 81 453 vu 8 80 empty empty -1 -8 0 10 -66577 -1 1 0;
 #X obj 81 415 env~ 128;
@@ -37,7 +37,7 @@ function.;
 #X obj 269 446 *~ 0.5;
 #X obj 163 449 *~ 0.5;
 #X obj 659 220 vsl 40 110 0 200 0 0 empty empty empty 0 -9 0 10 -261682
--1 -1 1398 1;
+-1 -1 2398 1;
 #X obj 659 345 / 127;
 #X floatatom 738 369 5 0 0 0 - - -;
 #X obj 659 175 loadbang;

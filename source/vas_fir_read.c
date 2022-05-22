@@ -12,7 +12,8 @@ extern vas_fir_list IRs;
 
 int vas_fir_read_sofa_0Degrees(char *fullpath, float *leftIR, float *rightIR)
 {
-    int err = 0;
+    int err = -1;
+#ifdef VAS_USE_LIBMYSOFA
     struct MYSOFA_EASY *hrtf = NULL;
     int filterLength;
     hrtf = mysofa_open(fullpath, 44100, &filterLength, &err);
@@ -26,6 +27,7 @@ int vas_fir_read_sofa_0Degrees(char *fullpath, float *leftIR, float *rightIR)
     mysofa_getfilter_float(hrtf , 0, 0, 0, leftIR, rightIR, &leftDelay, &rightDelay);
    
     mysofa_close(hrtf);
+#endif
     return err;
 }
 
@@ -77,6 +79,7 @@ void vas_fir_read_impulseFromFile(vas_fir *x, char *fullpath, int segmentSize, i
     {
 #ifdef VAS_USE_LIBMYSOFA
         void *filter = vas_fir_readSofa_getMetaData(x, fullpath);
+
         if(filter)
         {
             if(vas_fir_getInitFlag(x))
