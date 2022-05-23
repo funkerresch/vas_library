@@ -64,6 +64,15 @@ vas_fir_partitioned *vas_fir_partitioned_new(int flags)
 void vas_fir_partitioned_swapReadAndWrite(vas_fir_partitioned *x, int i)
 {
     float *tmp = x->readBufferLeft[i];
+    int *tmpQueueLeft = x->writeJobQueueLeft;
+    int *tmpQueueRight = x->writeJobQueueRight;
+    
+    x->writeJobQueueLeft = x->readJobQueueLeft;
+    x->writeJobQueueRight = x->readJobQueueRight;
+    
+    x->readJobQueueLeft = tmpQueueLeft;
+    x->readJobQueueRight = tmpQueueRight;
+    
     x->readBufferLeft[i] = x->writeBufferLeft[i];
     x->writeBufferLeft[i] = tmp;
 
@@ -92,9 +101,9 @@ void vas_fir_partitioned_process(vas_fir_partitioned *x, VAS_INPUTBUFFER *in, VA
     for(int i = x->convolverCount-1; i > 0; i--)            // after exchanging read and write buffers we are making sure, that every convolution engine has
     {                                                       // finished calculating before we add the results together
         if(!x->convolutionEngine[i]->left->frameCounter)
-            VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(&x->convolutionEngine[i]->left->jobQueue);  // because we give every doubled fft size twice as much time to finish,
-        if(!x->convolutionEngine[i]->right->frameCounter)                                // this also works fine without waiting because fft has O(n log n)
-            VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(&x->convolutionEngine[i]->right->jobQueue); // depends highly on what else is going on your computer
+            VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(&x->readJobQueueLeft[i]);  // because we give every doubled fft size twice as much time to finish,
+        if(!x->convolutionEngine[i]->right->frameCounter)               // this (usually) also works fine without waiting because fft has O(n log n)
+            VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(&x->readJobQueueRight[i]); // depends highly on what else is going on your computer
     }
     
     for(int i = x->convolverCount-1; i > 0; i--)
@@ -140,6 +149,10 @@ int vas_fir_partitioned_init(vas_fir_partitioned *x, int minSegmentSize, int max
     x->threadArgLeft = (vas_threadedConvolutionArg *) vas_mem_alloc(sizeof(vas_threadedConvolutionArg)* x->convolverCount);
     x->threadArgRight = (vas_threadedConvolutionArg *) vas_mem_alloc(sizeof(vas_threadedConvolutionArg)* x->convolverCount);
     x->partitionData = (vas_fir_partitioned_data *) vas_mem_alloc(sizeof(vas_fir_partitioned_data) * x->convolverCount);
+    x->writeJobQueueLeft = (int *) vas_mem_alloc(x->convolverCount * sizeof(int));
+    x->writeJobQueueRight = (int *) vas_mem_alloc(x->convolverCount * sizeof(int));
+    x->readJobQueueLeft = (int *) vas_mem_alloc(x->convolverCount * sizeof(int));
+    x->readJobQueueRight = (int *) vas_mem_alloc(x->convolverCount * sizeof(int));
     
     currentEnd = minSegmentSize * 8;
     vas_fir_partitioned_data_set(&x->partitionData[0], minSegmentSize, 0, currentEnd);
@@ -181,8 +194,8 @@ int vas_fir_partitioned_init(vas_fir_partitioned *x, int minSegmentSize, int max
         x->threadArgRight[i].data = x->writeBufferRight[i];
         x->threadArgLeft[i].job = malloc(sizeof(vas_job));
         x->threadArgRight[i].job = malloc(sizeof(vas_job));
-        x->threadArgLeft[i].jobQueue = &x->convolutionEngine[i]->left->jobQueue;
-        x->threadArgRight[i].jobQueue = &x->convolutionEngine[i]->right->jobQueue;
+        x->threadArgLeft[i].jobQueue = &x->writeJobQueueLeft[i];
+        x->threadArgRight[i].jobQueue = &x->writeJobQueueRight[i];
     }
     
     x->init = 1;
@@ -204,6 +217,10 @@ void vas_fir_partitioned_deinit(vas_fir_partitioned *x)
             free(x->threadArgRight[i].job);
         }
         
+        vas_mem_free(x->writeJobQueueLeft);
+        vas_mem_free(x->writeJobQueueRight);
+        vas_mem_free(x->readJobQueueLeft);
+        vas_mem_free(x->readJobQueueRight);
         vas_mem_free(x->threadArgLeft);
         vas_mem_free(x->threadArgRight);
         vas_mem_free(x->partitionData);

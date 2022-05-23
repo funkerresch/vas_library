@@ -37,6 +37,10 @@ typedef struct vas_fir_partitioned
     float **writeBufferRight;
     float **readBufferLeft;
     float **readBufferRight;
+    int *writeJobQueueLeft;
+    int *writeJobQueueRight;
+    int *readJobQueueLeft;
+    int *readJobQueueRight;
     vas_threadedConvolutionArg *threadArgLeft;
     vas_threadedConvolutionArg *threadArgRight;
     int filterEnd;

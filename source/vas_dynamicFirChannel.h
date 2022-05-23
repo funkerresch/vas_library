@@ -206,7 +206,6 @@ typedef struct vas_dynamicFirChannel
     int frameCounter;
     int startCrossfade;
     int aziDirection;
-    int jobQueue;
     
     float gain;
     float segmentThreshold;

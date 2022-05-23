@@ -3,7 +3,12 @@
 //
 //  Created by Thomas Resch on 05.01.22.
 //  Based on Johan Hanssen Seferides' Threadpool implementation
-//  Removed Real-Time critical parts (locks and heap allocation):
+//  and Taymindis lock-free queue.
+//  Removed Real-Time critical parts (locks and heap allocation),
+//  and replaced the job queue with an atomic, lock-free queue.
+//  Every job can pass it's own queue counter, the VAS_THREADS_WAIT_FOR_EMPTY_QUEUE()
+//  macro maybe used for sync purposes. It waits until the corresponding
+//  job counter is set to zero.
 
 /*
     https://github.com/Pithikos/C-Thread-Pool

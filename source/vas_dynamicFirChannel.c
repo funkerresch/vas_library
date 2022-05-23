@@ -1127,7 +1127,6 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup)
     x->frameCounter = 0;
     x->startCrossfade  = 0;
     x->aziDirection = 0;
-    x->jobQueue = 0;
 
     x->filter = vas_dynamicFirChannel_filter_new();
     x->input = vas_dynamicFirChannel_input_new();
