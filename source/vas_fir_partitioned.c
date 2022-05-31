@@ -103,7 +103,7 @@ void vas_fir_partitioned_process(vas_fir_partitioned *x, VAS_INPUTBUFFER *in, VA
         if(!x->convolutionEngine[i]->left->frameCounter)
             VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(&x->readJobQueueLeft[i]);  // because we give every doubled fft size twice as much time to finish,
         if(!x->convolutionEngine[i]->right->frameCounter)               // this (usually) also works fine without waiting because fft has O(n log n)
-            VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(&x->readJobQueueRight[i]); // depends highly on what else is going on your computer
+            VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(&x->readJobQueueRight[i]); // But depends highly on what else is going on your computer
     }
     
     for(int i = x->convolverCount-1; i > 0; i--)

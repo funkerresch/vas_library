@@ -1,9 +1,15 @@
 //
-//  vas_thhreads.c
-//  vas_binauralrir_unity
+//  vas_threads.c
 //
-//  Created by Thomas Resch on 28.12.21.
-//
+//  Created by Thomas Resch on 05.01.22.
+//  Based on Johan Hanssen Seferides' Threadpool implementation
+//  and Taymindis lock-free queue.
+//  Removed Real-Time critical parts (locks and heap allocation),
+//  and replaced the job queue with an atomic, lock-free queue.
+//  Every job can pass it's own queue counter, the VAS_THREADS_WAIT_FOR_EMPTY_QUEUE()
+//  macro maybe used for sync purposes. It waits until the corresponding
+//  job counter is set to zero.
+//  Licences are in vas_threads.h
 
 #include "vas_threads.h"
 
@@ -34,6 +40,12 @@ void atomic_flag_clear_explicit(volatile atomic_flag* object, memory_order order
 }
 
 #endif
+
+/* I started with spinlocks, as this was the only thing I could find in the popular blogs of
+the audio developer community about lock-free synchronisation mechanisms. They are (probably, haven't measured yet) a little faster than my
+implementation, but due to their energy consumption not applicable for mobile applications. I left them
+here for measuring purposes. They are not in use anymore.
+*/
 
 vas_spinMutex *vas_spinMutex_new(void)
 {
@@ -161,7 +173,7 @@ static void *_vas_threads_dequeue(vas_threads_lfqueue *x)
                 if (next)                                                       // and next exists
                 {
                     val = next->value;                                          // get our return value
-                    vas_threads_job *freeJob =  x->head->value;                        // and get the job which will be kicked out of the queue
+                    vas_threads_job *freeJob =  x->head->value;                 // and get the job which will be kicked out of the queue
                     if (__LFQ_BOOL_COMPARE_AND_SWAP(&x->head, head, next))      // if no one else did something replace head with next
                     {
                         atomic_flag_clear(&(freeJob->available));               // old head is no longer in use, so we can clear its atomic_flag
