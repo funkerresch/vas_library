@@ -18,7 +18,7 @@
 #define vas_util_h
 
 //#define VAS_USE_KISSFFT
-#define VAS_USE_PFFFT
+//#define VAS_USE_PFFFT
 //#define VAS_USE_AVX
 
 //#define VAS_USE_MULTITHREADREFLECTION
