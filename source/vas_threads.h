@@ -191,25 +191,40 @@ void atomic_flag_clear_explicit(volatile atomic_flag* object, memory_order order
 
 #endif
 
+// I changed this to arm yield and x86_64 _mm_pause and renamed the old ones
+// to ..SLEEP_AND_WAIT.. The sleep version sends (if called from there) the whole main audio thread
+// sleeping. This might be useful for special cases where just a single, very intense
+// DSP algorithm is calculated. But not when I want to have several instances of the same
+// plugin. An interessting extension could be to count the instances that are currently waiting
+// with another lock-free queue. If all are waiting for the worker threads, we can send the main audio
+// thread to sleep and do a "real" yield.
+
+#ifdef __arm__
+#define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
+                                                asm volatile("yield");
+#else
+#define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
+                                                _mm_pause();
+#endif
+
 // different sources say different things about nanosleep in this context (RT Audio Thread)
 // it works but maybe there is a better alternative
 // WINDOWS is in ms, should be fast enough too, but clearly depends on the application.
-// Alternatively we could simply do something stupid like count to 10
 
 #if defined __GNUC__ || defined __CYGWIN__ || defined __MINGW32__ || defined __APPLE__
-#define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
-                                            nanosleep((const struct timespec[]){{0, 1}}, NULL);
+#define VAS_THREADS_SLEEP_AND_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
+                                                          nanosleep((const struct timespec[]){{0, 1}}, NULL);
 #else
-#define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
-                                            Sleep(1);
+#define VAS_THREADS_SLEEP_AND_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
+                                                          Sleep(1);
 #endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* I started with spinlocks, as this was the only thing I could find in the popular blogs of
-the audio developer community about lock-free synchronisation mechanisms. They are (probably, haven't measured yet) a little faster than my
+/* I started with spinlocks which are supposed to wait in the worker threads until there is something to do. This was the only thing I could find in the popular blogs of
+the audio developer community about lock-free synchronisation mechanisms. They are (probably, I haven't measured yet) a little faster than my
 implementation, but due to their energy consumption not applicable for mobile applications. I left them
 here for measuring purposes.
 */
