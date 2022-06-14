@@ -96,11 +96,6 @@ void vas_spinMutex_unLock(vas_spinMutex *x)
     atomic_flag_clear(&x->flag);
 }
 
-/* Post to at least one thread
- * Since every thread has its own queue
- * it is not necessary to protect the semaphore value with a mutex.
- */
-
 static void vas_threads_waitForSeconds(double seconds)
 {
     double TIMEOUT = seconds;
@@ -112,6 +107,11 @@ static void vas_threads_waitForSeconds(double seconds)
         tpassed = difftime(end,start);
     }
 }
+
+/* Post to at least one thread
+ * Since every thread has its own queue
+ * it is not necessary to protect the semaphore value with a mutex.
+ */
 
 static void vas_threads_atomicBsem_post(vas_threads_atomicBsem *x)
 {

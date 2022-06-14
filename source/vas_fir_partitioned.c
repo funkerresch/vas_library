@@ -10,6 +10,7 @@
 //  vas_threads. The fixed size jobqueue is a little ugly, needs a little clean-up.
 //  static instance counter is missing in order to free the convolution thread pool
 //  when the last instance is freed
+//  pd example usage in vas_partconv~
 //
 // Partition Scheme
 //

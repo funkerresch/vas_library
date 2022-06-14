@@ -64,9 +64,7 @@ static void *vas_partconv_new(t_symbol *s, int argc, t_atom *argv)
     if(argc >= 1)
     {
         if(argv[0].a_type == A_FLOAT)
-        {
             x->segmentSize = (float)atom_getintarg(0, argc, argv);
-        }
         
         if(argv[0].a_type == A_SYMBOL)
             path = atom_getsymbolarg(0, argc, argv);
@@ -99,7 +97,7 @@ static void *vas_partconv_new(t_symbol *s, int argc, t_atom *argv)
             end = atom_getfloatarg(3, argc, argv);
     }
     
-    if(path)
+    if(path) // just test case so far
     {
         vas_pdmaxobject_read((vas_pdmaxobject *)x, path, x->segmentSize, 0, 2048);
         x->convolutionEngine = x->partConvEngine->convolutionEngine[1];
@@ -110,11 +108,13 @@ static void *vas_partconv_new(t_symbol *s, int argc, t_atom *argv)
     return (x);
 }
 
+// not ready yet, vas_partconv_read just used as a test case, only vas_partconv_set is working
+
 void vas_partconv_read(vas_partconv *x,  t_symbol *s, float segmentSize)
 {
-    vas_pdmaxobject_read((vas_pdmaxobject *)x, s, 512, 0, 4096);
+    vas_pdmaxobject_read((vas_pdmaxobject *)x, s, 512, 0, 4096); // reads 8 partitions from 0 until 4096
     x->convolutionEngine = x->partConvEngine->convolutionEngine[1];
-    vas_pdmaxobject_read((vas_pdmaxobject *)x, s, 2048, 4096, -1);
+    vas_pdmaxobject_read((vas_pdmaxobject *)x, s, 2048, 4096, -1); // reads the rest
     x->convolutionEngine = x->partConvEngine->convolutionEngine[0];
 }
 
@@ -165,6 +165,6 @@ void vas_partconv_tilde_setup(void)
     CLASS_MAINSIGNALIN(vas_partconv_class, vas_partconv, f);
    
     class_addmethod(vas_partconv_class, (t_method)vas_partconv_dsp, gensym("dsp"), 0);
-    class_addmethod(vas_partconv_class, (t_method)vas_pdmaxobject_read, gensym("read"), A_DEFSYM, A_DEFFLOAT, 0);
+   // class_addmethod(vas_partconv_class, (t_method)vas_pdmaxobject_read, gensym("read"), A_DEFSYM, A_DEFFLOAT, 0);
     class_addmethod(vas_partconv_class, (t_method)vas_partconv_set, gensym("set"), A_DEFSYM, A_DEFSYM, A_DEFFLOAT, A_DEFFLOAT, 0);
 }

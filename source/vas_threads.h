@@ -179,6 +179,8 @@ typedef enum memory_order {
     memory_order_seq_cst
 } memory_order;
 
+// Windows implementation of atomic_flag
+
 typedef struct atomic_flag { bool _Value; } atomic_flag;
 
 bool atomic_flag_test_and_set(volatile atomic_flag *flag);
