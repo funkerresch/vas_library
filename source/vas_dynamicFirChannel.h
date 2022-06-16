@@ -172,8 +172,6 @@ typedef struct vas_dynamicFirChannel_output
  * Everything necessary for calculating (equal-) partitioned convolution including dynamic exchange of the filter <br>
  */
 
-
-
 typedef struct vas_dynamicFirChannel
 {
     int setup;                                  // set with flags as "VAS_GLOBALFILTER" or "VAS_LOCALFILTER", defined in vas_util.h

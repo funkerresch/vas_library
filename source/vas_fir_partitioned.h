@@ -1,10 +1,36 @@
-//
-//  vas_fir_partitioned.h
-//  vas_reverb~
-//
-//  Created by Harvey Keitel on 26.04.21.
-//  Copyright © 2021 Intrinsic Audio. All rights reserved.
-//
+/**
+ * @file vas_fir_partitioned.h
+ * @author Thomas Resch <br>
+ * Audiocommunication Group, Technical University Berlin <br>
+ * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
+ * <br>
+ * @brief Implementation of a non-equal-segmented convolution algorithm, and<br>
+ * usage example for the heap- and lock-free pthreads-implementation vas_threads. <br>
+ * pd example usage is in vas_partconv~.
+ * Partition Scheme is close to Gardners proposition, but a little different in the beginning:
+ *
+ * 1st: 8 * minSegmentSize
+ * 2nd: 2 * (minSegmentSize * 4)
+ * 3rd: 2 * (lastSegmentSize * 2)
+ * 4th: 2 * (lastSegmentSize * 2)
+ * ...
+ *
+ * For example:
+ *
+ *
+ * |256            |1024     |2048             |4096                             |8192           <- Partition Sizes
+ * |               |         |                 |                                 |
+ * |-|-|-|-|-|-|-|-|----|----|--------|--------|----------------|----------------|--------------------------------|--------------------------------|
+ * |0              |2048     |4096             |8192                             |16384          <- Time
+ * |               |         |                 |                                 |
+ *
+ * Using a maximum segment size could also make sense, but would require a much more complicated scheduling scheme and many delay buffers.
+ * This way, after writing 4 min segment size frames we can start calculating the first 1024 fft convolution with the first 4 min segment size frames.
+ * After reading the next 4 min size frames at time 1024 the first 1024 frame should be calculated for output, we switch read and write buffers.
+ * At the same time (2048) we have collected enough samples to start convolution with the first 2048 filter frame..
+ * <br>
+ * <br>
+ */
 
 #ifdef VAS_USE_MULTITHREADCONVOLUTION
 

@@ -1,14 +1,22 @@
-//
-//  vas_threads.h
-//
-//  Created by Thomas Resch on 05.01.22.
-//  Based on Johan Hanssen Seferides' Threadpool implementation
-//  and Taymindis lock-free queue.
-//  Removed Real-Time critical parts (locks and heap allocation),
-//  and replaced the job queue with an atomic, lock-free queue.
-//  Every job can pass it's own queue counter, the VAS_THREADS_WAIT_FOR_EMPTY_QUEUE()
-//  macro maybe used for sync purposes. It waits until the corresponding
-//  job counter is set to zero.
+/**
+ * @file vas_threads.h
+ * @author Thomas Resch <br>
+ * Audiocommunication Group, Technical University Berlin <br>
+ * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
+ * <br>
+ * @brief A (in principle) lock- and heapfree pthreads-based threadpool<br>
+ * <br>
+ * Created by Thomas Resch on 05.01.22. <br>
+ * Based on Johan Hanssen Seferides' Threadpool implementation (https://github.com/Pithikos/C-Thread-Pool),<br>
+ * and Taymindis lock-free queue (https://github.com/Taymindis/lfqueue).<br>
+ * Removed Real-Time critical parts (locks and heap allocation),<br>
+ * and replaced the job queue with an atomic, lock-free queue.<br>
+ * Every "job-group" can pass a shared queue counter, the VAS_THREADS_WAIT_FOR_EMPTY_QUEUE<br>
+ * macro maybe used for sync purposes. It waits until the corresponding<br>
+ * job counter is set to zero.<br>
+ * Example usage is shown vas_fir_partitioned (non-equal-segmented parallel convolution)<br>
+ * <br>
+ */
 
 /*
     https://github.com/Pithikos/C-Thread-Pool
@@ -39,6 +47,7 @@
 
 //  Job queue has been replaced with a lock free FIFO queue, based
 //  on Taymindis lock-free queue:
+
 /*
     https://github.com/Taymindis/lfqueue
    
@@ -69,7 +78,8 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-//  All platform independent macros for atomic operations below are copied also from Taymindis's lock-free queue
+//  All following platform independent macros for atomic operations below are copied also from Taymindis's lock-free queue
+//  Thanks very much for those
 
 #ifndef vas_thpool_h
 #define vas_thpool_h
@@ -244,11 +254,10 @@ void vas_spinMutex_tryLock(vas_spinMutex *x);
 
 void vas_spinMutex_unLock(vas_spinMutex *x);
 
-/*
- * vas_threads_job contains the function
- * and arguments passed from the main
- * audio thread. It is passed as value
- * to the lfqueue
+/**
+ * @brief Struct vas_threads_job. <br>
+ * vas_threads_job contains function and arguments <br>
+ * passed from the main thread. <br>
  */
 
 typedef struct vas_threads_job
@@ -258,11 +267,12 @@ typedef struct vas_threads_job
     atomic_flag available;
 } vas_threads_job;
 
-/*
- * vas_threads_lfnode
- * is list node containing
- * a vas_thread_job as value
- * on dequeueing the job is returned
+/**
+ * @brief vas_threads_lfnode. <br>
+ * vas_threads_lfnode is a list node <br>
+ * containing a vas_thread_job as value. <br>
+ * On dequeuing the job is returned.
+ *
  */
 
 typedef struct vas_threads_lfnode
@@ -271,12 +281,13 @@ typedef struct vas_threads_lfnode
     struct vas_threads_lfnode *next;
 } vas_threads_lfnode;
 
-/*
- * The binary semaphore is used to wait
- * until a job is in the thread's queue
- * The mutex is not accessed by any
- * other thread, v is set using
- * the atomic compare and swap operation
+/**
+ * @brief vas_threads_atomicBsem <br>
+ * The binary semaphore is used to wait <br>
+ * until a job is pushed to the thread's queue <br>
+ * The mutex is not accessed by any <br>
+ * other thread, v is set using <br>
+ * the atomic compare and swap operation <br>
  */
 
 typedef struct vas_threads_atomicBsem
@@ -286,11 +297,12 @@ typedef struct vas_threads_atomicBsem
     int v;
 } vas_threads_atomicBsem;
 
-/*
- * JobNodes are pre-allocated with max number  = VAS_MAX_QUEUE_LENGTH
- * for each thread. Every Vas_Unity_Spatializer adds one job/thread each
- * audio frame. As long as the CPU is fast enough this makes it possible
- * to calculate VAS_MAX_QUEUE_LENGTH audio sources at the same time.
+/**
+ * @brief vas_threads_jobNode. <br>
+ * JobNodes are pre-allocated with max number  = VAS_MAX_QUEUE_LENGTH <br>
+ * for each thread. Every Vas_Unity_Spatializer adds one job/thread each <br>
+ * audio frame. As long as the CPU is fast enough this makes it possible <br>
+ * to calculate VAS_MAX_QUEUE_LENGTH audio sources at the same time. <br>
  */
 
 typedef struct vas_threads_jobNode
@@ -299,6 +311,12 @@ typedef struct vas_threads_jobNode
     vas_threads_lfnode node;
 } vas_threads_jobNode;
 
+/**
+ * @brief vas_threads_lfqueue. <br>
+ * vas_threads_lfqueue contains the jobs of
+ * thread.
+ */
+
 typedef struct vas_threads_lfqueue
 {
     vas_threads_lfnode *head, *tail, *root_free, *move_free;
@@ -306,6 +324,13 @@ typedef struct vas_threads_lfqueue
     vas_threads_atomicBsem *has_jobs;
 } vas_threads_lfqueue;
 
+/**
+ * @brief vas_thread.<br>
+ * vas_thread contains the pthread, <br>
+ * the queue and a prealloated number of nodes so they <br>
+ * don't have to be allocated on the heap somewhere. If <br>
+ * no jobNodes are available, the job is simply discarded. <br>
+ */
 
 typedef struct vas_thread
 {
@@ -317,12 +342,14 @@ typedef struct vas_thread
     int counter;
 } vas_thread;
 
-
-/* vas_threads is not a "real" threadpool
-// It is meant for an evenly distributed work load
-// for each thread.
-// The calling thread chooses the thread
+/**
+ * @brief vas_threads.<br>
+ * vas_threads is not a "real" threadpool.
+ * It is meant for an evenly distriburted work load <br>
+ * in each thread. <br>
+ * The calling thread chooses the worker thread explicitly. <br>
  */
+
 
 typedef struct vas_threads
 {
