@@ -31,7 +31,6 @@ void *vas_mem_resize(void *ptr, long size)
     if(ptr)
         free(ptr);
 #endif
-    
     posix_memalign(&tmp, 64, size);
     long long *setMem = tmp;
     memset(setMem, 0, size);

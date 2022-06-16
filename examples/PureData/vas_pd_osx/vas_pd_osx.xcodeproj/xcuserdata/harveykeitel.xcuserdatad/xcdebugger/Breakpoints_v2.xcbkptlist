@@ -14,8 +14,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "709"
-            endingLineNumber = "709"
+            startingLineNumber = "708"
+            endingLineNumber = "708"
             landmarkName = "vas_dynamicFirChannel_prepareOutputSignal(x)"
             landmarkType = "9">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "709"
-            endingLineNumber = "709"
+            startingLineNumber = "708"
+            endingLineNumber = "708"
             landmarkName = "vas_dynamicFirChannel_prepareOutputSignal(x)"
             landmarkType = "9">
             <Locations>
@@ -302,8 +302,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "944"
-            endingLineNumber = "944"
+            startingLineNumber = "943"
+            endingLineNumber = "943"
             landmarkName = "vas_dynamicFirChannel_isFilterSegmentBelowThreshhold(x, filter, ele, azi)"
             landmarkType = "9">
          </BreakpointContent>
@@ -318,8 +318,8 @@
             filePath = "../../../source/vas_mem.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -350,8 +350,8 @@
             filePath = "../../../source/vas_thpool_noMalloc.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "thpool_destroy_noHeap(thpool_p)"
             landmarkType = "9">
          </BreakpointContent>

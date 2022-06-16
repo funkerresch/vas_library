@@ -7,10 +7,11 @@
  * <br>
  * @brief Utilties for dynamic memory allocation <br>
  * <br>
- * Wrapper for memory allocation
- * Max/MSP SDK suggests using the Max/MSP "sysmem_" - routines
- * instead of malloc/calloc/free
- * So for Max/MSP define the Preprocessor macro "MAXMSPSDK"
+ * Wrapper for memory allocation <br>
+ * Max/MSP SDK suggests using the Max/MSP "sysmem_" - routines <br>
+ * instead of malloc/calloc/free but it returns errors for very large <br>
+ * memory allocations (or at least it has several years ago). Also pffft needs aligned memory so vas_mem uses <br>
+ * posix_memalign and _aligned_malloc on WIN for everthing. <br>
  */
 
 #ifndef vas_memory_h
@@ -48,6 +49,5 @@ void vas_mem_free(void *ptr);
 #ifdef __cplusplus
 }
 #endif
-
 
 #endif

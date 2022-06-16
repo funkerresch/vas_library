@@ -45,13 +45,13 @@ extern "C" {
 
 typedef struct vas_fir_metaData
 {
-    char *fullPath;
-    int filterLength;
-    int filterLengthMinusOffset;
+    char *fullPath;                                     // string for the fullpath of the IR
+    int filterLength;                                   // filter length
+    int filterLengthMinusOffset;                        // length - offset
     int filterOffset;
     int filterEnd;
     int segmentSize;
-    int directionFormat;
+    int directionFormat;                                //
     int audioFormat;
     int lineFormat;
     int azimuthStride;
@@ -174,14 +174,14 @@ typedef struct vas_dynamicFirChannel_output
 
 typedef struct vas_dynamicFirChannel
 {
-    int setup;                                  // set with flags as "VAS_GLOBALFILTER" or "VAS_LOCALFILTER", defined in vas_util.h
+    int setup;                                  // set with flags, defined in vas_util.h
     float *tmp;                                 // tmp is used for zeropadding before calculating the frequency response
     float *fadeOut;                             // holds the fadeout array necessary for the crossfade
     float *fadeIn;                              // holds the fadein array necessary for the crossfade
-    float *deInterleaveReal;                     // deInterleaveTmp is used deainterleaving the kissffts
-    float *deInterleaveImag;                     // deInterleaveTmp is used deainterleaving the kissffts
+    float *deInterleaveReal;                    // deInterleaveTmp is used deainterleaving the kissffts
+    float *deInterleaveImag;                    // deInterleaveTmp is used deainterleaving the kissffts
     
-    vas_dynamicFirChannel_input *input;          // my signal input
+    vas_dynamicFirChannel_input *input;         // my signal input
     vas_dynamicFirChannel_output output;        // calculated output
     vas_dynamicFirChannel_input *sharedInput;   // can be set if the channel uses the same input as another channel (->stereo reverb for example)
     vas_dynamicFirChannel_filter *sharedFilter; // can be set if the channel uses the same filter as another channel (->stereo reverb for example)
@@ -201,7 +201,7 @@ typedef struct vas_dynamicFirChannel
     int elevationTmp, azimuthTmp;
     int useSharedInput;
     int useSharedFilter;
-    int frameCounter;
+    int frameCounter;                           // counts input or output frames if segments size != vectorsize
     int startCrossfade;
     int aziDirection;
     
@@ -356,33 +356,107 @@ void vas_dynamicFirChannel_prepareArrays(vas_dynamicFirChannel *x);
 
 void vas_dynamicFirChannel_process(vas_dynamicFirChannel *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize, int flags);
 
+/**
+ * @brief Sets init flag.<br>
+ * @param x The target channel <br>
+ * Sets the initialization flag of a channel. <br>
+ * This should be done atomically (but isn't yet:() <br>
+ */
+
 void vas_dynamicFirChannel_setInitFlag(vas_dynamicFirChannel *x);
 
+/**
+ * @brief Removes init flag.<br>
+ * @param x The target channel <br>
+ * Removes the initialization flag of a channel. <br>
+ * This should be done atomically (but isn't yet:() <br>
+ */
+
 void vas_dynamicFirChannel_removeInitFlag(vas_dynamicFirChannel *x);
-    
-void vas_dynamicFirChannel_assignExternMemory(vas_dynamicFirChannel *x, float *real, float *imag);
+
+/**
+ * @brief Multiply-Add operation<br>
+ * @param x The target channel <br>
+ * @param target The target output to calculate, either the current or the next angle. <br>
+ * Multiplies and adds all segments for the next output vector. <br>
+ */
 
 void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dynamicFirChannel_target *target);
 
+/**
+ * @brief Crossfade between old and new filter (respectively angle). <br>
+ * @param x The target channel <br>
+ * Calculates a crossfade between the last vectors of the old filter <br>
+ * and the current vectors of the new filter (or angle).
+ */
+
 void vas_dynamicFirChannel_crossfadeBetweenOldAndNewFilter(vas_dynamicFirChannel *x);
+
+/**
+ * @brief Updates azimuth and elevation to new values. <br>
+ * @param x The target channel <br>
+ * If a crossfade is currently calculated it is not allowed to set azimuth <br>
+ * and elevation to new values.
+ */
 
 void vas_dynamicFirChannel_updateAzimuthAndElevation(vas_dynamicFirChannel *x);
 
+/**
+ * @brief Executes the actual dynamic convolution. <br>
+ * @param x The target channel <br>
+ * Calculates the convolution for the current filter (angle) and if necessary <br>
+ * for the next filter (if the filter has changed). Calculates the crossfade
+ * between old and new and writes the current output vector. <br>
+ */
+
 void vas_dynamicFirChannel_calculateConvolution(vas_dynamicFirChannel *x);
 
-void vas_dynamicFirChannel_selectIR(vas_dynamicFirChannel *x, int index);
-
-void  vas_dynamicFirChannel_setAzimuthDirection(vas_dynamicFirChannel *x, int aziDirection);
+/**
+ * @brief Sets the azimuth angle. <br>
+ * @param x The target channel <br>
+ * @param azimuth angle in degrees <br>
+ */
 
 void vas_dynamicFirChannel_setAzimuth(vas_dynamicFirChannel *x, int azimuth);
 
+/**
+ * @brief Sets the elevation angle. <br>
+ * @param x The target channel <br>
+ * @param elevation angle in degrees <br>
+ */
+
 void vas_dynamicFirChannel_setElevation(vas_dynamicFirChannel *x, int elevation);
+
+/**
+ * @brief Sets threshhold for zeroing out partitions as described in https://www.aes.org/e-lib/browse.cfm?elib=20512.<br>
+ * @param x The target channel <br>
+ * @param thresh Threshhold as float between 0 and 1. <br>
+ */
     
 void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float thresh);
 
+/**
+ * @brief Sets the segments (partition) size. <br>
+ * @param x The target channel <br>
+ * @param segmentSize Power of two somewhere between 8 and 32768. <br>
+ * Sets the partition size. FFT size will be twice the segment size.
+ */
+ 
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize);
 
+/**
+ * @brief Initializes the channel.<br>
+ * @param x The target channel <br>
+ * @param metaData Configuration information for the channel. <br>
+ * @param segmentSize Segment (partition) size.
+ */
+
 void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *metaData, int segmentSize);
+
+/**
+ * @brief Frees the channel.<br>
+ * @param x The target channel <br>
+ */
     
 void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x);
 
@@ -395,6 +469,10 @@ void vas_dynamicFirChannel_input_free(vas_dynamicFirChannel_input *x, int curren
 void vas_dynamicFirChannel_output_init(vas_dynamicFirChannel_output *x, int elevationZero);
 
 void vas_dynamicFirChannel_output_free(vas_dynamicFirChannel_output *x);
+
+void vas_dynamicFirChannel_selectIR(vas_dynamicFirChannel *x, int index);
+
+void  vas_dynamicFirChannel_setAzimuthDirection(vas_dynamicFirChannel *x, int aziDirection);
     
     
 #ifdef __cplusplus

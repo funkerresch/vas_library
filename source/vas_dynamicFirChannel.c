@@ -451,7 +451,6 @@ void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dyn
 void vas_dynamicFirChannel_crossfadeBetweenOldAndNewFilter(vas_dynamicFirChannel *x)
 {
     vas_util_fadd(x->output.next.overlap, x->output.next.signalFloat, x->output.next.signalFloat, x->filter->segmentSize);
-    
     vas_util_fmultiply(x->fadeOut+x->fadeCounter*x->filter->segmentSize, x->output.outputSegment, x->output.outputSegment, x->filter->segmentSize);
     vas_util_fmultiply(x->fadeIn+x->fadeCounter*x->filter->segmentSize, x->output.next.signalFloat, x->output.next.signalFloat, x->filter->segmentSize);
     vas_util_fadd(x->output.next.signalFloat, x->output.outputSegment, x->output.outputSegment, x->filter->segmentSize);
