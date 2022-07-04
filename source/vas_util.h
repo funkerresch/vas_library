@@ -1,9 +1,9 @@
 /**
  * @file vas_util.h
  * @author Thomas Resch <br>
- * Audiocommunication Group, Technische Universität Berlin <br>
+ * Audio Communication Group, TU-Berlin <br>
  * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
- * Tools for calculating convolution based stuff.<br>
+ * Utility functions for SIMD math and other stuff.<br>
  * Many thanks to gpakosz for whereami <br>
  * https://github.com/gpakosz/whereami <br>
  * Many thanks to digilus for readline for windows <br>

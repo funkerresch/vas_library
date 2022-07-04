@@ -1,10 +1,13 @@
-//
-//  vas_fir_read.h
-//  vas_binaural~
-//
-//  Created by Harvey Keitel on 18.02.21.
-//  Copyright © 2021 Intrinsic Audio. All rights reserved.
-//
+/**
+ * @file vas_fir_read.h
+ * @author Thomas Resch <br>
+ * Audio Communication Group, TU-Berlin <br>
+ * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
+ * Tools for calculating convolution based virtual acoustics (mainly dynamic binaural synthesis) <br>
+ * <br>
+ * @brief Utilties for reading IRs from arrays, .txt. and .sofa  files.<br>
+ * <br>
+ */
 
 #ifndef vas_fir_read_h
 #define vas_fir_read_h

@@ -1,7 +1,7 @@
 /**
  * @file dynamicFirChannel.h
  * @author Thomas Resch <br>
- * Audiocommunication Group, Technical University Berlin <br>
+ * Audio Communication Group, TU-Berlin <br>
  * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
  * Tools for calculating convolution based virtual acoustics (mainly dynamic binaural synthesis) <br>
  * <br>

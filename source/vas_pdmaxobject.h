@@ -1,10 +1,13 @@
-//
-//  vas_pdmaxobject.h
-//  vas_binaural~
-//
-//  Created by Thomas Resch on 18.02.21.
-//  Copyright © 2021 Intrinsic Audio. All rights reserved.
-//
+/**
+ * @file pdmaxobject.h
+ * @author Thomas Resch <br>
+ * Audio Communication Group, TU-Berlin <br>
+ * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
+ * Tools for calculating convolution based virtual acoustics (mainly dynamic binaural synthesis) <br>
+ * <br>
+ * @brief Macros and helper functions for Pure Data and Max/MSP objects<br>
+ * <br>
+ */
 
 #ifndef vas_pdmaxobject_h
 #define vas_pdmaxobject_h

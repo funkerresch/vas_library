@@ -204,22 +204,7 @@ vas_dynamicFirChannel *extractChannel2(vas_fir *x, char *line)
     
     return NULL;
 }
-/*
- char *fullPath;
- int filterLength;
- int filterOffset;
- int filterEnd;
- int directionFormat;
- int audioFormat;
- int lineFormat;
- int azimuthStride;
- int elevationStride;
- int eleZero;
- int eleRange;
- int eleMin;
- int eleMax;
- int aziRange;
- */
+
 static int vas_filter_checkMetaData(vas_fir *x)
 {
     int error = 0;

@@ -1,12 +1,14 @@
 /**
  * @file vas_fir.h
- * @author Thomas Resch
- * @date 4 Jan 2018
- * @brief C - "Base" class for all filters <br>
- *
+ * @author Thomas Resch <br>
+ * Audio Communication Group, TU-Berlin <br>
+ * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
+ * <br>
+ * @brief Base-Class for stereo convolution filters<br>
+ * <br>
  * All functions shared by the "real" stereo filter classes (binaural, staticFir etc..) <br>
  * are implemented in vas_filter. <br>
- * The class vas_filter itself can not be used. <br>
+ * The class vas_filter should be considered opaque and shall not be used. <br>
  *
  */
 

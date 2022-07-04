@@ -1,7 +1,7 @@
 /**
  * @file vas_threads.h
  * @author Thomas Resch <br>
- * Audiocommunication Group, Technical University Berlin <br>
+ * Audio Communication Group, TU-Berlin <br>
  * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
  * <br>
  * @brief A (in principle) lock- and heapfree pthreads-based threadpool<br>

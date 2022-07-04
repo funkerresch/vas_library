@@ -1,7 +1,7 @@
 /**
  * @file vas_fir_partitioned.h
  * @author Thomas Resch <br>
- * Audiocommunication Group, Technical University Berlin <br>
+ * Audio Communication Group, TU - Berlin <br>
  * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
  * <br>
  * @brief Implementation of a non-equal-segmented convolution algorithm and<br>
