@@ -29,6 +29,16 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>rwa_binauralsimple~.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>rwa_binauralspace~.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>rwa_reverb~ copy.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -39,9 +49,24 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>vas_dynconv~.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>vas_partconv~.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E47A60722636AD79007C786A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>FA2927EB1A899B4C005A2BA9</key>
 		<dict>
 			<key>primary</key>

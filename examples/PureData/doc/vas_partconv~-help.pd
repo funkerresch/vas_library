@@ -1,22 +1,22 @@
-#N canvas 255 70 1210 986 10;
+#N canvas 302 38 1210 916 10;
 #X obj 163 477 dac~;
 #X obj 107 182 readsf~;
 #X msg 154 157 1;
-#X obj 103 62 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
+#X obj 103 62 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
 #X obj 153 89 t b b;
 #X msg 181 37 \; pd dsp 0;
 #N canvas 0 23 450 300 (subpatch) 0;
-#X array arrayL 114155 float 0;
-#X coords 0 0.05 114154 -0.05 200 80 1 0 0;
+#X array arrayL 435464 float 0;
+#X coords 0 0.05 435463 -0.05 200 80 1 0 0;
 #X restore 330 426 graph;
 #X obj 278 100 soundfiler;
-#X floatatom 278 132 0 0 0 0 - - -;
+#X floatatom 278 132 0 0 0 0 - - - 0;
 #N canvas 0 23 450 300 (subpatch) 0;
-#X array arrayR 114155 float 0;
-#X coords 0 0.05 114154 -0.05 200 80 1 0 0;
+#X array arrayR 435464 float 0;
+#X coords 0 0.05 435463 -0.05 200 80 1 0 0;
 #X restore 536 426 graph;
-#X obj 81 453 vu 8 80 empty empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 81 453 vu 8 80 empty empty -1 -8 0 10 #404040 #000000 1 0;
 #X obj 81 415 env~ 128;
 #X obj 80 433 - 100;
 #X text 172 337 1st inlet is the signal and message input.;
@@ -30,16 +30,16 @@ function.;
 #X text 335 45 click here to load array;
 #X msg 278 68 read -resize outdoor1.wav arrayL arrayR \;;
 #X obj 574 70 soundfiler;
-#X floatatom 574 102 0 0 0 0 - - -;
+#X floatatom 574 102 0 0 0 0 - - - 0;
 #X msg 278 161 set arrayL arrayR 512 0 \$1;
 #X msg 696 94 read -resize unitpulse.wav arrayL arrayR \;;
 #X obj 163 374 vas_partconv~ 1024;
 #X obj 269 446 *~ 0.5;
 #X obj 163 449 *~ 0.5;
-#X obj 659 220 vsl 40 110 0 200 0 0 empty empty empty 0 -9 0 10 -261682
--1 -1 2398 1;
+#X obj 659 220 vsl 40 110 0 200 0 0 empty empty empty 0 -9 0 10 #fce0c4
+#000000 #000000 0 1;
 #X obj 659 345 / 127;
-#X floatatom 738 369 5 0 0 0 - - -;
+#X floatatom 738 369 5 0 0 0 - - - 0;
 #X obj 659 175 loadbang;
 #X msg 659 197 44;
 #X obj 659 369 send volume1;
@@ -49,6 +49,7 @@ function.;
 #X msg 574 38 read -resize Room7_KMB_v2_44.1kHz_16bit.wav arrayL arrayR
 \;;
 #X msg 106 134 open cicerospeech.wav;
+#X msg 752 116 read -resize LargeCanon.wav arrayL arrayR \;;
 #X connect 1 0 25 0;
 #X connect 1 1 3 0;
 #X connect 2 0 1 0;
@@ -82,3 +83,4 @@ function.;
 #X connect 36 0 25 0;
 #X connect 37 0 21 0;
 #X connect 38 0 1 0;
+#X connect 39 0 21 0;
