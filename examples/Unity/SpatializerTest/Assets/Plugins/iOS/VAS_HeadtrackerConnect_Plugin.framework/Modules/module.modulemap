@@ -1,4 +1,0 @@
-framework module VAS_HeadtrackerConnect_Plugin {
-  header "VAS_HeadtrackerConnect_Plugin-Swift.h"
-  requires objc
-}

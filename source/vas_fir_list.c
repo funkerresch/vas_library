@@ -19,7 +19,7 @@ vas_fir_list IRs;
 
 vas_fir_listNode *vas_fir_listNode_new(vas_fir *data)
 {
-    vas_fir_listNode *x = vas_mem_alloc(sizeof(vas_fir_listNode));
+    vas_fir_listNode *x = malloc(sizeof(vas_fir_listNode));
     x->data = data;
     x->next = NULL;
     return x;
@@ -28,7 +28,7 @@ vas_fir_listNode *vas_fir_listNode_new(vas_fir *data)
 void vas_fir_listNode_free(vas_fir_listNode *node)
 {
     if(node != NULL)
-        vas_mem_free(node);
+        free(node);
 }
 
 void vas_fir_list_addNode(vas_fir_list *x, vas_fir_listNode *node)

@@ -15,25 +15,29 @@
 
 void *vas_mem_alloc(long size)
 {
-    void *tmp;
-    posix_memalign(&tmp, 64, size);
-    long long *setMem = tmp;
-    memset(setMem, 0, size);
+    void *tmp = NULL;
+    if(!posix_memalign(&tmp, 64, size))
+    {
+        long long *setMem = tmp;
+        memset(setMem, 0, size);
+    }
     return tmp;
 }
 
 void *vas_mem_resize(void *ptr, long size)
 {
-    void *tmp;
+    void *tmp = NULL;
 #ifdef _WIN32
     _aligned_free(ptr);
 #else
     if(ptr)
         free(ptr);
 #endif
-    posix_memalign(&tmp, 64, size);
-    long long *setMem = tmp;
-    memset(setMem, 0, size);
+    if(!posix_memalign(&tmp, 64, size))
+    {
+        long long *setMem = tmp;
+        memset(setMem, 0, size);
+    }
     return tmp;
 }
 

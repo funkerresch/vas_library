@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E47A60722636AD79007C786A"
-               BuildableName = "vas_partconv~.pd_darwin"
-               BlueprintName = "vas_partconv~"
+               BuildableName = "vas_paracon~.pd_darwin"
+               BlueprintName = "vas_paracon~"
                ReferencedContainer = "container:vas_pd_osx.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,8 +51,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E47A60722636AD79007C786A"
-            BuildableName = "vas_partconv~.pd_darwin"
-            BlueprintName = "vas_partconv~"
+            BuildableName = "vas_paracon~.pd_darwin"
+            BlueprintName = "vas_paracon~"
             ReferencedContainer = "container:vas_pd_osx.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

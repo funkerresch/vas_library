@@ -97,8 +97,12 @@ void vas_dynamicFirChannel_filter_reset(vas_dynamicFirChannel_filter *x)
 #ifdef VAS_USE_VDSP
             for(int i = 0; i < x->numberOfSegments; i++)
             {
-                vas_mem_free(x->data[eleCount][aziCount][i].realp);
-                vas_mem_free(x->data[eleCount][aziCount][i].imagp);
+                if(x->data[eleCount][aziCount][i].realp)
+                    vas_mem_free(x->data[eleCount][aziCount][i].realp);
+                x->data[eleCount][aziCount][i].realp = NULL;
+                if(x->data[eleCount][aziCount][i].imagp)
+                    vas_mem_free(x->data[eleCount][aziCount][i].imagp);
+                x->data[eleCount][aziCount][i].imagp = NULL;
             }
 #endif
             
@@ -145,7 +149,7 @@ void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *met
     x->filter->offset = metaData->filterOffset;
     
     vas_dynamicFirChannel_setFilterSize(x, metaData->filterLength - x->filter->offset);
-    vas_dynamicFirChannel_prepareArrays(x);    
+    vas_dynamicFirChannel_prepareArrays(x);
 }
 
 void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x)
@@ -986,7 +990,11 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
         {
 #ifdef VAS_USE_VDSP
             x->filter->data[ele][azi][i].realp = vas_mem_alloc(sizeof(float) * x->filter->segmentSize);
+            if(!x->filter->data[ele][azi][i].realp)
+                post("Could not allocate memory");
             x->filter->data[ele][azi][i].imagp = vas_mem_alloc(sizeof(float) * x->filter->segmentSize);
+            if(!x->filter->data[ele][azi][i].imagp)
+                post("Could not allocate memory");
             x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle] = &x->filter->data[ele][azi][i];
             x->filter->pointerToFFTSegments[ele][azi][i] = &x->filter->data[ele][azi][i];
 #endif
@@ -1037,6 +1045,9 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
                 vas_mem_free(x->filter->data[ele][azi][i].imagp);
                 x->filter->data[ele][azi][i].realp = NULL;
                 x->filter->data[ele][azi][i].imagp = NULL;
+                x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle] = NULL;
+                x->filter->pointerToFFTSegments[ele][azi][i] = NULL;
+                //post("Segment is zero: %d %d %d", ele, azi, i);
 #endif
 #if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
                 vas_mem_free(x->filter->pointerToFFTSegments[ele][azi][i]);

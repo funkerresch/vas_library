@@ -127,14 +127,11 @@ void* vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath)
         x->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
         strcpy(x->metaData.fullPath, fullpath);
 #if defined(MAXMSPSDK) || defined(PUREDATA)
+        post("SOFA Meta Data:");
         post("Number of measurements: %d",hrtf->hrtf->M);
-        //post("%f %f %f %f %f %f", hrtf->hrtf->ReceiverPosition.values[0], hrtf->hrtf->ReceiverPosition.values[1],hrtf->hrtf->ReceiverPosition.values[2],
-        //hrtf->hrtf->ReceiverPosition.values[3],hrtf->hrtf->ReceiverPosition.values[4],hrtf->hrtf->ReceiverPosition.values[5]);
         post("Sampling Rate: %.0f", hrtf->hrtf->DataSamplingRate.values[0]);
         post("Listener View: %d", hrtf->hrtf->ListenerView.elements);
         post("Source Position: %d", hrtf->hrtf->SourcePosition.elements);
-        for(int i = 0; i<135; i++)
-            post("%f", hrtf->hrtf->SourcePosition.values[i]);
 #endif
         return hrtf;
     }
@@ -286,11 +283,8 @@ static int vas_filter_extractMetaDataFromText1(vas_fir *x, FILE *filePtr, char *
             if(x->metaData.directionFormat == VAS_IR_DIRECTIONFORMAT_SINGLE)
                 x->metaData.aziRange = 1;
             else
-            {
-                if(x->metaData.aziRange == 0)
-                    x->metaData.aziRange = 360/x->metaData.azimuthStride;
-            }
-
+                x->metaData.aziRange = 360/x->metaData.azimuthStride;
+            
 #ifdef VERBOSE
 #if(defined(MAXMSPSDK) || defined(PUREDATA))
             post("azistride: %d", x->metaData.azimuthStride);
@@ -783,7 +777,7 @@ FILE *vas_fir_readText_metaData1(vas_fir *x, char *fullpath)
     }
     else
     {
-        x->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
+        x->metaData.fullPath = malloc(sizeof(char) * size);
         strcpy(x->metaData.fullPath, fullpath);
         vas_filter_extractMetaDataFromText1(x, filePtr, &line);
         
