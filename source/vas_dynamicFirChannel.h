@@ -65,6 +65,7 @@ typedef struct vas_fir_metaData
     int aziMin;
     int aziMax;
     int numberOfIrs;
+    bool usingNeumannHeader;
 } vas_fir_metaData;
 
 void vas_filter_metaData_init(vas_fir_metaData *x);
@@ -82,18 +83,15 @@ typedef struct vas_dynamicFirChannel_filter
 #ifdef VAS_USE_VDSP
     FFTSetup setupReal;   
 #endif
-#ifdef VAS_USE_KISSFFT
-    kiss_fftr_cfg  forwardFFT;
-    kiss_fftr_cfg  inverseFFT;
-#endif
 #ifdef VAS_USE_PFFFT
     PFFFT_Setup *setupReal;
 #endif
     bool *segmentIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     bool indexIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
     int zeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     int nonZeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
-#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
     float maxAverageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     float minAverageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     double *averageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
@@ -118,6 +116,9 @@ typedef struct vas_dynamicFirChannel_filter
     int aziZero;
     int aziStride;
     int offset;
+    
+    int filterMemory;
+    int inputMemory;
 
 } vas_dynamicFirChannel_filter;
 
@@ -178,8 +179,6 @@ typedef struct vas_dynamicFirChannel
     float *tmp;                                 // tmp is used for zeropadding before calculating the frequency response
     float *fadeOut;                             // holds the fadeout array necessary for the crossfade
     float *fadeIn;                              // holds the fadein array necessary for the crossfade
-    float *deInterleaveReal;                    // deInterleaveTmp is used deainterleaving the kissffts
-    float *deInterleaveImag;                    // deInterleaveTmp is used deainterleaving the kissffts
     
     vas_dynamicFirChannel_input *input;         // my signal input
     vas_dynamicFirChannel_output output;        // calculated output
@@ -443,6 +442,8 @@ void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float t
  */
  
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize);
+
+void vas_dynamicFirChannel_copySharedFilterValues2Channel(vas_dynamicFirChannel *x);
 
 /**
  * @brief Initializes the channel.<br>

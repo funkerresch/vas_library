@@ -21,15 +21,15 @@
 #X obj 177 598 *~ 0.5;
 #X obj 102 598 *~ 0.5;
 #X obj 102 632 dac~ 1 2;
-#X floatatom 240 448 5 0 0 0 - - - 0;
-#X floatatom 381 447 5 0 0 0 - - - 0;
+#X floatatom 232 448 5 0 0 0 - - - 0;
+#X floatatom 363 447 5 0 0 0 - - - 0;
 #X obj 32 572 vu 8 80 empty empty -1 -8 0 10 #404040 #000000 1 0;
 #X obj 32 534 env~ 128;
 #X obj 31 552 - 100;
 #X obj 229 222 s azi;
 #X obj 296 221 s ele;
-#X obj 240 426 r azi;
-#X obj 381 425 r ele;
+#X obj 232 426 r azi;
+#X obj 363 425 r ele;
 #X text 107 466 1st inlet is the signal and message input. 2nd inlet
 is for azimuth. 3rd inlet is for elevation.;
 #X text 150 24 Receive elevation and azimuth from a headtracker via
@@ -126,12 +126,14 @@ size and IR set will share the filter with the first object that loaded
 the IR set. It does not allocate extra memory for the Impulse Responses.
 As long as any object references a filter set \, the object that loaded
 the original set will not accept a new IR set.;
-#X obj 102 507 vas_binaural~ 256 hrtfbrir/FABIAN_DIR_full.sofa;
-#X msg 25 316 read hrtfbrir/fr_pos0.txt 256 0 20000;
 #X text 264 311 fr_pos0.txt was created for the digital forum romanum
 by Christoph Böhm with Raven. It is an azimuth only outdoor BRIR.
 ;
-#X msg 70 354 read hrtfbrir/fabian_dir256.txt 64 0 0;
+#X obj 102 507 vas_binaural~ 256 hrtfbrir/fabian_dir256.txt;
+#X obj 389 528 vas_binaural~ 256 hrtfbrir/fr_pos0.txt;
+#X msg 25 316 read hrtfbrir/fr_pos0.txt 256 0 0;
+#X msg 70 354 read hrtfbrir/FABIAN_DIR_full.sofa 256 0 0, f 45;
+#X msg 514 468 read neumann48;
 #X connect 0 0 7 0;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
@@ -153,21 +155,22 @@ by Christoph Böhm with Raven. It is an azimuth only outdoor BRIR.
 #X connect 15 0 10 0;
 #X connect 17 0 19 1;
 #X connect 18 0 19 0;
-#X connect 20 0 42 1;
-#X connect 21 0 42 2;
+#X connect 20 0 43 1;
+#X connect 21 0 43 2;
 #X connect 23 0 24 0;
 #X connect 24 0 22 0;
 #X connect 27 0 20 0;
 #X connect 28 0 21 0;
-#X connect 33 0 42 0;
+#X connect 33 0 43 0;
 #X connect 35 0 18 1;
 #X connect 35 0 17 1;
 #X connect 36 0 10 0;
-#X connect 38 0 42 0;
+#X connect 38 0 43 0;
 #X connect 39 0 38 0;
 #X connect 40 0 3 0;
-#X connect 42 0 18 0;
-#X connect 42 0 23 0;
-#X connect 42 1 17 0;
-#X connect 43 0 42 0;
-#X connect 45 0 42 0;
+#X connect 43 0 18 0;
+#X connect 43 0 23 0;
+#X connect 43 1 17 0;
+#X connect 45 0 43 0;
+#X connect 46 0 43 0;
+#X connect 47 0 44 0;

@@ -9,6 +9,19 @@
 #include "vas_pdmaxobject.h"
 
 #ifdef PUREDATA
+
+bool vas_pdmaxobject_dspIsOn()
+{
+#ifdef PUREDATA
+    if(canvas_dspstate)
+#else
+    if(sys_getdspstate())
+#endif
+        return true;
+    else
+        return false;
+}
+
 void vas_pdmaxobject_getFloatArrayAndLength(t_symbol *arrayname, t_word **array, int *length)
 {
     t_garray *a;
@@ -41,7 +54,7 @@ void vas_pdmaxobject_set_mono_simple(vas_pdmaxobject *x, t_symbol *left, float s
     
     minLength = x->leftArrayLength;
 
-    vas_fir_setMetaData_manually1((vas_fir *)engine, minLength, segmentSize, VAS_IR_DIRECTIONFORMAT_SINGLE, 1, 1, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR, 0, 0);
+    vas_fir_setMetaData_manually1((vas_fir *)engine, NULL, minLength, segmentSize, VAS_IR_DIRECTIONFORMAT_SINGLE, 1, 1, VAS_IR_AUDIOFORMAT_STEREO, VAS_IR_LINEFORMAT_IR, 0, 0);
         
     filterLenghtMinusOffset = ((vas_fir *)engine)->metaData.filterLength;
     float *currentIr = (float *)vas_mem_alloc( filterLenghtMinusOffset * sizeof(float));
@@ -84,7 +97,7 @@ void vas_pdmaxobject_set1(vas_pdmaxobject *x, t_symbol *left, t_symbol *right, f
     for (int i=0; i<x->rightArrayLength;i++)
         rightIr[i] = x->rightArray[i].w_float;
     
-    vas_fir_read_singleImpulseFromFloatArray(engine, left->s_name, leftIr, rightIr, maxLength, segmentSize, offset, end);
+    vas_fir_read_singleImpulseFromFloatArray(engine, left->s_name, leftIr, rightIr, maxLength, segmentSize, offset, end, true);
      
     vas_mem_free(leftIr);
     vas_mem_free(rightIr);
@@ -220,37 +233,44 @@ void vas_pdmaxobject_setAndInterpolateBetweenIndexes1(vas_pdmaxobject *x, t_symb
 
 void vas_pdmaxobject_read(vas_pdmaxobject *x, t_symbol *s, float segmentSize, float offset, float end)
 {
-#ifdef PUREDATA
-    if(canvas_dspstate)
-#else
-    if(sys_getdspstate())
-#endif
-    {
-        post("Turn off DSP before loading new IRs");
-        return;
-    }
+    vas_fir *engine = x->convolutionEngine;
     const char *filename = s->s_name;
     
-    vas_fir *engine = x->convolutionEngine;
-    if(segmentSize)
+    if(vas_utilities_isValidSegmentSize(segmentSize))
         x->segmentSize = segmentSize;
+    else
+    {
+        vas_util_debug("%s: Invalid Segmentsize. Must be a power of 2.", __FUNCTION__);
+        return;
+    }
+    
+    if(vas_pdmaxobject_dspIsOn())
+    {
+        vas_util_debug("%s: Turn off DSP before loading new IRs", __FUNCTION__);
+        return;
+    }
     
     if(engine->left->filter->referenceCounter > 1)
     {
-        post("Another instance is referencing this filter.");
+        vas_util_debug("%s: Another instance is referencing this filter.");
         return;
     }
-
-#ifdef PUREDATA
-    unsigned long length = strlen(x->canvasDirectory);
-    if(x->canvasDirectory[length-1] == '/')
-        sprintf(x->fullpath, "%s%s", x->canvasDirectory, filename);
-    else
-        sprintf(x->fullpath, "%s/%s", x->canvasDirectory, filename);
-#else
-    vas_maxObjectUtilities_openFile1(s, x->fullpath);
-#endif
-    post("IR Path: %s", x->fullpath);
     
-    vas_fir_read_impulseFromFile(x->convolutionEngine, x->fullpath, segmentSize, offset, end);
+    if(!strcmp(filename, "neumann48"))
+        vas_fir_read_impulseFromFile(x->convolutionEngine, "neumann48", 128, 0, 0);
+    else
+    {
+        
+#ifdef PUREDATA
+        unsigned long length = strlen(x->canvasDirectory);
+        if(x->canvasDirectory[length-1] == '/')
+            sprintf(x->fullpath, "%s%s", x->canvasDirectory, filename);
+        else
+            sprintf(x->fullpath, "%s/%s", x->canvasDirectory, filename);
+#else
+        vas_maxObjectUtilities_openFile1(s, x->fullpath);
+#endif
+        post("IR Path: %s", x->fullpath);
+        vas_fir_read_impulseFromFile(x->convolutionEngine, x->fullpath, segmentSize, offset, end);
+    }
 }

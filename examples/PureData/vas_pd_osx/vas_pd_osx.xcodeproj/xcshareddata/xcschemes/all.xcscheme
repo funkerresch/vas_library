@@ -14,20 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FA2927EB1A899B4C005A2BA9"
-               BuildableName = "rwa_binauralsimple~.pd_darwin"
-               BlueprintName = "rwa_binauralsimple~"
-               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "E417C3F2236C70DC001A9C1B"
                BuildableName = "vas_binaural~.pd_darwin"
                BlueprintName = "vas_binaural~"
@@ -45,20 +31,6 @@
                BlueprintIdentifier = "E47A60722636AD79007C786A"
                BuildableName = "vas_paracon~.pd_darwin"
                BlueprintName = "vas_paracon~"
-               ReferencedContainer = "container:vas_pd_osx.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84DDB449292CF19D00B9CB90"
-               BuildableName = "vas_attenuate~.pd_darwin"
-               BlueprintName = "vas_attenuate~"
                ReferencedContainer = "container:vas_pd_osx.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -81,12 +53,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
+      enableGPUValidationMode = "1"
       allowLocationSimulation = "YES">
-      <PathRunnable
-         runnableDebuggingMode = "0"
-         BundleIdentifier = "org.puredata.pd.pd-gui"
-         FilePath = "/Applications/Pd-0.52-1-arm64.app">
-      </PathRunnable>
       <CommandLineArguments>
          <CommandLineArgument
             argument = "/Users/admin/Repositories/vas_library/examples/PureData/doc/rwa_binauralsimple\~-help.pd"
@@ -95,14 +63,14 @@
       </CommandLineArguments>
       <AdditionalOptions>
          <AdditionalOption
-            key = "DYLD_INSERT_LIBRARIES"
-            value = "/usr/lib/libgmalloc.dylib"
+            key = "MallocStackLogging"
+            value = ""
             isEnabled = "YES">
          </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -110,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FA2927EB1A899B4C005A2BA9"
-            BuildableName = "rwa_binauralsimple~.pd_darwin"
-            BlueprintName = "rwa_binauralsimple~"
+            BlueprintIdentifier = "E417C3F2236C70DC001A9C1B"
+            BuildableName = "vas_binaural~.pd_darwin"
+            BlueprintName = "vas_binaural~"
             ReferencedContainer = "container:vas_pd_osx.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -211,9 +211,12 @@ void atomic_flag_clear_explicit(volatile atomic_flag* object, memory_order order
 // with another lock-free queue. If all are waiting for the worker threads, we can send the main audio
 // thread to sleep and do a "real" yield.
 
-#if TARGET_CPU_ARM64
+#if defined (TARGET_CPU_ARM64) && defined (__APPLE__)
 #define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
-                                                asm volatile("yield");
+                                                __asm__ __volatile__ ("nop")
+#elif defined (__arm__)
+#define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
+                                                __asm__ __volatile__ ("yield")
 #elif TARGET_CPU_X86_64
 #define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
                                                 _mm_pause();

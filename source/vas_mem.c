@@ -28,7 +28,8 @@ void *vas_mem_resize(void *ptr, long size)
 {
     void *tmp = NULL;
 #ifdef _WIN32
-    _aligned_free(ptr);
+    if(ptr)
+        _aligned_free(ptr);
 #else
     if(ptr)
         free(ptr);

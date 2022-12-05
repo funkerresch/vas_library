@@ -51,9 +51,10 @@ void vas_fir_readText_Ir1(vas_fir *x, FILE *filePtr, int offset);
 void vas_fir_initFilter2(vas_fir *x, int segmentSize);
 void *vas_fir_readSofa_getMetaData(vas_fir *x, char *fullpath);
 int vas_fir_readSofa_getFilter(vas_fir *x, void *filter);
-void vas_fir_setAdditionalMetaData(vas_fir *x, int segmentSize, int offset, int end);
-void vas_fir_setMultiDirection3DegreeGridResoluion(vas_fir *x, int filterLength, int segmentSize, int offset, int end);
-void vas_fir_setMetaData_manually1(vas_fir *x, int filterLength, int segmentSize, int directionFormat, int eleStride, int aziStride, int audioFormat, int lineFormat, int offset, int end);
+void vas_fir_setAdditionalMetaData(vas_fir *x, const char *fullpath, int segmentSize, int offset, int end);
+void vas_fir_setMetaDataForNeumannHeader(vas_fir *x);
+void vas_fir_setMultiDirection3DegreeGridResoluion(vas_fir *x, char *fullpath, int filterLength, int segmentSize, int offset, int end);
+void vas_fir_setMetaData_manually1(vas_fir *x, char *fullpath, int filterLength, int segmentSize, int directionFormat, int eleStride, int aziStride, int audioFormat, int lineFormat, int offset, int end);
 void vas_fir_test_4096_1024_azimuthStride3(vas_fir *x);
     
 #ifdef __cplusplus

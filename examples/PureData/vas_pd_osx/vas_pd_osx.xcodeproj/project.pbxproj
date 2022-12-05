@@ -11,7 +11,6 @@
 		841E04E4292CDD750072DFDD /* vas_hpcomp~.c in Sources */ = {isa = PBXBuildFile; fileRef = E4BE83CE2379699900A84A1D /* vas_hpcomp~.c */; };
 		841E04E5292CDD750072DFDD /* vas_dynconv~.c in Sources */ = {isa = PBXBuildFile; fileRef = E4C5F36D2569169E00C72C66 /* vas_dynconv~.c */; };
 		841E04E8292CDD750072DFDD /* vas_reverb~.c in Sources */ = {isa = PBXBuildFile; fileRef = E4BE83D22379699A00A84A1D /* vas_reverb~.c */; };
-		841E04E9292CDD750072DFDD /* vas_paracon~.c in Sources */ = {isa = PBXBuildFile; fileRef = E47A60702636ACAE007C786A /* vas_paracon~.c */; };
 		841E04F1292CDE550072DFDD /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 841E04F0292CDE550072DFDD /* kiss_fft.c */; };
 		841E04F2292CDE550072DFDD /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 841E04F0292CDE550072DFDD /* kiss_fft.c */; };
 		841E04F3292CDE550072DFDD /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 841E04F0292CDE550072DFDD /* kiss_fft.c */; };
@@ -31,6 +30,7 @@
 		842E090220C67E760089C3D9 /* vas_fir.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090020C67E760089C3D9 /* vas_fir.c */; };
 		842E090620C67E8B0089C3D9 /* vas_fir_binaural.c in Sources */ = {isa = PBXBuildFile; fileRef = 842E090420C67E8B0089C3D9 /* vas_fir_binaural.c */; };
 		844237761FB4A887005ACA50 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844237741FB4A6E2005ACA50 /* Accelerate.framework */; };
+		847D8A0D2930F576001A1429 /* vas_paracon~.c in Sources */ = {isa = PBXBuildFile; fileRef = E47A60702636ACAE007C786A /* vas_paracon~.c */; };
 		84AB273929236B3300BC3653 /* vas_ringBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AB273629236B3300BC3653 /* vas_ringBuffer.h */; };
 		84AB273A29236B3300BC3653 /* vas_ringBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AB273629236B3300BC3653 /* vas_ringBuffer.h */; };
 		84AB273C29236B3300BC3653 /* vas_ringBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AB273629236B3300BC3653 /* vas_ringBuffer.h */; };
@@ -872,6 +872,8 @@
 		84E5E15E21FB48E6002216EF /* vas_hpcomp~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "vas_hpcomp~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E5E16721FB4A28002216EF /* vas_fir_headphoneCompensation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vas_fir_headphoneCompensation.c; path = ../../../source/vas_fir_headphoneCompensation.c; sourceTree = "<group>"; };
 		84E5E16821FB4A28002216EF /* vas_fir_headphoneCompensation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vas_fir_headphoneCompensation.h; path = ../../../source/vas_fir_headphoneCompensation.h; sourceTree = "<group>"; };
+		84E7D7B1293776EE00714521 /* vas_fir_neumannFilter_48kHz.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vas_fir_neumannFilter_48kHz.h; path = ../../../source/vas_fir_neumannFilter_48kHz.h; sourceTree = "<group>"; };
+		84E7D7B2293776EE00714521 /* vas_fir_neumannFilter_48kHz.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vas_fir_neumannFilter_48kHz.c; path = ../../../source/vas_fir_neumannFilter_48kHz.c; sourceTree = "<group>"; };
 		E411413E272812A00054E681 /* pf_mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pf_mixer.cpp; sourceTree = "<group>"; };
 		E411413F272812A00054E681 /* pffft_double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pffft_double.h; sourceTree = "<group>"; };
 		E4114143272812A00054E681 /* pffastconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pffastconv.c; sourceTree = "<group>"; };
@@ -1252,6 +1254,8 @@
 				84DA7EF820401E1A00CDC513 /* vas_util.c */,
 				842E08FF20C67E750089C3D9 /* vas_fir.h */,
 				842E090020C67E760089C3D9 /* vas_fir.c */,
+				84E7D7B1293776EE00714521 /* vas_fir_neumannFilter_48kHz.h */,
+				84E7D7B2293776EE00714521 /* vas_fir_neumannFilter_48kHz.c */,
 				E451E58C25DE6C3B00DD043F /* vas_fir_read.h */,
 				E451E58D25DE6C3B00DD043F /* vas_fir_read.c */,
 				E4A69BD2234C947C00E4E570 /* vas_fir_list.h */,
@@ -2202,6 +2206,7 @@
 				E4114296272812A10054E681 /* test_pffastconv.c in Sources */,
 				E4114186272812A00054E681 /* pf_mixer.cpp in Sources */,
 				E41142D6272812A10054E681 /* pffft_common.c in Sources */,
+				847D8A0D2930F576001A1429 /* vas_paracon~.c in Sources */,
 				E4114256272812A10054E681 /* pffft.c in Sources */,
 				E41141BE272812A00054E681 /* pf_cic.cpp in Sources */,
 				E41142E6272812A10054E681 /* fftpack.c in Sources */,
@@ -2311,7 +2316,6 @@
 				E41141A7272812A00054E681 /* pffastconv.c in Sources */,
 				841E04E5292CDD750072DFDD /* vas_dynconv~.c in Sources */,
 				E4D0CB83266F5C3F00ED4121 /* vas_fir_list.c in Sources */,
-				841E04E9292CDD750072DFDD /* vas_paracon~.c in Sources */,
 				84AB276B29236B7900BC3653 /* vas_delayTap.c in Sources */,
 				84AB275129236B6100BC3653 /* vas_delay.c in Sources */,
 				841E04E3292CDD750072DFDD /* vas_binauralspace~.c in Sources */,
@@ -2718,6 +2722,7 @@
 					VAS_DEBUG_MEM,
 					VERBOSE,
 					VAS_USE_LIBMYSOFA,
+					VAS_USE_NEUMANNHEADERS,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",
@@ -2765,6 +2770,7 @@
 					VAS_DEBUG_MEM,
 					VERBOSE,
 					VAS_USE_LIBMYSOFA,
+					VAS_USE_NEUMANNHEADERS,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../../libmysofa/src/hrtf",

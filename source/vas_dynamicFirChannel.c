@@ -20,11 +20,12 @@ void vas_filter_metaData_init(vas_fir_metaData *x)
     x->aziRange = 0;
     x->aziZero = 0;
     x->fullPath = NULL;
+    x->usingNeumannHeader = false;
 }
 
 vas_dynamicFirChannel_filter *vas_dynamicFirChannel_filter_new()
 {
-    vas_dynamicFirChannel_filter *x = vas_mem_alloc(sizeof(vas_dynamicFirChannel_filter));
+    vas_dynamicFirChannel_filter *x = malloc(sizeof(vas_dynamicFirChannel_filter));
     x->segmentSize = 256;
     x->fftSize = x->segmentSize * 2;
     x->fftSizeLog2 = log2(x->fftSize);
@@ -37,19 +38,9 @@ vas_dynamicFirChannel_filter *vas_dynamicFirChannel_filter_new()
     x->eleMax = 1;
     x->aziMin = 0;
     x->aziMax = 1000; // some random value > 359
-    
-#ifdef VAS_USE_VDSP
     x->setupReal = NULL;
-#endif
     
-#ifdef VAS_USE_KISSFFT
-    x->forwardFFT = NULL;
-    x->inverseFFT = NULL;
-#endif
-
-#ifdef VAS_USE_PFFFT
-    x->setupReal = NULL;
-#endif
+    x->filterMemory = sizeof(vas_dynamicFirChannel_filter);
     
     for(int eleCount = 0; eleCount < VAS_ELEVATION_ANGLES_MAX; eleCount++)
     {
@@ -75,20 +66,15 @@ void vas_dynamicFirChannel_filter_reset(vas_dynamicFirChannel_filter *x)
 {
 #ifdef VAS_USE_VDSP
     if(x->setupReal)
+    {
+        x->filterMemory -= sizeof(x->setupReal);
         vDSP_destroy_fftsetup(x->setupReal);
-#endif
-        
-#ifdef VAS_USE_KISSFFT
-    if(x->forwardFFT)
-        kiss_fftr_free(x->forwardFFT);
-    if(x->inverseFFT)
-        kiss_fftr_free(x->inverseFFT);
-#endif
-    
-#ifdef VAS_USE_PFFFT
+    }
+#else
     if(x->setupReal)
         pffft_destroy_setup(x->setupReal);
 #endif
+    x->setupReal = NULL;
     
     for(int eleCount = 0; eleCount < x->eleRange; eleCount++)
     {
@@ -98,18 +84,24 @@ void vas_dynamicFirChannel_filter_reset(vas_dynamicFirChannel_filter *x)
             for(int i = 0; i < x->numberOfSegments; i++)
             {
                 if(x->data[eleCount][aziCount][i].realp)
+                {
                     vas_mem_free(x->data[eleCount][aziCount][i].realp);
-                x->data[eleCount][aziCount][i].realp = NULL;
+                    x->data[eleCount][aziCount][i].realp = NULL;
+                }
                 if(x->data[eleCount][aziCount][i].imagp)
+                {
                     vas_mem_free(x->data[eleCount][aziCount][i].imagp);
-                x->data[eleCount][aziCount][i].imagp = NULL;
+                    x->data[eleCount][aziCount][i].imagp = NULL;
+                }
             }
-#endif
-            
-#if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
+#else
             for(int i = 0; i < x->numberOfSegments; i++)
             {
-                vas_mem_free(x->pointerToFFTSegments[eleCount][aziCount][i]);
+                if(x->pointerToFFTSegments[eleCount][aziCount][i])
+                {
+                    vas_mem_free(x->pointerToFFTSegments[eleCount][aziCount][i]);
+                    x->pointerToFFTSegments[eleCount][aziCount][i] = NULL;
+                }
             }
 #endif
 #ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
@@ -120,15 +112,52 @@ void vas_dynamicFirChannel_filter_reset(vas_dynamicFirChannel_filter *x)
     x->numberOfSegments = 0;
 }
 
+void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x)
+{
+    vas_dynamicFirChannel_filter_reset(x);
+    
+    for(int eleCount = 0; eleCount < x->eleRange; eleCount++)
+    {
+        for(int aziCount = 0; aziCount < x->aziRange; aziCount++)
+        {
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
+            vas_mem_free(x->averageSegmentPower[eleCount][aziCount]);
+            x->averageSegmentPower[eleCount][aziCount] = NULL;
+#endif
+
+#ifdef VAS_USE_VDSP
+            vas_mem_free(x->data[eleCount][aziCount]);
+            x->data[eleCount][aziCount] = NULL;
+                                             
+#endif
+            vas_mem_free(x->segmentIsZero[eleCount][aziCount]);
+            x->segmentIsZero[eleCount][aziCount] = NULL;
+            vas_mem_free(x->pointerToFFTSegments[eleCount][aziCount]);
+            x->pointerToFFTSegments[eleCount][aziCount] = NULL;
+        }
+    }
+    vas_mem_free(x);
+}
+
+void vas_dynamicFirChannel_setScaling(vas_dynamicFirChannel *x)
+{
+#ifdef VAS_USE_VDSP
+    x->scale = 1.0 / (4*x->filter->fftSize); // this is apples vDSP convention
+#else
+    x->scale = 1.0 / (x->filter->fftSize); // this seems to be correct for PFFFT
+#endif
+}
+
 void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *metaData, int segmentSize) // filter init must be called, if either segmentSize, eleRange or aziRange change
 {
     if(x->init)
     {
+        vas_util_debug("%s: Filter was loaded, calling reset.", __FUNCTION__);
         vas_dynamicFirChannel_input_reset(x->input, x->filter->numberOfSegments);
         vas_dynamicFirChannel_filter_reset(x->filter);
         x->init = 0;
     }
-    
+     
     x->frameCounter = 0;
     x->filter->referenceCounter = 1;
     x->filter->segmentSize = segmentSize;
@@ -146,76 +175,20 @@ void vas_dynamicFirChannel_init1(vas_dynamicFirChannel *x, vas_fir_metaData *met
     x->filter->eleMax = metaData->eleMax;
     x->filter->eleZero = metaData->eleZero;
     x->elevationTmp = metaData->eleZero;  // added
+    x->output.current.elevation = metaData->eleZero;  // added
+    x->output.next.elevation = metaData->eleZero;  // added
+    x->output.current.azimuth = metaData->aziZero;  // added
+    x->output.next.azimuth = metaData->aziZero;  // added
     x->filter->offset = metaData->filterOffset;
-    
+    x->filterSize = metaData->filterLengthMinusOffset;
+        
     vas_dynamicFirChannel_setFilterSize(x, metaData->filterLength - x->filter->offset);
     vas_dynamicFirChannel_prepareArrays(x);
 }
 
-void vas_dynamicFirChannel_filter_free(vas_dynamicFirChannel_filter *x)
-{
-#ifdef VAS_USE_VDSP
-    if(x->setupReal)
-    {
-        vDSP_destroy_fftsetup(x->setupReal);
-        x->setupReal = NULL;
-    
-    }
-#endif
-    
-#ifdef VAS_USE_KISSFFT
-    if(x->forwardFFT)
-        kiss_fftr_free(x->forwardFFT);
-    if(x->inverseFFT)
-        kiss_fftr_free(x->inverseFFT);
-#endif
-    
-#ifdef VAS_USE_PFFFT
-    if(x->setupReal)
-        pffft_destroy_setup(x->setupReal);
-#endif
-    
-    for(int eleCount = 0; eleCount < x->eleRange; eleCount++)
-    {
-        for(int aziCount = 0; aziCount < x->aziRange; aziCount++)
-        {
-#ifdef VAS_USE_VDSP
-            for(int i = 0; i < x->numberOfSegments; i++)
-            {
-                vas_mem_free(x->data[eleCount][aziCount][i].realp);
-                vas_mem_free(x->data[eleCount][aziCount][i].imagp);
-            }
-#endif
-            
-#if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
-            for(int i = 0; i < x->numberOfSegments; i++)
-            {
-                vas_mem_free(x->pointerToFFTSegments[eleCount][aziCount][i]);
-            }
-#endif
-        }
-    }
-    
-    for(int eleCount = 0; eleCount < VAS_ELEVATION_ANGLES_MAX; eleCount++)
-    {
-        for(int aziCount = 0; aziCount < VAS_AZIMUTH_ANGLES_MAX; aziCount++)
-        {
-#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
-            vas_mem_free(x->averageSegmentPower[eleCount][aziCount]);
-#endif
-            vas_mem_free(x->segmentIsZero[eleCount][aziCount]);
-#ifdef VAS_USE_VDSP
-            vas_mem_free(x->data[eleCount][aziCount]);
-#endif
-            vas_mem_free(x->pointerToFFTSegments[eleCount][aziCount]);
-        }
-    }
-    vas_mem_free(x);
-}
-
 vas_dynamicFirChannel_input *vas_dynamicFirChannel_input_new()
 {
-    vas_dynamicFirChannel_input *x = vas_mem_alloc(sizeof(vas_dynamicFirChannel_input));
+    vas_dynamicFirChannel_input *x = malloc(sizeof(vas_dynamicFirChannel_input));
     x->copy = NULL;
     x->real = NULL;
     x->imag = NULL;
@@ -232,9 +205,7 @@ void vas_dynamicFirChannel_input_reset(vas_dynamicFirChannel_input *x, int curre
 #ifdef VAS_USE_VDSP
         vas_mem_free(x->data[i].realp);
         vas_mem_free(x->data[i].imagp);
-#endif
-        
-#if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
+#else
         vas_mem_free(x->pointerToFFTSegments[i]);
 #endif
         i++;
@@ -243,19 +214,7 @@ void vas_dynamicFirChannel_input_reset(vas_dynamicFirChannel_input *x, int curre
 
 void vas_dynamicFirChannel_input_free(vas_dynamicFirChannel_input *x, int currentNumberOfSegments)
 {
-    int i = 0;
-    while(i < currentNumberOfSegments) // dealloc old input arrays, in case of new object, number of segemnts is zero..
-    {
-#ifdef VAS_USE_VDSP
-        vas_mem_free(x->data[i].realp);
-        vas_mem_free(x->data[i].imagp);
-#endif
-        
-#if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
-        vas_mem_free(x->pointerToFFTSegments[i]);
-#endif
-        i++;
-    }
+    vas_dynamicFirChannel_input_reset(x, currentNumberOfSegments);
     vas_mem_free(x->real);
     vas_mem_free(x->imag);
     vas_mem_free(x->pointerToFFTSegments);
@@ -347,59 +306,32 @@ void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float t
 {
     if(thresh >= 0 && thresh < 1)
         x->segmentThreshold = thresh;
-#if defined(MAXMSPSDK) || defined(PUREDATA)
-    post("%.20f", x->segmentThreshold);
-#endif
 }
 
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize)
 {
     if(!vas_utilities_isValidSegmentSize(segmentSize))
     {
-#if defined(MAXMSPSDK) || defined(PUREDATA)
-        post("Set Segment Size");
-#endif
-        
-#if defined(MAXMSPSDK) || defined(PUREDATA)
-        post("Invalid Segment Size: %d", segmentSize);
-#else
-        printf("Invalid Segment Size");
-#endif
+        vas_util_debug("%s: Invalid Segment Size: %d", __FUNCTION__, segmentSize);
         return;
     }
     
     x->filter->segmentSize = segmentSize;
     x->filter->fftSize = x->filter->segmentSize*2;
-    x->scale = 1.0 / (x->filter->segmentSize * x->filter->segmentSize);
     x->filter->fftSizeLog2 = log2(x->filter->fftSize);
+    vas_dynamicFirChannel_setScaling(x);
+
+    if(!x->useSharedFilter)
 #ifdef VAS_USE_VDSP
-    if(!x->useSharedFilter)
         x->filter->setupReal = vDSP_create_fftsetup ( x->filter->fftSizeLog2, FFT_RADIX2);
-#endif
-    
-#ifdef VAS_USE_KISSFFT
-    if(!x->useSharedFilter)
-    {
-        x->filter->forwardFFT = kiss_fftr_alloc(x->filter->fftSize,0,0,0);
-        x->filter->inverseFFT = kiss_fftr_alloc(x->filter->fftSize,1,0,0);
-    }
-#endif
-    
-#ifdef VAS_USE_PFFFT
-    if(!x->useSharedFilter)
+#else
         x->filter->setupReal = pffft_new_setup(x->filter->fftSize, PFFFT_REAL);
 #endif
     
 #ifdef VERBOSE
-#if(defined(MAXMSPSDK) || defined(PUREDATA))
-    post("Segment Size is: %d", x->filter->segmentSize);
-    post("FFT Size is: %d", x->filter->fftSize);
-    post("FFT Size Log2 is: %d", x->filter->fftSizeLog2);
-#else
-    printf("Segment Size is: %d", x->filter->segmentSize);
-    printf("FFT Size is: %d", x->filter->fftSize);
-    printf("FFT Size Log2 is: %d", x->filter->fftSizeLog2);
-#endif
+    vas_util_debug("%s: Segment Size is: %d", __FUNCTION__, x->filter->segmentSize);
+    vas_util_debug("%s: FFT Size is: %d", __FUNCTION__, x->filter->fftSize);
+    vas_util_debug("%s: FFT Size Log2 is: %d", __FUNCTION__, x->filter->fftSizeLog2);
 #endif
 }
 
@@ -421,20 +353,7 @@ void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dyn
         x->segmentIndex++;
     }
 #endif
-#ifdef VAS_USE_KISSFFT
-    if(!x->filter->segmentIsZero[target->elevation][target->azimuth][x->movingIndex])
-        vas_util_complexMultiply(x->filter->segmentSize+8, x->input->pointerToFFTSegments[0], x->filter->pointerToFFTSegments[target->elevation][target->azimuth][x->movingIndex], target->signalComplex);
-    
-    while(x->segmentIndex < x->filter->numberOfSegments)
-    {
-        if(!x->filter->segmentIsZero[target->elevation][target->azimuth][x->movingIndex-x->segmentIndex])
-        {
-            vas_util_complexMultiplyAdd(x->input->pointerToFFTSegments[x->segmentIndex], x->filter->pointerToFFTSegments[target->elevation][target->azimuth][x->movingIndex-x->segmentIndex], target->signalComplex, x->filter->segmentSize+8);
-        }
 
-        x->segmentIndex++;
-    }
-#endif
 #ifdef VAS_USE_PFFFT
     if(!x->filter->segmentIsZero[target->elevation][target->azimuth][x->movingIndex])
         pffft_zconvolve_no_accu(x->filter->setupReal, (float *)x->input->pointerToFFTSegments[0], (float *)x->filter->pointerToFFTSegments[target->elevation][target->azimuth][x->movingIndex], (float *) target->signalComplex, 1);
@@ -483,13 +402,6 @@ void vas_dynamicFirChannel_forwardFFTInput(vas_dynamicFirChannel *x)
     vDSP_ctoz ( ( COMPLEX * ) x->input->copy, 2, x->input->pointerToFFTSegments[x->movingIndex], 1, x->filter->segmentSize  );
     vDSP_fft_zrip ( x->filter->setupReal, x->input->pointerToFFTSegments[x->movingIndex], 1, x->filter->fftSizeLog2, FFT_FORWARD  );
 #endif
-    
-#ifdef VAS_USE_KISSFFT
-    kiss_fftr(x->filter->forwardFFT,x->input->copy,x->input->pointerToFFTSegments[x->movingIndex]);
-#ifdef VAS_USE_AVX
-    vas_util_deinterleaveComplexArray2(x->input->pointerToFFTSegments[x->movingIndex], x->deInterleaveReal, x->deInterleaveImag, x->filter->segmentSize+8);
-#endif
-#endif
 
 #ifdef VAS_USE_PFFFT
     pffft_transform(x->filter->setupReal, x->input->copy, (float *) x->input->pointerToFFTSegments[x->movingIndex], x->fftWork, PFFFT_FORWARD );
@@ -501,10 +413,6 @@ void vas_dynamicFirChannel_inverseFFT(vas_dynamicFirChannel *x, vas_dynamicFirCh
 #ifdef VAS_USE_VDSP
     vDSP_fft_zrip ( x->filter->setupReal, &target->signalComplex, 1, x->filter->fftSizeLog2, FFT_INVERSE  );
     vDSP_ztoc ( &target->signalComplex, 1, ( COMPLEX * ) (target->signalFloat), 2, x->filter->segmentSize );
-#endif
-    
-#ifdef VAS_USE_KISSFFT
-    kiss_fftri(x->filter->inverseFFT, target->signalComplex, target->signalFloat);
 #endif
     
 #ifdef VAS_USE_PFFFT
@@ -711,7 +619,7 @@ void vas_dynamicFirChannel_prepareOutputSignal(vas_dynamicFirChannel *x)
 {
     x->output.current.signalFloat = (float *)vas_mem_resize(x->output.current.signalFloat, sizeof(float) * x->filter->fftSize);
     x->output.next.signalFloat = (float *)vas_mem_resize(x->output.next.signalFloat, sizeof(float) * x->filter->fftSize);
-    x->output.outputSegment = (float *)vas_mem_resize(x->output.outputSegment, sizeof(float) * x->filter->segmentSize); // must be segmentsize, changed for debugging
+    x->output.outputSegment = (float *)vas_mem_resize(x->output.outputSegment, sizeof(float) * x->filter->segmentSize);
     x->output.current.overlap = (float *)vas_mem_resize(x->output.current.overlap, sizeof(float) * x->filter->segmentSize);
     x->output.next.overlap = (float *)vas_mem_resize(x->output.next.overlap, sizeof(float) * x->filter->segmentSize);
 #ifdef VAS_USE_VDSP
@@ -719,13 +627,9 @@ void vas_dynamicFirChannel_prepareOutputSignal(vas_dynamicFirChannel *x)
     x->output.current.signalComplex.imagp = (float *)vas_mem_resize(x->output.current.signalComplex.imagp, x->filter->segmentSize * sizeof ( float  ));
     x->output.next.signalComplex.realp = (float *)vas_mem_resize(x->output.next.signalComplex.realp, x->filter->segmentSize * sizeof ( float  ));
     x->output.next.signalComplex.imagp = (float *)vas_mem_resize(x->output.next.signalComplex.imagp, x->filter->segmentSize * sizeof ( float  ));
-//    vas_util_complexWriteZeros(&x->output.current.signalComplex, x->filter->segmentSize);
-//    vas_util_complexWriteZeros(&x->output.next.signalComplex, x->filter->segmentSize);
 #else
     x->output.current.signalComplex = (VAS_COMPLEX *)vas_mem_resize(x->output.current.signalComplex, (x->filter->segmentSize+8) * sizeof ( VAS_COMPLEX  ));
     x->output.next.signalComplex = (VAS_COMPLEX *)vas_mem_resize(x->output.next.signalComplex, (x->filter->segmentSize+8) * sizeof ( VAS_COMPLEX  ));
-//    vas_util_complexWriteZeros(x->output.current.signalComplex, x->filter->segmentSize+8);
-//    vas_util_complexWriteZeros(x->output.next.signalComplex, x->filter->segmentSize+8);
  #endif
 }
 
@@ -744,38 +648,41 @@ void vas_dynamicFirChannel_prepareInputSignal(vas_dynamicFirChannel *x)
         while(i < x->filter->numberOfSegments) //create pointer array to signal
         {
 #ifdef VAS_USE_VDSP
-            x->input->data[i].realp = vas_mem_alloc(sizeof(float) * (x->filter->segmentSize));
-            x->input->data[i].imagp = vas_mem_alloc(sizeof(float) * (x->filter->segmentSize));
+            x->input->data[i].realp = vas_mem_resize(x->input->data[i].realp, sizeof(float) * (x->filter->segmentSize));
+            x->input->data[i].imagp = vas_mem_resize(x->input->data[i].imagp, sizeof(float) * (x->filter->segmentSize));
             x->input->pointerToFFTSegments[i+x->pointerArrayMiddle] = &x->input->data[i];
             x->input->pointerToFFTSegments[i] = &x->input->data[i];
-//            vas_util_complexWriteZeros(x->input->pointerToFFTSegments[i],  x->filter->segmentSize);
-#endif
-            
-#if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
-            x->input->pointerToFFTSegments[i+x->pointerArrayMiddle] = vas_mem_alloc(sizeof(VAS_COMPLEX) * (x->filter->segmentSize+8));
+#else
+            x->input->pointerToFFTSegments[i+x->pointerArrayMiddle] = vas_mem_resize(x->input->pointerToFFTSegments[i+x->pointerArrayMiddle], sizeof(VAS_COMPLEX) * (x->filter->segmentSize+8));
             x->input->pointerToFFTSegments[i] = x->input->pointerToFFTSegments[i+x->pointerArrayMiddle];
-//            vas_util_complexWriteZeros(x->input->pointerToFFTSegments[i],  x->filter->segmentSize+8);
 #endif
             i++;
         }
     }
     else
     {
-#if defined(MAXMSPSDK) || defined(PUREDATA)
-        post("Use shared input");
-#endif
+        vas_util_debug("Use shared input");
         x->input->pointerToFFTSegments = x->sharedInput->pointerToFFTSegments;
     }
 }
 
+void vas_dynamicFirChannel_copySharedFilterValues2Channel(vas_dynamicFirChannel *x)
+{
+    x->filterSize = x->filter->filterLength; //??
+    x->fadeLength = VAS_DEFAULTCROSSFADELENGTH;
+    if(x->fadeLength < x->filter->segmentSize)
+        x->fadeLength = x->filter->segmentSize;
+    
+    x->numberOfFramesForCrossfade = x->fadeLength/x->filter->segmentSize;
+    x->fadeCounter = 0;
+    x->pointerArrayMiddle = x->filter->numberOfSegments;
+    x->pointerArraySize = x->filter->numberOfSegments*2;
+    x->movingIndex = x->pointerArrayMiddle;
+    vas_dynamicFirChannel_setScaling(x);
+}
+
 void vas_dynamicFirChannel_setFilterSize(vas_dynamicFirChannel *x, int filterSize)
 {
-    if(x->filter->segmentSize == 0)
-    {
-       // post("invalid segmentSize");
-        return;
-    }
-    
     x->filterSize = filterSize;
     if(x->filter->segmentSize > filterSize)
     {
@@ -786,26 +693,23 @@ void vas_dynamicFirChannel_setFilterSize(vas_dynamicFirChannel *x, int filterSiz
     }
     
     vas_dynamicFirChannel_setSegmentSize(x, x->filter->segmentSize);
-    x->fadeLength = 512;
+    x->fadeLength = VAS_DEFAULTCROSSFADELENGTH;
     if(x->fadeLength < x->filter->segmentSize)
         x->fadeLength = x->filter->segmentSize;
      
     x->filter->numberOfSegments = x->filterSize/x->filter->segmentSize;
     if(x->filterSize%x->filter->segmentSize != 0)
         x->filter->numberOfSegments+=1;
-#ifdef VERBOSE
-#if defined(MAXMSPSDK) || defined(PUREDATA)
-    post("Number of Segments: %d", x->filter->numberOfSegments);
-#else
-    printf("Number of Segments: %d", x->filter->numberOfSegments);
-#endif
-#endif
     
     x->numberOfFramesForCrossfade = x->fadeLength/x->filter->segmentSize;
     x->fadeCounter = 0;
     x->pointerArrayMiddle = x->filter->numberOfSegments;
     x->pointerArraySize = x->filter->numberOfSegments*2;
     x->movingIndex = x->pointerArrayMiddle;
+    
+#ifdef VERBOSE
+    vas_util_debug("%s: Number of Segments: %d", __FUNCTION__, x->filter->numberOfSegments);
+#endif
 }
 
 void vas_dynamicFirChannel_prepareArrays(vas_dynamicFirChannel *x)
@@ -814,10 +718,7 @@ void vas_dynamicFirChannel_prepareArrays(vas_dynamicFirChannel *x)
 #ifdef VAS_USE_PFFFT
     x->fftWork = (float *)vas_mem_resize(x->fftWork, sizeof(float) * x->filter->fftSize);
 #endif
-#ifdef VAS_USE_AVX
-    x->deInterleaveReal = (float *)vas_mem_resize(x->deInterleaveReal, sizeof(float) * (x->filter->segmentSize + 8));
-    x->deInterleaveImag = (float *)vas_mem_resize(x->deInterleaveImag, sizeof(float) * (x->filter->segmentSize + 8));
-#endif
+
     x->fadeOut = (float *)vas_mem_resize(x->fadeOut, sizeof(float) * x->fadeLength);
     x->fadeIn = (float *)vas_mem_resize(x->fadeIn, sizeof(float) * x->fadeLength);
     vas_utilities_writeFadeOutArray(x->fadeLength, x->fadeOut);
@@ -965,14 +866,6 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
     int size = x->filter->segmentSize;
     int numberOfSegmentsMinusOne = x->filter->numberOfSegments-1;
     
-#ifdef VAS_USE_VDSP
-    x->scale = 1.0 / (4*x->filter->fftSize); // this is apples vDSP convention
-#endif
-    
-#if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
-    x->scale = 1.0 / (x->filter->fftSize); // this seems to be correct for kissFFT although I did not check it yet
-#endif
-    
     if(!x->sharedFilter)
     {
         int i = 0;
@@ -989,17 +882,12 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
         while(i < x->filter->numberOfSegments)         //create pointer array to filtersegments
         {
 #ifdef VAS_USE_VDSP
-            x->filter->data[ele][azi][i].realp = vas_mem_alloc(sizeof(float) * x->filter->segmentSize);
-            if(!x->filter->data[ele][azi][i].realp)
-                post("Could not allocate memory");
-            x->filter->data[ele][azi][i].imagp = vas_mem_alloc(sizeof(float) * x->filter->segmentSize);
-            if(!x->filter->data[ele][azi][i].imagp)
-                post("Could not allocate memory");
+            x->filter->data[ele][azi][i].realp = vas_mem_resize(x->filter->data[ele][azi][i].realp, sizeof(float) * x->filter->segmentSize);
+            x->filter->data[ele][azi][i].imagp = vas_mem_resize(x->filter->data[ele][azi][i].imagp, sizeof(float) * x->filter->segmentSize);
             x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle] = &x->filter->data[ele][azi][i];
             x->filter->pointerToFFTSegments[ele][azi][i] = &x->filter->data[ele][azi][i];
-#endif
-#if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
-            x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle] = vas_mem_alloc(sizeof(VAS_COMPLEX) * (x->filter->segmentSize+8));
+#else
+            x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle] = vas_mem_resize(x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle], sizeof(VAS_COMPLEX) * (x->filter->segmentSize+8));
             x->filter->pointerToFFTSegments[ele][azi][i] = x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle];
 #endif
             if(i == numberOfSegmentsMinusOne)
@@ -1018,23 +906,15 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
                 vDSP_ctoz ( ( COMPLEX * ) x->tmp , 2, &(x->filter->data[ele][azi][i]), 1, x->filter->segmentSize  );
                 vDSP_fft_zrip ( x->filter->setupReal, &x->filter->data[ele][azi][i], 1, x->filter->fftSizeLog2, FFT_FORWARD  );
                 vas_util_complexScale(x->filter->pointerToFFTSegments[ele][azi][i], x->scale, x->filter->segmentSize);
-#endif
-
-#ifdef VAS_USE_KISSFFT
-                kiss_fftr(x->filter->forwardFFT,x->tmp,x->filter->pointerToFFTSegments[ele][azi][i]);
-                vas_util_complexScale(x->filter->pointerToFFTSegments[ele][azi][i], x->scale, x->filter->segmentSize+8);
-#ifdef VAS_USE_AVX
-                vas_util_deinterleaveComplexArray2(x->filter->pointerToFFTSegments[ele][azi][i], x->deInterleaveReal, x->deInterleaveImag, x->filter->segmentSize+8);
-#endif
-#endif
-                
-#ifdef VAS_USE_PFFFT
+#else
                 pffft_transform(x->filter->setupReal, x->tmp, (float *) x->filter->pointerToFFTSegments[ele][azi][i], x->fftWork, PFFFT_FORWARD );
                 vas_util_complexScale(x->filter->pointerToFFTSegments[ele][azi][i], x->scale, x->filter->segmentSize+8);
 #endif
                 x->filter->segmentIsZero[ele][azi][i] = false;
                 x->filter->segmentIsZero[ele][azi][i+x->pointerArrayMiddle] = false;
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
                 x->filter->nonZeroCounter[ele][azi]++;
+#endif
             }
             else
             {
@@ -1045,15 +925,13 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
                 vas_mem_free(x->filter->data[ele][azi][i].imagp);
                 x->filter->data[ele][azi][i].realp = NULL;
                 x->filter->data[ele][azi][i].imagp = NULL;
-                x->filter->pointerToFFTSegments[ele][azi][i+x->pointerArrayMiddle] = NULL;
-                x->filter->pointerToFFTSegments[ele][azi][i] = NULL;
-                //post("Segment is zero: %d %d %d", ele, azi, i);
-#endif
-#if defined(VAS_USE_KISSFFT) || defined(VAS_USE_PFFFT)
+#else
                 vas_mem_free(x->filter->pointerToFFTSegments[ele][azi][i]);
                 x->filter->pointerToFFTSegments[ele][azi][i] = NULL;
 #endif
+#ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
                 x->filter->zeroCounter[ele][azi]++;
+#endif
             }
             i++;
         }
@@ -1063,15 +941,20 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
 void vas_dynamicFirChannel_free(vas_dynamicFirChannel *x)
 {
     if(!x->useSharedInput)
-        vas_dynamicFirChannel_input_free(x->input, x->filter->numberOfSegments);
-   
-    vas_mem_free(x->tmp);
-#ifdef VAS_USE_AVX
-    vas_mem_free(x->deInterleaveReal);
-    vas_mem_free(x->deInterleaveImag);
-#endif
-    vas_mem_free(x->fadeOut);
-    vas_mem_free(x->fadeIn);
+    {
+        if(x->input)
+        {
+            vas_dynamicFirChannel_input_free(x->input, x->filter->numberOfSegments);
+            vas_util_debug("%s: Freeing input arrays.", __FUNCTION__);
+        }
+    }
+    
+    if(x->tmp)
+        vas_mem_free(x->tmp);
+    if(x->fadeOut)
+        vas_mem_free(x->fadeOut);
+    if(x->fadeIn)
+        vas_mem_free(x->fadeIn);
 #ifdef VAS_USE_PFFFT
     if(x->fftWork)
         vas_mem_free(x->fftWork);
@@ -1080,20 +963,14 @@ void vas_dynamicFirChannel_free(vas_dynamicFirChannel *x)
     
     x->filter->referenceCounter--;
     
-    if( !x->filter->referenceCounter)
+    if(!x->filter->referenceCounter)
     {
         x->init = 0; // making sure, that filter is not accessed in the audio thread anymore
         vas_dynamicFirChannel_filter_free(x->filter);
-        
-//#ifdef VERBOSE
-#if defined(MAXMSPSDK) || defined(PUREDATA)
-        post("Free  Filter");
-#else
-        printf("Free  Filter");
-#endif
-//#endif
-        
+        vas_util_debug("Free  dynamic fir channel.");
     }
+    
+    vas_mem_free(x);
 }
 
 void vas_dynamicFirChannel_setInitFlag(vas_dynamicFirChannel *x)
@@ -1115,17 +992,21 @@ void vas_dynamicFirChannel_shareInputWith(vas_dynamicFirChannel *x, vas_dynamicF
 
 void vas_dynamicFirChannel_getSharedFilterValues(vas_dynamicFirChannel *x, vas_dynamicFirChannel *sharedInputChannel)
 {
-    if(x->filter)
-        vas_dynamicFirChannel_filter_free(x->filter);
-    x->filter = sharedInputChannel->filter;
     x->useSharedFilter = true;
+    if(x->filter)
+    {
+        vas_mem_free(x->filter);
+        vas_util_debug("%s: Free filter, using shared filter.", __FUNCTION__);
+    }
+    
+    x->filter = sharedInputChannel->filter;
     x->frameCounter = 0;
-    vas_dynamicFirChannel_setFilterSize(x, sharedInputChannel->filterSize);
+    vas_dynamicFirChannel_copySharedFilterValues2Channel(x);
 }
 
 vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup)
 {
-    vas_dynamicFirChannel *x = vas_mem_alloc(sizeof(vas_dynamicFirChannel));
+    vas_dynamicFirChannel *x = malloc(sizeof(vas_dynamicFirChannel));
     x->gain = 1.;
     x->setup = setup;
     x->segmentIndex = 0;
@@ -1144,16 +1025,11 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup)
     x->tmp = NULL;
     x->fadeOut = NULL;
     x->fadeIn = NULL;
-#ifdef VAS_USE_AVX
-    x->deInterleaveReal = NULL;
-    x->deInterleaveImag = NULL;
-#endif
     x->segmentThreshold = 0;
 #ifdef VAS_USE_PFFFT
     x->fftWork = NULL;
 #endif
     vas_dynamicFirChannel_output_init(&x->output, 0);
-    
     x->elevationTmp = 0;
     x->azimuthTmp = 0;
     

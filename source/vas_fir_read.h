@@ -24,7 +24,7 @@ extern "C" {
 #endif
 
 void vas_fir_read_impulseFromFile(vas_fir *x, char *fullpath, int segmentSize, int offset, int end);
-void vas_fir_read_singleImpulseFromFloatArray(vas_fir *x, char *name, float *left, float *right, float length, int segmentSize, int offset, int end);
+void vas_fir_read_singleImpulseFromFloatArray(vas_fir *x, char *name, float *left, float *right, float length, int segmentSize, int offset, int end, bool filterSharingActive);
 
 #ifdef __cplusplus
 }

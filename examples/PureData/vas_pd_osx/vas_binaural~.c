@@ -88,7 +88,7 @@ static void vas_binaural_free(vas_binaural *x)
 {
     vas_fir *convolutionEngine = (vas_fir *)x->convolutionEngine;
     if(convolutionEngine->left->filter->referenceCounter == 1 || convolutionEngine->left->useSharedFilter == false  )
-        vas_fir_list_removeNode1(&IRs, (vas_fir *)x->convolutionEngine);
+        vas_fir_list_removeNodeByAdress(&IRs, (vas_fir *)x->convolutionEngine);
     
     vas_fir_binaural_free(x->convolutionEngine);
     inlet_free(x->azi);
@@ -161,7 +161,7 @@ static void *vas_binaural_new(t_symbol *s, int argc, t_atom *argv)
     }
     
     if(path)
-        vas_pdmaxobject_read((vas_pdmaxobject *)x, path, x->segmentSize, offset, end);
+            vas_pdmaxobject_read((vas_pdmaxobject *)x, path, x->segmentSize, offset, end);
 
     return (x);
 }
@@ -179,6 +179,7 @@ void vas_binaural_tilde_setup(void)
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setAzimuth, gensym("azimuth"), A_DEFFLOAT,0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setElevation, gensym("elevation"), A_DEFFLOAT,0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_aziDirection, gensym("azidirection"), A_DEFFLOAT,0);
+    
 #ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_setSegmentThreshold, gensym("thresh"), A_DEFFLOAT,0);
     class_addmethod(vas_binaural_class, (t_method)vas_binaural_postInactivePartionIndexes, gensym("zeroindexes"),0);

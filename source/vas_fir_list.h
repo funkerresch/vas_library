@@ -21,6 +21,18 @@
 extern "C" {
 #endif
 
+typedef struct vas_fir_idData
+{
+    char *name;
+    int segmentSize;
+    int offset;
+    int end;
+} vas_fir_idData;
+
+vas_fir_idData *vas_fir_idData_new(const char *name, int segmentSize, int offset, int end);
+
+void vas_fir_idData_free(vas_fir_idData *x);
+
 typedef struct vas_fir_listNode {
     vas_fir *data;
     struct vas_fir_listNode* next;
@@ -37,15 +49,13 @@ void vas_fir_list_clear(vas_fir_list *x);
 
 void vas_fir_listNode_free(vas_fir_listNode *node);
 
-void vas_fir_list_removeNode1(vas_fir_list *x, vas_fir *match);
+void vas_fir_list_removeNodeByAdress(vas_fir_list *x, vas_fir *match);
+
+void vas_fir_list_removeNode2(vas_fir_list *x, vas_fir_idData *idData);
 
 void vas_fir_list_addNode(vas_fir_list *x, vas_fir_listNode *node);
 
-vas_fir *vas_fir_list_find(vas_fir_list *x, const char *match);
-
 vas_fir *vas_fir_list_find1(vas_fir_list *x, const char *match, int segmentSize, int offset, int end);
-
-void vas_fir_list_removeNode(vas_fir_list *x, const char *match);
 
 #ifdef __cplusplus
 }

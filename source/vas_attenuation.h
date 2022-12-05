@@ -26,15 +26,22 @@ extern "C" {
 /**
  * @struct vas_attenuation
  * @brief A structure for an attenuation object <br>
- * @var minDistance <br>
- * @var maxDistance<br>
+ * @param distance The current distance. <br>
+ * @param attenuationFactor  <br>
+ * @param minAttenuation <br>
+ * @param maxAttenuation<br>
+ * @maxDistance<br>
+ * @stretchFactor<br>
+ *
  */
 typedef struct vas_attenuation
 {
     float distance;
     float attenuationFactor;
-    float minDistance;
+    float minAttenuation;
+    float maxAttenuation;
     float maxDistance;
+    float stretchFactor;
 } vas_attenuation;
 
 /**
@@ -66,13 +73,29 @@ void vas_attenuation_free(vas_attenuation *x);
  * signal attenuation based on the distance and the minDistance
  * and maxDistance parameters<br>
  */
+
 void vas_attenuation_perform(vas_attenuation *x, float *in, float *out, int vector_size);
 
 void vas_attenuation_setDistance(vas_attenuation *x, float distance);
 
-void vas_attenuation_setMinDistance(vas_attenuation *x, float minDistance);
-
 void vas_attenuation_setMaxDistance(vas_attenuation *x, float maxDistance);
+
+void vas_attenuation_setMaxAttenuation(vas_attenuation *x, float maxAttenuation);
+
+void vas_attenuation_setMinAttenuation(vas_attenuation *x, float minAttenuation);
+
+/**
+ * @related vas_attenuation
+ * @brief Sets the steepness of the curve. <br>
+ * @param x The attenuation object <br>
+ * @param steepness The steepness of the curve .<br>
+ * The function sets the steepness of the attenuation curve. <br>
+ * a value of 1 results (if max distance is big enough) in the <br>
+ * physical correct 1/r attenuation. A value of 10 results almost <br>
+ * in a linear damping function.<br>
+ */
+
+void vas_attenuation_setSteepness(vas_attenuation *x, float steepness);
     
 #ifdef __cplusplus
 }

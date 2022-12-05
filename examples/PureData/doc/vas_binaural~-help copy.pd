@@ -1,0 +1,91 @@
+#N canvas 585 76 651 674 10;
+#X obj 229 154 oscparse;
+#X obj 229 131 netreceive -u -b;
+#X msg 229 108 listen 51080;
+#X obj 26 179 readsf~;
+#X msg 74 154 1;
+#X obj 23 59 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 73 86 t b b;
+#X obj 229 177 route list;
+#X obj 229 199 route azimuth elevation;
+#X obj 229 85 loadbang;
+#X obj 458 139 vsl 40 110 0 200 0 0 empty empty empty 0 -9 0 10 #fce0c4
+#000000 #000000 0 1;
+#X obj 458 261 / 127;
+#X floatatom 551 286 5 0 0 0 - - - 0;
+#X obj 458 94 loadbang;
+#X obj 23 36 loadbang;
+#X msg 458 116 44;
+#X msg 528 93 \; pd dsp 0;
+#X obj 177 598 *~ 0.5;
+#X obj 102 598 *~ 0.5;
+#X obj 102 632 dac~ 1 2;
+#X floatatom 232 448 5 0 0 0 - - - 0;
+#X floatatom 363 447 5 0 0 0 - - - 0;
+#X obj 32 572 vu 8 80 empty empty -1 -8 0 10 #404040 #000000 1 0;
+#X obj 32 534 env~ 128;
+#X obj 31 552 - 100;
+#X obj 229 222 s azi;
+#X obj 296 221 s ele;
+#X obj 232 426 r azi;
+#X obj 363 425 r ele;
+#X text 107 466 1st inlet is the signal and message input. 2nd inlet
+is for azimuth. 3rd inlet is for elevation.;
+#X text 150 24 Receive elevation and azimuth from a headtracker via
+osc. Instructions for building the vas headtracker are a available
+at the vas git repository: github.com/funkerresch/vas_library;
+#X obj 26 202 s~ source;
+#X obj 101 439 r~ source;
+#X obj 458 285 send vol_main;
+#X obj 135 554 receive vol_main;
+#X obj 515 134 r mute_main;
+#X text 25 263 1st argument is the IR Set Name 2nd argument is the
+partition size for the fft (default is 256). 3rd argument is the offset
+in samples for the IR set. 4rth argument the end in samples.;
+#X msg 210 402 azidirection \$1;
+#X obj 210 377 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 26 131 open audio/cicerospeech.wav;
+#X text 277 566 Any further vas_binaural~ objects with the same partition
+size and IR set will share the filter with the first object that loaded
+the IR set. It does not allocate extra memory for the Impulse Responses.
+As long as any object references a filter set \, the object that loaded
+the original set will not accept a new IR set.;
+#X text 264 311 fr_pos0.txt was created for the digital forum romanum
+by Christoph Böhm with Raven. It is an azimuth only outdoor BRIR.
+;
+#X msg 70 354 read hrtfbrir/fabian_dir256.txt 256 0 0, f 45;
+#X msg 25 316 read hrtfbrir/fr_pos0.txt 256 0 0;
+#X obj 389 528 vas_binaural~;
+#X connect 0 0 7 0;
+#X connect 1 0 0 0;
+#X connect 2 0 1 0;
+#X connect 3 0 31 0;
+#X connect 3 1 5 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 6 1 39 0;
+#X connect 7 0 8 0;
+#X connect 8 0 25 0;
+#X connect 8 1 26 0;
+#X connect 9 0 2 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 11 0 33 0;
+#X connect 13 0 15 0;
+#X connect 14 0 5 0;
+#X connect 15 0 10 0;
+#X connect 17 0 19 1;
+#X connect 18 0 19 0;
+#X connect 23 0 24 0;
+#X connect 24 0 22 0;
+#X connect 27 0 20 0;
+#X connect 28 0 21 0;
+#X connect 34 0 18 1;
+#X connect 34 0 17 1;
+#X connect 35 0 10 0;
+#X connect 38 0 37 0;
+#X connect 39 0 3 0;
+#X connect 42 0 44 0;

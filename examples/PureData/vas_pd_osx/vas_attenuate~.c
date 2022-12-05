@@ -42,9 +42,19 @@ static void vas_attenuate_setMaxDistance(vas_attenuate *x, float maxDistance)
     vas_attenuation_setMaxDistance(x->attenuate, maxDistance);
 }
 
-static void vas_attenuate_setMinDistance(vas_attenuate *x, float minDistance)
+static void vas_attenuate_setMinAttenuation(vas_attenuate *x, float minAttenuation)
 {
-    vas_attenuation_setMinDistance(x->attenuate, minDistance);
+    vas_attenuation_setMinAttenuation(x->attenuate, minAttenuation);
+}
+
+static void vas_attenuate_setMaxAttenuation(vas_attenuate *x, float maxAttenuation)
+{
+    vas_attenuation_setMaxAttenuation(x->attenuate, maxAttenuation);
+}
+
+static void vas_attenuate_setSteepness(vas_attenuate *x, float steepness)
+{
+    vas_attenuation_setSteepness(x->attenuate, steepness);
 }
 
 void vas_attenuate_tilde_setup(void)
@@ -59,5 +69,7 @@ void vas_attenuate_tilde_setup(void)
     class_addmethod(vas_attenuate_class, (t_method)vas_attenuate_dsp, gensym("dsp"), 0);
     class_addmethod(vas_attenuate_class, (t_method)vas_attenuate_setDistance, gensym("distance"), A_DEFFLOAT,0);
     class_addmethod(vas_attenuate_class, (t_method)vas_attenuate_setMaxDistance, gensym("maxdistance"), A_DEFFLOAT,0);
-    class_addmethod(vas_attenuate_class, (t_method)vas_attenuate_setMinDistance, gensym("mindistance"), A_DEFFLOAT,0);
+    class_addmethod(vas_attenuate_class, (t_method)vas_attenuate_setMaxAttenuation, gensym("maxattenuation"), A_DEFFLOAT,0);
+    class_addmethod(vas_attenuate_class, (t_method)vas_attenuate_setMaxAttenuation, gensym("minattenuation"), A_DEFFLOAT,0);
+    class_addmethod(vas_attenuate_class, (t_method)vas_attenuate_setSteepness, gensym("steepness"), A_DEFFLOAT,0);
 }

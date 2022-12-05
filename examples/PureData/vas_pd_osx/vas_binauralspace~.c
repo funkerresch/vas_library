@@ -108,7 +108,7 @@ static void vas_binauralspace_free(vas_binauralspace *x)
 {
     vas_fir *convolutionEngine = (vas_fir *)x->convolutionEngine;
     if(convolutionEngine->left->filter->referenceCounter == 1 || convolutionEngine->left->useSharedFilter == false  )
-        vas_fir_list_removeNode1(&IRs, (vas_fir *)x->convolutionEngine);
+        vas_fir_list_removeNodeByAdress(&IRs, (vas_fir *)x->convolutionEngine);
     
     vas_fir_binaural_free(x->convolutionEngine);
     inlet_free(x->azi);

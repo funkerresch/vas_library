@@ -235,6 +235,7 @@ void vas_fir_parallel_deinit(vas_fir_parallel *x)
         vas_mem_free(x->readBufferLeft);
         vas_mem_free(x->readBufferRight);
     }
+
     x->init = 0;
 }
 
@@ -245,7 +246,7 @@ void vas_fir_parallel_setFilter(vas_fir_parallel *x, float *left, float *right, 
     int start = x->partitionData[0].start;
     int end = x->partitionData[0].end;
     
-    vas_fir_read_singleImpulseFromFloatArray((vas_fir*) x->convolutionEngine[0], "MinPartitionSize", left, right, length, currentSize, 0, x->partitionData[0].end);
+    vas_fir_read_singleImpulseFromFloatArray((vas_fir*) x->convolutionEngine[0], "MinPartitionSize", left, right, length, currentSize, 0, x->partitionData[0].end, false);
     
     for(int i=1; i<x->convolverCount; i++)
     {
@@ -253,7 +254,7 @@ void vas_fir_parallel_setFilter(vas_fir_parallel *x, float *left, float *right, 
         start = x->partitionData[i].start;
         end = x->partitionData[i].end;
         sprintf(name, "%dpartition", i);
-        vas_fir_read_singleImpulseFromFloatArray((vas_fir*) x->convolutionEngine[i], name, left, right, length, currentSize, x->partitionData[i].start, x->partitionData[i].end);
+        vas_fir_read_singleImpulseFromFloatArray((vas_fir*) x->convolutionEngine[i], name, left, right, length, currentSize, x->partitionData[i].start, x->partitionData[i].end, false);
     }
 }
 

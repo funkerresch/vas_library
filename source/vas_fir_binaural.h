@@ -18,6 +18,10 @@
 #include "vas_fir.h"
 #include "vas_fir_list.h"
 
+#ifdef VAS_USE_NEUMANNHEADERS
+#include "vas_fir_neumannFilter_48kHz.h"
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

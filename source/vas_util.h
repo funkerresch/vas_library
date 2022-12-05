@@ -4,8 +4,6 @@
  * Audio Communication Group, TU-Berlin <br>
  * University of Applied Sciences Nordwestschweiz (FHNW), Music-Academy, Research and Development <br>
  * Utility functions for SIMD math and other stuff.<br>
- * Many thanks to gpakosz for whereami <br>
- * https://github.com/gpakosz/whereami <br>
  * Many thanks to digilus for readline for windows <br>
  * https://github.com/digilus/getline <br>
  * <br>
@@ -17,13 +15,10 @@
 #ifndef vas_util_h
 #define vas_util_h
 
-//#define VAS_USE_KISSFFT
 //#define VAS_USE_PFFFT
 //#define VAS_USE_AVX
 
-//#define VAS_USE_MULTITHREADREFLECTION
-
-#if !defined(VAS_USE_VDSP) && !defined(VAS_USE_KISSFFT) && !defined(VAS_USE_PFFFT)
+#if !defined(VAS_USE_VDSP) && !defined(VAS_USE_PFFFT)
 
 #ifdef __APPLE__
 
@@ -31,22 +26,22 @@
 #define VAS_EXPORT
 #define VAS_USE_VDSP
 
-#else
+#else                       // #ifndef __APPLE__
 
 #ifdef _WIN32
 #define VAS_EXPORT __declspec(dllexport)
-#else
+#else                       // #ifndef _WIN32
 #define VAS_EXPORT
-#endif
+#endif                      // _WIN32 end
 #define _USE_MATH_DEFINES
 #include <math.h>
 #define VAS_USE_PFFFT
 
-#endif
+#endif                      // __APPLE__ end
 
-#endif
+#endif                      // end, VAS_USE_VDSP && VAS_USE_PFFFT
 
-#if !defined(VAS_EXPORT)
+#if !defined(VAS_EXPORT)    // This is not needed anymore
 
 #ifdef _WIN32
 #define VAS_EXPORT __declspec(dllexport)
@@ -67,14 +62,12 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#ifdef VAS_USE_VDSP
+#ifdef __APPLE__            // Needed if PFFFT is chosen on apple devices
 #include <Accelerate/Accelerate.h>
-typedef COMPLEX_SPLIT VAS_COMPLEX;
 #endif
 
-#ifdef VAS_USE_KISSFFT
-#include "kiss_fftr.h"
-typedef kiss_fft_cpx VAS_COMPLEX;
+#ifdef VAS_USE_VDSP
+typedef COMPLEX_SPLIT VAS_COMPLEX;
 #endif
 
 #ifdef VAS_USE_PFFFT
@@ -138,6 +131,7 @@ typedef float VAS_OUTPUTBUFFER;
 #define VAS_RIGHTCHANNEL 2
 
 #define VAS_MINCROSSFADELENGTH 512
+#define VAS_DEFAULTCROSSFADELENGTH 512
 
 #define VAS_IR_AUDIOFORMAT_MONO 1
 #define VAS_IR_AUDIOFORMAT_STEREO 2
@@ -159,62 +153,7 @@ typedef float VAS_OUTPUTBUFFER;
 #define VAS_ERROR_READFILE 1 << 1
 #define VAS_ERROR_METADATA 1 << 2
 
-
-#ifndef WHEREAMI_H
-#define WHEREAMI_H
-        
-#ifndef WAI_FUNCSPEC
-#define WAI_FUNCSPEC
-#endif
-#ifndef WAI_PREFIX
-#define WAI_PREFIX(function) wai_##function
-#endif
-        
-        /**
-         * Returns the path to the current executable.
-         *
-         * Usage:
-         *  - first call `int length = wai_getExecutablePath(NULL, 0, NULL);` to
-         *    retrieve the length of the path
-         *  - allocate the destination buffer with `path = (char*)malloc(length + 1);`
-         *  - call `wai_getExecutablePath(path, length, NULL)` again to retrieve the
-         *    path
-         *  - add a terminal NUL character with `path[length] = '\0';`
-         *
-         * @param out destination buffer, optional
-         * @param capacity destination buffer capacity
-         * @param dirname_length optional recipient for the length of the dirname part
-         *   of the path.
-         *
-         * @return the length of the executable path on success (without a terminal NUL
-         * character), otherwise `-1`
-         */
-        WAI_FUNCSPEC
-        int WAI_PREFIX(getExecutablePath)(char* out, int capacity, int* dirname_length);
-        
-        /**
-         * Returns the path to the current module
-         *
-         * Usage:
-         *  - first call `int length = wai_getModulePath(NULL, 0, NULL);` to retrieve
-         *    the length  of the path
-         *  - allocate the destination buffer with `path = (char*)malloc(length + 1);`
-         *  - call `wai_getModulePath(path, length, NULL)` again to retrieve the path
-         *  - add a terminal NUL character with `path[length] = '\0';`
-         *
-         * @param out destination buffer, optional
-         * @param capacity destination buffer capacity
-         * @param dirname_length optional recipient for the length of the dirname part
-         *   of the path.
-         *
-         * @return the length of the module path on success (without a terminal NUL
-         * character), otherwise `-1`
-         */
-        WAI_FUNCSPEC
-        int WAI_PREFIX(getModulePath)(char* out, int capacity, int* dirname_length);
-        
-    
-#endif // #ifndef WHEREAMI_H
+void vas_util_debug(char *fmt, ...);
     
 void vas_util_complexMultiplyAddWithOne(VAS_COMPLEX *signalIn, VAS_COMPLEX *dest, int length) ;
     

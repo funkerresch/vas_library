@@ -10,8 +10,10 @@ vas_attenuation *vas_attenuation_new(long maxDistance)
 {
     vas_attenuation *x = (vas_attenuation *)malloc(sizeof(vas_attenuation));
     x->maxDistance = maxDistance;
-    x->minDistance = VAS_SMALLESTDISTANCE;
+    x->minAttenuation = 0.0f;
+    x->maxAttenuation = 1.0f;
     x->distance = 1;
+    x->stretchFactor = 1.0f/1.7f;
     return x;
 }
 
@@ -30,30 +32,43 @@ void vas_attenuation_perform(vas_attenuation *x, float *in, float *out, int vect
 
 void vas_attenuation_setDistance(vas_attenuation *x, float distance)
 {
-    float stretchFactor = 1/1.7;
-    x->distance = MAX(distance, VAS_SMALLESTDISTANCE);
-    x->attenuationFactor = (1/powf(x->distance, stretchFactor)) * (1-(x->distance/x->maxDistance));
-    if(x->attenuationFactor < 0)
-        x->attenuationFactor = 0;
+    //x->distance = MAX(distance, VAS_SMALLESTDISTANCE);
+    x->attenuationFactor = (1/powf(x->distance, x->stretchFactor)) * (1-(x->distance/x->maxDistance));
+    if(x->attenuationFactor < x->minAttenuation)
+        x->attenuationFactor = x->minAttenuation;
     
-    //if(x->distance > x->maxDistance)
-        //x->attenuationFactor = 0;
-   // else if(x->distance <= x->minDistance)
-        //x->attenuationFactor = 1;
-    //else
-        //x->attenuationFactor = 1 / ( (x->distance-x->minDistance) * 250 / (x->maxDistance-x->minDistance) );
+    if(x->attenuationFactor >= x->maxAttenuation)
+        x->attenuationFactor = x->maxAttenuation;
 }
 
-void vas_attenuation_setMinDistance(vas_attenuation *x, float minDistance)
+void vas_attenuation_setMaxAttenuation(vas_attenuation *x, float maxAttenuation)
 {
-    x->minDistance = minDistance;
-    if(x->minDistance <= VAS_SMALLESTDISTANCE)
-        x->minDistance = VAS_SMALLESTDISTANCE;
+    x->maxAttenuation = maxAttenuation;
+    
+    if(x->maxAttenuation >= 1.0)
+        x->maxAttenuation = 1.0f;
+    
+    if(x->maxAttenuation <= x->minAttenuation)
+        x->maxAttenuation = x->minAttenuation;
+}
+
+void vas_attenuation_setMinAttenuation(vas_attenuation *x, float minAttenuation)
+{
+    x->minAttenuation = minAttenuation;
+    if(x->minAttenuation <= 0)
+        x->minAttenuation = 0;
+    
+    if(x->minAttenuation >= x->maxAttenuation)
+        x->minAttenuation = x->maxAttenuation;
 }
 
 void vas_attenuation_setMaxDistance(vas_attenuation *x, float maxDistance)
 {
     x->maxDistance = maxDistance;
-    if(x->maxDistance < x->minDistance+1)
-        x->maxDistance = x->minDistance+1;
+}
+
+void vas_attenuation_setSteepness(vas_attenuation *x, float steepness)
+{
+    if(steepness > 0)
+        x->stretchFactor = 1.0f/steepness;
 }
