@@ -21,10 +21,17 @@ vas_delayTap_crossfade *vas_delayTap_crossfade_new(vas_ringBuffer *ringBuffer)
     x->outputTarget = (float *)vas_mem_alloc(sizeof(float) * VAS_MAXVECTORSIZE);
     x->fadeCounter = 0;
     x->startCrossfade = 0;
-    vas_utilities_writeFadeOutArray(x->fadeLength, x->fadeOut);
-    vas_utilities_writeFadeInArray(x->fadeLength, x->fadeIn);
+    vas_util_writeFadeOutArray(x->fadeLength, x->fadeOut);
+    vas_util_writeFadeInArray(x->fadeLength, x->fadeIn);
     x->numberOfFramesForCrossfade = x->fadeLength/1024; //   GET BUFFERSIZE ON CREATING IAGS_SPAT
     return x;
+}
+
+void vas_delayTap_crossfade_setRingBuffer(vas_delayTap_crossfade *x, vas_ringBuffer *ringBuffer)
+{
+    vas_delayTap_setRingBuffer(x->current, ringBuffer);
+    vas_delayTap_setRingBuffer(x->target, ringBuffer);
+    x->maxdelayTapTime = ringBuffer->bufferSize;
 }
 
 void vas_delayTap_crossfade_setDelayTime(vas_delayTap_crossfade *x, float delayTime)

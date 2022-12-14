@@ -19,6 +19,12 @@
 #include <sys/sysctl.h> //TODO: this is not cross-compatible
 #endif
 
+#if defined(__ANDROID__) || defined(ANDROID)
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <unistd.h>
+#endif
+
 #define GETLINE_MINSIZE 16
 
 int vas_getline(char **lineptr, size_t *n, FILE *fp) {
@@ -131,6 +137,12 @@ float vas_util_fgain2db(float in)
     return -20.0f * log10f(in);
 }
 
+
+float vas_util_dB_to_lin(float dB)
+{
+    return powf(10, dB/20.0);
+}
+
 void vas_util_single2DoublePrecision(float *in, double *out, int length)
 {
     #ifdef VAS_USE_VDSP
@@ -157,30 +169,15 @@ void vas_util_double2SinglePrecision(double *in, float *out, int length)
     #endif
 }
 
-void vas_util_fadd(float *input1, float *input2, float *dest, int length)
+void vas_util_fadd(float *input1, float *input2,  float *dest, int length)
 {
 #ifdef VAS_USE_VDSP
     vDSP_vadd(input1, 1, input2, 1, dest, 1, length);
 #endif
     
-#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
-#ifdef VAS_USE_AVX
-    
-    int n = length;
-    while(n)
-    {
-        __m256 buffer1 = _mm256_load_ps(input1);
-        __m256 buffer2 = _mm256_load_ps(input2);
-        __m256 result;
-        
-        result = _mm256_add_ps(buffer1, buffer2);
-        _mm256_store_ps(dest, result);
-        n-=8;
-        input1+=8;
-        input2+=8;
-        dest+=8;
-    }
-#elif defined (PFFFT_ENABLE_NEON)
+#if defined(VAS_USE_PFFFT)
+
+#ifdef PFFFT_ENABLE_NEON
     int n = length;
     while(n)
     {
@@ -192,6 +189,25 @@ void vas_util_fadd(float *input1, float *input2, float *dest, int length)
         input1+=4;
         input2+=4;
         dest+=4;
+    }
+#elif defined (VAS_USE_AVX)
+
+    int n = length;
+    __m256 buffer1;
+    __m256 buffer2;
+    __m256 result;
+    
+    while(n)
+    {
+        buffer1 = _mm256_load_ps(input1);
+        buffer2 = _mm256_load_ps(input2);
+        result = _mm256_add_ps(buffer1, buffer2);
+        
+        _mm256_store_ps(dest, result);
+        n-=8;
+        input1+=8;
+        input2+=8;
+        dest+=8;
     }
      
 #else
@@ -209,7 +225,7 @@ void vas_util_fmultiply(float *input1, float *input2, float *dest, int length)
 #ifdef VAS_USE_VDSP
     vDSP_vmul(input1, 1, input2, 1, dest, 1, length);
 #endif
-#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
+#if defined(VAS_USE_PFFFT)
     
 #ifdef PFFFT_ENABLE_NEON
     int n = length;
@@ -224,6 +240,23 @@ void vas_util_fmultiply(float *input1, float *input2, float *dest, int length)
         input2+=4;
         dest+=4;
     }
+#elif defined(VAS_USE_AVX)
+    int n = length;
+    __m256 buffer1;
+    __m256 buffer2;
+    __m256 result;
+    
+    while(n)
+    {
+        buffer1 = _mm256_load_ps(input1);
+        buffer2 = _mm256_load_ps(input2);
+        result = _mm256_mul_ps(buffer1, buffer2);
+        _mm256_store_ps(dest, result);
+        n-=8;
+        input1+=8;
+        input2+=8;
+        dest+=8;
+    }
     
 #else
     int n = length;
@@ -235,25 +268,27 @@ void vas_util_fmultiply(float *input1, float *input2, float *dest, int length)
 #endif
 }
 
-void vas_util_fcopy(float *source, float *dest, int length)
+
+void vas_util_fcopyUnalignedSource(float *source, float *dest, int length)
 {
 #ifdef VAS_USE_VDSP
     cblas_scopy(length, source, 1, dest, 1);
 #endif
     
-#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
+#if defined(VAS_USE_PFFFT)
 #ifdef VAS_USE_AVX
-    
+
     int n = length;
+
     while(n)
     {
-        __m256 buffer = _mm256_load_ps(source);
-        _mm256_store_ps(dest, buffer);
+        _mm256_store_ps(dest, _mm256_loadu_ps(source));
         n-=8;
         source+=8;
         dest+=8;
     }
 #elif defined(PFFFT_ENABLE_NEON)
+
     int n = length;
     while(n)
     {
@@ -275,13 +310,52 @@ void vas_util_fcopy(float *source, float *dest, int length)
 #endif
 }
 
-void vas_util_fcopy_noavx(float *source, float *dest, int length)
+void vas_util_fcopy(float *source, float *dest, int length)
 {
 #ifdef VAS_USE_VDSP
     cblas_scopy(length, source, 1, dest, 1);
 #endif
     
-#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
+#if defined(VAS_USE_PFFFT)
+#ifdef VAS_USE_AVX
+
+    int n = length;
+
+    while(n)
+    {
+        _mm256_store_ps(dest, _mm256_load_ps(source));
+        n-=8;
+        source+=8;
+        dest+=8;
+    }
+#elif defined(PFFFT_ENABLE_NEON)
+
+    int n = length;
+    while(n)
+    {
+        float32x4_t v1 = vld1q_f32(source);
+        vst1q_f32(dest, v1);
+        n-=4;
+        source+=4;
+        dest+=4;
+    }
+
+#else
+    int n = length;
+    while (n--)
+    {
+        *dest++ = *source++;
+    }
+
+#endif
+#endif
+}
+
+void vas_util_fcopy_noavx(float *source, float *dest, int length)
+{
+#ifdef VAS_USE_VDSP
+    cblas_scopy(length, source, 1, dest, 1);
+#else
     int n = length;
     while (n--)
     {
@@ -297,7 +371,7 @@ void vas_util_fscale(float *dest, float scale,  int length)
     vDSP_vsmul(dest, 1, &scale, dest, 1, length);
 #endif
     
-#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
+#if defined(VAS_USE_PFFFT)
 #ifdef PFFFT_ENABLE_NEON
     int n = length;
     while(n)
@@ -308,7 +382,20 @@ void vas_util_fscale(float *dest, float scale,  int length)
         n-=4;
         dest+=4;
     }
-
+#elif defined(VAS_USE_AVX)
+    int n = length;
+    __m256 buffer;
+    const __m256 scalar = _mm256_set1_ps(scale);
+    __m256 result;
+    
+    while(n)
+    {
+        buffer = _mm256_load_ps(dest);
+        result = _mm256_mul_ps(buffer, scalar);
+        _mm256_store_ps(dest, result);
+        n-=8;
+        dest+=8;
+    }
 #else
     int n = length;
     while (n--)
@@ -328,7 +415,7 @@ void vas_util_fmulitplyScalar(float *source, float scale, float *dest, int lengt
     vDSP_vsmul(source, 1, &scale, dest, 1, length);
 #endif
     
-#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
+#if defined(VAS_USE_PFFFT)
     int n = length;
     while (n--)
     {
@@ -403,7 +490,7 @@ void vas_util_deinterleaveComplexArray2(VAS_COMPLEX *input, float *realArray, fl
     VAS_COMPLEX *inputPtr = input;
     int imagIndex = length * 0.5;
     
-#ifdef VAS_USE_KISSFFT
+#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
 #ifdef VAS_USE_AVX
     __m256 ab0145;
     __m256 ab2367;
@@ -690,18 +777,19 @@ void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int length)
     }
 #endif
     
-#if defined(VAS_USE_KISSFFT)|| defined(VAS_USE_PFFFT)
+#if defined(VAS_USE_PFFFT)
 #ifdef VAS_USE_AVX
     n = length *2;
     float *floatPtr = (float *)dest;
+    __m256 zero = _mm256_setzero_ps();
+
     while(n)
     {
-        __m256 zero = _mm256_setzero_ps();
         _mm256_store_ps(floatPtr, zero);
         floatPtr+=8;
         n-=8;
     }
-    
+
 #else
     
     while (n--)
@@ -714,12 +802,12 @@ void vas_util_complexWriteZeros(VAS_COMPLEX *dest, int length)
 #endif
 }
 
-float vas_utilities_degrees2radians(float degrees)
+float vas_util_degrees2radians(float degrees)
 {
     return degrees * (M_PI/180);
 }
 
-float vas_utilities_radians2degrees(float radians)
+float vas_util_radians2degrees(float radians)
 {
     return radians * (180/M_PI);
 }
@@ -732,12 +820,12 @@ const char *vas_util_getFileExtension(const char *filename)
     return dot + 1;
 }
 
-bool vas_utilities_isValidSegmentSize(int segmentSize)
+bool vas_util_isValidSegmentSize(int segmentSize)
 {
     return  (segmentSize >= 16) && (segmentSize <= 131072)  && ((segmentSize & (segmentSize - 1)) == 0);
 }
 
-int vas_utilities_roundUp2NextPowerOf2(int value)
+int vas_util_roundUp2NextPowerOf2(int value)
 {
     value--;
     value |= value >> 1;
@@ -805,35 +893,35 @@ void vas_utilities_fcopy_SSE(int n, float *source,  float *dest)
         *out++ = *in++;
 }*/
 
-void vas_utilities_writeZeros1(int length, VAS_INPUTBUFFER *dest)
+void vas_util_writeZeros1(int length, VAS_INPUTBUFFER *dest)
 {
     int n = length;
     while(n--)
         *dest++ = 0;
 }
 
-void vas_utilities_writeZeros(int length, float *dest)
+void vas_util_writeZeros(int length, float *dest)
 {
     int n = length;
     while(n--)
         *dest++ = 0;
 }
 
-float vas_utilities_fadeOut(float n, float length)
+float vas_util_fadeOut(float n, float length)
 {
     float k = 1 -(n/length);
     float volume = (0.5  + 0.5 * cos(M_PI * k));
     return volume;
 }
 
-float vas_utilities_fadeIn(float n, float length)
+float vas_util_fadeIn(float n, float length)
 {
     float k = 1 -(n/length);
     float volume = (0.5  - 0.5 * cos(M_PI * k));
     return volume;
 }
 
-void vas_utilities_writeFadeOutArray(float length, float *dest)
+void vas_util_writeFadeOutArray(float length, float *dest)
 {
     float n = length;
     float *destPtr = dest;
@@ -845,7 +933,7 @@ void vas_utilities_writeFadeOutArray(float length, float *dest)
     }
 }
 
-void vas_utilities_writeFadeInArray(float length, float *dest)
+void vas_util_writeFadeInArray(float length, float *dest)
 {
     float n = length;
     float *destPtr = dest;
@@ -857,7 +945,7 @@ void vas_utilities_writeFadeInArray(float length, float *dest)
     }
 }
 
-void vas_utilities_writeFadeOutArray1(float length, float *dest)
+void vas_util_writeFadeOutArray1(float length, float *dest)
 {
     float n = length;
     float *destPtr = dest;
@@ -869,7 +957,7 @@ void vas_utilities_writeFadeOutArray1(float length, float *dest)
     }
 }
 
-void vas_utilities_writeFadeInArray1(float length, float *dest)
+void vas_util_writeFadeInArray1(float length, float *dest)
 {
     float n = length;
     float *destPtr = dest;
@@ -881,7 +969,7 @@ void vas_utilities_writeFadeInArray1(float length, float *dest)
     }
 }
 
-void vas_utilities_copyFloatArray(int length, float *arr1, float *arr2)
+void vas_util_copyFloatArray(int length, float *arr1, float *arr2)
 {
     int n = length;
     float *in = arr1;

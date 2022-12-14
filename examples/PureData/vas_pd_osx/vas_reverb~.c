@@ -46,8 +46,6 @@ static void *vas_reverb_new(t_symbol *s, int argc, t_atom *argv)
     int end = 0;
     vas_reverb *x = (vas_reverb *)pd_new(vas_reverb_class);
     
-    //x->m = vas_util_measure_new("NORM REVERB");
-    
     t_symbol *path = NULL;
     x->outL = outlet_new(&x->x_obj, gensym("signal"));
     x->outR = outlet_new(&x->x_obj, gensym("signal"));
@@ -106,18 +104,12 @@ static void *vas_reverb_new(t_symbol *s, int argc, t_atom *argv)
     return (x);
 }
 
-static void vas_reverb_setIndex(vas_reverb *x, float index)
-{
-    vas_fir_reverb *binauralEngine = (vas_fir_binaural *)x->convolutionEngine;
-    vas_dynamicFirChannel_selectIR(binauralEngine->left, index);
-}
-
 void vas_reverb_tilde_setup(void)
 {
     vas_reverb_class = class_new(gensym("vas_reverb~"), (t_newmethod)vas_reverb_new, (t_method)vas_reverb_free,
     	sizeof(vas_reverb), CLASS_DEFAULT, A_GIMME, 0);
     
-    post("vas_reverb~ v0.7");
+    post("vas_reverb~ v0.75");
    
     CLASS_MAINSIGNALIN(vas_reverb_class, vas_reverb, f);
    

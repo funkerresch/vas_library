@@ -14,8 +14,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "vas_dynamicFirChannel_filter_reset(x)"
             landmarkType = "9">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "../../../source/vas_dynamicFirChannel.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "vas_dynamicFirChannel_filter_reset(x)"
             landmarkType = "9">
          </BreakpointContent>
@@ -81,6 +81,22 @@
             startingLineNumber = "72270"
             endingLineNumber = "72270"
             landmarkName = "vas_fir_neumannFilter_48kHz_init()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D94875D5-0660-4E26-8E8A-4777581CF15E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../source/vas_util.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "vas_util_fadd(input1, input2, dest, length)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

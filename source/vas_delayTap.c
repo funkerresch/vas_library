@@ -20,6 +20,21 @@ vas_delayTap *vas_delayTap_new(vas_ringBuffer *ringBuffer)
     return x;
 }
 
+void vas_delayTap_setRingBuffer(vas_delayTap *x, vas_ringBuffer *ringBuffer)
+{
+    if(x->ringBuffer)
+    {
+        x->ringBuffer->tapCounter--;
+    }
+    
+    x->ringBuffer = ringBuffer;
+    x->bufferSize = x->ringBuffer->bufferSize;
+    x->readPointer = x->ringBuffer->buffer;
+    x->readIndex = 0;
+    x->delayInSamples = 0;
+    x->ringBuffer->tapCounter++;
+}
+
 void vas_delayTap_free(vas_delayTap *x)
 {
     x->ringBuffer->tapCounter--;
@@ -39,7 +54,7 @@ void vas_delayTap_process(vas_delayTap *x, float *out, int vectorSize)
 {
     if( (x->readIndex+vectorSize) < x->bufferSize)
     {
-        vas_util_fcopy(&x->readPointer[x->readIndex], out, vectorSize);
+        vas_util_fcopyUnalignedSource(&x->readPointer[x->readIndex], out, vectorSize); // delay time is sample accurate and therefore not necessarly a multiple of 64:(
         x->readIndex+=vectorSize;
         return;
     }

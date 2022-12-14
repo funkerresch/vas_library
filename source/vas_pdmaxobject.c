@@ -236,7 +236,7 @@ void vas_pdmaxobject_read(vas_pdmaxobject *x, t_symbol *s, float segmentSize, fl
     vas_fir *engine = x->convolutionEngine;
     const char *filename = s->s_name;
     
-    if(vas_utilities_isValidSegmentSize(segmentSize))
+    if(vas_util_isValidSegmentSize(segmentSize))
         x->segmentSize = segmentSize;
     else
     {

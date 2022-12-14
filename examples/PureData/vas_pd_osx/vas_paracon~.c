@@ -115,9 +115,9 @@ void vas_paracon_read(vas_paracon *x,  t_symbol *s, float segmentSize)
 void vas_paracon_set(vas_paracon *x,  t_symbol *left, t_symbol *right, float minSegmentSize, float maxSegmentSize)
 {
     int maxLength = 0;
-    minSegmentSize = vas_utilities_roundUp2NextPowerOf2(minSegmentSize);
+    minSegmentSize = vas_util_roundUp2NextPowerOf2(minSegmentSize);
     if(maxSegmentSize > minSegmentSize)
-        maxSegmentSize = vas_utilities_roundUp2NextPowerOf2(maxSegmentSize);
+        maxSegmentSize = vas_util_roundUp2NextPowerOf2(maxSegmentSize);
     else
         maxSegmentSize = 0;
     

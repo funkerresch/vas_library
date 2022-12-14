@@ -11,7 +11,7 @@ vas_ringBuffer *vas_ringBuffer_new(int size)
 {
     vas_ringBuffer *x = (vas_ringBuffer *) malloc(sizeof(vas_ringBuffer));
     
-    int newSize = vas_utilities_roundUp2NextPowerOf2(size); //this should round up to the next multiple of vector size, not power of 2!
+    int newSize = vas_util_roundUp2NextPowerOf2(size); //this should round up to the next multiple of vector size, not power of 2!
     x->buffer = vas_mem_alloc(newSize * sizeof(float));
     x->bufferSize = newSize;;
     x->writePointer = x->buffer;

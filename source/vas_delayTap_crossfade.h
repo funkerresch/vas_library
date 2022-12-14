@@ -43,6 +43,8 @@ typedef struct vas_delayTap_crossfade
 } vas_delayTap_crossfade;
     
 vas_delayTap_crossfade *vas_delayTap_crossfade_new(vas_ringBuffer *ringBuffer);
+
+void vas_delayTap_crossfade_setRingBuffer(vas_delayTap_crossfade *x, vas_ringBuffer *ringBuffer);
     
 void vas_delayTap_crossfade_setDelayTime(vas_delayTap_crossfade *x, float delayTime);
     

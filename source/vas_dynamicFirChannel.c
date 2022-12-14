@@ -66,10 +66,7 @@ void vas_dynamicFirChannel_filter_reset(vas_dynamicFirChannel_filter *x)
 {
 #ifdef VAS_USE_VDSP
     if(x->setupReal)
-    {
-        x->filterMemory -= sizeof(x->setupReal);
         vDSP_destroy_fftsetup(x->setupReal);
-    }
 #else
     if(x->setupReal)
         pffft_destroy_setup(x->setupReal);
@@ -284,6 +281,9 @@ void vas_dynamicFirChannel_setAzimuth(vas_dynamicFirChannel *x, int azimuth)
         int aziMin = 360 + x->filter->aziMin;
         int azi = azimuth;
         
+        if(x->aziDirection)
+            azi = 360 - azi;
+        
         if(azi < 0)
             azi = 360 + azi;
    
@@ -310,7 +310,7 @@ void vas_dynamicFirChannel_setSegmentThreshold(vas_dynamicFirChannel *x, float t
 
 void vas_dynamicFirChannel_setSegmentSize(vas_dynamicFirChannel *x, int segmentSize)
 {
-    if(!vas_utilities_isValidSegmentSize(segmentSize))
+    if(!vas_util_isValidSegmentSize(segmentSize))
     {
         vas_util_debug("%s: Invalid Segment Size: %d", __FUNCTION__, segmentSize);
         return;
@@ -349,6 +349,8 @@ void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dyn
     {
         if(!x->filter->segmentIsZero[target->elevation][target->azimuth][x->movingIndex-x->segmentIndex])
             vas_util_complexMultiplyAdd(x->input->pointerToFFTSegments[x->segmentIndex], x->filter->pointerToFFTSegments[target->elevation][target->azimuth][x->movingIndex-x->segmentIndex], &target->signalComplex, x->filter->segmentSize);
+        else
+            vas_util_complexWriteZeros(&target->signalComplex, x->filter->segmentSize);
         
         x->segmentIndex++;
     }
@@ -357,6 +359,8 @@ void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dyn
 #ifdef VAS_USE_PFFFT
     if(!x->filter->segmentIsZero[target->elevation][target->azimuth][x->movingIndex])
         pffft_zconvolve_no_accu(x->filter->setupReal, (float *)x->input->pointerToFFTSegments[0], (float *)x->filter->pointerToFFTSegments[target->elevation][target->azimuth][x->movingIndex], (float *) target->signalComplex, 1);
+    else
+        vas_util_complexWriteZeros(target->signalComplex, x->filter->segmentSize);
     
     while(x->segmentIndex < x->filter->numberOfSegments)
     {
@@ -364,6 +368,8 @@ void vas_dynamicFirChannel_multiplyAddSegments(vas_dynamicFirChannel *x, vas_dyn
         {
             pffft_zconvolve_accumulate(x->filter->setupReal, (float *)x->input->pointerToFFTSegments[x->segmentIndex], (float *)x->filter->pointerToFFTSegments[target->elevation][target->azimuth][x->movingIndex-x->segmentIndex], (float *) target->signalComplex, 1); // move this to vas_util to complexMultiplyAdd
         }
+        else
+            vas_util_complexWriteZeros(target->signalComplex, x->filter->segmentSize);
 
         x->segmentIndex++;
     }
@@ -686,10 +692,10 @@ void vas_dynamicFirChannel_setFilterSize(vas_dynamicFirChannel *x, int filterSiz
     x->filterSize = filterSize;
     if(x->filter->segmentSize > filterSize)
     {
-        if(vas_utilities_isValidSegmentSize(filterSize))
+        if(vas_util_isValidSegmentSize(filterSize))
             x->filter->segmentSize = filterSize;
         else
-            x->filter->segmentSize = vas_utilities_roundUp2NextPowerOf2(filterSize);
+            x->filter->segmentSize = vas_util_roundUp2NextPowerOf2(filterSize);
     }
     
     vas_dynamicFirChannel_setSegmentSize(x, x->filter->segmentSize);
@@ -721,8 +727,8 @@ void vas_dynamicFirChannel_prepareArrays(vas_dynamicFirChannel *x)
 
     x->fadeOut = (float *)vas_mem_resize(x->fadeOut, sizeof(float) * x->fadeLength);
     x->fadeIn = (float *)vas_mem_resize(x->fadeIn, sizeof(float) * x->fadeLength);
-    vas_utilities_writeFadeOutArray(x->fadeLength, x->fadeOut);
-    vas_utilities_writeFadeInArray(x->fadeLength, x->fadeIn);
+    vas_util_writeFadeOutArray(x->fadeLength, x->fadeOut);
+    vas_util_writeFadeInArray(x->fadeLength, x->fadeIn);
     vas_dynamicFirChannel_prepareInputSignal(x);
     vas_dynamicFirChannel_prepareOutputSignal(x);
 }
@@ -893,7 +899,7 @@ void vas_dynamicFirChannel_prepareFilter(vas_dynamicFirChannel *x, float *filter
             if(i == numberOfSegmentsMinusOne)
             {
                 size = x->filterSize - (x->filter->segmentSize*numberOfSegmentsMinusOne);
-                vas_utilities_writeZeros(x->filter->fftSize, x->tmp);
+                vas_util_writeZeros(x->filter->fftSize, x->tmp);
             }
             
             vas_util_fcopy_noavx(filter+(i*x->filter->segmentSize), x->tmp, size); // size might not be a multiple of 8
@@ -1018,10 +1024,8 @@ vas_dynamicFirChannel *vas_dynamicFirChannel_new(int setup)
     x->frameCounter = 0;
     x->startCrossfade  = 0;
     x->aziDirection = 0;
-
     x->filter = vas_dynamicFirChannel_filter_new();
     x->input = vas_dynamicFirChannel_input_new();
-    
     x->tmp = NULL;
     x->fadeOut = NULL;
     x->fadeIn = NULL;

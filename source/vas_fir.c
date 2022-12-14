@@ -153,8 +153,8 @@ int vas_fir_readSofa_getFilter(vas_fir *x, void *filter)
             int azi = aziCount * aziStride;
             int ele = eleCount * eleStride;
             
-            float azim = vas_utilities_degrees2radians(azi);
-            float elev = vas_utilities_degrees2radians(ele - eleZero*eleStride);
+            float azim = vas_util_degrees2radians(azi);
+            float elev = vas_util_degrees2radians(ele - eleZero*eleStride);
             float xx = cosf(elev)*cosf(azim);
             float y = cosf(elev)*sinf(azim);
             float z = sinf(elev);

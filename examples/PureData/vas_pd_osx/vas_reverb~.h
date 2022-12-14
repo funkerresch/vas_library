@@ -15,8 +15,6 @@ typedef struct vas_reverb
 #ifdef PUREDATA
     VAS_PD_OBJECT
 #endif
-       // vas_util_measure *m;
-    
 } vas_reverb;
 
 #ifdef PUREDATA

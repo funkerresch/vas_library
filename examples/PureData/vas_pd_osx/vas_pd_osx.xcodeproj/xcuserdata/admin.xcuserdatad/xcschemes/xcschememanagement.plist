@@ -54,6 +54,16 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>vas_attenuate~.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>vas_binaural~ copy.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>vas_dynconv~.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>

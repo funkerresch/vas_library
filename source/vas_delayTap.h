@@ -84,5 +84,7 @@ void vas_delayTap_processInPlace(vas_delayTap *x, float *out, int vector_size);
  */
 void vas_delayTap_set(vas_delayTap *x, float _delay_in_samples);
 
+void vas_delayTap_setRingBuffer(vas_delayTap *x, vas_ringBuffer *ringBuffer);
+
 
 #endif /* vas_delayTap_h */

@@ -165,6 +165,8 @@ void vas_util_postSomeValue(VAS_COMPLEX *dest, int length);
 
 float vas_util_fgain2db(float in);
 
+float vas_util_dB_to_lin(float dB);
+
 float vas_util_faverageSumOfmagnitudes(float *in, int length);
 
 void vas_util_single2DoublePrecision(float *in, double *out, int length);
@@ -176,6 +178,8 @@ void vas_util_fadd(float *input1, float *input2, float *dest, int length);
 void vas_util_fmultiply(float *input1, float *input2, float *dest, int length);
     
 void vas_util_fcopy(float *source, float *dest, int length);
+
+void vas_util_fcopyUnalignedSource(float *source, float *dest, int length);
 
 void vas_util_fcopy_noavx(float *source, float *dest, int length);
     
@@ -201,13 +205,13 @@ const char *vas_util_getFileExtension(const char *filename);
 
 void vas_util_getFileExtension1(const char *filename, char *fileExtension);
 
-float vas_utilities_degrees2radians(float degrees);
+float vas_util_degrees2radians(float degrees);
 
-float vas_utilities_radians2degrees(float radians);
+float vas_util_radians2degrees(float radians);
 
-bool vas_utilities_isValidSegmentSize(int segmentSize);
+bool vas_util_isValidSegmentSize(int segmentSize);
 
-int vas_utilities_roundUp2NextPowerOf2(int value);
+int vas_util_roundUp2NextPowerOf2(int value);
 
 void ak_vaTools_zmultiply_SSE(int length, VAS_COMPLEX signalIn, VAS_COMPLEX filter, VAS_COMPLEX dest);                //complex-multiplication
 
@@ -217,23 +221,23 @@ void ak_vaTools_fadd_SSE(int n, float *signalIn, float *filter, float *dest);
 
 void vas_utilities_fcopy_SSE(int n, float *source,  float *dest);
 
-void vas_utilities_writeZeros(int length, float *dest);
+void vas_util_writeZeros(int length, float *dest);
 
-void vas_utilities_writeZeros1(int length, VAS_INPUTBUFFER *dest);
+void vas_util_writeZeros1(int length, VAS_INPUTBUFFER *dest);
 
-float vas_utilities_fadeOut(float n, float length);
+float vas_util_fadeOut(float n, float length);
 
-float vas_utilities_fadeIn(float n, float length);
+float vas_util_fadeIn(float n, float length);
 
-void vas_utilities_writeFadeOutArray(float length, float *dest);
+void vas_util_writeFadeOutArray(float length, float *dest);
 
-void vas_utilities_writeFadeInArray(float length, float *dest);
+void vas_util_writeFadeInArray(float length, float *dest);
 
-void vas_utilities_writeFadeOutArray1(float length, float *dest);
+void vas_util_writeFadeOutArray1(float length, float *dest);
 
-void vas_utilities_writeFadeInArray1(float length, float *dest);
+void vas_util_writeFadeInArray1(float length, float *dest);
 
-void vas_utilities_copyFloatArray(int length, float *arr1, float *arr2);
+void vas_util_copyFloatArray(int length, float *arr1, float *arr2);
     
 #ifdef VAS_USE_VDSP
     
