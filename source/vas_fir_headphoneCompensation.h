@@ -13,11 +13,11 @@
 #ifndef vas_filter_headphoneCompensation_h
 #define vas_filter_headphoneCompensation_h
 
-#include "vas_fir.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include "vas_fir.h"
 
 typedef struct vas_fir_headphoneCompensation
 {

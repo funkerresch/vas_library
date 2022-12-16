@@ -141,37 +141,6 @@ void vas_iir_biquad_setFrequency(vas_iir_biquad *x, float f0)
         x->b2_over_a0 = x->b2/x->a0;
 }
 
-void vas_iir_biquad_processInPlace(vas_iir_biquad *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize)
-{
-    int n = 0;
-    float lastOut = x->lastOut;
-    float lastLastOut = x->lastLastOut;
-    float lastIn = x->lastIn;
-    float lastLastIn = x->lastLastIn;
-    float currentIn;
-    float currentOut;
-    
-    while(n++ < vectorSize)
-    {
-        currentIn = *in++;
-        
-        currentOut = x->b0_over_a0 * currentIn + x->b1_over_a0 * lastIn + x->b2_over_a0 * lastLastIn
-               - x->a1_over_a0 * lastOut - x->a2_over_a0 * lastLastOut;
-        
-        *out++ += currentOut;
-        
-        lastLastOut = lastOut;
-        lastOut = currentOut;
-        lastLastIn = lastIn;
-        lastIn = currentIn;
-    }
-    
-    x->lastLastIn = lastLastIn;
-    x->lastIn = lastIn;
-    x->lastLastOut = lastLastOut;
-    x->lastOut = lastOut;
-}
-
 void vas_iir_biquad_process(vas_iir_biquad *x, VAS_INPUTBUFFER *in, VAS_OUTPUTBUFFER *out, int vectorSize)
 {
     if(x->f0 >= x->sampleRate / 2)

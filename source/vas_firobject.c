@@ -1,5 +1,4 @@
 #include "vas_firobject.h"
-#include "vas_fir_read.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -9,7 +8,6 @@ extern vas_fir_list IRs;
 }
 #endif
 
-#ifdef PUREDATA
 void vas_firobject_getFloatArrayAndLength(rwa_firobject *x, t_symbol *arrayname, t_word **array, int *length)
 {
     t_garray *a;
@@ -315,22 +313,9 @@ void vas_firobject_set1(rwa_firobject *x, t_symbol *left, t_symbol *right, float
     vas_fir_setInitFlag((vas_fir *)engine);
     vas_mem_free(currentIr);
 }
-#endif
-
-
 
 void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float offset, float end)
 {
-#ifdef PUREDATA
-    if(canvas_dspstate)
-#else
-    if(sys_getdspstate())
-#endif
-    {
-        post("Turn off DSP before loading new IRs");
-        return;
-    }
-    
     const char *fileExtension;
     const char *filename = s->s_name;
     
@@ -343,16 +328,13 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
         post("Another instance is referencing this filter.");
         return;
     }
-
-#ifdef PUREDATA
-        unsigned long length = strlen(x->canvasDirectory);
+    
+    unsigned long length = strlen(x->canvasDirectory);
+    
     if(x->canvasDirectory[length-1] == '/')
         sprintf(x->fullpath, "%s%s", x->canvasDirectory, filename);
     else
         sprintf(x->fullpath, "%s/%s", x->canvasDirectory, filename);
-#else
-    vas_maxObjectUtilities_openFile1(s, x->fullpath);
-#endif
     
     post("IR Path: %s", x->fullpath);
     fileExtension = vas_util_getFileExtension(filename);
@@ -364,34 +346,9 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
         void *filter = vas_fir_readSofa_getMetaData(engine, x->fullpath);
         if(filter)
         {
-            if(vas_fir_getInitFlag(engine))
-            {
-                vas_fir_list_removeNode(&IRs, engine->metaData.fullPath);
-                post("remove current filter node");
-            }
-                
-            vas_fir *existingFilter = vas_fir_list_find1(&IRs, x->fullpath, segmentSize, offset, end);
-            
-            if(existingFilter != NULL)
-            {
-                size_t size = strlen(existingFilter->metaData.fullPath);
-                engine->metaData.fullPath = vas_mem_alloc(sizeof(char) * size);
-                strcpy(engine->metaData.fullPath, existingFilter->metaData.fullPath);
-                vas_fir_prepareChannelsWithSharedFilter((vas_fir *)existingFilter, engine->left, engine->right);
-                vas_fir_setInitFlag((vas_fir *)engine);
-                post("Use existing filter");
-                return;
-            }
-            
-            vas_fir_setMultiDirection3DegreeGridResoluion(engine, engine->metaData.filterLength, segmentSize, offset, end);
-            
-            if(end > 0 && (end < ((vas_fir *)engine)->metaData.filterLength) )
-                ((vas_fir *)engine)->metaData.filterLength = end;
-            
-            ((vas_fir *)engine)->metaData.filterLengthMinusOffset = ((vas_fir *)engine)->metaData.filterLength - ((vas_fir *)engine)->metaData.filterOffset;
+            vas_fir_setMultiDirection3DegreeGridResoluion(engine, engine->metaData.filterLength, segmentSize, 0, 0);
             vas_fir_initFilter2((vas_fir *)engine, x->segmentSize);
             vas_fir_readSofa_getFilter(engine, filter);
-            vas_fir_list_addNode(&IRs, vas_fir_listNode_new(engine));
             vas_fir_setInitFlag((vas_fir *)engine);
         }
 #else
@@ -435,7 +392,6 @@ void rwa_firobject_read2(rwa_firobject *x, t_symbol *s, float segmentSize, float
             vas_fir_readText_Ir1((vas_fir *)engine, file, offset); // move fclose out of this function..
             vas_fir_list_addNode(&IRs, vas_fir_listNode_new(engine));
             vas_fir_setInitFlag((vas_fir *)engine);
-            printf("New filter\n");
         }
         else
             error("Could not open %s", x->fullpath);

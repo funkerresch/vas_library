@@ -32,6 +32,8 @@ typedef struct vas_delayTap
 
 } vas_delayTap;
 
+void vas_delayTap_setRingBuffer(vas_delayTap *x, vas_ringBuffer *ringBuffer);
+
 /**
  * @related vas_delay
  * @brief Creates a new delay object<br>
@@ -52,27 +54,14 @@ void vas_delayTap_free(vas_delayTap *x);
 
 /**
  * @related vas_delay
- * @brief Performs the delay in realtime. <br>
+ * @brief Performs the delay in realtime in-place. <br>
  * @param x My delay object <br>
- * @param in The input vector <br>
- * @param out The output vector <br>
+ * @param input The input/output vector <br>
  * @param vector_size The size of the i/o vectors <br>
  * The function vas_delay_perform delays any <br>
  * incoming signal and copies the result to the output vector <br>
  */
-void vas_delayTap_process(vas_delayTap *x, float *out, int vector_size);
-
-/**
- * @related vas_delay
- * @brief Performs the delay in realtime in place. <br>
- * @param x My delay object <br>
- * @param in The input vector <br>
- * @param out The output vector <br>
- * @param vector_size The size of the i/o vectors <br>
- * The function vas_delay_perform delays any <br>
- * incoming signal and copies the result to the output vector <br>
- */
-void vas_delayTap_processInPlace(vas_delayTap *x, float *out, int vector_size);
+void vas_delayTap_process(vas_delayTap *x, float *input, int vector_size);
 
 /**
  * @related vas_delay
@@ -83,8 +72,6 @@ void vas_delayTap_processInPlace(vas_delayTap *x, float *out, int vector_size);
  * Delays exceeding the buffer size are handeled by setting the delay to zero. <br>
  */
 void vas_delayTap_set(vas_delayTap *x, float _delay_in_samples);
-
-void vas_delayTap_setRingBuffer(vas_delayTap *x, vas_ringBuffer *ringBuffer);
 
 
 #endif /* vas_delayTap_h */

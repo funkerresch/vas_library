@@ -12,6 +12,7 @@
 //  Licences are in vas_threads.h
 
 #include "vas_threads.h"
+#include "vas_fir_binauralReflection1.h"
 
 static volatile int threads_keepalive;
 
@@ -322,6 +323,25 @@ static void* vas_threads_executeJob(struct vas_thread* x)
 
 static int vas_threads_initThread (vas_threads* x, struct vas_thread** thread_p, int id){
 
+    pthread_attr_t tattr;
+    int ret;
+    int newprio = sched_get_priority_max(SCHED_FIFO);
+    struct sched_param param;
+
+    /* initialized with default attributes */
+    ret = pthread_attr_init (&tattr);
+
+    /* safe to get existing scheduling param */
+    ret = pthread_attr_getschedparam (&tattr, &param);
+
+    /* set the priority; others are unchanged */
+    
+    param.sched_priority = newprio;
+
+    /* setting the new scheduling param */
+    ret = pthread_attr_setschedparam (&tattr, &param);
+    pthread_attr_setschedpolicy(&tattr, SCHED_RR);
+    
     *thread_p = (struct vas_thread*)malloc(sizeof(struct vas_thread));
     if (*thread_p == NULL){
         printf("thread_init(): Could not allocate memory for thread\n");
@@ -338,7 +358,7 @@ static int vas_threads_initThread (vas_threads* x, struct vas_thread** thread_p,
         atomic_flag_clear(& ((*thread_p)->jobNodes[i].job.available));
      
     // priority is inherited from creating thread ?
-    pthread_create(&(*thread_p)->pthread, NULL, (void * (*)(void *)) vas_threads_executeJob, (*thread_p));
+    pthread_create(&(*thread_p)->pthread, &tattr, (void * (*)(void *)) vas_threads_executeJob, (*thread_p));
     pthread_detach((*thread_p)->pthread);
     return 0;
 }
@@ -435,6 +455,7 @@ int vas_threads_addWork(vas_threads* x, int threadNumber, void (*function_p)(voi
 
     newjob->function=function_p;
     newjob->arg=arg_p;
+   // int instance = ((vas_threadedReflectionArg *)arg_p)->extra1;
 
     vas_threads_lfqueue_enq(&x->threads[threadNumber]->jobQueue, newjob, newNode);
   

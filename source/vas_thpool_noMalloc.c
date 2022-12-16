@@ -1,39 +1,11 @@
 //
 //  thpool_noMalloc.c
 //
-// This is not in use anymore, because it is not safe in a real-time audio context.
-// I only left it here for measuring purposes.
-//
-//  Variation of thpool.ch by Johan Hanssen Seferidis without mem alloc
+//  Variation of thpool.ch without mem alloc
 //  Argument for thpool_add_work_noHeap should subclass vas_threadedArg and pass the job with it as first argument
-//  Created by Thomas Resch on 23.04.21.
+//  Created by Harvey Keitel on 23.04.21.
 //  Copyright © 2021 Intrinsic Audio. All rights reserved.
-
-/*
-    https://github.com/Pithikos/C-Thread-Pool
- 
-    The MIT License (MIT)
-
-    Copyright (c) 2016 Johan Hanssen Seferidis
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
-*/
+//
 
 #if defined (VAS_USE_MULTITHREADCONVOLUTION) || defined (VAS_USE_MULTITHREADREFLECTION)
 
@@ -42,7 +14,9 @@ extern "C" {
 #endif
 
 #include "thpool.c"
-#include <sched.h>
+
+//#include <sched.h>
+#include "vas_thpool_noMalloc.h"
 #include "vas_fir_binauralReflection1.h"
 
 #define VAS_MAXNUMBEROFTHREADS 256 // no machine running unity or pd with more than 256 logical cores
@@ -88,6 +62,7 @@ static void* thread_do_noHeap(struct thread* thread_p){
     thpool_* thpool_p = thread_p->thpool_p;
 
     /* Register signal handler */
+#ifndef _WIN32
     struct sigaction act;
     sigemptyset(&act.sa_mask);
     act.sa_flags = 0;
@@ -95,6 +70,7 @@ static void* thread_do_noHeap(struct thread* thread_p){
     if (sigaction(SIGUSR1, &act, NULL) == -1) {
         err("thread_do(): cannot handle SIGUSR1");
     }
+#endif
 
     /* Mark thread as alive (initialized) */
     pthread_mutex_lock(&thpool_p->thcount_lock);
@@ -160,7 +136,7 @@ void thpool_destroy_noHeap(thpool_* thpool_p){
     /* Poll remaining threads */
     while (thpool_p->num_threads_alive){
         bsem_post_all(thpool_p->jobqueue.has_jobs);
-        sleep(1);
+        //sleep(1);
     }
 
     int n;
@@ -185,7 +161,6 @@ static int thread_init_noHeap (thpool_* thpool_p, struct thread** thread_p, int 
     pthread_attr_t tattr;
     int ret;
    
-    struct sched_param oldparam;
     struct sched_param param;
     
     int policy;

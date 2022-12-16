@@ -54,8 +54,6 @@ void vas_delayTap_crossfade_clear(vas_delayTap_crossfade *x)
 
 void vas_delayTap_crossfade_process(vas_delayTap_crossfade *x, float *out, int vectorSize)
 {
-    //x->numberOfFramesForCrossfade = x->fadeLength/vectorSize; // A lot of divisions, is done in new function() for now, but need to pass vectorsize there..
-    
     if(!x->fadeCounter)
         vas_delayTap_crossfade_updateDelayTime(x);
     

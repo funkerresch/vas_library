@@ -9,7 +9,7 @@
 
 vas_delayTap *vas_delayTap_new(vas_ringBuffer *ringBuffer)
 {
-    vas_delayTap *x = (vas_delayTap *)malloc(sizeof(vas_delayTap));
+    vas_delayTap *x = (vas_delayTap *)vas_mem_alloc(sizeof(vas_delayTap));
     x->ringBuffer = ringBuffer;
     x->bufferSize = x->ringBuffer->bufferSize;
     x->readPointer = x->ringBuffer->buffer;
@@ -38,16 +38,7 @@ void vas_delayTap_setRingBuffer(vas_delayTap *x, vas_ringBuffer *ringBuffer)
 void vas_delayTap_free(vas_delayTap *x)
 {
     x->ringBuffer->tapCounter--;
-    free(x);
-}
-
-void vas_delayTap_processInPlace(vas_delayTap *x, float *out, int vectorSize)
-{
-    if(x->readIndex & x->bufferSize)
-        x->readIndex = 0;
-    
-    vas_util_fadd(&x->readPointer[x->readIndex], out, out, vectorSize);
-    x->readIndex+=vectorSize;
+    vas_mem_free(x);
 }
 
 void vas_delayTap_process(vas_delayTap *x, float *out, int vectorSize)

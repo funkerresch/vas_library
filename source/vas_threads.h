@@ -154,6 +154,7 @@ inline BOOL __SYNC_BOOL_CAS(LONG volatile *dest, LONG input, LONG comparand) {
 #include <windows.h>
 #define __LFQ_YIELD_THREAD SwitchToThread
 #endif
+#include <stdbool.h>
 
 #if defined __GNUC__ || defined __CYGWIN__ || defined __MINGW32__ || defined __APPLE__
 #define lfq_time_t long
@@ -211,13 +212,13 @@ void atomic_flag_clear_explicit(volatile atomic_flag* object, memory_order order
 // with another lock-free queue. If all are waiting for the worker threads, we can send the main audio
 // thread to sleep and do a "real" yield.
 
-#if defined (TARGET_CPU_ARM64) && defined (__APPLE__)
+#if defined (__APPLE__) && defined (TARGET_CPU_ARM64)
 #define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
-                                                __asm__ __volatile__ ("nop")
-#elif defined (__arm__)
+                                                ;
+#elif defined (__arm__) && !defined (__APPLE__)
 #define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
-                                                __asm__ __volatile__ ("yield")
-#elif TARGET_CPU_X86_64
+                                                asm volatile("yield");
+#elif TARGET_CPU_X86_64 || defined (_WIN64)
 #define VAS_THREADS_WAIT_FOR_EMPTY_QUEUE(A) while(!__LFQ_BOOL_COMPARE_AND_SWAP(A, 0, 0)) \
                                                 _mm_pause();
 #endif

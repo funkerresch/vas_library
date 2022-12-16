@@ -16,9 +16,9 @@ extern "C" {
 // we do not want any memory allocation within the DSP loop
 // it costs time and what if it really fails ?
 
-int thpool_add_work_noHeap(struct thpool_* thpool_p, void (*function_p)(void*), void* arg_p);
-void thpool_destroy_noHeap(struct thpool_* thpool_p);
-struct thpool_* thpool_init_noHeap(int num_threads);
+int thpool_add_work_noHeap(struct vas_threads* thpool_p, void (*function_p)(void*), void* arg_p);
+void thpool_destroy_noHeap(struct vas_threads* thpool_p);
+struct vas_threads* thpool_init_noHeap(int num_threads);
 
 typedef struct vas_job { // same as thpools job which is not in the header but in source file
     struct vas_job*  prev;
