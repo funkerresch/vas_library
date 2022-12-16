@@ -188,6 +188,8 @@ void vas_util_complexMultiplyAddWithOne(VAS_COMPLEX *signalIn, VAS_COMPLEX *dest
 int vas_getline(char **lineptr, size_t *n, FILE *stream);
     
 char* vas_strsep(char** stringp, const char* delim);
+
+void vas_util_debug(char *fmt, ...);
     
 void vas_util_postSomeValue(VAS_COMPLEX *dest, int length);
 

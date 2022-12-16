@@ -97,6 +97,22 @@ char* vas_strsep(char** stringp, const char* delim)
     return start;
 }
 
+void vas_util_debug(char *fmt, ...)
+{
+    char dest[1024 * 16];
+    va_list argptr;
+    va_start(argptr, fmt);
+    vsprintf(dest, fmt, argptr);
+    va_end(argptr);
+#if defined(MAXMSPSDK) || defined(PUREDATA)
+    post(dest);
+#elif defined(IAGS_UNITY_SPATIALIZER)
+    Debug(dest);
+#else
+    printf(dest);
+#endif
+}
+
 float vas_util_faverageSumOfmagnitudes(float *in, int length)
 {
     float result = 0;
