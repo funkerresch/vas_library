@@ -109,7 +109,7 @@ void vas_util_debug(char *fmt, ...)
 #elif defined(IAGS_UNITY_SPATIALIZER)
     Debug(dest);
 #else
-    printf("%s", dest);
+    ;//printf("%s", dest);
 #endif
 }
 

@@ -88,7 +88,7 @@ void vas_fir_binaural_free(vas_fir_binaural *x)
     vas_fir_binaural_referenceCounter--;
     
 #ifdef VAS_USE_NEUMANNHEADERS
-    if(vas_fir_binaural_referenceCounter == 1)
+    if(vas_fir_binaural_referenceCounter == 1) // The last reference frees the global neumann filter
     {
         if(neumannHrtfInit_48kHz)
         {
@@ -96,8 +96,12 @@ void vas_fir_binaural_free(vas_fir_binaural *x)
             vas_fir_binaural_free(neumannHrtf_48kHz);
             vas_util_debug("%s: Freed Neumann 48kHz HRTF", __FUNCTION__);
         }
+        vas_fir_binaural_referenceCounter--;
     }
 #endif
+    
+    if(!vas_fir_binaural_referenceCounter)
+        vas_fir_list_clear(&IRs);
 }
 
 void vas_fir_binaural_shareInput(vas_fir_binaural *x, vas_fir_binaural *sharedInput)

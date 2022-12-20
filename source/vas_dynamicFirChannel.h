@@ -81,22 +81,17 @@ typedef struct vas_dynamicFirChannel_filter
     
 #ifdef VAS_USE_VDSP
     FFTSetup setupReal;   
-#endif
-#ifdef VAS_USE_KISSFFT
-    kiss_fftr_cfg  forwardFFT;
-    kiss_fftr_cfg  inverseFFT;
-#endif
-#ifdef VAS_USE_PFFFT
+#else
     PFFFT_Setup *setupReal;
 #endif
-    bool *segmentIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
-    int zeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
-    int nonZeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    bool *segmentIsZero[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];    
 #ifdef VAS_WITH_AVERAGE_SEGMENTPOWER
     float maxAverageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     float minAverageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     double *averageSegmentPower[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
     double overallEnergy[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    int zeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
+    int nonZeroCounter[VAS_ELEVATION_ANGLES_MAX][VAS_AZIMUTH_ANGLES_MAX];
 #endif
     
     int referenceCounter;
@@ -171,16 +166,12 @@ typedef struct vas_dynamicFirChannel_output
  * Everything necessary for calculating (equal-) partitioned convolution including dynamic exchange of the filter <br>
  */
 
-
-
 typedef struct vas_dynamicFirChannel
 {
-    int setup;                                  // set with flags as "VAS_GLOBALFILTER" or "VAS_LOCALFILTER", defined in vas_util.h
+    int setup;
     float *tmp;                                 // tmp is used for zeropadding before calculating the frequency response
     float *fadeOut;                             // holds the fadeout array necessary for the crossfade
     float *fadeIn;                              // holds the fadein array necessary for the crossfade
-    float *deInterleaveReal;                     // deInterleaveTmp is used deainterleaving the kissffts
-    float *deInterleaveImag;                     // deInterleaveTmp is used deainterleaving the kissffts
     
     vas_dynamicFirChannel_input *input;          // my signal input
     vas_dynamicFirChannel_output output;        // calculated output
