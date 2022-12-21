@@ -80,7 +80,7 @@ vas_fir_binaural *vas_fir_binaural_new(int flags)
 void vas_fir_binaural_free(vas_fir_binaural *x)
 {
     if(x->metaData.fullPath)
-        vas_mem_free(x->metaData.fullPath );
+        free(x->metaData.fullPath );
     
     vas_dynamicFirChannel_free(x->left);
     vas_dynamicFirChannel_free(x->right);
